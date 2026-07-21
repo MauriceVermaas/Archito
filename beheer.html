@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blokwereld — Beheer (CMS)</title>
+<style>
+  :root{ --bg:#f4f1ea; --paneel:#fff; --tekst:#20331a; --accent:#5a9b3a; --accent2:#3d6b28; --fout:#c0392b; --goed:#2e8b3d; --rand:#0002; }
+  *{box-sizing:border-box}
+  html,body{ margin:0; height:100%; }
+  body{ font-family:system-ui,'Segoe UI',sans-serif; color:var(--tekst); background:var(--bg); line-height:1.5; display:flex; flex-direction:column; height:100vh; }
+  header{ background:var(--accent2); color:#fff; padding:.6em 1em; display:flex; align-items:center; gap:1em; flex-wrap:wrap; }
+  header h1{ margin:0; font-size:1.15rem; }
+  header .sub{ font-size:.82rem; opacity:.9; }
+  .layout{ flex:1; display:flex; min-height:0; }
+  aside{ width:210px; background:#fff; border-right:2px solid var(--rand); overflow:auto; padding:.5em; flex-shrink:0; }
+  aside button{ display:block; width:100%; text-align:left; border:none; background:none; padding:.6em .7em; border-radius:10px; cursor:pointer; font:inherit; color:var(--tekst); margin-bottom:2px; }
+  aside button:hover{ background:#eef4e8; }
+  aside button.aan{ background:var(--accent); color:#fff; font-weight:600; }
+  aside .badge{ float:right; font-size:.72rem; opacity:.8; }
+  main{ flex:1; overflow:auto; padding:1.2em; }
+  .paneel{ display:none; }
+  .paneel.aan{ display:block; }
+  h2{ margin:.1em 0 .3em; font-size:1.2rem; }
+  .uitleg{ color:#555; font-size:.9rem; margin:.2em 0 1em; }
+  .wrap{ overflow-x:auto; border:1px solid var(--rand); border-radius:10px; }
+  table{ border-collapse:collapse; width:100%; font-size:.9rem; }
+  th,td{ border-bottom:1px solid var(--rand); border-right:1px solid var(--rand); padding:.3em .4em; text-align:left; vertical-align:top; }
+  th{ background:#f0f4ec; position:sticky; top:0; z-index:1; }
+  td input,td select,td textarea{ width:100%; border:1px solid #ccc; border-radius:6px; padding:.25em; font:inherit; }
+  td.num input{ width:64px; } td.niv select{ width:60px; }
+  textarea{ resize:vertical; min-height:2.2em; }
+  button.knop{ background:var(--accent); color:#fff; border:none; border-radius:10px; padding:.5em .9em; font:inherit; font-weight:600; cursor:pointer; }
+  button.knop:hover{ background:var(--accent2); }
+  button.knop2{ background:#eef4e8; color:var(--accent2); border:none; border-radius:10px; padding:.45em .8em; font:inherit; font-weight:600; cursor:pointer; }
+  .del{ background:#f6d7d1; color:var(--fout); border:none; border-radius:8px; padding:.2em .5em; cursor:pointer; font:inherit; }
+  .acties{ display:flex; gap:.6em; flex-wrap:wrap; align-items:center; margin-top:.8em; }
+  .status{ font-size:.85rem; font-weight:600; padding:.3em .6em; border-radius:8px; }
+  .status.ok{ background:#e2f5e6; color:#1e7a2c; } .status.err{ background:#fbe3df; color:var(--fout); }
+  /* beeld-veld */
+  .beeldcel{ min-width:190px; }
+  .bvrij{ display:flex; gap:.4em; align-items:center; }
+  .bvprev{ width:40px; height:40px; border:1px solid var(--rand); border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fafafa; flex-shrink:0; }
+  .bvprev img{ max-width:100%; max-height:100%; object-fit:contain; }
+  .bvinfo{ font-size:.72rem; line-height:1.2; }
+  .bvinfo.ok{ color:var(--goed); } .bvinfo.err{ color:var(--fout); }
+  input[type=file]{ font-size:.78rem; width:150px; }
+  /* mascottes */
+  .maslijst{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8em; }
+  .maskaart{ border:1px solid var(--rand); border-radius:12px; padding:.8em; background:#fff; }
+  .maskaart h3{ margin:.1em 0 .5em; font-size:1rem; text-transform:capitalize; }
+  .maskaart label{ display:block; font-size:.8rem; color:#555; margin-top:.5em; }
+  .maskaart input,.maskaart textarea{ width:100%; border:1px solid #ccc; border-radius:6px; padding:.35em; font:inherit; }
+  .maspreview{ font-size:2.6rem; text-align:center; height:74px; display:flex; align-items:center; justify-content:center; }
+  .maspreview img{ width:64px; height:64px; object-fit:contain; }
+  .spec{ background:#eef4f8; border:1px solid #cfe0ec; border-radius:8px; padding:.5em .7em; font-size:.82rem; margin:.4em 0; }
+  .iconslot{ border:1px solid var(--rand); border-radius:12px; padding:1em; margin:.6em 0; background:#fff; }
+  .balk{ background:#fff; border-top:2px solid var(--rand); padding:.6em 1em; display:flex; gap:.6em; align-items:center; flex-wrap:wrap; }
+  code{ background:#eef; padding:0 .3em; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>🛠️ Blokwereld — Beheer</h1><div class="sub">Wijzig content, afbeeldingen en mascottes. Exporteer en zet terug in de map.</div></div>
+</header>
+<div class="layout">
+  <aside id="nav"></aside>
+  <main id="panelen"></main>
+</div>
+<div class="balk">
+  <button class="knop" onclick="exporteerAlles()">⬇️ Exporteer alles</button>
+  <span id="globaalStatus" class="status ok">Klaar</span>
+  <span style="font-size:.82rem;color:#666">Na export: zet de bestanden terug in <code>data/</code> (en iconen in <code>icons/</code>) en ververs de app.</span>
+</div>
+
+<script src="data/sommen.js"></script>
+<script src="data/woorden.js"></script>
+<script src="data/flitswoorden.js"></script>
+<script src="data/memory.js"></script>
+<script src="data/talen.js"></script>
+<script src="data/denken.js"></script>
+<script src="data/beelddenken.js"></script>
+<script src="data/mascottes.js"></script>
+<script src="data/wezens.js"></script>
+<script src="data/creatief.js"></script>
+<script>
+"use strict";
+/* ========== afbeelding-specs (maten + gewichten + formaten) ========== */
+var BEELDSPEC = {
+  mascotte:{ aanbevolen:"256×256", maxW:512, maxH:512, maxKB:80,  formaten:["png","webp","svg","jpg","jpeg","gif"] },
+  tegel:   { aanbevolen:"128×128", maxW:256, maxH:256, maxKB:40,  formaten:["png","webp","svg","jpg","jpeg","gif"] },
+  icon192: { aanbevolen:"192×192", exactW:192, exactH:192, maxKB:60,  formaten:["png"] },
+  icon512: { aanbevolen:"512×512", exactW:512, exactH:512, maxKB:120, formaten:["png"] }
+};
+function specTekst(s){ var sp=BEELDSPEC[s];
+  var maat = sp.exactW ? ("exact "+sp.exactW+"×"+sp.exactH+" px") : ("max "+sp.maxW+"×"+sp.maxH+" px (aanbevolen "+sp.aanbevolen+")");
+  return "Formaten: "+sp.formaten.join(", ").toUpperCase()+" · "+maat+" · max "+sp.maxKB+" KB";
+}
+/* analyseer een bestand → {url,ext,kb,w,h} */
+function analyseBeeld(file){
+  return new Promise(function(res){
+    var ext=(file.name.split(".").pop()||"").toLowerCase();
+    var r=new FileReader();
+    r.onload=function(){ var url=r.result; var kb=Math.round((file.size!=null?file.size:url.length*0.75)/1024);
+      if(ext==="svg"){ res({url:url,ext:ext,kb:kb,w:null,h:null}); return; }
+      var img=new Image(); img.onload=function(){ res({url:url,ext:ext,kb:kb,w:img.naturalWidth,h:img.naturalHeight}); };
+      img.onerror=function(){ res({url:url,ext:ext,kb:kb,w:null,h:null}); }; img.src=url;
+    };
+    r.readAsDataURL(file);
+  });
+}
+/* controleer tegen spec → lijst problemen (leeg = ok) */
+function keurBeeld(meta, specKey){
+  var sp=BEELDSPEC[specKey], p=[];
+  if(sp.formaten.indexOf(meta.ext)<0) p.push("formaat ."+meta.ext+" mag niet (wel: "+sp.formaten.join("/")+")");
+  if(meta.kb>sp.maxKB) p.push("te zwaar: "+meta.kb+" KB (max "+sp.maxKB+")");
+  if(meta.w!=null){
+    if(sp.exactW && (meta.w!==sp.exactW||meta.h!==sp.exactH)) p.push("moet exact "+sp.exactW+"×"+sp.exactH+" zijn (is "+meta.w+"×"+meta.h+")");
+    if(!sp.exactW && (meta.w>sp.maxW||meta.h>sp.maxH)) p.push("te groot: "+meta.w+"×"+meta.h+" (max "+sp.maxW+"×"+sp.maxH+")");
+  }
+  return p;
+}
+
+/* ========== helpers ========== */
+function kloon(x){ return JSON.parse(JSON.stringify(x)); }
+function lijstNaarStr(a){ return (a||[]).join(", "); }
+function strNaarLijst(s){ return String(s||"").split(",").map(function(t){return t.trim();}).filter(Boolean); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function download(bestand, tekst, mime){ var blob=new Blob([tekst],{type:mime||"text/javascript;charset=utf-8"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=bestand; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); }
+function bestandsTekst(header, decl){ return header.replace(/\n$/,"")+"\n\n"+decl+"\n"; }
+
+/* ========== schema's ========== */
+var SCHEMAS = {
+  sommen:{ titel:"Rekenen", global:"SOMMEN", file:"sommen.js",
+    header:"// data/sommen.js — rekensommen. { a, op, b, niveau }. Antwoord altijd positief en geheel; geen dubbele sommen.",
+    velden:[{k:"a",type:"num"},{k:"op",type:"select",opts:["+","−","×",":","½"]},{k:"b",type:"num"},{k:"niveau",type:"niveau"}], nieuw:function(){return {a:1,op:"+",b:1,niveau:1};} },
+  woorden:{ titel:"Spelling", global:"WOORDEN", file:"woorden.js",
+    header:"// data/woorden.js — spelling. { w, delen:[...], extra:[...], niveau }. Delen samengevoegd = w; instinker (extra) nooit in het woord.",
+    velden:[{k:"w",type:"text"},{k:"delen",type:"list"},{k:"extra",type:"list"},{k:"niveau",type:"niveau"}], nieuw:function(){return {w:"",delen:[],extra:[],niveau:1};} },
+  flitswoorden:{ titel:"Flitswoorden", global:"FLITSWOORDEN", file:"flitswoorden.js",
+    header:"// data/flitswoorden.js — flitslezen. { w, alt:[2 lookalikes], niveau }. Lookalikes bevatten w niet.",
+    velden:[{k:"w",type:"text"},{k:"alt",type:"list"},{k:"niveau",type:"niveau"}], nieuw:function(){return {w:"",alt:[],niveau:1};} },
+  memory:{ titel:"Memory", global:"MEMORY", file:"memory.js",
+    header:"// data/memory.js — plaatje↔woord. { w, plaatje, afb?, niveau }. afb (eigen afbeelding) vervangt de emoji.",
+    velden:[{k:"w",type:"text"},{k:"plaatje",type:"text"},{k:"afb",type:"beeld",spec:"tegel"},{k:"niveau",type:"niveau"}], nieuw:function(){return {w:"",plaatje:"",afb:"",niveau:1};} },
+  talen:{ titel:"Talen", global:"TALEN", file:"talen.js",
+    header:"// data/talen.js — woordenschat. { nl, en, es, plaatje, afb?, niveau }. afb vervangt de emoji.",
+    velden:[{k:"nl",type:"text"},{k:"en",type:"text"},{k:"es",type:"text"},{k:"plaatje",type:"text"},{k:"afb",type:"beeld",spec:"tegel"},{k:"niveau",type:"niveau"}], nieuw:function(){return {nl:"",en:"",es:"",plaatje:"",afb:"",niveau:1};} },
+  denken:{ titel:"Denken (tekst)", global:"DENKEN", file:"denken.js",
+    header:"// data/denken.js — kritisch denken (tekst). { soort, vraag, opties:[...], goed, uitleg, niveau }. goed staat letterlijk in opties.",
+    velden:[{k:"soort",type:"text"},{k:"vraag",type:"area"},{k:"opties",type:"list"},{k:"goed",type:"text"},{k:"uitleg",type:"area"},{k:"niveau",type:"niveau"}], nieuw:function(){return {soort:"patroon",vraag:"",opties:[],goed:"",uitleg:"",niveau:1};} },
+  beelddenken:{ titel:"Beelddenken", global:"BEELD_DENKEN", file:"beelddenken.js",
+    header:"// data/beelddenken.js — VISUEEL denken. { soort, opdracht, toon?:[...], opties:[...], goed, uitleg, niveau }. goed uniek in opties; toon mag \"❓\" bevatten.",
+    velden:[{k:"soort",type:"text"},{k:"opdracht",type:"text"},{k:"toon",type:"list"},{k:"opties",type:"list"},{k:"goed",type:"text"},{k:"uitleg",type:"area"},{k:"niveau",type:"niveau"}], nieuw:function(){return {soort:"anders",opdracht:"",toon:[],opties:[],goed:"",uitleg:"",niveau:1};} }
+};
+var VOLGORDE=["sommen","woorden","flitswoorden","memory","talen","denken","beelddenken"];
+
+var DATA={}; VOLGORDE.forEach(function(k){ DATA[k]=kloon(window[SCHEMAS[k].global]||[]); });
+var CRE={ CHALLENGE_DATA:kloon(window.CHALLENGE_DATA||[]), WONDER_DATA:kloon(window.WONDER_DATA||[]), STARTZIN_DATA:kloon(window.STARTZIN_DATA||[]) };
+var MAS=kloon(window.MASCOTTES||{});
+var WEZ=kloon(window.WEZENS||{start:[],strand:[],park:[],huis:[],koopbaar:[]});
+var WEZ_GROEPEN=["start","strand","park","huis","koopbaar"];
+function wezLabel(g){ return {start:"Blokwereld ⛏️",strand:"Strand 🏖️",park:"Park 🏞️",huis:"Huis 🏠",koopbaar:"Te koop 🐾"}[g]||g; }
+var ICONS={ icon192:"", icon512:"" };
+
+/* ========== validatie ========== */
+function somAntwoord(s){ return s.op==='+'?s.a+s.b:s.op==='−'?s.a-s.b:s.op==='×'?s.a*s.b:s.op===':'?s.a/s.b:s.op==='½'?s.a/2:NaN; }
+function valideer(key){
+  var rows=DATA[key], f=[];
+  if(key==="sommen"){ var set={}; rows.forEach(function(s,i){ var a=somAntwoord(s); if(!(Number.isInteger(a)&&a>=0)) f.push("rij "+(i+1)+": antwoord niet positief geheel"); var k=s.a+s.op+s.b; if(set[k]) f.push("rij "+(i+1)+": dubbele som "+k); set[k]=1; }); }
+  else if(key==="woorden"){ rows.forEach(function(w,i){ if((w.delen||[]).join("")!==w.w) f.push("rij "+(i+1)+" ("+w.w+"): delen ≠ woord"); (w.extra||[]).forEach(function(e){ if(w.w.indexOf(e)>=0) f.push("rij "+(i+1)+": instinker '"+e+"' in woord"); }); }); }
+  else if(key==="flitswoorden"){ rows.forEach(function(x,i){ if((x.alt||[]).length!==2) f.push("rij "+(i+1)+" ("+x.w+"): 2 lookalikes nodig"); (x.alt||[]).forEach(function(a){ if(a===x.w||a.indexOf(x.w)>=0) f.push("rij "+(i+1)+": lookalike bevat woord"); }); }); }
+  else if(key==="memory"){ rows.forEach(function(m,i){ if(!m.w||(!m.plaatje&&!m.afb)) f.push("rij "+(i+1)+": w en (plaatje of afbeelding) verplicht"); }); }
+  else if(key==="talen"){ rows.forEach(function(t,i){ if(!t.nl||!t.en||!t.es||(!t.plaatje&&!t.afb)) f.push("rij "+(i+1)+": nl, en, es en (plaatje of afbeelding) verplicht"); }); }
+  else if(key==="denken"){ rows.forEach(function(d,i){ if(!(d.opties||[]).includes(d.goed)) f.push("rij "+(i+1)+": 'goed' niet in opties"); if(!d.uitleg) f.push("rij "+(i+1)+": uitleg verplicht"); }); }
+  else if(key==="beelddenken"){ rows.forEach(function(p,i){ if(!p.opdracht||p.opdracht.length>45) f.push("rij "+(i+1)+": opdracht ontbreekt of >45 tekens"); if((p.opties||[]).length<2) f.push("rij "+(i+1)+": min. 2 opties"); if(!(p.opties||[]).includes(p.goed)) f.push("rij "+(i+1)+": 'goed' niet in opties"); if((p.opties||[]).filter(function(o){return o===p.goed;}).length!==1) f.push("rij "+(i+1)+": 'goed' niet uniek"); if(!p.uitleg) f.push("rij "+(i+1)+": uitleg verplicht"); }); }
+  rows.forEach(function(r,i){ if(![1,2,3].includes(Number(r.niveau))) f.push("rij "+(i+1)+": niveau moet 1/2/3 zijn"); });
+  return f;
+}
+function valideerMascottes(){ var f=[]; Object.keys(MAS).forEach(function(k){ var m=MAS[k]; if(!m.emoji) f.push(k+": emoji (terugval) verplicht"); if(!m.naam) f.push(k+": naam verplicht"); if(!(m.zinnen||[]).length) f.push(k+": min. 1 zin"); }); return f; }
+function valideerWezens(){ var f=[]; WEZ_GROEPEN.forEach(function(g){ if(!Array.isArray(WEZ[g])||!WEZ[g].length){ f.push(wezLabel(g)+": min. 1 figuur"); return; } WEZ[g].forEach(function(c,i){ if(!c||!c.emoji) f.push(wezLabel(g)+" #"+(i+1)+": emoji (terugval) verplicht"); }); }); return f; }
+
+/* ========== export ========== */
+function schoon(rows){ return rows.map(function(r){ var o=kloon(r); o.niveau=Number(o.niveau); if("afb" in o && !o.afb) delete o.afb; return o; }); }
+function exporteer(key){ var f=valideer(key); if(f.length){ toonStatus(key,f); return false; }
+  var sc=SCHEMAS[key]; var decl="var "+sc.global+" = "+JSON.stringify(schoon(DATA[key]),null,2)+";\nif (typeof module !== 'undefined') module.exports = "+sc.global+";";
+  download(sc.file, bestandsTekst(sc.header,decl)); toonStatus(key,[]); return true; }
+function exporteerMascottes(){ var f=valideerMascottes(); var st=document.getElementById("mas-status");
+  if(f.length){ if(st){st.className="status err"; st.textContent="✗ "+f.join(" · ");} return false; }
+  var header="// data/mascottes.js — mascotte per thema. { emoji, naam, zinnen:[...], afbeelding? }. Afbeelding vervangt de emoji.";
+  var uit={}; Object.keys(MAS).forEach(function(k){ var m=MAS[k]; uit[k]={emoji:m.emoji,naam:m.naam,afbeelding:m.afbeelding||"",zinnen:m.zinnen||[]}; });
+  var decl="var MASCOTTES = "+JSON.stringify(uit,null,2)+";\nif (typeof module !== 'undefined') module.exports = MASCOTTES;";
+  download("mascottes.js", bestandsTekst(header,decl)); if(st){st.className="status ok"; st.textContent="✓ Geëxporteerd";} return true; }
+function exporteerWezens(){ var f=valideerWezens(); var st=document.getElementById("wez-status");
+  if(f.length){ if(st){st.className="status err"; st.textContent="✗ "+f.join(" · ");} return false; }
+  var header="// data/wezens.js — rondlopend leven per wereld + te koop. { emoji, afbeelding? }. Afbeelding vervangt de emoji.";
+  var uit={}; WEZ_GROEPEN.forEach(function(g){ uit[g]=(WEZ[g]||[]).map(function(c){ return {emoji:c.emoji, afbeelding:c.afbeelding||""}; }); });
+  var decl="var WEZENS = "+JSON.stringify(uit,null,2)+";\nif (typeof module !== 'undefined') module.exports = WEZENS;";
+  download("wezens.js", bestandsTekst(header,decl)); if(st){st.className="status ok"; st.textContent="✓ Geëxporteerd";} return true; }
+function exporteerCreatief(){ opslaanCreatief();
+  var header="// data/creatief.js — open opdrachten. CHALLENGE_DATA, WONDER_DATA, STARTZIN_DATA.";
+  var decl="var CHALLENGE_DATA = "+JSON.stringify(CRE.CHALLENGE_DATA,null,2)+";\nvar WONDER_DATA = "+JSON.stringify(CRE.WONDER_DATA,null,2)+";\nvar STARTZIN_DATA = "+JSON.stringify(CRE.STARTZIN_DATA,null,2)+";\nif (typeof module !== 'undefined') module.exports = { CHALLENGE_DATA, WONDER_DATA, STARTZIN_DATA };";
+  download("creatief.js", bestandsTekst(header,decl)); var st=document.getElementById("cre-status"); if(st){st.className="status ok"; st.textContent="✓ Geëxporteerd";} }
+function exporteerIcon(sleutel){ var url=ICONS[sleutel]; var st=document.getElementById(sleutel+"-status");
+  if(!url){ if(st){st.className="status err"; st.textContent="✗ Nog geen geldige afbeelding";} return false; }
+  var b=atob(url.split(",")[1]); var arr=new Uint8Array(b.length); for(var i=0;i<b.length;i++) arr[i]=b.charCodeAt(i);
+  var naam = sleutel==="icon192"?"icon-192.png":"icon-512.png";
+  download(naam, arr, "image/png"); if(st){st.className="status ok"; st.textContent="✓ "+naam+" gedownload — zet in map icons/";} return true; }
+function exporteerAlles(){ var alles=true, fout=[];
+  VOLGORDE.forEach(function(k){ var f=valideer(k); if(f.length){ alles=false; fout.push(SCHEMAS[k].titel); toonStatus(k,f); } });
+  if(valideerMascottes().length){ alles=false; fout.push("Mascottes"); }
+  if(valideerWezens().length){ alles=false; fout.push("Dieren"); }
+  var g=document.getElementById("globaalStatus");
+  if(!alles){ g.className="status err"; g.textContent="✗ Niet geëxporteerd — los eerst op: "+fout.join(", "); return; }
+  VOLGORDE.forEach(exporteer); exporteerMascottes(); exporteerWezens(); exporteerCreatief();
+  g.className="status ok"; g.textContent="✓ Alles geëxporteerd (iconen exporteer je apart in het tabblad App-iconen)"; }
+function toonStatus(key,fouten){ var el=document.getElementById("st-"+key); if(!el) return;
+  if(fouten.length){ el.className="status err"; el.textContent="✗ "+fouten.length+" probleem(en): "+fouten.slice(0,4).join(" · ")+(fouten.length>4?" …":""); }
+  else { el.className="status ok"; el.textContent="✓ Klaar om te exporteren"; } }
+
+/* ========== rendering tabellen ========== */
+function beeldCel(key,i,veld){ var url=DATA[key][i][veld.k];
+  var prev = url ? '<span class="bvprev"><img src="'+url+'"></span>' : '<span class="bvprev">—</span>';
+  var info = url ? '<span class="bvinfo ok" id="bvi-'+key+'-'+i+'">✓ geplaatst</span>' : '<span class="bvinfo" id="bvi-'+key+'-'+i+'">geen</span>';
+  return '<td class="beeldcel"><div class="bvrij">'+prev+'<div><input type="file" accept="image/*" onchange="beeldUpload(\''+key+'\','+i+',\''+veld.k+'\',\''+veld.spec+'\',this)">'
+    +(url?' <button class="del" onclick="beeldWis(\''+key+'\','+i+',\''+veld.k+'\')">wis</button>':'')+'<br>'+info+'</div></div></td>'; }
+function celInput(key,i,veld){ var r=DATA[key][i], v=r[veld.k];
+  if(veld.type==="beeld") return beeldCel(key,i,veld);
+  if(veld.type==="list") return '<td><input data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="list" value="'+esc(lijstNaarStr(v))+'" placeholder="komma-gescheiden"></td>';
+  if(veld.type==="area") return '<td><textarea data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text">'+esc(v)+'</textarea></td>';
+  if(veld.type==="num") return '<td class="num"><input type="number" data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="num" value="'+(v==null?"":v)+'"></td>';
+  if(veld.type==="niveau"){ var o=[1,2,3].map(function(n){return '<option value="'+n+'"'+(Number(v)===n?" selected":"")+'>'+n+'</option>';}).join(""); return '<td class="niv"><select data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="num">'+o+'</select></td>'; }
+  if(veld.type==="select"){ var op=veld.opts.map(function(x){return '<option'+(v===x?" selected":"")+'>'+x+'</option>';}).join(""); return '<td><select data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text">'+op+'</select></td>'; }
+  return '<td><input data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text" value="'+esc(v)+'"></td>'; }
+function renderTabel(key){ var sc=SCHEMAS[key], rows=DATA[key];
+  var th="<tr>"+sc.velden.map(function(v){return "<th>"+v.k+"</th>";}).join("")+"<th></th></tr>";
+  var body=rows.map(function(r,i){ return "<tr>"+sc.velden.map(function(v){return celInput(key,i,v);}).join("")+'<td><button class="del" onclick="verwijder(\''+key+'\','+i+')">✕</button></td></tr>'; }).join("");
+  return '<div class="wrap"><table><thead>'+th+'</thead><tbody>'+body+'</tbody></table></div>'; }
+function heeftBeeld(key){ return SCHEMAS[key].velden.some(function(v){return v.type==="beeld";}); }
+function paneelContent(key){ var sc=SCHEMAS[key];
+  return '<h2>'+sc.titel+'</h2>'
+    +(heeftBeeld(key)?'<div class="spec">🖼️ Afbeelding-eisen (tegel): '+specTekst("tegel")+'. Laat leeg om de emoji te gebruiken.</div>':'')
+    +'<div id="tab-'+key+'">'+renderTabel(key)+'</div>'
+    +'<div class="acties"><button class="knop2" onclick="voegToe(\''+key+'\')">+ Rij toevoegen</button><button class="knop" onclick="exporteer(\''+key+'\')">⬇️ Exporteer '+sc.file+'</button><span id="st-'+key+'" class="status ok">—</span></div>'; }
+
+function paneelCreatief(){ function lijst(id,label,arr){ return '<label style="display:block;margin:.5em 0 .2em;font-weight:600">'+label+' ('+arr.length+')</label><textarea id="'+id+'" style="width:100%;min-height:7em;border:1px solid #ccc;border-radius:8px;padding:.4em;font:inherit">'+esc(arr.join("\n"))+'</textarea>'; }
+  return '<h2>Creatief</h2><p class="uitleg">Eén item per regel.</p>'+lijst("cre-challenge","Bouwopdrachten",CRE.CHALLENGE_DATA)+lijst("cre-wonder","Wondervragen",CRE.WONDER_DATA)+lijst("cre-startzin","Startzinnen",CRE.STARTZIN_DATA)
+    +'<div class="acties"><button class="knop" onclick="exporteerCreatief()">⬇️ Exporteer creatief.js</button><span id="cre-status" class="status ok">—</span></div>'; }
+function paneelMascottes(){ var kaarten=Object.keys(MAS).map(function(k){ var m=MAS[k]; var prev=m.afbeelding?'<img src="'+m.afbeelding+'">':(m.emoji||"🧍");
+    return '<div class="maskaart"><h3>'+k+'</h3><div class="maspreview" id="mp-'+k+'">'+prev+'</div>'
+      +'<label>Emoji (terugval)</label><input value="'+esc(m.emoji)+'" oninput="masSet(\''+k+'\',\'emoji\',this.value)">'
+      +'<label>Naam</label><input value="'+esc(m.naam)+'" oninput="masSet(\''+k+'\',\'naam\',this.value)">'
+      +'<label>Aanmoedigingen (één per regel)</label><textarea rows="3" oninput="masZinnen(\''+k+'\',this.value)">'+esc((m.zinnen||[]).join("\n"))+'</textarea>'
+      +'<label>Eigen afbeelding</label><input type="file" accept="image/*" onchange="masUpload(\''+k+'\',this)"><div class="bvinfo" id="masinfo-'+k+'">'+(m.afbeelding?"✓ geplaatst":"")+'</div>'
+      +(m.afbeelding?'<button class="knop2" style="margin-top:.4em" onclick="masWis(\''+k+'\')">Afbeelding verwijderen</button>':'')+'</div>'; }).join("");
+  return '<h2>Mascottes</h2><div class="spec">🖼️ Afbeelding-eisen (mascotte): '+specTekst("mascotte")+'.</div><div class="maslijst">'+kaarten+'</div>'
+    +'<div class="acties"><button class="knop" onclick="exporteerMascottes()">⬇️ Exporteer mascottes.js</button><span id="mas-status" class="status ok">—</span></div>'; }
+function paneelWezens(){
+  var secties=WEZ_GROEPEN.map(function(g){
+    var lijst=(WEZ[g]||[]);
+    var kaarten=lijst.map(function(c,i){ var prev=c.afbeelding?'<img src="'+c.afbeelding+'">':(c.emoji||"🐾");
+      return '<div class="maskaart"><div class="maspreview" id="wp-'+g+'-'+i+'">'+prev+'</div>'
+        +'<label>Emoji (terugval)</label><input value="'+esc(c.emoji)+'" oninput="wezSet(\''+g+'\','+i+',this.value)">'
+        +'<label>Eigen afbeelding</label><input type="file" accept="image/*" onchange="wezUpload(\''+g+'\','+i+',this)"><div class="bvinfo" id="wezinfo-'+g+'-'+i+'">'+(c.afbeelding?"✓ geplaatst":"")+'</div>'
+        +'<button class="del" style="margin-top:.4em" onclick="wezDel(\''+g+'\','+i+')">✕ verwijder</button></div>'; }).join("");
+    return '<h3 style="margin:.7em 0 .2em">'+wezLabel(g)+' ('+lijst.length+')</h3><div class="maslijst">'+kaarten+'</div>'
+      +'<button class="knop2" onclick="wezAdd(\''+g+'\')">+ Figuur toevoegen</button>';
+  }).join("");
+  return '<h2>Dieren & poppetjes</h2><div class="spec">🖼️ Afbeelding-eisen: '+specTekst("mascotte")+'. Laat leeg om de emoji te gebruiken. Deze figuurtjes lopen vanzelf rond in de bouwmodus; onder "Te koop" staan de maatjes die het kind kan bijkopen.</div>'+secties
+    +'<div class="acties"><button class="knop" onclick="exporteerWezens()">⬇️ Exporteer wezens.js</button><span id="wez-status" class="status ok">—</span></div>';
+}
+function wezSet(g,i,v){ WEZ[g][i].emoji=v; var el=document.getElementById("wp-"+g+"-"+i); if(el&&!WEZ[g][i].afbeelding) el.innerHTML=v||"🐾"; }
+function wezAdd(g){ if(!WEZ[g]) WEZ[g]=[]; WEZ[g].push({emoji:"🐾",afbeelding:""}); document.getElementById("paneel-wezens").innerHTML=paneelWezens(); }
+function wezDel(g,i){ WEZ[g].splice(i,1); document.getElementById("paneel-wezens").innerHTML=paneelWezens(); }
+function wezUpload(g,i,input){ var file=input.files&&input.files[0]; if(!file) return;
+  analyseBeeld(file).then(function(meta){ var p=keurBeeld(meta,"mascotte"); var info=document.getElementById("wezinfo-"+g+"-"+i);
+    if(p.length){ if(info){info.className="bvinfo err"; info.textContent="✗ "+p.join("; ");} input.value=""; return; }
+    WEZ[g][i].afbeelding=meta.url; document.getElementById("paneel-wezens").innerHTML=paneelWezens(); }); }
+function paneelIconen(){ function slot(key,titel){ var url=ICONS[key];
+    return '<div class="iconslot"><h3 style="margin:.1em 0">'+titel+'</h3><div class="spec">'+specTekst(key)+'</div>'
+      +'<div class="bvrij"><span class="bvprev" style="width:64px;height:64px">'+(url?'<img src="'+url+'">':'—')+'</span>'
+      +'<div><input type="file" accept="image/png" onchange="iconUpload(\''+key+'\',this)"><div class="bvinfo" id="'+key+'-info">'+(url?"✓ geldig":"")+'</div></div></div>'
+      +'<div class="acties"><button class="knop" onclick="exporteerIcon(\''+key+'\')">⬇️ Download '+(key==="icon192"?"icon-192.png":"icon-512.png")+'</button><span id="'+key+'-status" class="status ok">—</span></div></div>'; }
+  return '<h2>App-iconen</h2><p class="uitleg">Vervang de PWA-iconen. Ze moeten <b>exact</b> de juiste maat en PNG zijn (waarschuwen én blokkeren). Download en zet ze in de map <code>icons/</code>.</p>'+slot("icon192","Icoon 192×192")+slot("icon512","Icoon 512×512"); }
+
+/* ========== edit-handlers ========== */
+function voegToe(key){ DATA[key].push(SCHEMAS[key].nieuw()); herteken(key); }
+function verwijder(key,i){ DATA[key].splice(i,1); herteken(key); }
+function herteken(key){ document.getElementById("tab-"+key).innerHTML=renderTabel(key); var b=document.getElementById("navbadge-"+key); if(b) b.textContent=DATA[key].length; toonStatus(key,valideer(key)); }
+document.addEventListener("input",function(e){ var t=e.target; if(!t.dataset||!t.dataset.k) return; var key=t.dataset.k,i=+t.dataset.i,f=t.dataset.f,typ=t.dataset.t,v=t.value;
+  if(typ==="num") v=v===""?"":Number(v); else if(typ==="list") v=strNaarLijst(v); DATA[key][i][f]=v; toonStatus(key,valideer(key)); });
+function opslaanCreatief(){ var g=function(id){ var el=document.getElementById(id); return el?el.value.split("\n").map(function(s){return s.trim();}).filter(Boolean):[]; };
+  var c=g("cre-challenge"); if(c.length)CRE.CHALLENGE_DATA=c; var w=g("cre-wonder"); if(w.length)CRE.WONDER_DATA=w; var s=g("cre-startzin"); if(s.length)CRE.STARTZIN_DATA=s; }
+
+/* afbeelding upload (content + mascotte + icon) — keurt en blokkeert */
+function beeldUpload(key,i,f,spec,input){ var file=input.files&&input.files[0]; if(!file) return;
+  analyseBeeld(file).then(function(meta){ var p=keurBeeld(meta,spec); var info=document.getElementById("bvi-"+key+"-"+i);
+    if(p.length){ if(info){info.className="bvinfo err"; info.textContent="✗ "+p.join("; ");} input.value=""; return; }
+    DATA[key][i][f]=meta.url; toonStatus(key,valideer(key)); herteken(key); }); }
+function beeldWis(key,i,f){ DATA[key][i][f]=""; herteken(key); }
+function masSet(k,f,v){ MAS[k][f]=v; masPreview(k); }
+function masZinnen(k,v){ MAS[k].zinnen=v.split("\n").map(function(s){return s.trim();}).filter(Boolean); }
+function masPreview(k){ var el=document.getElementById("mp-"+k); if(el) el.innerHTML=MAS[k].afbeelding?'<img src="'+MAS[k].afbeelding+'">':(MAS[k].emoji||"🧍"); }
+function masUpload(k,input){ var file=input.files&&input.files[0]; if(!file) return;
+  analyseBeeld(file).then(function(meta){ var p=keurBeeld(meta,"mascotte"); var info=document.getElementById("masinfo-"+k);
+    if(p.length){ if(info){info.className="bvinfo err"; info.textContent="✗ "+p.join("; ");} input.value=""; return; }
+    MAS[k].afbeelding=meta.url; document.getElementById("paneel-mascottes").innerHTML=paneelMascottes(); }); }
+function masWis(k){ MAS[k].afbeelding=""; document.getElementById("paneel-mascottes").innerHTML=paneelMascottes(); }
+function iconUpload(key,input){ var file=input.files&&input.files[0]; if(!file) return;
+  analyseBeeld(file).then(function(meta){ var p=keurBeeld(meta,key); var info=document.getElementById(key+"-info");
+    if(p.length){ if(info){info.className="bvinfo err"; info.textContent="✗ "+p.join("; ");} ICONS[key]=""; input.value=""; return; }
+    ICONS[key]=meta.url; document.getElementById("paneel-iconen").innerHTML=paneelIconen(); }); }
+
+/* ========== opbouw + tabbladen ========== */
+var TABS=[];
+VOLGORDE.forEach(function(k){ TABS.push({id:k, titel:SCHEMAS[k].titel, badge:function(){return DATA[k].length;}, render:function(){return paneelContent(k);}}); });
+TABS.push({id:"creatief", titel:"Creatief", render:paneelCreatief});
+TABS.push({id:"mascottes", titel:"Mascottes", render:paneelMascottes});
+TABS.push({id:"wezens", titel:"Dieren", render:paneelWezens});
+TABS.push({id:"iconen", titel:"App-iconen", render:paneelIconen});
+function toon(id){ TABS.forEach(function(t){ var p=document.getElementById("paneel-"+t.id); if(p) p.classList.toggle("aan",t.id===id); var b=document.getElementById("nav-"+t.id); if(b) b.classList.toggle("aan",t.id===id); });
+  if(SCHEMAS[id]) toonStatus(id,valideer(id)); }
+(function init(){
+  var nav=document.getElementById("nav"); var pan=document.getElementById("panelen"); var navHtml="", panHtml="";
+  TABS.forEach(function(t){ var badge=t.badge?'<span class="badge" id="navbadge-'+t.id+'">'+t.badge()+'</span>':'';
+    navHtml+='<button id="nav-'+t.id+'" onclick="toon(\''+t.id+'\')">'+t.titel+badge+'</button>';
+    panHtml+='<div class="paneel" id="paneel-'+t.id+'">'+t.render()+'</div>'; });
+  nav.innerHTML=navHtml; pan.innerHTML=panHtml;
+  VOLGORDE.forEach(function(k){ toonStatus(k,valideer(k)); });
+  toon(TABS[0].id);
+})();
+</script>
+</body>
+</html>

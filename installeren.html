@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4a7c3a">
+<title>Blokwereld — installeren & testen</title>
+<style>
+  :root{ --bg1:#7ec850; --bg2:#4a7c3a; --paneel:#fff; --tekst:#20331a; --accent:#5a9b3a; --accent2:#3d6b28; }
+  *{box-sizing:border-box}
+  body{ margin:0; font-family:'Andika',system-ui,sans-serif; color:var(--tekst); background:linear-gradient(160deg,var(--bg1),var(--bg2)); min-height:100vh; padding:1.2em; }
+  .kaart{ background:var(--paneel); max-width:640px; margin:0 auto 1em; border-radius:22px; padding:1.2em 1.4em; box-shadow:0 8px 30px rgba(0,0,0,.18); }
+  h1{ margin:.1em 0 .3em; font-size:1.5rem; }
+  h2{ font-size:1.15rem; margin:.6em 0 .3em; }
+  p,li{ line-height:1.6; }
+  .knop{ display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; padding:.8em 1.4em; border-radius:16px; box-shadow:0 4px 0 var(--accent2); margin:.4em 0; }
+  .knop:active{ transform:translateY(2px); box-shadow:0 2px 0 var(--accent2); }
+  .rijknoppen{ display:flex; gap:.6em; flex-wrap:wrap; }
+  .tab{ display:flex; gap:.5em; margin:.6em 0; }
+  .tab button{ flex:1; font:inherit; font-weight:700; padding:.6em; border:2px solid var(--accent); background:#fff; color:var(--accent2); border-radius:12px; cursor:pointer; }
+  .tab button.aan{ background:var(--accent); color:#fff; }
+  .stap{ display:none; }
+  .stap.aan{ display:block; }
+  ol{ padding-left:1.3em; } li{ margin:.3em 0; }
+  .badge{ display:inline-block; background:#e2f5e6; color:#1e7a2c; border-radius:10px; padding:.15em .6em; font-size:.85rem; font-weight:700; }
+  .privacy{ font-size:.9rem; color:#444; }
+  a{ color:var(--accent2); }
+</style>
+</head>
+<body>
+<div class="kaart">
+  <h1>🧱 Blokwereld <span class="badge">gratis test</span></h1>
+  <p>Bedankt dat je meetest! Blokwereld is een Nederlandse leerapp voor de basisschool, speciaal voor <b>beelddenkers</b> en kinderen met (mogelijke) <b>dyslexie</b>: rekenen, spelling, lezen, talen en kritisch denken, met een speelse bouw-beloning.</p>
+  <p><span class="badge">Tijdens de test is alles gratis</span> en volledig ontgrendeld. Er is niets te kopen.</p>
+  <div class="rijknoppen">
+    <a class="knop" href="index.html">▶️ Open Blokwereld</a>
+    <a class="knop" style="background:#7a6cff;box-shadow:0 4px 0 #5a4fd0" href="mailto:mvermaas@nsecure.nl?subject=Blokwereld%20test-feedback">✉️ Feedback sturen</a>
+  </div>
+</div>
+
+<div class="kaart">
+  <h2>📲 Zet de app op het beginscherm</h2>
+  <p>Zo speelt het het fijnst — als een echte app, zonder browserbalk, en offline te gebruiken.</p>
+  <div class="tab">
+    <button id="tab-ios" class="aan" onclick="toon('ios')"> iPhone / iPad</button>
+    <button id="tab-android" onclick="toon('android')">Android</button>
+  </div>
+  <div id="stap-ios" class="stap aan">
+    <ol>
+      <li>Open deze pagina in <b>Safari</b> (niet in een andere browser).</li>
+      <li>Tik onderin op het <b>deel-icoon</b> ⬆️ (vierkant met pijltje omhoog).</li>
+      <li>Kies <b>Zet op beginscherm</b>.</li>
+      <li>Tik rechtsboven op <b>Voeg toe</b>.</li>
+      <li>Open Blokwereld voortaan via het nieuwe icoon op je beginscherm.</li>
+    </ol>
+  </div>
+  <div id="stap-android" class="stap">
+    <ol>
+      <li>Open deze pagina in <b>Chrome</b>.</li>
+      <li>Tik rechtsboven op het menu <b>⋮</b>.</li>
+      <li>Kies <b>App installeren</b> (of <b>Toevoegen aan startscherm</b>).</li>
+      <li>Bevestig met <b>Installeren</b>.</li>
+      <li>Open Blokwereld voortaan via het nieuwe icoon.</li>
+    </ol>
+    <p class="privacy">Tip: soms verschijnt vanzelf onderin een balkje “App installeren”. Daar kun je ook op tikken.</p>
+  </div>
+</div>
+
+<div class="kaart">
+  <h2>🙋 Wat we graag willen weten</h2>
+  <ul>
+    <li>Vond je kind het leuk? Welke spellen het meest?</li>
+    <li>Was het duidelijk zonder uitleg? Waar liep het vast?</li>
+    <li>Werkte alles goed op jullie toestel? (iPhone/Android + model)</li>
+    <li>Zou je voor de volledige versie (Premium) willen betalen?</li>
+  </ul>
+  <a class="knop" href="mailto:mvermaas@nsecure.nl?subject=Blokwereld%20test-feedback&body=Wat%20vond%20je%20kind%20leuk%3F%0A%0AWat%20kan%20beter%3F%0A%0AToestel%20(iPhone%2FAndroid%20%2B%20model)%3A%0A">✉️ Stuur je feedback</a>
+</div>
+
+<div class="kaart privacy">
+  <h2>🔒 Privacy</h2>
+  <p>Blokwereld werkt zonder account en zonder tracking. Alle gegevens (naam, leeftijd, voortgang) blijven op het toestel zelf; er wordt niets naar internet gestuurd. Ouderfuncties zitten achter een lokale pincode. AVG-proof, gemaakt met kinderen in gedachten.</p>
+</div>
+
+<script>
+function toon(p){
+  document.getElementById('stap-ios').classList.toggle('aan', p==='ios');
+  document.getElementById('stap-android').classList.toggle('aan', p==='android');
+  document.getElementById('tab-ios').classList.toggle('aan', p==='ios');
+  document.getElementById('tab-android').classList.toggle('aan', p==='android');
+}
+// toon het juiste tabblad automatisch
+if(/android/i.test(navigator.userAgent)) toon('android');
+</script>
+</body>
+</html>
