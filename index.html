@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4a7c3a">
 <title>Archito</title>
 <meta name="description" content="Nederlandstalige leerapp voor beelddenkers: rekenen, spelling, lezen, talen en kritisch denken met een bouw-beloningslus.">
@@ -17,6 +17,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lexend:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+/* US-11: OpenDyslexic als optioneel leesfont.
+   LET OP (offline): voor volledige offline-werking het .woff2-bestand lokaal meeleveren
+   en deze bron-URL vervangen door een relatief pad (bijv. fonts/OpenDyslexic-Regular.woff2). */
+@font-face{ font-family:'OpenDyslexic'; font-style:normal; font-weight:400;
+  src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.19/files/opendyslexic-latin-400-normal.woff2') format('woff2');
+  font-display:swap; }
+@font-face{ font-family:'OpenDyslexic'; font-style:normal; font-weight:700;
+  src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.19/files/opendyslexic-latin-700-normal.woff2') format('woff2');
+  font-display:swap; }
 /* ==== Thema-variabelen: nieuwe skin = alleen data + deze blokken ==== */
 :root{
   --leesfont:'Andika','Lexend',system-ui,sans-serif;
@@ -58,7 +67,8 @@ body{
   background:linear-gradient(160deg,var(--bg1),var(--bg2)); color:var(--paneeltekst);
   min-height:100%; padding-bottom:40px;
 }
-h1,h2,h3{font-family:var(--pixelfont); line-height:1.5}
+/* US-01: leestekst in de leesfont. Alleen het decoratieve logo (.pix) blijft pixelfont. */
+h1,h2,h3{font-family:var(--leesfont); line-height:1.45}
 .pix{font-family:var(--pixelfont)}
 button,.knop{
   font-family:var(--leesfont); font-size:1.05rem; font-weight:700;
@@ -108,14 +118,15 @@ main{max-width:760px; margin:0 auto; padding:1em}
 .breek{animation:breek .35s forwards}
 .blij{font-size:1.1rem}
 /* ==== Rekenblok / knoppen antwoorden ==== */
-.steenblok{font-family:var(--pixelfont); font-size:1.8rem; background:#b98a5a; color:#fff2d8; border:6px solid #7c5a34; border-radius:14px; padding:.7em 1em; text-align:center; margin:.4em auto; max-width:340px; text-shadow:2px 2px 0 #0006}
+.steenblok{font-family:var(--leesfont); font-weight:700; font-size:1.9rem; background:#b98a5a; color:#fff2d8; border:6px solid #7c5a34; border-radius:14px; padding:.7em 1em; text-align:center; margin:.4em auto; max-width:340px; text-shadow:2px 2px 0 #0006}
 .antwoorden{display:grid; grid-template-columns:1fr 1fr; gap:.6em; max-width:360px; margin:.6em auto}
 .antwoorden button{font-size:1.5rem}
 /* Diverse hulp */
 .rij{display:flex; flex-wrap:wrap; gap:.4em; align-items:center}
 .midden{text-align:center}
-.klein{font-size:.85rem; opacity:.85}
-.reset{display:block; text-align:center; margin:1.5em auto .5em; color:#fff8; font-size:.8rem}
+/* US-09: contrast via vaste kleur i.p.v. opacity-dimming */
+.klein{font-size:.9rem; opacity:1}
+.reset{display:block; text-align:center; margin:1.5em auto .5em; color:#fff; opacity:1; font-size:.85rem; text-decoration:underline; text-shadow:0 1px 2px rgba(0,0,0,.55)}
 
 /* ===================== Zachte, ronde, speelse laag (Toca-geïnspireerd) ===================== */
 :root{ --letterspatie:.03em; --rond:26px; }
@@ -153,7 +164,7 @@ button:active,.knop:active{ box-shadow:0 2px 0 var(--schaduw), 0 4px 8px rgba(0,
 .beeldtegel:active{ transform:translateY(3px); box-shadow:0 2px 0 var(--schaduw); }
 .beeldtegel.fout{ animation:schud .3s; border-color:var(--fout); }
 .beeldtegel.raak{ border-color:var(--goed); transform:scale(1.06); }
-.beeldopdracht{ font-family:var(--pixelfont); font-size:1rem; line-height:1.6; text-align:center; margin:.4em 0; }
+.beeldopdracht{ font-family:var(--leesfont); font-weight:700; font-size:1.15rem; line-height:1.6; text-align:center; margin:.4em 0; }
 /* ==== Beeldlab (doe-puzzels) ==== */
 .beeldtegel.klein{ font-size:2.6rem; min-height:72px; padding:.3em 0; }
 .beeldtegel .bllabel{ font-family:var(--leesfont); font-size:.8rem; margin-top:.2em; }
@@ -181,7 +192,7 @@ button:active,.knop:active{ box-shadow:0 2px 0 var(--schaduw), 0 4px 8px rgba(0,
 .mini{ min-height:36px; min-width:36px; padding:.2em .4em; font-size:1rem; margin:.1em; }
 /* ==== Ouder-voortgang ==== */
 .statkaart{ background:var(--paneel); border-radius:14px; padding:.6em; text-align:center; box-shadow:0 3px 0 var(--schaduw); }
-.statnum{ font-family:var(--pixelfont); font-size:1.3rem; color:var(--accent2); }
+.statnum{ font-family:var(--leesfont); font-weight:700; font-size:1.5rem; color:var(--accent2); }
 .oudertabel{ width:100%; border-collapse:collapse; font-size:.95rem; margin:.4em 0; }
 .oudertabel td{ padding:.25em .4em; border-bottom:1px solid #0001; }
 /* ==== Installatie-tip + premium ==== */
@@ -334,6 +345,39 @@ button::before, .knop::before, .spelknop::before{
 .tipspel{ padding:.4em 0; border-bottom:1px solid #0001; }
 .tipspel:last-child{ border-bottom:none; }
 .tipspel > div{ margin-top:.15em; }
+
+/* ===================== US-03: zichtbare focus + toetsenbordbediening ===================== */
+:root{ --focuskleur:#123; }
+body[data-theme="galaxy"], body[data-theme="unicorn"], body[data-theme="voetbal"], body[data-theme="powerup"]{ --focuskleur:#fff; }
+:focus{ outline:none; }
+:focus-visible{ outline:4px solid var(--focuskleur); outline-offset:3px; border-radius:8px; box-shadow:0 0 0 3px rgba(255,255,255,.9), 0 0 0 7px #1668d6; }
+.spelknop:focus-visible, .beeldtegel:focus-visible, .kindkaart:focus-visible, [role="button"]:focus-visible{ outline:4px solid #1668d6; outline-offset:3px; box-shadow:0 0 0 3px #fff; }
+[role="button"]{ cursor:pointer; }
+
+/* US-09: HUD-chips met genoeg contrast op elk thema */
+#hud .chip{ background:rgba(0,0,0,.42); color:#fff; }
+#hud button{ background:rgba(255,255,255,.28); color:#fff; }
+
+/* US-05: 'Verder' knop */
+.verder-wrap{ text-align:center; margin:1em 0; }
+.verder-knop{ font-size:1.2rem; padding:.7em 1.6em; background:var(--goed); color:#fff; }
+
+/* ===================== US-06: Rustige modus ===================== */
+body[data-rustig="1"] *{ animation:none !important; transition:none !important; }
+body[data-rustig="1"] #hud .chip, body[data-rustig="1"] #hud .xpbalk{ display:none; }
+body[data-tijdverborgen="1"] #hud .chip[title="Speeltijd over"]{ display:none; }
+.rustigpaneel{ background:var(--paneel); border-radius:22px; padding:1em; margin:1em 0; box-shadow:0 6px 20px var(--schaduw); text-align:center; }
+
+/* ===================== US-11: Leescomfort ===================== */
+:root{ --leesschaal:1; --regelafstand:1.5; --woordafstand:0em; }
+body{ font-size:calc(1rem * var(--leesschaal)); word-spacing:var(--woordafstand); }
+main, .popup{ line-height:var(--regelafstand); }
+.sectie p, .beeldopdracht, .steenblok, .feedback, .klein, label, li, .leestekst p{ line-height:var(--regelafstand); }
+body[data-leesfont="opendyslexic"]{ --leesfont:'OpenDyslexic','Andika','Lexend',system-ui,sans-serif; }
+body[data-leesfont="lexend"]{ --leesfont:'Lexend','Andika',system-ui,sans-serif; }
+.instelrij{ display:flex; align-items:center; justify-content:space-between; gap:.6em; margin:.5em 0; flex-wrap:wrap; }
+.instelrij .knoppen{ display:flex; gap:.3em; align-items:center; }
+.schakelaar[aria-pressed="true"]{ outline:3px solid var(--accent); }
 </style>
 </head>
 <body data-theme="craft">
@@ -401,7 +445,7 @@ button::before, .knop::before, .spelknop::before{
 /* =========================================================================
    BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.32.0";
+var APP_VERSIE = "3.33.0";
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
@@ -430,6 +474,10 @@ function nieuweState(){
   return {
     versie:APP_VERSIE, naam:"", leeftijd:0, groep:3, niveau:1,
     thema:"craft", stem:null, taal:"en", geluidAan:true, muziekAan:false,
+    voorlezenAan:true,                               // US-04: voorlezen los van geluidseffecten (default aan)
+    rustigeModus:false, tijdVerborgen:false,         // US-06: rustige modus + resttijd apart verbergen
+    leesSchaal:1, regelAfstand:1.5, woordAfstand:0, leesFontKeuze:"andika", // US-11: leescomfort
+    foutenLog:[],                                    // US-10: fouten stil loggen voor ouders
     valuta:0, xp:0, oefendagen:0, ouderPin:"", besteCombo:0, bouwenVrij:false, avatar:"",
     tel:{verdiend:0, geoogst:0, gebouwd:0, dagquest:0, levelups:0, minigame:0}, missieIndex:0, stickers:[], oogstDag:null, hakDag:null,
     speeltijdMin:20, tijdGebruiktSec:0, tijdDatum:"",
@@ -491,6 +539,7 @@ function nieuwKind(){
 }
 function kiesKind(idx){
   if(idx<0||idx>=PROFIELDATA.profielen.length) return;
+  var _kp=PROFIELDATA.profielen[idx]; if(_kp && _kp.naam) zeg(_kp.naam);   // US-12: naam voorlezen voor het wisselen
   PROFIELDATA.profielen[PROFIELDATA.actief] = S;              // huidige vastleggen
   PROFIELDATA.actief = idx;
   S = migreerProfiel(Object.assign(nieuweState(), PROFIELDATA.profielen[idx]));
@@ -500,7 +549,14 @@ function kiesKind(idx){
 }
 function verwijderKind(idx){
   if(PROFIELDATA.profielen.length<=1){ toonToast("Er moet minstens één kind blijven."); return; }
-  if(typeof confirm==="function" && !confirm("Dit kind en zijn voortgang verwijderen?")) return;
+  var naam = (PROFIELDATA.profielen[idx] && PROFIELDATA.profielen[idx].naam) || "dit kind";
+  // US-08: verwijderen zit achter de drempel en gebruikt een eigen dialoog (geen native confirm())
+  vraagOuderGate(function(){
+    bevestig("Wil je <b>"+naam+"</b> en alle voortgang verwijderen?", function(){ _verwijderKindDoe(idx); });
+  });
+}
+function _verwijderKindDoe(idx){
+  if(PROFIELDATA.profielen.length<=1){ toonToast("Er moet minstens één kind blijven."); return; }
   PROFIELDATA.profielen.splice(idx,1);
   if(PROFIELDATA.actief>=PROFIELDATA.profielen.length) PROFIELDATA.actief=PROFIELDATA.profielen.length-1;
   S = migreerProfiel(Object.assign(nieuweState(), PROFIELDATA.profielen[PROFIELDATA.actief]));
@@ -512,10 +568,12 @@ function kiesProfielScherm(){
   var kaarten = PROFIELDATA.profielen.map(function(p,i){
     var actief = i===PROFIELDATA.actief;
     return '<div class="kindkaart'+(actief?' actief':'')+'">'
-      + '<div class="kindav" onclick="kiesKind('+i+')">'+kindAvatar(p)+'</div>'
+      + '<div class="kindav" onclick="kiesKind('+i+')" aria-label="'+(p.naam||"Nieuw kind")+'">'+kindAvatar(p)+'</div>'
       + '<div class="kindnaam" onclick="kiesKind('+i+')">'+(p.naam||"Nieuw kind")+'</div>'
       + '<div class="klein">'+(p.leeftijd?p.leeftijd+' jaar':'—')+'</div>'
-      + '<div class="rij" style="justify-content:center;gap:.2em"><button class="knop2" onclick="kiesKind('+i+')">Spelen</button>'
+      + '<div class="rij" style="justify-content:center;gap:.2em">'
+      + '<button class="mini" title="Naam voorlezen" aria-label="Naam voorlezen" onclick="zeg(\''+(p.naam||"Nieuw kind").replace(/\x27/g,"")+'\')">🔊</button>'
+      + '<button class="knop2" onclick="kiesKind('+i+')">▶ Spelen</button>'
       + '<button class="mini" title="Bewerken" onclick="kiesKind('+i+');setTimeout(openProfiel,50)">✏️</button>'
       + (PROFIELDATA.profielen.length>1?'<button class="mini" title="Verwijderen" onclick="verwijderKind('+i+')">🗑️</button>':'')
       + '</div></div>';
@@ -533,36 +591,54 @@ function openMenu(){
   var ic=function(p){return '<img src="ui/'+p+'" style="width:26px;height:26px;object-fit:contain;vertical-align:middle;margin-right:.45em">';};
   var geluid = S.geluidAan ? ic('mi-geluid-aan.png')+"Geluid aan" : ic('mi-geluid-uit.png')+"Geluid uit";
   var muziek = S.muziekAan ? ic('mi-muziek-aan.png')+"Muziek aan" : ic('mi-muziek-uit.png')+"Muziek uit";
+  var voorlezen = ic('mi-stem.png') + (S.voorlezenAan ? "Voorlezen aan" : "Voorlezen uit");   // US-04
   var html = '<h2>☰ Menu</h2><div class="menugrid">'
     + '<button onclick="kiesProfielScherm()">'+ic('mi-wissel.png')+'Wissel kind</button>'
     + '<button onclick="openThemakeuze()">'+ic('mi-thema.png')+'Thema kiezen</button>'
     + '<button onclick="openStickerboek()">'+ic('mi-sticker.png')+'Stickerboek</button>'
+    + '<button onclick="menuToggleVoorlezen()">'+voorlezen+'</button>'
     + '<button onclick="menuToggleGeluid()">'+geluid+'</button>'
     + '<button onclick="menuToggleMuziek()">'+muziek+'</button>'
     + '<button onclick="openStemkiezer()">'+ic('mi-stem.png')+'Voorleesstem</button>'
+    + '<button onclick="openInstellingen()">⚙️ Instellingen</button>'
     + '<button onclick="openOuders()">'+ic('mi-ouders.png')+'Ouders</button>'
-    + '<button onclick="openPremium()">'+ic('mi-premium.png')+'Premium</button>'
     + (kanInstalleren() ? '<button onclick="installeerApp()">'+ic('mi-install.png')+'App installeren</button>' : '')
-    + '</div>';
+    + '</div>'
+    + '<p class="klein">Premium en aankopen staan in het oudergedeelte (👪 Ouders).</p>';   // US-07
   openOverlay(html);
 }
 function menuToggleGeluid(){ wisselGeluid(); openMenu(); }
 function menuToggleMuziek(){ wisselMuziek(); openMenu(); }
+function menuToggleVoorlezen(){ S.voorlezenAan=!S.voorlezenAan; bewaarState(); if(S.voorlezenAan) zeg("Voorlezen staat aan."); openMenu(); }
 
 function resetAlles(){
-  if(typeof confirm==="function" && !confirm("Weet je het zeker? ALLE kinderen en voortgang worden gewist.")) return;
-  try{ localStorage.removeItem(OPSLAG_KEY); }catch(e){}
-  PROFIELDATA = { profielen:[ nieuweState() ], actief:0 }; S = PROFIELDATA.profielen[0];
-  location.reload && location.reload();
+  // US-08: reset achter de drempel + eigen bevestiging (geen native confirm())
+  vraagOuderGate(function(){
+    bevestig("ALLE kinderen en voortgang worden gewist. Doorgaan?", function(){
+      try{ localStorage.removeItem(OPSLAG_KEY); }catch(e){}
+      PROFIELDATA = { profielen:[ nieuweState() ], actief:0 }; S = PROFIELDATA.profielen[0];
+      if(location.reload) location.reload();
+    });
+  });
 }
 
-/* ---- Foutvangnet ---- */
-function toonFout(bericht){
-  var b = document.getElementById("foutbalk");
-  if(b){ b.style.display="block"; b.textContent = "⚠ v"+APP_VERSIE+" — "+bericht; }
+/* ---- Foutvangnet (US-10: verberg technische fouten voor het kind) ----
+   Technische fouten worden stil gelogd (console + S.foutenLog, alleen in het oudergedeelte). */
+function logFout(bericht){
+  try{ console.error("[Archito v"+APP_VERSIE+"]", bericht); }catch(e){}
+  try{
+    if(S && Array.isArray(S.foutenLog)){
+      S.foutenLog.push({t:new Date().toISOString(), v:APP_VERSIE, m:(""+bericht).slice(0,300)});
+      if(S.foutenLog.length>30) S.foutenLog = S.foutenLog.slice(-30);
+    }
+  }catch(e){}
 }
+/* Oude naam blijft bestaan zodat bestaande aanroepen werken; toont niets aan het kind. */
+function toonFout(bericht){ logFout(bericht); }
+/* Alleen bij een fout die het spelen echt blokkeert: neutrale, geruststellende boodschap. */
+function toonVriendelijkeFout(){ try{ toonToast("Oeps, even opnieuw proberen 🙂"); }catch(e){} }
 if(typeof window!=="undefined"){
-  window.addEventListener("error", function(ev){ toonFout((ev.message||"Onbekende fout")); });
+  window.addEventListener("error", function(ev){ logFout(ev.message||"Onbekende fout"); });
 }
 
 /* ---- Spraak (Web Speech API) ---- */
@@ -578,7 +654,7 @@ function kiesBesteStem(taalPrefix){
   return premium || kand[0] || null;
 }
 function zeg(tekst, taalPrefix, rate){
-  if(!S.geluidAan) return;
+  if(!S.voorlezenAan) return;   // US-04: voorlezen staat los van geluidseffecten
   try{
     if(!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
     window.speechSynthesis.cancel();
@@ -967,7 +1043,7 @@ function openSpel(sleutel){
   if(titelEl) titelEl.textContent = titels[sleutel]||"";
   _huidigSpel = sleutel;
   var fn = starters[sleutel];
-  if(typeof fn==="function"){ try{ fn(); }catch(e){ toonFout("Spel starten mislukt: "+e.message); } }
+  if(typeof fn==="function"){ try{ fn(); }catch(e){ logFout("Spel starten mislukt: "+e.message); toonVriendelijkeFout(); } }
 }
 /* ---- Spelregels + betekenisvolle hints per spel (kort, voorleesbaar) ---- */
 var _huidigSpel = "reken";
@@ -1012,6 +1088,22 @@ function toonSpelHint(){
 function bouwStartscherm(){
   var oefen = document.getElementById("oefenGrid"); var maak = document.getElementById("maakGrid");
   if(!oefen||!maak) return;
+  // US-06: rustige modus toont eerst één activiteit + 'Kies zelf'
+  var startScherm = document.getElementById("scherm-start");
+  var secties = startScherm ? startScherm.querySelectorAll(".sectie") : [];
+  var missieVak = document.getElementById("missieVak"), dq = document.getElementById("dagquestVak");
+  if(S.rustigeModus && !_rustigToonAlles){
+    Array.prototype.forEach.call(secties, function(s){ s.style.display="none"; });
+    if(missieVak) missieVak.style.display="none";
+    if(dq) dq.style.display="none";
+    toonRustigPaneel(); tekenMascotte();
+    return;
+  } else {
+    Array.prototype.forEach.call(secties, function(s){ s.style.display=""; });
+    if(missieVak) missieVak.style.display="";
+    if(dq) dq.style.display="";
+    var rp=document.getElementById("rustigVak"); if(rp && rp.remove) rp.remove();
+  }
   var sp = THEMA.spellen;
   var lijst = [
     {k:"reken", ico:"⛏️", img:"ui/menu-reken.png", naam:sp.reken},
@@ -1092,14 +1184,36 @@ function mascotteJuich(){
 }
 
 /* ---- Overlay helpers (auto ✕ + klik-buiten + Escape) ---- */
+var _overlayVorigeFocus = null;   // US-03: focus terugzetten bij sluiten
 function openOverlay(html){
   var o=document.getElementById("overlay"); var inh=document.getElementById("overlayInhoud");
+  try{ if(!o || !o.classList.contains("actief")) _overlayVorigeFocus = document.activeElement; }catch(e){}
   if(inh) inh.innerHTML=html; if(o) o.classList.add("actief");
+  setTimeout(function(){
+    if(typeof verrijkToegankelijkheid==="function"){ try{ verrijkToegankelijkheid(inh); }catch(e){} }
+    var eerste = inh && inh.querySelector("button, [role='button'], a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+    if(eerste && eerste.focus){ try{ eerste.focus(); }catch(e){} }
+    else { var sl=o&&o.querySelector(".sluit"); if(sl&&sl.focus) try{ sl.focus(); }catch(e){} }
+  }, 30);
 }
-function sluitOverlay(){ var o=document.getElementById("overlay"); if(o) o.classList.remove("actief"); }
+function sluitOverlay(){
+  var o=document.getElementById("overlay"); if(o) o.classList.remove("actief");
+  try{ if(_overlayVorigeFocus && _overlayVorigeFocus.focus){ _overlayVorigeFocus.focus(); } }catch(e){}
+  _overlayVorigeFocus = null;
+}
 if(typeof window!=="undefined"){
   window.addEventListener("keydown", function(e){ if(e.key==="Escape") sluitOverlay(); });
   window.addEventListener("click", function(e){ if(e.target && e.target.id==="overlay") sluitOverlay(); });
+  window.addEventListener("keydown", function(e){   // US-03: focus-trap in de actieve overlay
+    if(e.key!=="Tab") return;
+    var o=document.getElementById("overlay"); if(!o || !o.classList.contains("actief")) return;
+    var f = o.querySelectorAll("button, [role='button'], a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+    f = Array.prototype.filter.call(f, function(el){ return el.offsetParent!==null || el===document.activeElement; });
+    if(!f.length) return;
+    var eerste=f[0], laatste=f[f.length-1];
+    if(e.shiftKey && document.activeElement===eerste){ e.preventDefault(); laatste.focus(); }
+    else if(!e.shiftKey && document.activeElement===laatste){ e.preventDefault(); eerste.focus(); }
+  }, true);
 }
 
 /* ---- Level-helpers ---- */
@@ -1151,7 +1265,8 @@ function openProfiel(eerste){
    + '<p><b>Kies je poppetje:</b></p><div class="rij" id="pfAvatar"></div>'
    + '<p><b>Hoe oud ben je?</b></p><div class="rij" id="pfLeeftijd"></div>'
    + '<p><b>Hoe lang spelen vandaag?</b></p><div class="rij" id="pfTijd"></div>'
-   + '<p><b>Ouder-PIN (optioneel, 4 cijfers):</b></p>'
+   + '<p><b>Ouder-PIN (4 cijfers):</b></p>'
+   + '<p class="klein">Met een PIN kan je kind het oudergedeelte, de instellingen en het verwijderen van profielen niet zelf openen. Sterk aanbevolen.</p>'
    + '<input id="pfPin" inputmode="numeric" maxlength="4" style="font-size:1.2rem;padding:.5em;border-radius:10px;border:2px solid #ccc;width:120px" value="'+(S.ouderPin||"")+'">'
    + '<p><button class="groot" onclick="bewaarProfiel()">Spelen! <img src="ui/mi-play.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"></button></p>';
   openOverlay(html);
@@ -1240,6 +1355,21 @@ function obKlaar(){
   if(!S.naam) S.naam="Speler";
   bewaarState(); sluitOverlay(); pasThemaToe(); updateHud(); nieuweDagquestIndienNodig();
   toonToast("Welkom, "+S.naam+"! 🎉"); zeg("Welkom "+S.naam+"! Veel plezier.");
+  // US-08 AC2: actief vragen om een ouder-PIN als die er nog niet is
+  if(!S.ouderPin){ setTimeout(vraagOuderPinInstellen, 400); }
+}
+function vraagOuderPinInstellen(){
+  openOverlay('<h2>🔒 Stel een ouder-PIN in?</h2>'
+    + '<p>Met een PIN kan je kind niet zelf de speeltijd verlengen, instellingen wijzigen of profielen verwijderen.</p>'
+    + '<p><b>Kies 4 cijfers:</b></p>'
+    + '<input id="onbPin" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Nieuwe ouder-PIN" style="font-size:1.4rem;padding:.5em;border-radius:12px;border:2px solid #ccc;width:140px;text-align:center">'
+    + '<div class="rij" style="justify-content:center"><button class="groot" onclick="onboardingPinBewaren()">Instellen</button>'
+    + '<button onclick="sluitOverlay()">Later</button></div>');
+}
+function onboardingPinBewaren(){
+  var i=document.getElementById("onbPin"); var pin=(i&&i.value||"").replace(/\D/g,"").slice(0,4);
+  if(pin.length===4){ S.ouderPin=pin; bewaarState(); toonToast("PIN ingesteld 🔒"); }
+  sluitOverlay();
 }
 
 /* ---- Themakeuze (preview-kaarten, nooit direct wisselen) ---- */
@@ -1304,17 +1434,11 @@ function toonSchermtijdEind(){
   if(o) o.classList.add("actief");
   var sl=document.querySelector("#overlay .sluit"); if(sl) sl.style.display="none"; // niet te omzeilen zonder PIN
 }
-function ouderVerleng(){
-  if(!vraagOuderPin()) return;
+function ouderVerleng(){ vraagOuderGate(_verlengNu); }   // US-08: schermtijd verlengen alleen na drempel
+function _verlengNu(){
   S.speeltijdMin += 10; S.schermtijdOverT=false; bewaarState();
   var sl=document.querySelector("#overlay .sluit"); if(sl) sl.style.display="block";
   sluitOverlay();
-}
-function vraagOuderPin(){
-  if(!S.ouderPin) return true; // geen PIN ingesteld = vrij
-  var inv = typeof prompt==="function" ? prompt("Ouder-PIN:") : null;
-  if(inv===S.ouderPin) return true;
-  toonToast("PIN klopt niet."); return false;
 }
 
 /* ---- Ouder-scherm: voortgang + instellingen (achter PIN) ---- */
@@ -1329,10 +1453,7 @@ function ouderVoortgangHtml(){
   }).join("");
   return '<table class="oudertabel">'+rijen+'</table>';
 }
-function openOuders(){
-  if(!vraagOuderPin()) return;
-  ouderScherm();
-}
+function openOuders(){ vraagOuderGate(ouderScherm); }   // US-08: altijd achter een drempel
 function ouderScherm(){
   var somGeoefend = Object.keys(S.somStats||{}).length;
   var speeltijd = S.speeltijdMin>=999 ? "onbeperkt" : (S.speeltijdMin+" min/dag");
@@ -1357,11 +1478,23 @@ function ouderScherm(){
     + '<h3>Voortgang per onderdeel</h3>' + ouderVoortgangHtml()
     + (somGeoefend? '<p class="klein">Rekensommen geoefend: '+somGeoefend+' · <a href="#" onclick="toonMuur();return false">Mijn muur bekijken 🧱</a></p>' : '')
     + '<h3>Instellingen</h3>'
-    + '<p class="klein">Speeltijd: <b>'+speeltijd+'</b>'+(S.ouderPin?' · PIN ingesteld 🔒':' · geen PIN')+'</p>'
+    + '<p class="klein">Speeltijd: <b>'+speeltijd+'</b>'+(S.ouderPin?' · PIN ingesteld 🔒':' · geen PIN — stel er een in voor betere beveiliging')+'</p>'
     + '<div class="rij"><button onclick="openProfiel()">✏️ Profiel &amp; PIN</button>'
-    + '<button onclick="ouderVerleng()">⏳ +10 min vandaag</button></div>'
+    + '<button onclick="_verlengNu()">⏳ +10 min vandaag</button>'
+    + '<button onclick="openInstellingen()">⚙️ Instellingen</button></div>'
+    + '<h3>⭐ Premium</h3>'
+    + '<p class="klein">Informatie over Premium en eventuele aankopen staat hier, in het oudergedeelte — niet in het spel van het kind.</p>'
+    + '<div class="rij"><button onclick="openPremium()">⭐ Premium bekijken</button></div>'
+    + oudersFoutenHtml()
     + '<a class="reset" style="color:#c0392b" href="#" onclick="resetAlles();return false">Alle gegevens wissen (reset)</a>';
   openOverlay(html);
+}
+/* US-10: technische fouten alleen zichtbaar voor de ouder */
+function oudersFoutenHtml(){
+  var log = (S.foutenLog||[]);
+  if(!log.length) return '';
+  var rijen = log.slice(-8).reverse().map(function(f){ return '<li class="klein">'+(f.t||"").slice(0,19).replace("T"," ")+' — '+(f.m||"")+'</li>'; }).join("");
+  return '<details style="margin:.6em 0"><summary class="klein">🛠️ Technische meldingen ('+log.length+') — voor de bouwer</summary><ul>'+rijen+'</ul></details>';
 }
 /* Uitgebreide oudersectie: tips & spelletjes zónder scherm (data/oudertips.js). */
 function openOuderTips(){
@@ -1511,7 +1644,7 @@ function rmKies(val){
     if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed")+(vlot?" ⚡":""); }
     if(blok) blok.classList.add("breek");
     goedAntwoordLevel("reken"); dagquestVoortgang("reken"); bewaarState();
-    setTimeout(rmVolgende, 650);
+    toonVerder(rmVolgende);   // US-05: kind gaat zelf verder
   } else {
     st.fout++; speelGeluid("bijna");
     if(fb){ fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna"); }
@@ -1645,7 +1778,7 @@ function smBonusControleer(){
   var achterstevoren=_sm.woord.delen.slice().reverse().join("");
   var goed=_sm.gebouwd.join("")===achterstevoren;
   var fb=document.getElementById("smFb");
-  if(goed){ speelGeluid("schat"); if(fb){fb.className="feedback goed"; fb.textContent="Knap! +2 ✨";} geefValuta(2); bewaarState(); setTimeout(smVolgende,800); }
+  if(goed){ speelGeluid("schat"); if(fb){fb.className="feedback goed"; fb.textContent="Knap! +2 ✨";} geefValuta(2); bewaarState(); toonVerder(smVolgende); }
   else { if(fb){fb.className="feedback bijna"; fb.textContent="Bijna! Nog eens of sla over.";} _sm.gebouwd=[]; var g=document.getElementById("smGebouwd"); if(g)g.textContent="…"; }
   return goed;
 }
@@ -1719,7 +1852,7 @@ function bmLees(){ zeg(_bm.opgave.vraag); }
 function bmKies(v){
   var o=_bm.opgave; var goed = (""+v)===(""+o.goed);
   var fb=document.getElementById("bmFb");
-  if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("verhaal"); bewaarState(); setTimeout(bmVolgende,750); }
+  if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("verhaal"); bewaarState(); toonVerder(bmVolgende); }
   else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} }
   return goed;
 }
@@ -1746,7 +1879,7 @@ function flTeken(flits){
 }
 function flKies(w){
   var goed = w===_fl.item.w; var fb=document.getElementById("flFb");
-  if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("flits"); dagquestVoortgang("flits"); bewaarState(); setTimeout(flVolgende,600); }
+  if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("flits"); dagquestVoortgang("flits"); bewaarState(); toonVerder(flVolgende); }
   else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent="Het was: "+_fl.item.w;} var wv=document.getElementById("flWoord"); if(wv) wv.textContent=_fl.item.w; }
   return goed;
 }
@@ -1815,7 +1948,7 @@ function tlKies(w){
   var it=_tl.item; var goed = w===it[_tl.taal]; var fb=document.getElementById("tlFb");
   if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1);
     var lv=haalLevel(tlSpelSleutel(),1); lv.teller++; if(lv.teller>=5){lv.teller=0; lv.level++; geefValuta(2); speelGeluid("levelup");}
-    zegTaal(it[_tl.taal],_tl.taal); bewaarState(); setTimeout(tlVolgende,800); }
+    zegTaal(it[_tl.taal],_tl.taal); bewaarState(); toonVerder(tlVolgende); }
   else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} zegTaal(it[_tl.taal],_tl.taal); }
   return goed;
 }
@@ -1855,7 +1988,7 @@ function dgKiesBeeld(el, o){
   var d=_dg.item; var goed = o===d.goed; var fb=document.getElementById("dgFb");
   if(goed){ if(el) el.className="beeldtegel raak"; speelGeluid("goed");
     if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); }
-    geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); setTimeout(dgVolgende,1700); }
+    geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); toonVerder(dgVolgende); }
   else { if(el){ el.className="beeldtegel fout"; setTimeout(function(){ if(el&&el.className.indexOf("raak")<0) el.className="beeldtegel"; },400); }
     speelGeluid("bijna"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } zeg("Kijk nog eens goed."); }
   return goed;
@@ -1876,12 +2009,12 @@ function dgTekenWonder(){
   zeg(_dg.item.vraag);
 }
 function dgLees(){ zeg(_dg.item.opdracht || _dg.item.vraag); }
-function dgWonderKlaar(){ speelGeluid("schat"); geefValuta(1); var fb=document.getElementById("dgFb"); if(fb){fb.className="feedback goed"; fb.textContent="Wat een fantasie! +1";} bewaarState(); setTimeout(dgVolgende,900); return true; }
+function dgWonderKlaar(){ speelGeluid("schat"); geefValuta(1); var fb=document.getElementById("dgFb"); if(fb){fb.className="feedback goed"; fb.textContent="Wat een fantasie! +1";} bewaarState(); toonVerder(dgVolgende); return true; }
 function dgKies(o){
   var d=_dg.item; var goed = o===d.goed; var fb=document.getElementById("dgFb"); var u=document.getElementById("dgUitleg");
   if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");}
     if(u) u.innerHTML='<div class="sectie"><b>Waarom?</b><br>'+d.uitleg+'</div>';
-    geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); setTimeout(dgVolgende,1600); }
+    geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); toonVerder(dgVolgende); }
   else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent="Denk nog eens: klopt dat echt voor élk geval?";} }
   return goed;
 }
@@ -1910,7 +2043,7 @@ function blStart(modus){
   else if(modus==="zoek") blTekenZoek();
 }
 function blKop(){ return '<div class="rij" style="justify-content:center;gap:.5em"><button class="knop2" onclick="startBeeldlab()">⬅️</button><span class="klein">'+levelBadge("beeldlab")+'</span></div>'; }
-function blGoed(){ speelGeluid("goed"); geefValuta(1); goedAntwoordLevel("beeldlab"); bewaarState(); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); } zeg(feedbackZin("goed")); setTimeout(function(){ blStart(_bl.modus); },1500); }
+function blGoed(){ speelGeluid("goed"); geefValuta(1); goedAntwoordLevel("beeldlab"); bewaarState(); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); } zeg(feedbackZin("goed")); toonVerder(function(){ blStart(_bl.modus); }); }
 function blMis(){ speelGeluid("bijna"); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } }
 
 /* ---- Modus 1: Op volgorde (tik/sleep) ---- */
@@ -2023,8 +2156,8 @@ function lzKies(val){
     if(u) u.innerHTML='<div class="sectie"><b>Goed! </b>'+vr.uitleg+'</div>';
     geefValuta(1); goedAntwoordLevel("lezen"); zeg(vr.uitleg); bewaarState();
     _lz.idx++;
-    if(_lz.idx < v.vragen.length){ setTimeout(lzVolgendeVraag, 1600); }
-    else { setTimeout(startLezen, 1900); }   // verhaal uit → volgend verhaal
+    if(_lz.idx < v.vragen.length){ toonVerder(lzVolgendeVraag); }   // US-05: zelf verder
+    else { toonVerder(startLezen); }   // verhaal uit → volgend verhaal
     return true;
   } else {
     speelGeluid("bijna"); if(fb){ fb.className="feedback bijna"; fb.textContent="Luister nog eens goed naar het verhaal 👂"; }
@@ -2456,11 +2589,185 @@ function toonInstallTip(){
 }
 function sluitInstallTip(){ S.installTipWeg=true; bewaarState(); var t=document.getElementById("installTip"); if(t) t.hidden=true; }
 
+/* =======================================================================
+   TOEGANKELIJKHEID & INSTELLINGEN (US-03, US-04, US-05, US-06, US-11, US-12)
+   ======================================================================= */
+function _isNatief(el){ var t=el.tagName; return t==="BUTTON"||t==="A"||t==="INPUT"||t==="SELECT"||t==="TEXTAREA"||t==="LABEL"; }
+function verrijkToegankelijkheid(root){
+  root = root || document.body; if(!root || !root.querySelectorAll) return;
+  var sel = "[onclick], .spelknop, .beeldtegel, .kindkaart, .kindav, .kindnaam, .bloptrij, .blcel, .blchip, .mascotte";
+  var els = root.querySelectorAll(sel);
+  Array.prototype.forEach.call(els, function(el){
+    if(_isNatief(el) || el.getAttribute("data-a11y")) return;
+    el.setAttribute("data-a11y","1");
+    if(!el.getAttribute("role")) el.setAttribute("role","button");
+    if(!el.hasAttribute("tabindex")) el.setAttribute("tabindex","0");
+    el.addEventListener("keydown", function(e){
+      if(e.key==="Enter" || e.key===" " || e.key==="Spacebar"){ e.preventDefault(); el.click(); }
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll(".feedback"), function(el){
+    if(!el.getAttribute("aria-live")){ el.setAttribute("aria-live","polite"); el.setAttribute("role","status"); }
+  });
+}
+function startToegankelijkheidObserver(){
+  if(typeof MutationObserver==="undefined" || !document.body) return;
+  try{
+    var mo = new MutationObserver(function(muts){
+      for(var i=0;i<muts.length;i++){ if(muts[i].addedNodes && muts[i].addedNodes.length){ verrijkToegankelijkheid(muts[i].target); } }
+    });
+    mo.observe(document.body, { childList:true, subtree:true });
+  }catch(e){ logFout("observer: "+e.message); }
+}
+/* US-12: label voorlezen bij lang indrukken */
+var _lpTimer=null;
+function _labelVan(el){ return (el.getAttribute("aria-label") || (el.textContent||"").replace(/\s+/g," ").trim()).slice(0,90); }
+if(typeof document!=="undefined"){
+  document.addEventListener("pointerdown", function(e){
+    var el = e.target && e.target.closest && e.target.closest("button,[role='button'],.spelknop,.kindkaart,.kindnaam,.beeldtegel");
+    if(!el) return;
+    _lpTimer = setTimeout(function(){ if(S.voorlezenAan){ var t=_labelVan(el); if(t) zeg(t); } }, 550);
+  }, {passive:true});
+  ["pointerup","pointercancel","pointerleave","pointermove"].forEach(function(ev){
+    document.addEventListener(ev, function(){ if(_lpTimer){ clearTimeout(_lpTimer); _lpTimer=null; } }, {passive:true});
+  });
+}
+
+/* ---- US-05: zelf verder na een goed antwoord ---- */
+function toonVerder(volgendeFn){
+  var inh = document.getElementById("spelInhoud");
+  if(!inh){ if(volgendeFn) volgendeFn(); return; }
+  var oud = document.getElementById("verderWrap"); if(oud && oud.remove) oud.remove();
+  Array.prototype.forEach.call(inh.querySelectorAll("button"), function(x){ x.disabled=true; });
+  Array.prototype.forEach.call(inh.querySelectorAll(".beeldtegel, .bloptrij, [role='button']"), function(x){ x.style.pointerEvents="none"; x.setAttribute("aria-disabled","true"); });
+  var wrap = document.createElement("div"); wrap.className="verder-wrap"; wrap.id="verderWrap";
+  var b = document.createElement("button");
+  b.className="knop verder-knop"; b.textContent="Verder ▶"; b.setAttribute("aria-label","Verder naar de volgende");
+  b.onclick = function(){
+    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}   // US-05 AC4
+    if(wrap.remove) wrap.remove();
+    if(volgendeFn) volgendeFn();
+  };
+  wrap.appendChild(b); inh.appendChild(wrap);
+  setTimeout(function(){ try{ b.focus(); }catch(e){} }, 30);
+}
+
+/* ---- US-06 / US-11: instellingen toepassen op de body ---- */
+function pasInstellingenToe(){
+  var b = document.body; if(!b) return;
+  b.setAttribute("data-rustig", S.rustigeModus ? "1" : "0");
+  b.setAttribute("data-tijdverborgen", S.tijdVerborgen ? "1" : "0");
+  b.setAttribute("data-leesfont", S.leesFontKeuze || "andika");
+  if(b.style && typeof b.style.setProperty==="function"){
+    b.style.setProperty("--leesschaal", S.leesSchaal || 1);
+    b.style.setProperty("--regelafstand", S.regelAfstand || 1.5);
+    b.style.setProperty("--woordafstand", (S.woordAfstand || 0) + "em");
+  }
+}
+
+/* ---- US-04 / US-06 / US-11: centraal instellingenscherm ---- */
+function _schakel(label, aan, actie){
+  return '<div class="instelrij"><span>'+label+'</span>'
+    + '<button class="knop schakelaar" role="switch" aria-checked="'+(aan?'true':'false')+'" aria-pressed="'+(aan?'true':'false')+'" onclick="'+actie+'">'+(aan?'Aan':'Uit')+'</button></div>';
+}
+function _stapper(label, waarde, actie){
+  return '<div class="instelrij"><span>'+label+'</span><span class="knoppen">'
+    + '<button class="knop mini" aria-label="'+label+' kleiner" onclick="'+actie+'(-1)">−</button>'
+    + '<b aria-hidden="true">'+waarde+'</b>'
+    + '<button class="knop mini" aria-label="'+label+' groter" onclick="'+actie+'(1)">+</button></span></div>';
+}
+function openInstellingen(){
+  var schaalTekst = Math.round((S.leesSchaal||1)*100)+"%";
+  var html = '<h2>⚙️ Instellingen</h2>'
+    + '<h3>🔊 Geluid</h3>'
+    + _schakel("Voorlezen (uitleg &amp; vragen)", S.voorlezenAan, "zetVoorlezen()")
+    + _schakel("Geluidseffecten", S.geluidAan, "zetGeluid()")
+    + _schakel("Muziek", S.muziekAan, "zetMuziek()")
+    + '<p class="klein">Voorlezen werkt ook als de geluidseffecten uit staan.</p>'
+    + '<div class="rij"><button onclick="openStemkiezer()">🗣️ Kies een stem</button></div>'
+    + '<h3>🌿 Rust &amp; focus</h3>'
+    + _schakel("Rustige modus (minder prikkels)", S.rustigeModus, "zetRustig()")
+    + _schakel("Speeltijd-teller tonen", !S.tijdVerborgen, "zetTijdVerborgen()")
+    + '<h3>📖 Leescomfort</h3>'
+    + _stapper("Tekstgrootte ("+schaalTekst+")", schaalTekst, "stelLeesSchaal")
+    + _stapper("Regelafstand", (S.regelAfstand||1.5).toFixed(1), "stelRegelAfstand")
+    + _stapper("Woordafstand", (S.woordAfstand||0).toFixed(2), "stelWoordAfstand")
+    + '<div class="instelrij"><span>Leesletter</span><span class="knoppen">'
+      + '<button class="knop mini schakelaar" aria-pressed="'+(S.leesFontKeuze==="andika")+'" onclick="kiesLeesFont(\'andika\')">Andika</button>'
+      + '<button class="knop mini schakelaar" aria-pressed="'+(S.leesFontKeuze==="lexend")+'" onclick="kiesLeesFont(\'lexend\')">Lexend</button>'
+      + '<button class="knop mini schakelaar" aria-pressed="'+(S.leesFontKeuze==="opendyslexic")+'" onclick="kiesLeesFont(\'opendyslexic\')">OpenDyslexic</button>'
+    + '</span></div>'
+    + '<p class="klein">De leesinstellingen worden bij dit profiel bewaard.</p>';
+  openOverlay(html);
+}
+function zetVoorlezen(){ S.voorlezenAan=!S.voorlezenAan; bewaarState(); if(S.voorlezenAan) zeg("Voorlezen staat aan."); openInstellingen(); }
+function zetGeluid(){ S.geluidAan=!S.geluidAan; bewaarState(); updateHud(); if(S.geluidAan) speelGeluid("goed"); openInstellingen(); }
+function zetMuziek(){ if(typeof wisselMuziek==="function"){ wisselMuziek(); } else { S.muziekAan=!S.muziekAan; bewaarState(); } openInstellingen(); }
+function zetRustig(){ S.rustigeModus=!S.rustigeModus; _rustigToonAlles=false; bewaarState(); pasInstellingenToe(); bouwStartscherm(); updateHud(); openInstellingen(); }
+function zetTijdVerborgen(){ S.tijdVerborgen=!S.tijdVerborgen; bewaarState(); pasInstellingenToe(); updateHud(); openInstellingen(); }
+function stelLeesSchaal(d){ S.leesSchaal = Math.min(1.6, Math.max(0.9, Math.round(((S.leesSchaal||1)+d*0.15)*100)/100)); bewaarState(); pasInstellingenToe(); openInstellingen(); }
+function stelRegelAfstand(d){ S.regelAfstand = Math.min(2.2, Math.max(1.3, Math.round(((S.regelAfstand||1.5)+d*0.2)*10)/10)); bewaarState(); pasInstellingenToe(); openInstellingen(); }
+function stelWoordAfstand(d){ S.woordAfstand = Math.min(0.5, Math.max(0, Math.round(((S.woordAfstand||0)+d*0.1)*100)/100)); bewaarState(); pasInstellingenToe(); openInstellingen(); }
+function kiesLeesFont(naam){ S.leesFontKeuze=naam; bewaarState(); pasInstellingenToe(); openInstellingen(); }
+
+/* ---- US-06: rustig startscherm (één aanbevolen activiteit + 'Kies zelf') ---- */
+var _rustigToonAlles = false;
+function toonRustigPaneel(){
+  var startScherm = document.getElementById("scherm-start"); if(!startScherm) return;
+  var oud = document.getElementById("rustigVak"); if(oud && oud.remove) oud.remove();
+  var sp = THEMA.spellen || {};
+  var vak = document.createElement("div"); vak.id="rustigVak"; vak.className="rustigpaneel";
+  vak.innerHTML = '<h2>Zullen we beginnen?</h2>'
+    + '<div class="spelknop" style="max-width:280px;margin:.6em auto;background:var(--accent);color:#fff" onclick="openSpel(\'reken\')">'
+    + '<span class="ico">⛏️</span><span>'+(sp.reken||"Rekenen")+'</span></div>'
+    + '<button class="knop" onclick="rustigKiesZelf()">Kies zelf ▾</button>';
+  startScherm.appendChild(vak);
+}
+function rustigKiesZelf(){ _rustigToonAlles = true; bouwStartscherm(); }
+
+/* ---- US-08: oudergate (drempel) + eigen bevestigingsdialoog i.p.v. confirm()/prompt() ---- */
+var _ouderGateCb=null, _gateSom=0;
+function vraagOuderGate(cb){
+  _ouderGateCb = cb || function(){};
+  if(S.ouderPin){
+    openOverlay('<h2>🔒 Even voor de ouder</h2><p>Voer de ouder-PIN in.</p>'
+      + '<input id="gatePin" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Ouder-PIN" style="font-size:1.4rem;padding:.5em;border-radius:12px;border:2px solid #ccc;width:140px;text-align:center">'
+      + '<div class="feedback" id="gateFb" role="status" aria-live="polite"></div>'
+      + '<p><button class="groot" onclick="gateControleer()">Verder</button></p>');
+  } else {
+    var a = 4+Math.floor(Math.random()*6), b = 4+Math.floor(Math.random()*6); _gateSom = a+b;
+    openOverlay('<h2>🔒 Even voor de ouder</h2><p>Deze vraag houdt jonge kinderen tegen. Hoeveel is <b>'+a+' + '+b+'</b>?</p>'
+      + '<input id="gateSom" inputmode="numeric" maxlength="3" autocomplete="off" aria-label="Antwoord op de som" style="font-size:1.4rem;padding:.5em;border-radius:12px;border:2px solid #ccc;width:120px;text-align:center">'
+      + '<div class="feedback" id="gateFb" role="status" aria-live="polite"></div>'
+      + '<p class="klein">Tip: stel een ouder-PIN in bij Profiel &amp; PIN voor betere beveiliging.</p>'
+      + '<p><button class="groot" onclick="gateControleer()">Verder</button></p>');
+  }
+}
+function gateControleer(){
+  var ok=false;
+  if(S.ouderPin){ var i=document.getElementById("gatePin"); ok = !!i && i.value===S.ouderPin; }
+  else { var s=document.getElementById("gateSom"); ok = !!s && parseInt(s.value,10)===_gateSom; }
+  if(ok){ var cb=_ouderGateCb; _ouderGateCb=null; sluitOverlay(); setTimeout(function(){ if(cb) cb(); }, 20); }
+  else { var fb=document.getElementById("gateFb"); if(fb){ fb.className="feedback bijna"; fb.textContent="Klopt niet, probeer nog eens."; } }
+}
+var _bevestigCb=null;
+function bevestig(tekst, onJa){
+  _bevestigCb = onJa || function(){};
+  openOverlay('<h2>Weet je het zeker?</h2><p>'+tekst+'</p>'
+    + '<div class="rij" style="justify-content:center">'
+    + '<button class="groot" style="background:var(--fout);color:#fff" onclick="bevestigJa()">Ja</button>'
+    + '<button class="groot" onclick="sluitOverlay()">Nee</button></div>');
+}
+function bevestigJa(){ var cb=_bevestigCb; _bevestigCb=null; sluitOverlay(); setTimeout(function(){ if(cb) cb(); }, 20); }
+
 /* ---- Init ---- */
 function init(){
   laadState(); laadStemmen();
   if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = laadStemmen; }
+  pasInstellingenToe();                     // US-06/US-11: rustige modus + leescomfort toepassen
   pasThemaToe(); startSchermtijdKlok();
+  startToegankelijkheidObserver();          // US-03: nieuwe elementen automatisch toetsenbord-vriendelijk maken
+  verrijkToegankelijkheid(document.body);
   if(!S.naam){ startOnboarding(); }
   else { updateHud(); if(aantalProfielen()>1) kiesProfielScherm(); }   // terugkomen: eerst kiezen met welk kind je verder gaat
   var v=document.getElementById("versie"); if(v) v.textContent="v"+APP_VERSIE;

@@ -257,20 +257,45 @@ test('meerdere kinderen: eigen profiel + eigen voortgang, gratis in één app', 
   eq(ctx.aantalProfielen(), 2, 'profielen blijven bewaard');
   eq(ctx.S.naam, 'Kind2', 'actieve kind onthouden');
 });
-test('kind verwijderen kan, maar minstens één blijft', ()=>{
+test('kind verwijderen zit achter de oudergate en respecteert minimum (US-08)', ()=>{
   const ctx = laadApp(); ctx.laadState(); ctx.S.naam='A'; ctx.bewaarState(); ctx.nieuwKind(); ctx.S.naam='B'; ctx.bewaarState();
-  ctx.verwijderKind(1); eq(ctx.aantalProfielen(), 1, 'kind verwijderd');
-  ctx.verwijderKind(0); eq(ctx.aantalProfielen(), 1, 'laatste kind blijft staan');
+  ctx.verwijderKind(1);  // opent eerst de oudergate i.p.v. direct te verwijderen
+  const gate = ctx.document.getElementById('overlayInhoud').innerHTML;
+  ok(gate.indexOf('voor de ouder')>=0, 'verwijderen vraagt eerst de oudergate');
+  eq(ctx.aantalProfielen(), 2, 'nog niets verwijderd voor bevestiging');
+  ctx._verwijderKindDoe(1); eq(ctx.aantalProfielen(), 1, 'kern verwijdert het kind');
+  ctx._verwijderKindDoe(0); eq(ctx.aantalProfielen(), 1, 'laatste kind blijft staan');
 });
-test('ouder-scherm toont voortgang (achter PIN)', ()=>{
-  const ctx = laadApp(); ctx.laadState(); ctx.S.naam='Test'; ctx.S.ouderPin='';  // geen PIN → vrij
+test('ouder-scherm zit achter de gate en toont voortgang (US-08)', ()=>{
+  const ctx = laadApp(); ctx.laadState(); ctx.S.naam='Test'; ctx.S.ouderPin='';  // geen PIN → rekendrempel
   ctx.haalLevel('reken',1); ctx.haalLevel('memory',1);  // wat voortgang
   ctx.openOuders();
-  const html = ctx.document.getElementById('overlayInhoud').innerHTML;
+  let html = ctx.document.getElementById('overlayInhoud').innerHTML;
+  ok(html.indexOf('voor de ouder')>=0, 'oudergate verschijnt eerst (ook zonder PIN)');
+  ctx.ouderScherm();  // na de drempel: het echte oudergedeelte
+  html = ctx.document.getElementById('overlayInhoud').innerHTML;
   ok(html.indexOf('Ouders')>=0, 'ouder-scherm geopend');
   ok(html.indexOf('Voortgang per onderdeel')>=0, 'voortgang getoond');
   ok(html.indexOf('Rekenen')>=0, 'spel-voortgang zichtbaar');
   ok(html.indexOf('Zonder scherm')>=0, 'knop naar schermloze tips aanwezig');
+  ok(html.indexOf('Premium')>=0, 'premium-info in het oudergedeelte (US-07)');
+});
+test('toegankelijkheid & doelgroep-instellingen (US-04/06/08/10/11)', ()=>{
+  const ctx = laadApp(); ctx.laadState();
+  eq(ctx.S.voorlezenAan, true, 'US-04: voorlezen default aan');
+  eq(ctx.S.geluidAan, true, 'geluid default aan');
+  eq(ctx.S.rustigeModus, false, 'US-06: rustige modus default uit');
+  eq(ctx.S.leesSchaal, 1, 'US-11: leesschaal default 100%');
+  ok(Array.isArray(ctx.S.foutenLog), 'US-10: foutenlog aanwezig');
+  const foutbalk = ctx.document.getElementById('foutbalk');
+  ctx.toonFout('testfout X');
+  ok(ctx.S.foutenLog.length>=1, 'US-10: fout wordt gelogd voor de ouder');
+  ok((foutbalk.style.display||'')!=='block', 'US-10: foutbalk niet zichtbaar voor het kind');
+  const s0 = ctx.S.leesSchaal; ctx.stelLeesSchaal(1); ok(ctx.S.leesSchaal>s0, 'US-11: tekst groter kan');
+  ctx.kiesLeesFont('opendyslexic'); eq(ctx.S.leesFontKeuze, 'opendyslexic', 'US-11: ander leesfont');
+  ctx.zetRustig(); eq(ctx.S.rustigeModus, true, 'US-06: rustige modus aan te zetten');
+  ctx.zetVoorlezen(); eq(ctx.S.voorlezenAan, false, 'US-04: voorlezen apart uit');
+  eq(ctx.S.geluidAan, true, 'US-04: geluidseffecten ongewijzigd');
 });
 test('oudertips-data is gevuld en het tips-scherm toont de spelletjes', ()=>{
   const T = require('../data/oudertips.js');
