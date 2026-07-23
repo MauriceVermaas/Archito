@@ -33,5 +33,23 @@ Alle 12 stories uit het UX-rapport zijn verwerkt, rechtstreeks in deze projectma
 - Real-DOM smoke-test (jsdom) — 14 checks groen, incl. het leesavontuur.
 - `node --check` op de inline JS — OK.
 
+## Fixes na testfeedback (v3.33.0)
+- **Verder-knop viel buiten beeld** na een goed antwoord (leek vastgelopen / "som laadt niet"). De knop is nu *sticky* onderaan het scherm en scrollt automatisch in beeld, dus altijd zichtbaar.
+- **Vastlopen bij effecten**: de toegankelijkheids-observer draait niet meer over de juice-/deeltjeslaag, wat jank tijdens combo-effecten voorkomt.
+- **'Mijn muur'**: kreeg een duidelijke Terug-knop (naar het spel, of naar het oudergedeelte als je daar vandaan kwam).
+
+## Bouwmodus uitgebreid (v3.34.0)
+- **Nieuwe bouwitems** (op verzoek van de kids): 🧱 muur, 🪟 raam, 🚪 deur, 🚧 hek, 🪜 trap, 🔺 dak, plus 🔥 kampvuur, ⛲ fontein, 🏮 lantaarn, 📮 brievenbus, 🚗 auto, ⛺ tent, ⛄ sneeuwpop, 🌵 cactus, 🍄 paddenstoel, 🌈 regenboog, ⭐ ster, ❤️ hart. Allemaal emoji — geen nieuwe tekeningen nodig.
+- **Blok-kiezer pop-up met categorieën** (Grond / Huis bouwen / Natuur / Dieren / Deco): de lange rij blokken is uit beeld gehaald en zit nu achter één "Kies blok…"-knop, in de eigen afgeronde app-stijl. Zo blijft het **speelveld zichtbaar** in plaats van weggedrukt door de knoppen.
+- **Dag & nacht**: 🌙/☀️-knop per wereld die het veld in nachtsfeer zet (blijft bewaard per wereld).
+
+Nog op de wensenlijst (volgende stap): blokken kunnen kleuren (verfkwast) en bouwsels bewaren/delen.
+
+## Automatisch verder (v3.35.0)
+Naast de Verder-knop kan het spel na een instelbaar aantal seconden (2–12, standaard 5) automatisch doorgaan, met een zichtbaar aftellen. Instelbaar via ⚙️ Instellingen → Rust & focus. In de rustige modus gaat het nooit vanzelf verder (dan blijft alleen de Verder-knop), zodat kinderen die meer tijd nodig hebben de regie houden.
+
+## Navigatie: onderbalk i.p.v. hamburger (v3.36.0)
+Geïnspireerd op Squla. Het ☰-menu bovenin (dat achter de iPhone-camera kon vallen) is vervangen door een **vaste onderbalk** die alleen op het startscherm verschijnt: 🏠 Thuis · 🎨 Wereld · ⭐ Stickers · 👤 Kind · ☰ Meer. Duimvriendelijk, altijd zichtbaar, en met safe-area onderin (niet achter de home-balk). De bovenbalk is nu puur status (naam, diamanten, XP). Tijdens een spel is de balk verborgen (daar is de Terug-knop). "Meer" opent het bestaande menu met de overige opties (thema, stem, geluid, ouders, installeren).
+
 ## Aandachtspunt voor deploy
 OpenDyslexic laadt nu via CDN. Voor volledig offline gebruik: lever het `.woff2`-bestand lokaal mee en vervang de CDN-URL in de `@font-face`-regel door een relatief pad. Andika/Lexend werken zoals voorheen via de bestaande Google-Fonts-link.
