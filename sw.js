@@ -1,6 +1,6 @@
 /* Blokwereld service worker — cache-first, offline na eerste (https) bezoek.
    CACHE_VERSIE loopt mee met APP_VERSIE zodat een nieuwe versie de oude cache vervangt. */
-var CACHE_VERSIE = "archito-3.36.0";
+var CACHE_VERSIE = "archito-3.36.2";
 var BESTANDEN = [
   "./", "./index.html", "./manifest.json",
   "./data/sommen.js", "./data/woorden.js", "./data/flitswoorden.js",

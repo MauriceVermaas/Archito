@@ -400,7 +400,8 @@ body[data-leesfont="lexend"]{ --leesfont:'Lexend','Andika',system-ui,sans-serif;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.1em;
 }
 #bottombar button:active{ transform:none; background:#ffffff22; }
-#bottombar .bb-ico{ font-size:1.5rem; line-height:1; }
+#bottombar .bb-ico{ width:30px; height:30px; object-fit:contain; }
+#bottombar .bb-meer{ width:auto; height:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; line-height:1; }
 #bottombar .bb-label{ font-size:.72rem; font-weight:700; letter-spacing:0; }
 /* ruimte onder de inhoud zodat de balk niets afdekt op het startscherm */
 body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
@@ -445,11 +446,11 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 
 <!-- Vaste onderbalk (Squla-stijl): alleen op het startscherm, weg van de camera -->
 <nav id="bottombar" hidden aria-label="Hoofdmenu">
-  <button onclick="naarStart()"><span class="bb-ico">🏠</span><span class="bb-label">Thuis</span></button>
-  <button onclick="openThemakeuze()"><span class="bb-ico">🎨</span><span class="bb-label">Wereld</span></button>
-  <button onclick="openStickerboek()"><span class="bb-ico">⭐</span><span class="bb-label">Stickers</span></button>
-  <button onclick="kiesProfielScherm()"><span class="bb-ico">👤</span><span class="bb-label">Kind</span></button>
-  <button onclick="openMenu()"><span class="bb-ico">☰</span><span class="bb-label">Meer</span></button>
+  <button onclick="naarStart()"><img class="bb-ico" src="tegels/tegel-huis.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Thuis</span></button>
+  <button onclick="openThemakeuze()"><img class="bb-ico" src="ui/mi-thema.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Wereld</span></button>
+  <button onclick="openStickerboek()"><img class="bb-ico" src="ui/mi-sticker.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Stickers</span></button>
+  <button onclick="kiesProfielScherm()"><img class="bb-ico" src="ui/mi-kinderen.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Spelers</span></button>
+  <button onclick="openMenu()"><span class="bb-ico bb-meer" aria-hidden="true">☰</span><span class="bb-label">Meer</span></button>
 </nav>
 
 <!-- Overlays -->
@@ -480,7 +481,7 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 /* =========================================================================
    BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.36.0";
+var APP_VERSIE = "3.36.2";
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
