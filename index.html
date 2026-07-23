@@ -481,7 +481,7 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 /* =========================================================================
    BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.36.2";
+var APP_VERSIE = "3.37.2";
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
@@ -1965,7 +1965,12 @@ function memKlik(i){
   if(_mem.open.length===2){
     var a=_mem.kaarten[_mem.open[0]], b=_mem.kaarten[_mem.open[1]];
     if(a.paar===b.paar){ a.gevonden=b.gevonden=true; _mem.gevonden++; _mem.open=[]; speelGeluid("paar"); geefValuta(1); bewaarState();
-      if(_mem.gevonden===_mem.kaarten.length/2){ var fb=document.getElementById("memFb"); goedAntwoordLevel("memory"); speelGeluid("schat"); memTeken(); if(fb){fb.className="feedback goed"; fb.textContent="Alle paren gevonden! 🎉";} }
+      if(_mem.gevonden===_mem.kaarten.length/2){
+        goedAntwoordLevel("memory"); speelGeluid("schat"); memTeken();
+        var fb=document.getElementById("memFb"); if(fb){ fb.className="feedback goed"; fb.textContent="Alle paren gevonden! 🎉"; }
+        zeg("Alle paren gevonden! Goed gedaan!");
+        toonVerder(startMemory);   // nieuw potje: zelf verder (of vanzelf na X sec)
+      }
       else memTeken();
     } else { _mem.bezig=true; setTimeout(function(){ _mem.open=[]; _mem.bezig=false; memTeken(); }, 900); }
   }
@@ -2247,7 +2252,7 @@ function blokDef(type){ return BLOKKEN[type] || GEWAS[type] || {kleur:"#ccc"}; }
 function bwIsRijp(type){ return !!(GEWAS[type] && type!=="kiem"); }
 var BW_MAXHOOG=6, BW_MAXVELD=30;
 var BW_TILEW=34, BW_TILEH=17, BW_LAYERH=13, BW_OY=20;   // isometrische maten (gedeeld door tegels + levende laag)
-var _bw={modus:"bouwen", blok:"steen", actief:false, keysGebonden:false, nodes:null, popNode:null, sparkleNode:null};
+var _bw={modus:"bouwen", blok:"steen", actief:false, keysGebonden:false, nodes:null, popNode:null, sparkleNode:null, pak:null};
 var _bwTimer=null;
 /* Rondlopend leven per wereldtype: dieren + poppetjes die vanzelf bewegen (actie!).
    Data-gestuurd via data/wezens.js (bewerkbaar in beheer.html). Valt terug op onderstaande
@@ -2321,7 +2326,29 @@ function bwToets(e){
   else if(e.key==="ArrowRight"){ bwBeweeg(1,0); e.preventDefault&&e.preventDefault(); }
   else if(e.key===" "||e.key==="Enter"){ bwActie(); e.preventDefault&&e.preventDefault(); }
 }
-function bwModus(m){ _bw.modus=m; bwTeken(); }
+function bwModus(m){ if(m!=="verplaats") bwPakTerug(); _bw.modus=m; bwTeken(); }
+/* ---- Verplaatsen: tik-pak, tik-neerzet (bestaande blokjes verhuizen, gratis) ---- */
+function bwVerplaatsTik(x,y){
+  var w=bwWereld(); var cel=w.grid[y] && w.grid[y][x]; if(!cel) return;
+  if(!_bw.pak){
+    if(cel.length<=1){ toonToast("Hier is geen los blokje om te verplaatsen."); return; }  // bodem blijft
+    var type=cel.pop(); _bw.pak={x:x, y:y, type:type};
+    speelGeluid("hak"); zeg("Opgepakt. Tik waar het naartoe moet.");
+    bewaarState(); bwTeken();
+  } else {
+    if(cel.length>=BW_MAXHOOG){ toonToast("Hier kan niets meer bij."); return; }
+    cel.push(_bw.pak.type); _bw.pak=null;
+    // Verplaatsen is neutraal: kost niets en levert niets op — alleen een fijn geluidje.
+    speelGeluid("paar"); bewaarState(); bwTeken();
+  }
+}
+/* Als er een blokje 'in de hand' zit en de speler stopt/wisselt: netjes terugleggen. */
+function bwPakTerug(){
+  if(!_bw.pak) return;
+  var w=bwWereld(); var cel=w.grid[_bw.pak.y] && w.grid[_bw.pak.y][_bw.pak.x];
+  if(cel) cel.push(_bw.pak.type);
+  _bw.pak=null; bewaarState();
+}
 function bwKiesBlok(b){ _bw.blok=b; _bw.modus="bouwen"; bwTeken(); }
 /* ---- Blok-kiezer: categorieën in een aparte pop-up, zodat het speelveld vrij blijft ---- */
 var BLOK_CATS = [
@@ -2495,6 +2522,7 @@ function bwTikCel(x,y){
   var w=bwWereld();
   if(_bw.modus==="weghakken"){ w.pop.x=x; w.pop.y=y; bwHak(x,y); }
   else if(_bw.modus==="bouwen"){ w.pop.x=x; w.pop.y=y; bwPlaats(x,y); }
+  else if(_bw.modus==="verplaats"){ bwVerplaatsTik(x,y); }
   else { w.pop.x=x; w.pop.y=y; oogst(x,y); bewaarState(); bwTekenLeven(); }   // avontuur: erheen lopen
 }
 function bwTeken(){
@@ -2518,13 +2546,19 @@ function bwTeken(){
    +'<div class="rij midden" style="justify-content:center">'
      +'<button onclick="bwModus(\'bouwen\')" '+(_bw.modus==="bouwen"?'style="outline:3px solid var(--accent)"':'')+'>🧱 Bouwen</button>'
      +'<button onclick="bwModus(\'weghakken\')" '+(_bw.modus==="weghakken"?'style="outline:3px solid var(--accent)"':'')+'>⛏️ Weghakken</button>'
+     +'<button onclick="bwModus(\'verplaats\')" '+(_bw.modus==="verplaats"?'style="outline:3px solid var(--accent)"':'')+'>↔️ Verplaats</button>'
      +'<button onclick="bwModus(\'avontuur\')" '+(_bw.modus==="avontuur"?'style="outline:3px solid var(--accent)"':'')+'>🗡️ Avontuur</button>'
    +'</div>'
    +'<div class="rij" style="justify-content:center;align-items:center;flex-wrap:wrap">'
      +'<button class="knop groot" onclick="openBlokKiezer()">'+huidigIcoon+' <span style="margin-left:.2em">Kies blok…</span></button>'
      +'<span class="klein">🐾 Maatje erbij:</span>'+levenKoop
    +'</div>'
-   +'<div class="klein midden" style="margin:.2em 0">👆 Kies een blok en <b>tik op de grond</b> om te bouwen — of loop met de pijltjes en gebruik ✋</div>'
+   +'<div class="klein midden" style="margin:.2em 0">'+(
+       _bw.modus==="verplaats"
+         ? (_bw.pak ? '↔️ Je hebt '+blokIcoon(_bw.pak.type)+' vast — <b>tik waar het naartoe moet</b>'
+                    : '↔️ <b>Tik op een blokje</b> om het op te pakken, tik daarna op een nieuwe plek')
+         : '👆 Kies een blok en <b>tik op de grond</b> om te bouwen — of loop met de pijltjes en gebruik ✋'
+     )+'</div>'
    +'<div id="bwScroll" style="overflow:auto;max-width:100%;max-height:58vh;border-radius:22px;background:'+(wl.nacht?'linear-gradient(#0b1030,#1a2452)':'#ffffff33')+';padding:6px;position:relative"><div id="bwVeld" style="position:relative;width:'+breedte+'px;height:'+hoogte+'px;margin:0 auto"><div id="bwTiles">'+bwTilesHtml(wl)+'</div><div id="bwLeven"></div></div>'+(wl.nacht?'<div style="position:absolute;inset:0;pointer-events:none;border-radius:18px;background:radial-gradient(130% 90% at 72% 12%, rgba(255,255,210,.12), rgba(6,10,30,.42) 70%);box-shadow:inset 0 0 70px rgba(0,10,45,.6)"><div style="position:absolute;top:10px;right:16px;font-size:1.7rem">🌙</div></div>':'')+'</div>'
    +'<div class="midden">'
      +'<div><button onclick="bwBeweeg(0,-1)">⬆️</button></div>'
@@ -2618,7 +2652,7 @@ function bwKoopWezen(sel){
   speelGeluid("schat"); toonToast("Nieuw maatje! "+s+" loopt rond ✨");
   bewaarState(); bwSpawnLeven(); return true;
 }
-function stopBouwmodus(){ _bw.actief=false; bwStopLoop(); bewaarState(); }
+function stopBouwmodus(){ bwPakTerug(); _bw.actief=false; bwStopLoop(); bewaarState(); }
 //__SPELLEN_EINDE__
 
 /* =====================  FREEMIUM (testfase: alles gratis)  ===================== */

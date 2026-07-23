@@ -296,6 +296,12 @@ test('toegankelijkheid & doelgroep-instellingen (US-04/06/08/10/11)', ()=>{
   ctx.zetRustig(); eq(ctx.S.rustigeModus, true, 'US-06: rustige modus aan te zetten');
   ctx.zetVoorlezen(); eq(ctx.S.voorlezenAan, false, 'US-04: voorlezen apart uit');
   eq(ctx.S.geluidAan, true, 'US-04: geluidseffecten ongewijzigd');
+  // automatisch verder na X sec
+  eq(ctx.S.autoVerder, true, 'auto-verder default aan');
+  eq(ctx.S.autoVerderSec, 5, 'auto-verder default 5 sec');
+  ctx.stelAutoVerderSec(2); eq(ctx.S.autoVerderSec, 7, 'seconden ophogen kan');
+  ctx.stelAutoVerderSec(99); eq(ctx.S.autoVerderSec, 12, 'seconden maximaal 12');
+  ctx.zetAutoVerder(); eq(ctx.S.autoVerder, false, 'auto-verder uit te zetten');
 });
 test('oudertips-data is gevuld en het tips-scherm toont de spelletjes', ()=>{
   const T = require('../data/oudertips.js');
@@ -622,6 +628,18 @@ test('extra items en werelden zijn data-gestuurd uitbreidbaar', ()=>{
   ok(ctx.BLOKKEN.palm && ctx.BLOKKEN.bank && ctx.BLOKKEN.bloem, 'nieuwe items in palet');
   ['strand','park','huis'].forEach(t=>ok(ctx.bwDef(t) && typeof ctx.bwDef(t).gen==='function', 'wereld '+t+' heeft generator'));
 });
+test('nieuwe bouwitems (raam/deur/hek + set) bestaan en zijn plaatsbaar', ()=>{
+  const ctx = nieuwSpel(1);
+  ['muur','raam','deur','hek','trap','dak','kampvuur','fontein','lantaarn','auto','regenboog'].forEach(function(k){
+    ok(ctx.BLOKKEN[k] && ctx.BLOKKEN[k].emoji && ctx.BLOKKEN[k].prijs>0, 'blok '+k+' bestaat met emoji + prijs');
+  });
+  // plaatsbaar: kies 'raam' en tik op een cel
+  ctx.startBouwmodus(); ctx.S.valuta = 20; ctx.bwKiesBlok('raam');
+  var w=ctx.bwWereld(), h0=w.grid[3][4].length, v0=ctx.S.valuta;
+  ctx.bwTikCel(4,3);
+  eq(w.grid[3][4].length, h0+1, 'raam wordt op de cel geplaatst');
+  ok(ctx.S.valuta < v0, 'kostte valuta');
+});
 
 // ============================================================
 sectie('8b. Scenario: levende wereld (bewegende dieren + poppetjes)');
@@ -765,6 +783,34 @@ test('tik in weghakken-modus haalt een blok weg', ()=>{
   const w=ctx.bwWereld(); ctx.bwKiesBlok('steen'); ctx.bwTikCel(4,3);
   const h1=w.grid[3][4].length; ctx.bwModus('weghakken'); ctx.bwTikCel(4,3);
   eq(w.grid[3][4].length, h1-1, 'blok weggehaald op de getikte cel');
+});
+test('verplaats-modus: bestaand blokje oppakken en op een andere plek neerzetten', ()=>{
+  const ctx = nieuwSpel(1); ctx.startBouwmodus(); ctx.S.valuta=20;
+  const w=ctx.bwWereld();
+  ctx.bwKiesBlok('steen'); ctx.bwTikCel(4,3);           // zet een los blokje op (4,3)
+  const bron0=w.grid[3][4].length, doel0=w.grid[3][5].length;
+  ctx.bwModus('verplaats');
+  ctx.bwTikCel(4,3);                                     // oppakken
+  ok(ctx._bw.pak && ctx._bw.pak.type==='steen', 'blokje is opgepakt');
+  eq(w.grid[3][4].length, bron0-1, 'bron heeft één blokje minder');
+  var vVoor=ctx.S.valuta;
+  ctx.bwTikCel(5,3);                                     // neerzetten
+  ok(!ctx._bw.pak, 'niets meer in de hand');
+  eq(w.grid[3][5].length, doel0+1, 'doel heeft het blokje erbij');
+  eq(ctx.S.valuta, vVoor, 'verplaatsen kost niets en levert niets op (neutraal)');
+});
+test('verplaats-modus: bodem blijft en afbreken legt het blokje terug', ()=>{
+  const ctx = nieuwSpel(1); ctx.startBouwmodus(); ctx.S.valuta=20;
+  const w=ctx.bwWereld();
+  w.grid[2][2] = ['gras'];                               // forceer een kale grondcel
+  ctx.bwModus('verplaats'); ctx.bwTikCel(2,2);           // alleen bodem → niets oppakken
+  ok(!ctx._bw.pak, 'bodemlaag wordt niet opgepakt');
+  w.grid[2][2] = ['gras','hout'];                        // los blokje erop
+  const n=w.grid[2][2].length;
+  ctx.bwTikCel(2,2);                                     // oppakken
+  eq(w.grid[2][2].length, n-1, 'opgepakt');
+  ctx.bwModus('bouwen');                                 // wisselen zonder neerzetten → terugleggen
+  ok(!ctx._bw.pak && w.grid[2][2].length===n, 'blokje netjes teruggelegd bij moduswissel');
 });
 test('bouwblokken worden als 3D-kubussen (met zijkanten) getekend', ()=>{
   const ctx = nieuwSpel(1); ctx.startBouwmodus();
