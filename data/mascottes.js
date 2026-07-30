@@ -9,12 +9,12 @@
 //                in plaats van de emoji. Zo kun je de emoji's vervangen door eigen beelden.
 
 var MASCOTTES = {
-  craft:   { emoji:"🦫", naam:"Bram de Bouwbever", afbeelding:"mascottes/mascotte-bram.png", zinnen:["Zullen we samen blokjes hakken?","Elke som is een nieuw blokje voor je wereld!","Kom, we gaan bouwen!"] },
-  galaxy:  { emoji:"👽", naam:"Kosmo", afbeelding:"mascottes/mascotte-kosmo.png", zinnen:["Klaar voor de lancering?","Elke ster die je verdient laat je verder reizen!","Op naar het volgende sterrenstelsel!"] },
-  powerup: { emoji:"🍄", naam:"Turbo", afbeelding:"mascottes/mascotte-turbo.png", zinnen:["Pak die power-up en ga ervoor!","Elk goed antwoord is een muntje extra!","Sprong-klaar? Let's go!"] },
-  unicorn: { emoji:"🦄", naam:"Fee", afbeelding:"mascottes/mascotte-fee.png", zinnen:["Laten we samen dromen waarmaken!","Elk hartje maakt je droomwereld mooier!","Sprankelen maar!"] },
-  voetbal: { emoji:"🦁", naam:"Leo de Leeuw", afbeelding:"mascottes/mascotte-leo.png", zinnen:["Klaar voor de wedstrijd?","Elk goed antwoord is een doelpunt!","Kom op, wij scoren dit!"] },
-  zeemeermin: { emoji:"🧜‍♀️", naam:"Merel de Zeemeermin", afbeelding:"mascottes/mascotte-merel.png", zinnen:["Duik je mee de zee in?","Elke schelp maakt je paleis mooier!","Zwem maar lekker verder!"] }
+  craft:   { emoji:"🦫", naam:"Bram de Bouwbever", afbeelding:"mascottes/mascotte-bram-nb.png", zinnen:["Zullen we samen blokjes hakken?","Elke som is een nieuw blokje voor je wereld!","Kom, we gaan bouwen!"] },
+  galaxy:  { emoji:"👽", naam:"Kosmo", afbeelding:"mascottes/mascotte-kosmo-nb.png", zinnen:["Klaar voor de lancering?","Elke ster die je verdient laat je verder reizen!","Op naar het volgende sterrenstelsel!"] },
+  powerup: { emoji:"🍄", naam:"Turbo", afbeelding:"mascottes/mascotte-turbo-nb.png", zinnen:["Pak die power-up en ga ervoor!","Elk goed antwoord is een muntje extra!","Sprong-klaar? Let's go!"] },
+  unicorn: { emoji:"🦄", naam:"Fee", afbeelding:"mascottes/mascotte-fee-nb.png", zinnen:["Laten we samen dromen waarmaken!","Elk hartje maakt je droomwereld mooier!","Sprankelen maar!"] },
+  voetbal: { emoji:"⚽", naam:"Spike de Spits", afbeelding:"mascottes/mascotte-spike-nb.png", zinnen:["Klaar voor de wedstrijd?","Elk goed antwoord is een doelpunt!","Kom op, wij scoren dit!"] },
+  zeemeermin: { emoji:"🧜‍♀️", naam:"Luna de Zeemeermin", afbeelding:"mascottes/mascotte-luna-nb.png", zinnen:["Duik je mee de zee in?","Elke schelp maakt je paleis mooier!","Zwem maar lekker verder!"] }
 };
 
 if (typeof module !== 'undefined') module.exports = MASCOTTES;

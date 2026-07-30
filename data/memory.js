@@ -1,4 +1,5 @@
 // data/memory.js — plaatje↔woord-paren; 'afb' = tegel-afbeelding (valt terug op emoji als leeg).
+
 var MEMORY = [
   {
     "w": "kat",
@@ -481,12 +482,6 @@ var MEMORY = [
     "niveau": 2
   },
   {
-    "w": "druif",
-    "plaatje": "🍇",
-    "afb": "tegels/tegel-druif.png",
-    "niveau": 2
-  },
-  {
     "w": "hamburger",
     "plaatje": "🍔",
     "afb": "tegels/tegel-hamburger.png",
@@ -575,12 +570,6 @@ var MEMORY = [
     "plaatje": "⚡",
     "afb": "tegels/tegel-bliksem.png",
     "niveau": 3
-  },
-  {
-    "w": "druppel",
-    "plaatje": "💧",
-    "afb": "tegels/tegel-druppel.png",
-    "niveau": 2
   },
   {
     "w": "schelp",
@@ -931,12 +920,6 @@ var MEMORY = [
     "niveau": 2
   },
   {
-    "w": "voetbal",
-    "plaatje": "⚽",
-    "afb": "tegels/tegel-voetbal.png",
-    "niveau": 2
-  },
-  {
     "w": "muziek",
     "plaatje": "🎵",
     "afb": "tegels/tegel-muziek.png",
@@ -1097,6 +1080,511 @@ var MEMORY = [
     "plaatje": "🪂",
     "afb": "tegels/tegel-parachute.png",
     "niveau": 3
+  },
+  {
+    "w": "kasteel",
+    "plaatje": "🏰",
+    "niveau": 4
+  },
+  {
+    "w": "brug",
+    "plaatje": "🌉",
+    "niveau": 4
+  },
+  {
+    "w": "kaart",
+    "plaatje": "🗺️",
+    "niveau": 4
+  },
+  {
+    "w": "medaille",
+    "plaatje": "🏅",
+    "niveau": 4
+  },
+  {
+    "w": "brief",
+    "plaatje": "✉️",
+    "niveau": 4
+  },
+  {
+    "w": "ring",
+    "plaatje": "💍",
+    "niveau": 4
+  },
+  {
+    "w": "ziekenhuis",
+    "plaatje": "🏥",
+    "niveau": 5
+  },
+  {
+    "w": "bibliotheek",
+    "plaatje": "📚",
+    "niveau": 5
+  },
+  {
+    "w": "vliegveld",
+    "plaatje": "🛫",
+    "niveau": 5
+  },
+  {
+    "w": "museum",
+    "plaatje": "🏛️",
+    "niveau": 5
+  },
+  {
+    "w": "fabriek",
+    "plaatje": "🏭",
+    "niveau": 5
+  },
+  {
+    "w": "kerk",
+    "plaatje": "⛪",
+    "niveau": 5
+  },
+  {
+    "w": "telescoop",
+    "plaatje": "🔭",
+    "niveau": 6
+  },
+  {
+    "w": "batterij",
+    "plaatje": "🔋",
+    "niveau": 6
+  },
+  {
+    "w": "magneet",
+    "plaatje": "🧲",
+    "niveau": 6
+  },
+  {
+    "w": "satelliet",
+    "plaatje": "🛰️",
+    "niveau": 6
+  },
+  {
+    "w": "thermometer",
+    "plaatje": "🌡️",
+    "niveau": 6
+  },
+  {
+    "w": "wereldbol",
+    "plaatje": "🌍",
+    "niveau": 6
+  },
+  {
+    "w": "parasol",
+    "plaatje": "⛱️",
+    "niveau": 4
+  },
+  {
+    "w": "ladder",
+    "plaatje": "🪜",
+    "niveau": 4
+  },
+  {
+    "w": "emmer",
+    "plaatje": "🪣",
+    "niveau": 4
+  },
+  {
+    "w": "zaklamp",
+    "plaatje": "🔦",
+    "niveau": 4
+  },
+  {
+    "w": "weegschaal",
+    "plaatje": "⚖️",
+    "niveau": 4
+  },
+  {
+    "w": "rugzak",
+    "plaatje": "🎒",
+    "niveau": 4
+  },
+  {
+    "w": "ambulance",
+    "plaatje": "🚑",
+    "niveau": 5
+  },
+  {
+    "w": "vuilnisbak",
+    "plaatje": "🗑️",
+    "niveau": 5
+  },
+  {
+    "w": "gereedschap",
+    "plaatje": "🛠️",
+    "niveau": 5
+  },
+  {
+    "w": "vergrootglas",
+    "plaatje": "🔍",
+    "niveau": 5
+  },
+  {
+    "w": "penseel",
+    "plaatje": "🖌️",
+    "niveau": 5
+  },
+  {
+    "w": "rekenmachine",
+    "plaatje": "🧮",
+    "niveau": 5
+  },
+  {
+    "w": "planeet",
+    "plaatje": "🪐",
+    "niveau": 6
+  },
+  {
+    "w": "atoom",
+    "plaatje": "⚛️",
+    "niveau": 6
+  },
+  {
+    "w": "tandwiel",
+    "plaatje": "⚙️",
+    "niveau": 6
+  },
+  {
+    "w": "proefbuis",
+    "plaatje": "🧪",
+    "niveau": 6
+  },
+  {
+    "w": "diskette",
+    "plaatje": "💾",
+    "niveau": 6
+  },
+  {
+    "w": "robotarm",
+    "plaatje": "🦾",
+    "niveau": 6
+  },
+  {
+    "w": "pop",
+    "plaatje": "🧸",
+    "niveau": 1
+  },
+  {
+    "w": "beker",
+    "plaatje": "🏆",
+    "niveau": 1
+  },
+  {
+    "w": "bord",
+    "plaatje": "🍽️",
+    "niveau": 1
+  },
+  {
+    "w": "mes",
+    "plaatje": "🔪",
+    "niveau": 1
+  },
+  {
+    "w": "vork",
+    "plaatje": "🍴",
+    "niveau": 1
+  },
+  {
+    "w": "muts",
+    "plaatje": "🧢",
+    "niveau": 1
+  },
+  {
+    "w": "schrift",
+    "plaatje": "📒",
+    "niveau": 2
+  },
+  {
+    "w": "gum",
+    "plaatje": "🧽",
+    "niveau": 2
+  },
+  {
+    "w": "lijm",
+    "plaatje": "🧴",
+    "niveau": 2
+  },
+  {
+    "w": "soep",
+    "plaatje": "🍲",
+    "niveau": 2
+  },
+  {
+    "w": "rijst",
+    "plaatje": "🍚",
+    "niveau": 2
+  },
+  {
+    "w": "hoofd",
+    "plaatje": "🙂",
+    "niveau": 3
+  },
+  {
+    "w": "bot",
+    "plaatje": "🦴",
+    "niveau": 3
+  },
+  {
+    "w": "wind",
+    "plaatje": "🌬️",
+    "niveau": 3
+  },
+  {
+    "w": "storm",
+    "plaatje": "🌩️",
+    "niveau": 3
+  },
+  {
+    "w": "winkel",
+    "plaatje": "🏪",
+    "niveau": 3
+  },
+  {
+    "w": "school",
+    "plaatje": "🏫",
+    "niveau": 3
+  },
+  {
+    "w": "park",
+    "plaatje": "🏞️",
+    "niveau": 3
+  },
+  {
+    "w": "straat",
+    "plaatje": "🛣️",
+    "niveau": 3
+  },
+  {
+    "w": "geld",
+    "plaatje": "💰",
+    "niveau": 3
+  },
+  {
+    "w": "zwemmen",
+    "plaatje": "🏊",
+    "niveau": 3
+  },
+  {
+    "w": "dokter",
+    "plaatje": "🩺",
+    "niveau": 4
+  },
+  {
+    "w": "verpleger",
+    "plaatje": "💉",
+    "niveau": 4
+  },
+  {
+    "w": "bakker",
+    "plaatje": "🥖",
+    "niveau": 4
+  },
+  {
+    "w": "boer",
+    "plaatje": "🧑‍🌾",
+    "niveau": 4
+  },
+  {
+    "w": "kok",
+    "plaatje": "👨‍🍳",
+    "niveau": 4
+  },
+  {
+    "w": "leraar",
+    "plaatje": "🧑‍🏫",
+    "niveau": 4
+  },
+  {
+    "w": "station",
+    "plaatje": "🚉",
+    "niveau": 4
+  },
+  {
+    "w": "haven",
+    "plaatje": "🚢",
+    "niveau": 4
+  },
+  {
+    "w": "bos",
+    "plaatje": "🌲",
+    "niveau": 4
+  },
+  {
+    "w": "woestijn",
+    "plaatje": "🏜️",
+    "niveau": 4
+  },
+  {
+    "w": "eiland",
+    "plaatje": "🏝️",
+    "niveau": 4
+  },
+  {
+    "w": "adelaar",
+    "plaatje": "🦅",
+    "niveau": 4
+  },
+  {
+    "w": "computer",
+    "plaatje": "💻",
+    "niveau": 5
+  },
+  {
+    "w": "schroef",
+    "plaatje": "🔩",
+    "niveau": 5
+  },
+  {
+    "w": "medicijn",
+    "plaatje": "💊",
+    "niveau": 5
+  },
+  {
+    "w": "verband",
+    "plaatje": "🩹",
+    "niveau": 5
+  },
+  {
+    "w": "vitamine",
+    "plaatje": "🥗",
+    "niveau": 5
+  },
+  {
+    "w": "theater",
+    "plaatje": "🎭",
+    "niveau": 5
+  },
+  {
+    "w": "hotel",
+    "plaatje": "🏨",
+    "niveau": 5
+  },
+  {
+    "w": "markt",
+    "plaatje": "🛒",
+    "niveau": 5
+  },
+  {
+    "w": "krant",
+    "plaatje": "📰",
+    "niveau": 5
+  },
+  {
+    "w": "postbode",
+    "plaatje": "📮",
+    "niveau": 5
+  },
+  {
+    "w": "vlag",
+    "plaatje": "🚩",
+    "niveau": 5
+  },
+  {
+    "w": "microscoop",
+    "plaatje": "🔬",
+    "niveau": 6
+  },
+  {
+    "w": "gletsjer",
+    "plaatje": "🧊",
+    "niveau": 6
+  },
+  {
+    "w": "aardbeving",
+    "plaatje": "🌎",
+    "niveau": 6
+  },
+  {
+    "w": "komeet",
+    "plaatje": "☄️",
+    "niveau": 6
+  },
+  {
+    "w": "astronaut",
+    "plaatje": "🧑‍🚀",
+    "niveau": 6
+  },
+  {
+    "w": "ruimteschip",
+    "plaatje": "🛸",
+    "niveau": 6
+  },
+  {
+    "w": "skelet",
+    "plaatje": "💀",
+    "niveau": 6
+  },
+  {
+    "w": "kameleon",
+    "plaatje": "🦎",
+    "niveau": 6
+  },
+  {
+    "w": "kwal",
+    "plaatje": "🪼",
+    "niveau": 6
+  },
+  {
+    "w": "orkaan",
+    "plaatje": "🌀",
+    "niveau": 6
+  },
+  {
+    "w": "krokodil",
+    "plaatje": "🐊",
+    "niveau": 6
+  },
+  {
+    "w": "schorpioen",
+    "plaatje": "🦂",
+    "niveau": 6
+  },
+  {
+    "w": "spin",
+    "plaatje": "🕷️",
+    "niveau": 6
+  },
+  {
+    "w": "zandloper",
+    "plaatje": "⌛",
+    "niveau": 6
+  },
+  {
+    "w": "brandblusser",
+    "plaatje": "🧯",
+    "niveau": 6
+  },
+  {
+    "w": "diamant",
+    "plaatje": "💎",
+    "niveau": 6
+  },
+  {
+    "w": "virus",
+    "plaatje": "🦠",
+    "niveau": 6
+  },
+  {
+    "w": "röntgenfoto",
+    "plaatje": "🩻",
+    "niveau": 6
+  },
+  {
+    "w": "ketting",
+    "plaatje": "⛓️",
+    "niveau": 6
+  },
+  {
+    "w": "piano",
+    "plaatje": "🎹",
+    "niveau": 6
+  },
+  {
+    "w": "wol",
+    "plaatje": "🧶",
+    "niveau": 6
   }
 ];
 if (typeof module !== 'undefined') module.exports = MEMORY;

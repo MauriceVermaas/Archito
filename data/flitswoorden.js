@@ -2298,6 +2298,510 @@ var FLITSWOORDEN = [
       "tnompet"
     ],
     "niveau": 3
+  },
+  {
+    "w": "huisje",
+    "alt": [
+      "hiusje",
+      "husije"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "koning",
+    "alt": [
+      "knoing",
+      "koinng"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "bakker",
+    "alt": [
+      "bkaker",
+      "bakekr"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "vrouw",
+    "alt": [
+      "voruw",
+      "vruow"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "winter",
+    "alt": [
+      "wniter",
+      "witner"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "zomer",
+    "alt": [
+      "zmoer",
+      "zoemr"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "kleuren",
+    "alt": [
+      "keluren",
+      "klueren"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "computer",
+    "alt": [
+      "cmoputer",
+      "copmuter"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "station",
+    "alt": [
+      "sattion",
+      "sttaion"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "zwembad",
+    "alt": [
+      "zewmbad",
+      "zwmebad"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "voetbalveld",
+    "alt": [
+      "veotbalveld",
+      "votebalveld"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "fietspad",
+    "alt": [
+      "feitspad",
+      "fitespad"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "vakantie",
+    "alt": [
+      "vkaantie",
+      "vaakntie"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "garage",
+    "alt": [
+      "graage",
+      "gaarge"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "verhaal",
+    "alt": [
+      "vrehaal",
+      "vehraal"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "speeltuin",
+    "alt": [
+      "sepeltuin",
+      "speletuin"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "schoolplein",
+    "alt": [
+      "shcoolplein",
+      "scoholplein"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "gebeurde",
+    "alt": [
+      "gbeeurde",
+      "geeburde"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "verwachting",
+    "alt": [
+      "vrewachting",
+      "vewrachting"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "ingewikkeld",
+    "alt": [
+      "ignewikkeld",
+      "inegwikkeld"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "bibliotheek",
+    "alt": [
+      "bbiliotheek",
+      "bilbiotheek"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "restaurant",
+    "alt": [
+      "rsetaurant",
+      "retsaurant"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "kilometer",
+    "alt": [
+      "kliometer",
+      "kiolmeter"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "gemeente",
+    "alt": [
+      "gmeeente",
+      "geemente"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "theater",
+    "alt": [
+      "tehater",
+      "thaeter"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "wetenschap",
+    "alt": [
+      "wteenschap",
+      "weetnschap"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "geschiedenis",
+    "alt": [
+      "gsechiedenis",
+      "gecshiedenis"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "belangrijk",
+    "alt": [
+      "bleangrijk",
+      "bealngrijk"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "onderwerp",
+    "alt": [
+      "odnerwerp",
+      "onedrwerp"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "avontuur",
+    "alt": [
+      "aovntuur",
+      "avnotuur"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "schaduw",
+    "alt": [
+      "shcaduw",
+      "scahduw"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "beweging",
+    "alt": [
+      "bweeging",
+      "beewging"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "vriendin",
+    "alt": [
+      "virendin",
+      "vreindin"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "boodschap",
+    "alt": [
+      "bodoschap",
+      "boosdchap"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "toekomst",
+    "alt": [
+      "teokomst",
+      "tokeomst"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "landkaart",
+    "alt": [
+      "lnadkaart",
+      "ladnkaart"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "ijsbeer",
+    "alt": [
+      "isjbeer",
+      "ijbseer"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "speelgoed",
+    "alt": [
+      "sepelgoed",
+      "spelegoed"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "gordijn",
+    "alt": [
+      "grodijn",
+      "godrijn"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "fontein",
+    "alt": [
+      "fnotein",
+      "fotnein"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "winkelen",
+    "alt": [
+      "wnikelen",
+      "wiknelen"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "zeemeeuw",
+    "alt": [
+      "zemeeeuw",
+      "zeeemeuw"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "handschoen",
+    "alt": [
+      "hnadschoen",
+      "hadnschoen"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "kampioen",
+    "alt": [
+      "kmapioen",
+      "kapmioen"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "publiek",
+    "alt": [
+      "pbuliek",
+      "pulbiek"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "horizon",
+    "alt": [
+      "hroizon",
+      "hoirzon"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "energie",
+    "alt": [
+      "eenrgie",
+      "enregie"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "machine",
+    "alt": [
+      "mcahine",
+      "mahcine"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "vitamine",
+    "alt": [
+      "vtiamine",
+      "viatmine"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "ambulance",
+    "alt": [
+      "abmulance",
+      "amublance"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "chocolade",
+    "alt": [
+      "cohcolade",
+      "chcoolade"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "januari",
+    "alt": [
+      "jnauari",
+      "jaunari"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "kwartier",
+    "alt": [
+      "kawrtier",
+      "kwratier"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "democratie",
+    "alt": [
+      "dmeocratie",
+      "deomcratie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "industrie",
+    "alt": [
+      "idnustrie",
+      "inudstrie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "kwaliteit",
+    "alt": [
+      "kawliteit",
+      "kwlaiteit"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "techniek",
+    "alt": [
+      "tcehniek",
+      "tehcniek"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "provincie",
+    "alt": [
+      "porvincie",
+      "prvoincie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "temperatuur",
+    "alt": [
+      "tmeperatuur",
+      "tepmeratuur"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "organisatie",
+    "alt": [
+      "ogranisatie",
+      "oragnisatie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "voorbeeld",
+    "alt": [
+      "vorobeeld",
+      "voobreeld"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "opdracht",
+    "alt": [
+      "odpracht",
+      "oprdacht"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "verschil",
+    "alt": [
+      "vreschil",
+      "vesrchil"
+    ],
+    "niveau": 6
   }
 ];
 if (typeof module !== 'undefined') module.exports = FLITSWOORDEN;

@@ -3680,6 +3680,815 @@ var WOORDEN = [
       "z"
     ],
     "niveau": 3
+  },
+  {
+    "w": "huisje",
+    "delen": [
+      "huis",
+      "je"
+    ],
+    "extra": [
+      "huies",
+      "jee"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "koning",
+    "delen": [
+      "ko",
+      "ning"
+    ],
+    "extra": [
+      "co",
+      "ninch"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "bakker",
+    "delen": [
+      "bak",
+      "ker"
+    ],
+    "extra": [
+      "baak",
+      "cer"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "vrouw",
+    "delen": [
+      "vrouw"
+    ],
+    "extra": [
+      "vrauw"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "winter",
+    "delen": [
+      "win",
+      "ter"
+    ],
+    "extra": [
+      "wien",
+      "teer"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "zomer",
+    "delen": [
+      "zo",
+      "mer"
+    ],
+    "extra": [
+      "zoo",
+      "meer"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "kleuren",
+    "delen": [
+      "kleu",
+      "ren"
+    ],
+    "extra": [
+      "cleu",
+      "reen"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "computer",
+    "delen": [
+      "com",
+      "pu",
+      "ter"
+    ],
+    "extra": [
+      "kom",
+      "puu"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "station",
+    "delen": [
+      "sta",
+      "tion"
+    ],
+    "extra": [
+      "staa",
+      "sion"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "zwembad",
+    "delen": [
+      "zwem",
+      "bad"
+    ],
+    "extra": [
+      "zweem",
+      "baad"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "voetbalveld",
+    "delen": [
+      "voet",
+      "bal",
+      "veld"
+    ],
+    "extra": [
+      "voot",
+      "baal"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "fietspad",
+    "delen": [
+      "fiets",
+      "pad"
+    ],
+    "extra": [
+      "feits",
+      "paad"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "vakantie",
+    "delen": [
+      "va",
+      "kan",
+      "tie"
+    ],
+    "extra": [
+      "vaa",
+      "can"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "garage",
+    "delen": [
+      "ga",
+      "ra",
+      "ge"
+    ],
+    "extra": [
+      "cha",
+      "raa"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "verhaal",
+    "delen": [
+      "ver",
+      "haal"
+    ],
+    "extra": [
+      "fer",
+      "hal"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "speeltuin",
+    "delen": [
+      "speel",
+      "tuin"
+    ],
+    "extra": [
+      "spel",
+      "tuien"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "schoolplein",
+    "delen": [
+      "school",
+      "plein"
+    ],
+    "extra": [
+      "sgool",
+      "plijn"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "gebeurde",
+    "delen": [
+      "ge",
+      "beur",
+      "de"
+    ],
+    "extra": [
+      "che",
+      "biur"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "verwachting",
+    "delen": [
+      "ver",
+      "wach",
+      "ting"
+    ],
+    "extra": [
+      "fer",
+      "wag"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "ingewikkeld",
+    "delen": [
+      "in",
+      "ge",
+      "wik",
+      "keld"
+    ],
+    "extra": [
+      "ien",
+      "che"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "bibliotheek",
+    "delen": [
+      "bi",
+      "bli",
+      "o",
+      "theek"
+    ],
+    "extra": [
+      "bie",
+      "blie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "restaurant",
+    "delen": [
+      "res",
+      "tau",
+      "rant"
+    ],
+    "extra": [
+      "rees",
+      "tou"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "kilometer",
+    "delen": [
+      "ki",
+      "lo",
+      "me",
+      "ter"
+    ],
+    "extra": [
+      "ci",
+      "loo"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "gemeente",
+    "delen": [
+      "ge",
+      "meen",
+      "te"
+    ],
+    "extra": [
+      "che",
+      "men"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "theater",
+    "delen": [
+      "the",
+      "a",
+      "ter"
+    ],
+    "extra": [
+      "thee",
+      "teer"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "wetenschap",
+    "delen": [
+      "we",
+      "ten",
+      "schap"
+    ],
+    "extra": [
+      "wee",
+      "teen"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "geschiedenis",
+    "delen": [
+      "ge",
+      "schie",
+      "de",
+      "nis"
+    ],
+    "extra": [
+      "che",
+      "sgie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "belangrijk",
+    "delen": [
+      "be",
+      "lang",
+      "rijk"
+    ],
+    "extra": [
+      "bi",
+      "lanch"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "onderwerp",
+    "delen": [
+      "on",
+      "der",
+      "werp"
+    ],
+    "extra": [
+      "oon",
+      "deer"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "avontuur",
+    "delen": [
+      "a",
+      "von",
+      "tuur"
+    ],
+    "extra": [
+      "voon",
+      "tur"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "schaduw",
+    "delen": [
+      "scha",
+      "duw"
+    ],
+    "extra": [
+      "sga"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "beweging",
+    "delen": [
+      "be",
+      "we",
+      "ging"
+    ],
+    "extra": [
+      "bi",
+      "wee"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "vriendin",
+    "delen": [
+      "vrien",
+      "din"
+    ],
+    "extra": [
+      "vrein",
+      "dien"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "boodschap",
+    "delen": [
+      "bood",
+      "schap"
+    ],
+    "extra": [
+      "bod",
+      "sgap"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "toekomst",
+    "delen": [
+      "toe",
+      "komst"
+    ],
+    "extra": [
+      "too",
+      "comst"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "landkaart",
+    "delen": [
+      "land",
+      "kaart"
+    ],
+    "extra": [
+      "kart"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "ijsbeer",
+    "delen": [
+      "ijs",
+      "beer"
+    ],
+    "extra": [
+      "eis",
+      "ber"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "speelgoed",
+    "delen": [
+      "speel",
+      "goed"
+    ],
+    "extra": [
+      "spel",
+      "choed"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "gordijn",
+    "delen": [
+      "gor",
+      "dijn"
+    ],
+    "extra": [
+      "chor",
+      "dein"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "fontein",
+    "delen": [
+      "fon",
+      "tein"
+    ],
+    "extra": [
+      "foon",
+      "tijn"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "winkelen",
+    "delen": [
+      "win",
+      "ke",
+      "len"
+    ],
+    "extra": [
+      "wien",
+      "ce"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "zeemeeuw",
+    "delen": [
+      "zee",
+      "meeuw"
+    ],
+    "extra": [
+      "meuw"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "handschoen",
+    "delen": [
+      "hand",
+      "schoen"
+    ],
+    "extra": [
+      "sgoen"
+    ],
+    "niveau": 4
+  },
+  {
+    "w": "kampioen",
+    "delen": [
+      "kam",
+      "pi",
+      "oen"
+    ],
+    "extra": [
+      "cam",
+      "pie"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "publiek",
+    "delen": [
+      "pu",
+      "bliek"
+    ],
+    "extra": [
+      "puu",
+      "blijk"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "horizon",
+    "delen": [
+      "ho",
+      "ri",
+      "zon"
+    ],
+    "extra": [
+      "hoo",
+      "rie"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "energie",
+    "delen": [
+      "e",
+      "ner",
+      "gie"
+    ],
+    "extra": [
+      "neer",
+      "chie"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "machine",
+    "delen": [
+      "ma",
+      "chi",
+      "ne"
+    ],
+    "extra": [
+      "maa",
+      "gi"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "vitamine",
+    "delen": [
+      "vi",
+      "ta",
+      "mi",
+      "ne"
+    ],
+    "extra": [
+      "vie",
+      "taa"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "ambulance",
+    "delen": [
+      "am",
+      "bu",
+      "lan",
+      "ce"
+    ],
+    "extra": [
+      "aam",
+      "buu"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "chocolade",
+    "delen": [
+      "cho",
+      "co",
+      "la",
+      "de"
+    ],
+    "extra": [
+      "go",
+      "ko"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "januari",
+    "delen": [
+      "ja",
+      "nu",
+      "a",
+      "ri"
+    ],
+    "extra": [
+      "jaa",
+      "nuu"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "kwartier",
+    "delen": [
+      "kwar",
+      "tier"
+    ],
+    "extra": [
+      "cwar",
+      "cier"
+    ],
+    "niveau": 5
+  },
+  {
+    "w": "democratie",
+    "delen": [
+      "de",
+      "mo",
+      "cra",
+      "tie"
+    ],
+    "extra": [
+      "dee",
+      "moo"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "industrie",
+    "delen": [
+      "in",
+      "dus",
+      "trie"
+    ],
+    "extra": [
+      "ien",
+      "duus"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "kwaliteit",
+    "delen": [
+      "kwa",
+      "li",
+      "teit"
+    ],
+    "extra": [
+      "cwa",
+      "lie"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "techniek",
+    "delen": [
+      "tech",
+      "niek"
+    ],
+    "extra": [
+      "teg",
+      "nijk"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "provincie",
+    "delen": [
+      "pro",
+      "vin",
+      "cie"
+    ],
+    "extra": [
+      "proo",
+      "vien"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "experiment",
+    "delen": [
+      "ex",
+      "pe",
+      "ri",
+      "ment"
+    ],
+    "extra": [
+      "eks",
+      "pee"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "temperatuur",
+    "delen": [
+      "tem",
+      "pe",
+      "ra",
+      "tuur"
+    ],
+    "extra": [
+      "teem",
+      "pee"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "organisatie",
+    "delen": [
+      "or",
+      "ga",
+      "ni",
+      "sa",
+      "tie"
+    ],
+    "extra": [
+      "oor",
+      "cha"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "voorbeeld",
+    "delen": [
+      "voor",
+      "beeld"
+    ],
+    "extra": [
+      "vor",
+      "beld"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "opdracht",
+    "delen": [
+      "op",
+      "dracht"
+    ],
+    "extra": [
+      "oop",
+      "dragt"
+    ],
+    "niveau": 6
+  },
+  {
+    "w": "verschil",
+    "delen": [
+      "ver",
+      "schil"
+    ],
+    "extra": [
+      "fer",
+      "sgil"
+    ],
+    "niveau": 6
   }
 ];
 if (typeof module !== 'undefined') module.exports = WOORDEN;

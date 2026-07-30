@@ -1,4 +1,5 @@
 // data/talen.js — woordenschat; 'afb' = tegel-afbeelding (valt terug op emoji als leeg).
+
 var TALEN = [
   {
     "nl": "kat",
@@ -310,30 +311,6 @@ var TALEN = [
     "es": "feliz",
     "plaatje": "😀",
     "afb": "tegels/tegel-gelukkig.png",
-    "niveau": 3
-  },
-  {
-    "nl": "groot",
-    "en": "big",
-    "es": "grande",
-    "plaatje": "🐘",
-    "afb": "tegels/tegel-groot.png",
-    "niveau": 3
-  },
-  {
-    "nl": "klein",
-    "en": "small",
-    "es": "pequeño",
-    "plaatje": "🐭",
-    "afb": "tegels/tegel-klein.png",
-    "niveau": 3
-  },
-  {
-    "nl": "snel",
-    "en": "fast",
-    "es": "rápido",
-    "plaatje": "⚡",
-    "afb": "tegels/tegel-snel.png",
     "niveau": 3
   },
   {
@@ -801,14 +778,6 @@ var TALEN = [
     "niveau": 2
   },
   {
-    "nl": "druif",
-    "en": "grape",
-    "es": "uva",
-    "plaatje": "🍇",
-    "afb": "tegels/tegel-druif.png",
-    "niveau": 2
-  },
-  {
     "nl": "hamburger",
     "en": "hamburger",
     "es": "hamburguesa",
@@ -895,14 +864,6 @@ var TALEN = [
     "plaatje": "⚡",
     "afb": "tegels/tegel-bliksem.png",
     "niveau": 3
-  },
-  {
-    "nl": "druppel",
-    "en": "drop",
-    "es": "gota",
-    "plaatje": "💧",
-    "afb": "tegels/tegel-druppel.png",
-    "niveau": 2
   },
   {
     "nl": "schelp",
@@ -1329,14 +1290,6 @@ var TALEN = [
     "niveau": 2
   },
   {
-    "nl": "voetbal",
-    "en": "soccer",
-    "es": "fútbol",
-    "plaatje": "⚽",
-    "afb": "tegels/tegel-voetbal.png",
-    "niveau": 2
-  },
-  {
     "nl": "muziek",
     "en": "music",
     "es": "música",
@@ -1551,6 +1504,706 @@ var TALEN = [
     "plaatje": "🪂",
     "afb": "tegels/tegel-parachute.png",
     "niveau": 3
+  },
+  {
+    "nl": "kasteel",
+    "en": "castle",
+    "es": "castillo",
+    "plaatje": "🏰",
+    "niveau": 4
+  },
+  {
+    "nl": "brug",
+    "en": "bridge",
+    "es": "puente",
+    "plaatje": "🌉",
+    "niveau": 4
+  },
+  {
+    "nl": "kaart",
+    "en": "map",
+    "es": "mapa",
+    "plaatje": "🗺️",
+    "niveau": 4
+  },
+  {
+    "nl": "medaille",
+    "en": "medal",
+    "es": "medalla",
+    "plaatje": "🏅",
+    "niveau": 4
+  },
+  {
+    "nl": "brief",
+    "en": "letter",
+    "es": "carta",
+    "plaatje": "✉️",
+    "niveau": 4
+  },
+  {
+    "nl": "ring",
+    "en": "ring",
+    "es": "anillo",
+    "plaatje": "💍",
+    "niveau": 4
+  },
+  {
+    "nl": "ziekenhuis",
+    "en": "hospital",
+    "es": "hospital",
+    "plaatje": "🏥",
+    "niveau": 5
+  },
+  {
+    "nl": "bibliotheek",
+    "en": "library",
+    "es": "biblioteca",
+    "plaatje": "📚",
+    "niveau": 5
+  },
+  {
+    "nl": "vliegveld",
+    "en": "airport",
+    "es": "aeropuerto",
+    "plaatje": "🛫",
+    "niveau": 5
+  },
+  {
+    "nl": "museum",
+    "en": "museum",
+    "es": "museo",
+    "plaatje": "🏛️",
+    "niveau": 5
+  },
+  {
+    "nl": "fabriek",
+    "en": "factory",
+    "es": "fábrica",
+    "plaatje": "🏭",
+    "niveau": 5
+  },
+  {
+    "nl": "kerk",
+    "en": "church",
+    "es": "iglesia",
+    "plaatje": "⛪",
+    "niveau": 5
+  },
+  {
+    "nl": "telescoop",
+    "en": "telescope",
+    "es": "telescopio",
+    "plaatje": "🔭",
+    "niveau": 6
+  },
+  {
+    "nl": "batterij",
+    "en": "battery",
+    "es": "batería",
+    "plaatje": "🔋",
+    "niveau": 6
+  },
+  {
+    "nl": "magneet",
+    "en": "magnet",
+    "es": "imán",
+    "plaatje": "🧲",
+    "niveau": 6
+  },
+  {
+    "nl": "satelliet",
+    "en": "satellite",
+    "es": "satélite",
+    "plaatje": "🛰️",
+    "niveau": 6
+  },
+  {
+    "nl": "thermometer",
+    "en": "thermometer",
+    "es": "termómetro",
+    "plaatje": "🌡️",
+    "niveau": 6
+  },
+  {
+    "nl": "wereldbol",
+    "en": "globe",
+    "es": "globo",
+    "plaatje": "🌍",
+    "niveau": 6
+  },
+  {
+    "nl": "parasol",
+    "en": "parasol",
+    "es": "parasol",
+    "plaatje": "⛱️",
+    "niveau": 4
+  },
+  {
+    "nl": "ladder",
+    "en": "ladder",
+    "es": "escalera",
+    "plaatje": "🪜",
+    "niveau": 4
+  },
+  {
+    "nl": "emmer",
+    "en": "bucket",
+    "es": "cubo",
+    "plaatje": "🪣",
+    "niveau": 4
+  },
+  {
+    "nl": "zaklamp",
+    "en": "flashlight",
+    "es": "linterna",
+    "plaatje": "🔦",
+    "niveau": 4
+  },
+  {
+    "nl": "weegschaal",
+    "en": "scale",
+    "es": "balanza",
+    "plaatje": "⚖️",
+    "niveau": 4
+  },
+  {
+    "nl": "rugzak",
+    "en": "backpack",
+    "es": "mochila",
+    "plaatje": "🎒",
+    "niveau": 4
+  },
+  {
+    "nl": "ambulance",
+    "en": "ambulance",
+    "es": "ambulancia",
+    "plaatje": "🚑",
+    "niveau": 5
+  },
+  {
+    "nl": "vuilnisbak",
+    "en": "bin",
+    "es": "basura",
+    "plaatje": "🗑️",
+    "niveau": 5
+  },
+  {
+    "nl": "gereedschap",
+    "en": "tools",
+    "es": "herramientas",
+    "plaatje": "🛠️",
+    "niveau": 5
+  },
+  {
+    "nl": "vergrootglas",
+    "en": "magnifier",
+    "es": "lupa",
+    "plaatje": "🔍",
+    "niveau": 5
+  },
+  {
+    "nl": "penseel",
+    "en": "brush",
+    "es": "pincel",
+    "plaatje": "🖌️",
+    "niveau": 5
+  },
+  {
+    "nl": "rekenmachine",
+    "en": "calculator",
+    "es": "calculadora",
+    "plaatje": "🧮",
+    "niveau": 5
+  },
+  {
+    "nl": "planeet",
+    "en": "planet",
+    "es": "planeta",
+    "plaatje": "🪐",
+    "niveau": 6
+  },
+  {
+    "nl": "atoom",
+    "en": "atom",
+    "es": "átomo",
+    "plaatje": "⚛️",
+    "niveau": 6
+  },
+  {
+    "nl": "tandwiel",
+    "en": "gear",
+    "es": "engranaje",
+    "plaatje": "⚙️",
+    "niveau": 6
+  },
+  {
+    "nl": "proefbuis",
+    "en": "test tube",
+    "es": "tubo",
+    "plaatje": "🧪",
+    "niveau": 6
+  },
+  {
+    "nl": "diskette",
+    "en": "floppy disk",
+    "es": "disquete",
+    "plaatje": "💾",
+    "niveau": 6
+  },
+  {
+    "nl": "robotarm",
+    "en": "robot arm",
+    "es": "brazo robot",
+    "plaatje": "🦾",
+    "niveau": 6
+  },
+  {
+    "nl": "pop",
+    "en": "doll",
+    "es": "muñeca",
+    "plaatje": "🧸",
+    "niveau": 1
+  },
+  {
+    "nl": "beker",
+    "en": "cup",
+    "es": "taza",
+    "plaatje": "🏆",
+    "niveau": 1
+  },
+  {
+    "nl": "bord",
+    "en": "plate",
+    "es": "plato",
+    "plaatje": "🍽️",
+    "niveau": 1
+  },
+  {
+    "nl": "mes",
+    "en": "knife",
+    "es": "cuchillo",
+    "plaatje": "🔪",
+    "niveau": 1
+  },
+  {
+    "nl": "vork",
+    "en": "fork",
+    "es": "tenedor",
+    "plaatje": "🍴",
+    "niveau": 1
+  },
+  {
+    "nl": "muts",
+    "en": "hat",
+    "es": "gorro",
+    "plaatje": "🧢",
+    "niveau": 1
+  },
+  {
+    "nl": "schrift",
+    "en": "notebook",
+    "es": "cuaderno",
+    "plaatje": "📒",
+    "niveau": 2
+  },
+  {
+    "nl": "gum",
+    "en": "eraser",
+    "es": "goma",
+    "plaatje": "🧽",
+    "niveau": 2
+  },
+  {
+    "nl": "lijm",
+    "en": "glue",
+    "es": "pegamento",
+    "plaatje": "🧴",
+    "niveau": 2
+  },
+  {
+    "nl": "soep",
+    "en": "soup",
+    "es": "sopa",
+    "plaatje": "🍲",
+    "niveau": 2
+  },
+  {
+    "nl": "rijst",
+    "en": "rice",
+    "es": "arroz",
+    "plaatje": "🍚",
+    "niveau": 2
+  },
+  {
+    "nl": "hoofd",
+    "en": "head",
+    "es": "cabeza",
+    "plaatje": "🙂",
+    "niveau": 3
+  },
+  {
+    "nl": "bot",
+    "en": "bone",
+    "es": "hueso",
+    "plaatje": "🦴",
+    "niveau": 3
+  },
+  {
+    "nl": "wind",
+    "en": "wind",
+    "es": "viento",
+    "plaatje": "🌬️",
+    "niveau": 3
+  },
+  {
+    "nl": "storm",
+    "en": "storm",
+    "es": "tormenta",
+    "plaatje": "🌩️",
+    "niveau": 3
+  },
+  {
+    "nl": "winkel",
+    "en": "shop",
+    "es": "tienda",
+    "plaatje": "🏪",
+    "niveau": 3
+  },
+  {
+    "nl": "park",
+    "en": "park",
+    "es": "parque",
+    "plaatje": "🏞️",
+    "niveau": 3
+  },
+  {
+    "nl": "straat",
+    "en": "street",
+    "es": "calle",
+    "plaatje": "🛣️",
+    "niveau": 3
+  },
+  {
+    "nl": "geld",
+    "en": "money",
+    "es": "dinero",
+    "plaatje": "💰",
+    "niveau": 3
+  },
+  {
+    "nl": "zwemmen",
+    "en": "swimming",
+    "es": "natación",
+    "plaatje": "🏊",
+    "niveau": 3
+  },
+  {
+    "nl": "dokter",
+    "en": "doctor",
+    "es": "médico",
+    "plaatje": "🩺",
+    "niveau": 4
+  },
+  {
+    "nl": "verpleger",
+    "en": "nurse",
+    "es": "enfermero",
+    "plaatje": "💉",
+    "niveau": 4
+  },
+  {
+    "nl": "bakker",
+    "en": "baker",
+    "es": "panadero",
+    "plaatje": "🥖",
+    "niveau": 4
+  },
+  {
+    "nl": "boer",
+    "en": "farmer",
+    "es": "granjero",
+    "plaatje": "🧑‍🌾",
+    "niveau": 4
+  },
+  {
+    "nl": "kok",
+    "en": "cook",
+    "es": "cocinero",
+    "plaatje": "👨‍🍳",
+    "niveau": 4
+  },
+  {
+    "nl": "leraar",
+    "en": "teacher",
+    "es": "maestro",
+    "plaatje": "🧑‍🏫",
+    "niveau": 4
+  },
+  {
+    "nl": "station",
+    "en": "station",
+    "es": "estación",
+    "plaatje": "🚉",
+    "niveau": 4
+  },
+  {
+    "nl": "haven",
+    "en": "harbour",
+    "es": "puerto",
+    "plaatje": "🚢",
+    "niveau": 4
+  },
+  {
+    "nl": "bos",
+    "en": "forest",
+    "es": "bosque",
+    "plaatje": "🌲",
+    "niveau": 4
+  },
+  {
+    "nl": "woestijn",
+    "en": "desert",
+    "es": "desierto",
+    "plaatje": "🏜️",
+    "niveau": 4
+  },
+  {
+    "nl": "eiland",
+    "en": "island",
+    "es": "isla",
+    "plaatje": "🏝️",
+    "niveau": 4
+  },
+  {
+    "nl": "adelaar",
+    "en": "eagle",
+    "es": "águila",
+    "plaatje": "🦅",
+    "niveau": 4
+  },
+  {
+    "nl": "computer",
+    "en": "computer",
+    "es": "ordenador",
+    "plaatje": "💻",
+    "niveau": 5
+  },
+  {
+    "nl": "schroef",
+    "en": "screw",
+    "es": "tornillo",
+    "plaatje": "🔩",
+    "niveau": 5
+  },
+  {
+    "nl": "medicijn",
+    "en": "medicine",
+    "es": "medicina",
+    "plaatje": "💊",
+    "niveau": 5
+  },
+  {
+    "nl": "verband",
+    "en": "bandage",
+    "es": "vendaje",
+    "plaatje": "🩹",
+    "niveau": 5
+  },
+  {
+    "nl": "vitamine",
+    "en": "vitamin",
+    "es": "vitamina",
+    "plaatje": "🥗",
+    "niveau": 5
+  },
+  {
+    "nl": "theater",
+    "en": "theatre",
+    "es": "teatro",
+    "plaatje": "🎭",
+    "niveau": 5
+  },
+  {
+    "nl": "hotel",
+    "en": "hotel",
+    "es": "hotel",
+    "plaatje": "🏨",
+    "niveau": 5
+  },
+  {
+    "nl": "markt",
+    "en": "market",
+    "es": "mercado",
+    "plaatje": "🛒",
+    "niveau": 5
+  },
+  {
+    "nl": "krant",
+    "en": "newspaper",
+    "es": "periódico",
+    "plaatje": "📰",
+    "niveau": 5
+  },
+  {
+    "nl": "postbode",
+    "en": "postman",
+    "es": "cartero",
+    "plaatje": "📮",
+    "niveau": 5
+  },
+  {
+    "nl": "vlag",
+    "en": "flag",
+    "es": "bandera",
+    "plaatje": "🚩",
+    "niveau": 5
+  },
+  {
+    "nl": "microscoop",
+    "en": "microscope",
+    "es": "microscopio",
+    "plaatje": "🔬",
+    "niveau": 6
+  },
+  {
+    "nl": "gletsjer",
+    "en": "glacier",
+    "es": "glaciar",
+    "plaatje": "🧊",
+    "niveau": 6
+  },
+  {
+    "nl": "aardbeving",
+    "en": "earthquake",
+    "es": "terremoto",
+    "plaatje": "🌎",
+    "niveau": 6
+  },
+  {
+    "nl": "komeet",
+    "en": "comet",
+    "es": "cometa",
+    "plaatje": "☄️",
+    "niveau": 6
+  },
+  {
+    "nl": "astronaut",
+    "en": "astronaut",
+    "es": "astronauta",
+    "plaatje": "🧑‍🚀",
+    "niveau": 6
+  },
+  {
+    "nl": "ruimteschip",
+    "en": "spaceship",
+    "es": "nave",
+    "plaatje": "🛸",
+    "niveau": 6
+  },
+  {
+    "nl": "skelet",
+    "en": "skeleton",
+    "es": "esqueleto",
+    "plaatje": "💀",
+    "niveau": 6
+  },
+  {
+    "nl": "kameleon",
+    "en": "chameleon",
+    "es": "camaleón",
+    "plaatje": "🦎",
+    "niveau": 6
+  },
+  {
+    "nl": "kwal",
+    "en": "jellyfish",
+    "es": "medusa",
+    "plaatje": "🪼",
+    "niveau": 6
+  },
+  {
+    "nl": "orkaan",
+    "en": "hurricane",
+    "es": "huracán",
+    "plaatje": "🌀",
+    "niveau": 6
+  },
+  {
+    "nl": "krokodil",
+    "en": "crocodile",
+    "es": "cocodrilo",
+    "plaatje": "🐊",
+    "niveau": 6
+  },
+  {
+    "nl": "schorpioen",
+    "en": "scorpion",
+    "es": "escorpión",
+    "plaatje": "🦂",
+    "niveau": 6
+  },
+  {
+    "nl": "spin",
+    "en": "spider",
+    "es": "araña",
+    "plaatje": "🕷️",
+    "niveau": 6
+  },
+  {
+    "nl": "zandloper",
+    "en": "hourglass",
+    "es": "reloj de arena",
+    "plaatje": "⌛",
+    "niveau": 6
+  },
+  {
+    "nl": "brandblusser",
+    "en": "extinguisher",
+    "es": "extintor",
+    "plaatje": "🧯",
+    "niveau": 6
+  },
+  {
+    "nl": "diamant",
+    "en": "diamond",
+    "es": "diamante",
+    "plaatje": "💎",
+    "niveau": 6
+  },
+  {
+    "nl": "virus",
+    "en": "virus",
+    "es": "virus",
+    "plaatje": "🦠",
+    "niveau": 6
+  },
+  {
+    "nl": "röntgenfoto",
+    "en": "x-ray",
+    "es": "radiografía",
+    "plaatje": "🩻",
+    "niveau": 6
+  },
+  {
+    "nl": "ketting",
+    "en": "chain",
+    "es": "cadena",
+    "plaatje": "⛓️",
+    "niveau": 6
+  },
+  {
+    "nl": "piano",
+    "en": "piano",
+    "es": "piano",
+    "plaatje": "🎹",
+    "niveau": 6
+  },
+  {
+    "nl": "wol",
+    "en": "wool",
+    "es": "lana",
+    "plaatje": "🧶",
+    "niveau": 6
   }
 ];
 if (typeof module !== 'undefined') module.exports = TALEN;

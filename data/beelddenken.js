@@ -5304,6 +5304,3415 @@ var BEELD_DENKEN = [
     "goed": "🚌",
     "uitleg": "Dit beeld is precies hetzelfde als bovenaan.",
     "niveau": 3
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🟦",
+      "🟦",
+      "🔺",
+      "🟦",
+      "🟦",
+      "❓"
+    ],
+    "opties": [
+      "🔺",
+      "🟡",
+      "🟦"
+    ],
+    "goed": "🔺",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🟦",
+      "🟡",
+      "🔺",
+      "🟦",
+      "❓"
+    ],
+    "opties": [
+      "🟡",
+      "🔺",
+      "🟦"
+    ],
+    "goed": "🟡",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🔺",
+      "🟦",
+      "🔺",
+      "🔺",
+      "🟦",
+      "🔺",
+      "❓"
+    ],
+    "opties": [
+      "🔺",
+      "🟦",
+      "🟡"
+    ],
+    "goed": "🔺",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐱",
+      "🐱",
+      "🐶",
+      "🐱",
+      "🐱",
+      "❓"
+    ],
+    "opties": [
+      "🐱",
+      "🐭",
+      "🐶"
+    ],
+    "goed": "🐶",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐱",
+      "🐭",
+      "🐶",
+      "🐱",
+      "❓"
+    ],
+    "opties": [
+      "🐶",
+      "🐱",
+      "🐭"
+    ],
+    "goed": "🐭",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "❓"
+    ],
+    "opties": [
+      "🐭",
+      "🐶",
+      "🐱"
+    ],
+    "goed": "🐶",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍐",
+      "🍐",
+      "🍎",
+      "🍐",
+      "🍐",
+      "❓"
+    ],
+    "opties": [
+      "🍎",
+      "🍇",
+      "🍐"
+    ],
+    "goed": "🍎",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍐",
+      "🍇",
+      "🍎",
+      "🍐",
+      "❓"
+    ],
+    "opties": [
+      "🍐",
+      "🍎",
+      "🍇"
+    ],
+    "goed": "🍇",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍎",
+      "🍐",
+      "🍎",
+      "🍎",
+      "🍐",
+      "🍎",
+      "❓"
+    ],
+    "opties": [
+      "🍎",
+      "🍇",
+      "🍐"
+    ],
+    "goed": "🍎",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "🌙",
+      "⭐",
+      "🌙",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "☀️",
+      "🌙",
+      "⭐"
+    ],
+    "goed": "⭐",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "☀️",
+      "⭐",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "⭐",
+      "☀️",
+      "🌙"
+    ],
+    "goed": "☀️",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "⭐",
+      "🌙",
+      "⭐",
+      "⭐",
+      "🌙",
+      "⭐",
+      "❓"
+    ],
+    "opties": [
+      "🌙",
+      "⭐",
+      "☀️"
+    ],
+    "goed": "⭐",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟢",
+      "🟢",
+      "🔴",
+      "🟢",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🔴",
+      "🔵",
+      "🟢"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟢",
+      "🔵",
+      "🔴",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🔵",
+      "🟢",
+      "🔴"
+    ],
+    "goed": "🔵",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "❓"
+    ],
+    "opties": [
+      "🟢",
+      "🔴",
+      "🔵"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🚲",
+      "🚗",
+      "🍎",
+      "🚌"
+    ],
+    "goed": "🍎",
+    "uitleg": "Deze past niet: de rest zijn voertuigen.",
+    "niveau": 4
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🔨",
+      "🌷",
+      "🪚",
+      "🪛"
+    ],
+    "goed": "🌷",
+    "uitleg": "Deze past niet: de rest is gereedschap.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🐘",
+      "🇳🇱",
+      "🇧🇪",
+      "🇩🇪"
+    ],
+    "goed": "🐘",
+    "uitleg": "Deze past niet: de rest zijn vlaggen.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "➖",
+      "➕",
+      "✖️",
+      "🎈"
+    ],
+    "goed": "🎈",
+    "uitleg": "Deze past niet: de rest zijn rekentekens.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "⚖️",
+      "📏",
+      "🌡️",
+      "🍰"
+    ],
+    "goed": "🍰",
+    "uitleg": "Deze past niet: de rest zijn meetinstrumenten.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🟦",
+      "🟦",
+      "🔺",
+      "🟦",
+      "🟦",
+      "❓"
+    ],
+    "opties": [
+      "🟡",
+      "🟦",
+      "🔺"
+    ],
+    "goed": "🔺",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🔺",
+      "🟦",
+      "🔺",
+      "🔺",
+      "🟦",
+      "🔺",
+      "❓"
+    ],
+    "opties": [
+      "🟡",
+      "🔺",
+      "🟦"
+    ],
+    "goed": "🔺",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐱",
+      "🐭",
+      "🐶",
+      "🐱",
+      "❓"
+    ],
+    "opties": [
+      "🐭",
+      "🐶",
+      "🐱"
+    ],
+    "goed": "🐭",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "❓"
+    ],
+    "opties": [
+      "🐶",
+      "🐭",
+      "🐱"
+    ],
+    "goed": "🐶",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍐",
+      "🍐",
+      "🍎",
+      "🍐",
+      "🍐",
+      "❓"
+    ],
+    "opties": [
+      "🍐",
+      "🍎",
+      "🍇"
+    ],
+    "goed": "🍎",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "🌙",
+      "⭐",
+      "🌙",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "⭐",
+      "☀️",
+      "🌙"
+    ],
+    "goed": "⭐",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "☀️",
+      "⭐",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "🌙",
+      "⭐",
+      "☀️"
+    ],
+    "goed": "☀️",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "⭐",
+      "🌙",
+      "⭐",
+      "⭐",
+      "🌙",
+      "⭐",
+      "❓"
+    ],
+    "opties": [
+      "⭐",
+      "🌙",
+      "☀️"
+    ],
+    "goed": "⭐",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟢",
+      "🟢",
+      "🔴",
+      "🟢",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🟢",
+      "🔵",
+      "🔴"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟢",
+      "🔵",
+      "🔴",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🔵",
+      "🔴",
+      "🟢"
+    ],
+    "goed": "🔵",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "❓"
+    ],
+    "opties": [
+      "🔴",
+      "🟢",
+      "🔵"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚌",
+      "🚌",
+      "🚗",
+      "🚌",
+      "🚌",
+      "❓"
+    ],
+    "opties": [
+      "🚌",
+      "🚗",
+      "🚲"
+    ],
+    "goed": "🚗",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚌",
+      "🚲",
+      "🚗",
+      "🚌",
+      "❓"
+    ],
+    "opties": [
+      "🚌",
+      "🚗",
+      "🚲"
+    ],
+    "goed": "🚲",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚗",
+      "🚌",
+      "🚗",
+      "🚗",
+      "🚌",
+      "🚗",
+      "❓"
+    ],
+    "opties": [
+      "🚗",
+      "🚌",
+      "🚲"
+    ],
+    "goed": "🚗",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌵",
+      "🌵",
+      "🌳",
+      "🌵",
+      "🌵",
+      "❓"
+    ],
+    "opties": [
+      "🌳",
+      "🌵",
+      "🌷"
+    ],
+    "goed": "🌳",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌵",
+      "🌷",
+      "🌳",
+      "🌵",
+      "❓"
+    ],
+    "opties": [
+      "🌵",
+      "🌷",
+      "🌳"
+    ],
+    "goed": "🌷",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌳",
+      "🌵",
+      "🌳",
+      "🌳",
+      "🌵",
+      "🌳",
+      "❓"
+    ],
+    "opties": [
+      "🌷",
+      "🌵",
+      "🌳"
+    ],
+    "goed": "🌳",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥇",
+      "🥈",
+      "🥈",
+      "🥇",
+      "🥈",
+      "🥈",
+      "❓"
+    ],
+    "opties": [
+      "🥉",
+      "🥈",
+      "🥇"
+    ],
+    "goed": "🥇",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥇",
+      "🥈",
+      "🥉",
+      "🥇",
+      "🥈",
+      "❓"
+    ],
+    "opties": [
+      "🥉",
+      "🥈",
+      "🥇"
+    ],
+    "goed": "🥉",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥇",
+      "🥇",
+      "🥈",
+      "🥇",
+      "🥇",
+      "🥈",
+      "🥇",
+      "❓"
+    ],
+    "opties": [
+      "🥇",
+      "🥉",
+      "🥈"
+    ],
+    "goed": "🥇",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😐",
+      "😐",
+      "😀",
+      "😐",
+      "😐",
+      "❓"
+    ],
+    "opties": [
+      "😢",
+      "😐",
+      "😀"
+    ],
+    "goed": "😀",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😐",
+      "😢",
+      "😀",
+      "😐",
+      "❓"
+    ],
+    "opties": [
+      "😐",
+      "😀",
+      "😢"
+    ],
+    "goed": "😢",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😀",
+      "😐",
+      "😀",
+      "😀",
+      "😐",
+      "😀",
+      "❓"
+    ],
+    "opties": [
+      "😢",
+      "😐",
+      "😀"
+    ],
+    "goed": "😀",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔔",
+      "🎵",
+      "🎵",
+      "🔔",
+      "🎵",
+      "🎵",
+      "❓"
+    ],
+    "opties": [
+      "🔔",
+      "🎺",
+      "🎵"
+    ],
+    "goed": "🔔",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔔",
+      "🎵",
+      "🎺",
+      "🔔",
+      "🎵",
+      "❓"
+    ],
+    "opties": [
+      "🎺",
+      "🎵",
+      "🔔"
+    ],
+    "goed": "🎺",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔔",
+      "🔔",
+      "🎵",
+      "🔔",
+      "🔔",
+      "🎵",
+      "🔔",
+      "❓"
+    ],
+    "opties": [
+      "🎺",
+      "🎵",
+      "🔔"
+    ],
+    "goed": "🔔",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🍎",
+      "🚌",
+      "🚗",
+      "🚲"
+    ],
+    "goed": "🍎",
+    "uitleg": "Deze past niet: de rest zijn voertuigen.",
+    "niveau": 4
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🪚",
+      "🌷",
+      "🔨",
+      "🪛"
+    ],
+    "goed": "🌷",
+    "uitleg": "Deze past niet: de rest is gereedschap.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🇳🇱",
+      "🇩🇪",
+      "🐘",
+      "🇧🇪"
+    ],
+    "goed": "🐘",
+    "uitleg": "Deze past niet: de rest zijn vlaggen.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "✖️",
+      "➕",
+      "➖",
+      "🎈"
+    ],
+    "goed": "🎈",
+    "uitleg": "Deze past niet: de rest zijn rekentekens.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "⚖️",
+      "🌡️",
+      "🍰",
+      "📏"
+    ],
+    "goed": "🍰",
+    "uitleg": "Deze past niet: de rest zijn meetinstrumenten.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍩",
+      "🍩",
+      "🍰",
+      "🍩",
+      "🍩",
+      "❓"
+    ],
+    "opties": [
+      "🍪",
+      "🍰",
+      "🍩"
+    ],
+    "goed": "🍰",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍩",
+      "🍪",
+      "🍰",
+      "🍩",
+      "❓"
+    ],
+    "opties": [
+      "🍪",
+      "🍩",
+      "🍰"
+    ],
+    "goed": "🍪",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍰",
+      "🍩",
+      "🍰",
+      "🍰",
+      "🍩",
+      "🍰",
+      "❓"
+    ],
+    "opties": [
+      "🍩",
+      "🍪",
+      "🍰"
+    ],
+    "goed": "🍰",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "🏀",
+      "🏀",
+      "⚽",
+      "🏀",
+      "🏀",
+      "❓"
+    ],
+    "opties": [
+      "🎾",
+      "⚽",
+      "🏀"
+    ],
+    "goed": "⚽",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "🏀",
+      "🎾",
+      "⚽",
+      "🏀",
+      "❓"
+    ],
+    "opties": [
+      "🎾",
+      "⚽",
+      "🏀"
+    ],
+    "goed": "🎾",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "⚽",
+      "🏀",
+      "⚽",
+      "⚽",
+      "🏀",
+      "⚽",
+      "❓"
+    ],
+    "opties": [
+      "🎾",
+      "⚽",
+      "🏀"
+    ],
+    "goed": "⚽",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐬",
+      "🐬",
+      "🐟",
+      "🐬",
+      "🐬",
+      "❓"
+    ],
+    "opties": [
+      "🐟",
+      "🐬",
+      "🐙"
+    ],
+    "goed": "🐟",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐬",
+      "🐙",
+      "🐟",
+      "🐬",
+      "❓"
+    ],
+    "opties": [
+      "🐬",
+      "🐟",
+      "🐙"
+    ],
+    "goed": "🐙",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐟",
+      "🐬",
+      "🐟",
+      "🐟",
+      "🐬",
+      "🐟",
+      "❓"
+    ],
+    "opties": [
+      "🐬",
+      "🐙",
+      "🐟"
+    ],
+    "goed": "🐟",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "☂️",
+      "🧣",
+      "🧣",
+      "☂️",
+      "🧣",
+      "🧣",
+      "❓"
+    ],
+    "opties": [
+      "☂️",
+      "🧣",
+      "🧤"
+    ],
+    "goed": "☂️",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "☂️",
+      "🧣",
+      "🧤",
+      "☂️",
+      "🧣",
+      "❓"
+    ],
+    "opties": [
+      "☂️",
+      "🧤",
+      "🧣"
+    ],
+    "goed": "🧤",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "☂️",
+      "☂️",
+      "🧣",
+      "☂️",
+      "☂️",
+      "🧣",
+      "☂️",
+      "❓"
+    ],
+    "opties": [
+      "🧤",
+      "🧣",
+      "☂️"
+    ],
+    "goed": "☂️",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🛰️",
+      "🛰️",
+      "🚀",
+      "🛰️",
+      "🛰️",
+      "❓"
+    ],
+    "opties": [
+      "🪐",
+      "🚀",
+      "🛰️"
+    ],
+    "goed": "🚀",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🛰️",
+      "🪐",
+      "🚀",
+      "🛰️",
+      "❓"
+    ],
+    "opties": [
+      "🚀",
+      "🛰️",
+      "🪐"
+    ],
+    "goed": "🪐",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🚀",
+      "🛰️",
+      "🚀",
+      "🚀",
+      "🛰️",
+      "🚀",
+      "❓"
+    ],
+    "opties": [
+      "🛰️",
+      "🚀",
+      "🪐"
+    ],
+    "goed": "🚀",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🖊️",
+      "📕",
+      "📕",
+      "🖊️",
+      "📕",
+      "📕",
+      "❓"
+    ],
+    "opties": [
+      "📐",
+      "📕",
+      "🖊️"
+    ],
+    "goed": "🖊️",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🖊️",
+      "📕",
+      "📐",
+      "🖊️",
+      "📕",
+      "❓"
+    ],
+    "opties": [
+      "📕",
+      "📐",
+      "🖊️"
+    ],
+    "goed": "📐",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🖊️",
+      "🖊️",
+      "📕",
+      "🖊️",
+      "🖊️",
+      "📕",
+      "🖊️",
+      "❓"
+    ],
+    "opties": [
+      "🖊️",
+      "📕",
+      "📐"
+    ],
+    "goed": "🖊️",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥦",
+      "🥦",
+      "🥕",
+      "🥦",
+      "🥦",
+      "❓"
+    ],
+    "opties": [
+      "🌽",
+      "🥦",
+      "🥕"
+    ],
+    "goed": "🥕",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥦",
+      "🌽",
+      "🥕",
+      "🥦",
+      "❓"
+    ],
+    "opties": [
+      "🥕",
+      "🌽",
+      "🥦"
+    ],
+    "goed": "🌽",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥕",
+      "🥦",
+      "🥕",
+      "🥕",
+      "🥦",
+      "🥕",
+      "❓"
+    ],
+    "opties": [
+      "🌽",
+      "🥕",
+      "🥦"
+    ],
+    "goed": "🥕",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "⏳",
+      "⏳",
+      "🕐",
+      "⏳",
+      "⏳",
+      "❓"
+    ],
+    "opties": [
+      "⏰",
+      "⏳",
+      "🕐"
+    ],
+    "goed": "🕐",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "⏳",
+      "⏰",
+      "🕐",
+      "⏳",
+      "❓"
+    ],
+    "opties": [
+      "⏰",
+      "⏳",
+      "🕐"
+    ],
+    "goed": "⏰",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "🕐",
+      "⏳",
+      "🕐",
+      "🕐",
+      "⏳",
+      "🕐",
+      "❓"
+    ],
+    "opties": [
+      "⏰",
+      "🕐",
+      "⏳"
+    ],
+    "goed": "🕐",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🚌",
+      "🚲",
+      "🚗",
+      "🍎"
+    ],
+    "goed": "🍎",
+    "uitleg": "Deze past niet: de rest zijn voertuigen.",
+    "niveau": 4
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🪚",
+      "🔨",
+      "🌷",
+      "🪛"
+    ],
+    "goed": "🌷",
+    "uitleg": "Deze past niet: de rest is gereedschap.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🇧🇪",
+      "🐘",
+      "🇩🇪",
+      "🇳🇱"
+    ],
+    "goed": "🐘",
+    "uitleg": "Deze past niet: de rest zijn vlaggen.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🎈",
+      "➕",
+      "✖️",
+      "➖"
+    ],
+    "goed": "🎈",
+    "uitleg": "Deze past niet: de rest zijn rekentekens.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "📏",
+      "🍰",
+      "🌡️",
+      "⚖️"
+    ],
+    "goed": "🍰",
+    "uitleg": "Deze past niet: de rest zijn meetinstrumenten.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔺",
+      "🟦",
+      "🟡",
+      "🔺",
+      "🟦",
+      "❓"
+    ],
+    "opties": [
+      "🟦",
+      "🟡",
+      "🔺"
+    ],
+    "goed": "🟡",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐱",
+      "🐱",
+      "🐶",
+      "🐱",
+      "🐱",
+      "❓"
+    ],
+    "opties": [
+      "🐭",
+      "🐱",
+      "🐶"
+    ],
+    "goed": "🐶",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐱",
+      "🐭",
+      "🐶",
+      "🐱",
+      "❓"
+    ],
+    "opties": [
+      "🐱",
+      "🐭",
+      "🐶"
+    ],
+    "goed": "🐭",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "🐶",
+      "🐱",
+      "🐶",
+      "❓"
+    ],
+    "opties": [
+      "🐭",
+      "🐱",
+      "🐶"
+    ],
+    "goed": "🐶",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍐",
+      "🍐",
+      "🍎",
+      "🍐",
+      "🍐",
+      "❓"
+    ],
+    "opties": [
+      "🍐",
+      "🍇",
+      "🍎"
+    ],
+    "goed": "🍎",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍎",
+      "🍎",
+      "🍐",
+      "🍎",
+      "🍎",
+      "🍐",
+      "🍎",
+      "❓"
+    ],
+    "opties": [
+      "🍎",
+      "🍐",
+      "🍇"
+    ],
+    "goed": "🍎",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "🌙",
+      "⭐",
+      "🌙",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "🌙",
+      "☀️",
+      "⭐"
+    ],
+    "goed": "⭐",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⭐",
+      "🌙",
+      "☀️",
+      "⭐",
+      "🌙",
+      "❓"
+    ],
+    "opties": [
+      "☀️",
+      "⭐",
+      "🌙"
+    ],
+    "goed": "☀️",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟢",
+      "🟢",
+      "🔴",
+      "🟢",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🟢",
+      "🔴",
+      "🔵"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "🔴",
+      "🟢",
+      "🔴",
+      "❓"
+    ],
+    "opties": [
+      "🔵",
+      "🔴",
+      "🟢"
+    ],
+    "goed": "🔴",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚌",
+      "🚌",
+      "🚗",
+      "🚌",
+      "🚌",
+      "❓"
+    ],
+    "opties": [
+      "🚗",
+      "🚲",
+      "🚌"
+    ],
+    "goed": "🚗",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚌",
+      "🚲",
+      "🚗",
+      "🚌",
+      "❓"
+    ],
+    "opties": [
+      "🚌",
+      "🚲",
+      "🚗"
+    ],
+    "goed": "🚲",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚗",
+      "🚗",
+      "🚌",
+      "🚗",
+      "🚗",
+      "🚌",
+      "🚗",
+      "❓"
+    ],
+    "opties": [
+      "🚌",
+      "🚗",
+      "🚲"
+    ],
+    "goed": "🚗",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌵",
+      "🌵",
+      "🌳",
+      "🌵",
+      "🌵",
+      "❓"
+    ],
+    "opties": [
+      "🌵",
+      "🌳",
+      "🌷"
+    ],
+    "goed": "🌳",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌵",
+      "🌷",
+      "🌳",
+      "🌵",
+      "❓"
+    ],
+    "opties": [
+      "🌷",
+      "🌵",
+      "🌳"
+    ],
+    "goed": "🌷",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🌳",
+      "🌳",
+      "🌵",
+      "🌳",
+      "🌳",
+      "🌵",
+      "🌳",
+      "❓"
+    ],
+    "opties": [
+      "🌵",
+      "🌷",
+      "🌳"
+    ],
+    "goed": "🌳",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥇",
+      "🥈",
+      "🥈",
+      "🥇",
+      "🥈",
+      "🥈",
+      "❓"
+    ],
+    "opties": [
+      "🥈",
+      "🥇",
+      "🥉"
+    ],
+    "goed": "🥇",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥇",
+      "🥈",
+      "🥉",
+      "🥇",
+      "🥈",
+      "❓"
+    ],
+    "opties": [
+      "🥈",
+      "🥇",
+      "🥉"
+    ],
+    "goed": "🥉",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😐",
+      "😐",
+      "😀",
+      "😐",
+      "😐",
+      "❓"
+    ],
+    "opties": [
+      "😐",
+      "😢",
+      "😀"
+    ],
+    "goed": "😀",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😐",
+      "😢",
+      "😀",
+      "😐",
+      "❓"
+    ],
+    "opties": [
+      "😢",
+      "😀",
+      "😐"
+    ],
+    "goed": "😢",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "😀",
+      "😀",
+      "😐",
+      "😀",
+      "😀",
+      "😐",
+      "😀",
+      "❓"
+    ],
+    "opties": [
+      "😢",
+      "😀",
+      "😐"
+    ],
+    "goed": "😀",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔔",
+      "🎵",
+      "🎵",
+      "🔔",
+      "🎵",
+      "🎵",
+      "❓"
+    ],
+    "opties": [
+      "🎺",
+      "🎵",
+      "🔔"
+    ],
+    "goed": "🔔",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🔔",
+      "🔔",
+      "🎵",
+      "🔔",
+      "🔔",
+      "🎵",
+      "🔔",
+      "❓"
+    ],
+    "opties": [
+      "🔔",
+      "🎵",
+      "🎺"
+    ],
+    "goed": "🔔",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍩",
+      "🍩",
+      "🍰",
+      "🍩",
+      "🍩",
+      "❓"
+    ],
+    "opties": [
+      "🍪",
+      "🍩",
+      "🍰"
+    ],
+    "goed": "🍰",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍩",
+      "🍪",
+      "🍰",
+      "🍩",
+      "❓"
+    ],
+    "opties": [
+      "🍩",
+      "🍰",
+      "🍪"
+    ],
+    "goed": "🍪",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🍰",
+      "🍰",
+      "🍩",
+      "🍰",
+      "🍰",
+      "🍩",
+      "🍰",
+      "❓"
+    ],
+    "opties": [
+      "🍰",
+      "🍪",
+      "🍩"
+    ],
+    "goed": "🍰",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "🏀",
+      "🏀",
+      "⚽",
+      "🏀",
+      "🏀",
+      "❓"
+    ],
+    "opties": [
+      "🏀",
+      "🎾",
+      "⚽"
+    ],
+    "goed": "⚽",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "🏀",
+      "🎾",
+      "⚽",
+      "🏀",
+      "❓"
+    ],
+    "opties": [
+      "🎾",
+      "🏀",
+      "⚽"
+    ],
+    "goed": "🎾",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "⚽",
+      "⚽",
+      "🏀",
+      "⚽",
+      "⚽",
+      "🏀",
+      "⚽",
+      "❓"
+    ],
+    "opties": [
+      "🏀",
+      "🎾",
+      "⚽"
+    ],
+    "goed": "⚽",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐬",
+      "🐬",
+      "🐟",
+      "🐬",
+      "🐬",
+      "❓"
+    ],
+    "opties": [
+      "🐙",
+      "🐬",
+      "🐟"
+    ],
+    "goed": "🐟",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐬",
+      "🐙",
+      "🐟",
+      "🐬",
+      "❓"
+    ],
+    "opties": [
+      "🐟",
+      "🐙",
+      "🐬"
+    ],
+    "goed": "🐙",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🐟",
+      "🐟",
+      "🐬",
+      "🐟",
+      "🐟",
+      "🐬",
+      "🐟",
+      "❓"
+    ],
+    "opties": [
+      "🐟",
+      "🐙",
+      "🐬"
+    ],
+    "goed": "🐟",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "☂️",
+      "🧣",
+      "🧤",
+      "☂️",
+      "🧣",
+      "❓"
+    ],
+    "opties": [
+      "☂️",
+      "🧣",
+      "🧤"
+    ],
+    "goed": "🧤",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "☂️",
+      "☂️",
+      "🧣",
+      "☂️",
+      "☂️",
+      "🧣",
+      "☂️",
+      "❓"
+    ],
+    "opties": [
+      "🧣",
+      "🧤",
+      "☂️"
+    ],
+    "goed": "☂️",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🛰️",
+      "🛰️",
+      "🚀",
+      "🛰️",
+      "🛰️",
+      "❓"
+    ],
+    "opties": [
+      "🛰️",
+      "🚀",
+      "🪐"
+    ],
+    "goed": "🚀",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🛰️",
+      "🪐",
+      "🚀",
+      "🛰️",
+      "❓"
+    ],
+    "opties": [
+      "🛰️",
+      "🪐",
+      "🚀"
+    ],
+    "goed": "🪐",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🚀",
+      "🚀",
+      "🛰️",
+      "🚀",
+      "🚀",
+      "🛰️",
+      "🚀",
+      "❓"
+    ],
+    "opties": [
+      "🪐",
+      "🛰️",
+      "🚀"
+    ],
+    "goed": "🚀",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🖊️",
+      "📕",
+      "📕",
+      "🖊️",
+      "📕",
+      "📕",
+      "❓"
+    ],
+    "opties": [
+      "📕",
+      "🖊️",
+      "📐"
+    ],
+    "goed": "🖊️",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🖊️",
+      "📕",
+      "📐",
+      "🖊️",
+      "📕",
+      "❓"
+    ],
+    "opties": [
+      "📐",
+      "🖊️",
+      "📕"
+    ],
+    "goed": "📐",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥦",
+      "🥦",
+      "🥕",
+      "🥦",
+      "🥦",
+      "❓"
+    ],
+    "opties": [
+      "🥦",
+      "🌽",
+      "🥕"
+    ],
+    "goed": "🥕",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥦",
+      "🌽",
+      "🥕",
+      "🥦",
+      "❓"
+    ],
+    "opties": [
+      "🥦",
+      "🥕",
+      "🌽"
+    ],
+    "goed": "🌽",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🥕",
+      "🥕",
+      "🥦",
+      "🥕",
+      "🥕",
+      "🥦",
+      "🥕",
+      "❓"
+    ],
+    "opties": [
+      "🥕",
+      "🥦",
+      "🌽"
+    ],
+    "goed": "🥕",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "⏳",
+      "⏳",
+      "🕐",
+      "⏳",
+      "⏳",
+      "❓"
+    ],
+    "opties": [
+      "🕐",
+      "⏳",
+      "⏰"
+    ],
+    "goed": "🕐",
+    "uitleg": "Het patroon is A-B-B en begint dan opnieuw met A.",
+    "niveau": 4
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "⏳",
+      "⏰",
+      "🕐",
+      "⏳",
+      "❓"
+    ],
+    "opties": [
+      "🕐",
+      "⏰",
+      "⏳"
+    ],
+    "goed": "⏰",
+    "uitleg": "Het patroon is A-B-C en herhaalt zich; na B komt C.",
+    "niveau": 5
+  },
+  {
+    "soort": "reeks",
+    "opdracht": "Wat komt hierna?",
+    "toon": [
+      "🕐",
+      "🕐",
+      "⏳",
+      "🕐",
+      "🕐",
+      "⏳",
+      "🕐",
+      "❓"
+    ],
+    "opties": [
+      "🕐",
+      "⏰",
+      "⏳"
+    ],
+    "goed": "🕐",
+    "uitleg": "Het patroon is A-A-B; na de eerste A volgt nog een A.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🍎",
+      "🚲",
+      "🚗",
+      "🚌"
+    ],
+    "goed": "🍎",
+    "uitleg": "Deze past niet: de rest zijn voertuigen.",
+    "niveau": 4
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "🌷",
+      "🪚",
+      "🪛",
+      "🔨"
+    ],
+    "goed": "🌷",
+    "uitleg": "Deze past niet: de rest is gereedschap.",
+    "niveau": 5
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "➖",
+      "🎈",
+      "✖️",
+      "➕"
+    ],
+    "goed": "🎈",
+    "uitleg": "Deze past niet: de rest zijn rekentekens.",
+    "niveau": 6
+  },
+  {
+    "soort": "anders",
+    "opdracht": "Welke hoort er niet bij?",
+    "opties": [
+      "📏",
+      "🌡️",
+      "⚖️",
+      "🍰"
+    ],
+    "goed": "🍰",
+    "uitleg": "Deze past niet: de rest zijn meetinstrumenten.",
+    "niveau": 6
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "⬆️",
+      "➡️",
+      "⬇️",
+      "⬅️",
+      "⬆️",
+      "➡️",
+      "❓"
+    ],
+    "opties": [
+      "➡️",
+      "⬆️",
+      "⬇️"
+    ],
+    "goed": "⬇️",
+    "uitleg": "De pijl draait steeds een kwartslag met de klok mee; daarna komt ⬇️.",
+    "niveau": 5
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "⬇️",
+      "⬅️",
+      "⬆️",
+      "➡️",
+      "⬇️",
+      "⬅️",
+      "❓"
+    ],
+    "opties": [
+      "⬆️",
+      "⬅️",
+      "⬇️"
+    ],
+    "goed": "⬆️",
+    "uitleg": "De pijl draait steeds een kwartslag met de klok mee; daarna komt ⬆️.",
+    "niveau": 6
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "⬆️",
+      "⬅️",
+      "⬇️",
+      "➡️",
+      "⬆️",
+      "⬅️",
+      "❓"
+    ],
+    "opties": [
+      "⬆️",
+      "⬅️",
+      "⬇️"
+    ],
+    "goed": "⬇️",
+    "uitleg": "De pijl draait steeds een kwartslag tegen de klok in; daarna komt ⬇️.",
+    "niveau": 5
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "⬇️",
+      "➡️",
+      "⬆️",
+      "⬅️",
+      "⬇️",
+      "➡️",
+      "❓"
+    ],
+    "opties": [
+      "⬆️",
+      "⬇️",
+      "➡️"
+    ],
+    "goed": "⬆️",
+    "uitleg": "De pijl draait steeds een kwartslag tegen de klok in; daarna komt ⬆️.",
+    "niveau": 6
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "↗️",
+      "↘️",
+      "↙️",
+      "↖️",
+      "↗️",
+      "↘️",
+      "❓"
+    ],
+    "opties": [
+      "↙️",
+      "↘️",
+      "↗️"
+    ],
+    "goed": "↙️",
+    "uitleg": "De pijl draait steeds een kwartslag met de klok mee; daarna komt ↙️.",
+    "niveau": 5
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "↙️",
+      "↖️",
+      "↗️",
+      "↘️",
+      "↙️",
+      "↖️",
+      "❓"
+    ],
+    "opties": [
+      "↗️",
+      "↙️",
+      "↖️"
+    ],
+    "goed": "↗️",
+    "uitleg": "De pijl draait steeds een kwartslag met de klok mee; daarna komt ↗️.",
+    "niveau": 6
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "↖️",
+      "↙️",
+      "↘️",
+      "↗️",
+      "↖️",
+      "↙️",
+      "❓"
+    ],
+    "opties": [
+      "↖️",
+      "↘️",
+      "↙️"
+    ],
+    "goed": "↘️",
+    "uitleg": "De pijl draait steeds een kwartslag tegen de klok in; daarna komt ↘️.",
+    "niveau": 5
+  },
+  {
+    "soort": "rotatie",
+    "opdracht": "Welke kant draait hij op?",
+    "toon": [
+      "↘️",
+      "↗️",
+      "↖️",
+      "↙️",
+      "↘️",
+      "↗️",
+      "❓"
+    ],
+    "opties": [
+      "↘️",
+      "↗️",
+      "↖️"
+    ],
+    "goed": "↖️",
+    "uitleg": "De pijl draait steeds een kwartslag tegen de klok in; daarna komt ↖️.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "▶️"
+    ],
+    "opties": [
+      "🟦",
+      "◀️",
+      "▶️"
+    ],
+    "goed": "◀️",
+    "uitleg": "Spiegelen klapt het beeld om: ▶️ wordt ◀️.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "◀️"
+    ],
+    "opties": [
+      "▶️",
+      "◀️",
+      "⭐"
+    ],
+    "goed": "▶️",
+    "uitleg": "Spiegelen klapt het beeld om: ◀️ wordt ▶️.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "🔺"
+    ],
+    "opties": [
+      "🔺",
+      "🔻",
+      "⭐"
+    ],
+    "goed": "🔻",
+    "uitleg": "Spiegelen klapt het beeld om: 🔺 wordt 🔻.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "🔻"
+    ],
+    "opties": [
+      "🔻",
+      "🔺",
+      "🔵"
+    ],
+    "goed": "🔺",
+    "uitleg": "Spiegelen klapt het beeld om: 🔻 wordt 🔺.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "⬆️"
+    ],
+    "opties": [
+      "⬇️",
+      "⬆️",
+      "🔵"
+    ],
+    "goed": "⬇️",
+    "uitleg": "Spiegelen klapt het beeld om: ⬆️ wordt ⬇️.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "⬇️"
+    ],
+    "opties": [
+      "⬆️",
+      "🟨",
+      "⬇️"
+    ],
+    "goed": "⬆️",
+    "uitleg": "Spiegelen klapt het beeld om: ⬇️ wordt ⬆️.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "🔼"
+    ],
+    "opties": [
+      "🔽",
+      "🔼",
+      "🟨"
+    ],
+    "goed": "🔽",
+    "uitleg": "Spiegelen klapt het beeld om: 🔼 wordt 🔽.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "🔽"
+    ],
+    "opties": [
+      "🔼",
+      "🔽",
+      "⬛"
+    ],
+    "goed": "🔼",
+    "uitleg": "Spiegelen klapt het beeld om: 🔽 wordt 🔼.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "↗️"
+    ],
+    "opties": [
+      "⬛",
+      "↙️",
+      "↗️"
+    ],
+    "goed": "↙️",
+    "uitleg": "Spiegelen klapt het beeld om: ↗️ wordt ↙️.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "↙️"
+    ],
+    "opties": [
+      "🟦",
+      "↗️",
+      "↙️"
+    ],
+    "goed": "↗️",
+    "uitleg": "Spiegelen klapt het beeld om: ↙️ wordt ↗️.",
+    "niveau": 6
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "↘️"
+    ],
+    "opties": [
+      "↘️",
+      "🟦",
+      "↖️"
+    ],
+    "goed": "↖️",
+    "uitleg": "Spiegelen klapt het beeld om: ↘️ wordt ↖️.",
+    "niveau": 5
+  },
+  {
+    "soort": "spiegeling",
+    "opdracht": "Welke is het spiegelbeeld?",
+    "toon": [
+      "↖️"
+    ],
+    "opties": [
+      "↘️",
+      "↖️",
+      "⭐"
+    ],
+    "goed": "↘️",
+    "uitleg": "Spiegelen klapt het beeld om: ↖️ wordt ↘️.",
+    "niveau": 6
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🐛 → 🦋. Dus ☁️ → ?",
+    "opties": [
+      "🌧️",
+      "🦋",
+      "🧶"
+    ],
+    "goed": "🌧️",
+    "uitleg": "🐛 verandert in 🦋; op dezelfde manier verandert ☁️ in 🌧️.",
+    "niveau": 5
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🥚 → 🐣. Dus 🌾 → ?",
+    "opties": [
+      "🍞",
+      "🌳",
+      "🐣"
+    ],
+    "goed": "🍞",
+    "uitleg": "🥚 verandert in 🐣; op dezelfde manier verandert 🌾 in 🍞.",
+    "niveau": 6
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🌱 → 🌳. Dus 🐄 → ?",
+    "opties": [
+      "🌳",
+      "🥛",
+      "🥧"
+    ],
+    "goed": "🥛",
+    "uitleg": "🌱 verandert in 🌳; op dezelfde manier verandert 🐄 in 🥛.",
+    "niveau": 5
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "☁️ → 🌧️. Dus 🐑 → ?",
+    "opties": [
+      "🧶",
+      "🍣",
+      "🌧️"
+    ],
+    "goed": "🧶",
+    "uitleg": "☁️ verandert in 🌧️; op dezelfde manier verandert 🐑 in 🧶.",
+    "niveau": 6
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🌾 → 🍞. Dus 🌰 → ?",
+    "opties": [
+      "🍞",
+      "🌳",
+      "🦋"
+    ],
+    "goed": "🌳",
+    "uitleg": "🌾 verandert in 🍞; op dezelfde manier verandert 🌰 in 🌳.",
+    "niveau": 5
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🐄 → 🥛. Dus 🍎 → ?",
+    "opties": [
+      "🥧",
+      "🥛",
+      "🐣"
+    ],
+    "goed": "🥧",
+    "uitleg": "🐄 verandert in 🥛; op dezelfde manier verandert 🍎 in 🥧.",
+    "niveau": 6
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🐑 → 🧶. Dus 🐟 → ?",
+    "opties": [
+      "🍣",
+      "🧶",
+      "🌳"
+    ],
+    "goed": "🍣",
+    "uitleg": "🐑 verandert in 🧶; op dezelfde manier verandert 🐟 in 🍣.",
+    "niveau": 5
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🌰 → 🌳. Dus 🐛 → ?",
+    "opties": [
+      "🦋",
+      "🌳",
+      "🌧️"
+    ],
+    "goed": "🦋",
+    "uitleg": "🌰 verandert in 🌳; op dezelfde manier verandert 🐛 in 🦋.",
+    "niveau": 6
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🍎 → 🥧. Dus 🥚 → ?",
+    "opties": [
+      "🥧",
+      "🍞",
+      "🐣"
+    ],
+    "goed": "🐣",
+    "uitleg": "🍎 verandert in 🥧; op dezelfde manier verandert 🥚 in 🐣.",
+    "niveau": 5
+  },
+  {
+    "soort": "analogie",
+    "opdracht": "🐟 → 🍣. Dus 🌱 → ?",
+    "opties": [
+      "🌳",
+      "🍣",
+      "🥛"
+    ],
+    "goed": "🌳",
+    "uitleg": "🐟 verandert in 🍣; op dezelfde manier verandert 🌱 in 🌳.",
+    "niveau": 6
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟥",
+      "🔵",
+      "🟦",
+      "🔴",
+      "❓"
+    ],
+    "opties": [
+      "🔴",
+      "🟥",
+      "🔵"
+    ],
+    "goed": "🟥",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 5
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🔴",
+      "🟥",
+      "🔵",
+      "🟦",
+      "🔴",
+      "🟥",
+      "🔵",
+      "❓"
+    ],
+    "opties": [
+      "🔴",
+      "🔵",
+      "🟦"
+    ],
+    "goed": "🟦",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 6
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🟡",
+      "🟨",
+      "🟢",
+      "🟩",
+      "🟡",
+      "❓"
+    ],
+    "opties": [
+      "🟨",
+      "🟡",
+      "🟢"
+    ],
+    "goed": "🟨",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 5
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🟡",
+      "🟨",
+      "🟢",
+      "🟩",
+      "🟡",
+      "🟨",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🟢",
+      "🟡",
+      "🟩"
+    ],
+    "goed": "🟩",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 6
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🟣",
+      "🟪",
+      "🟠",
+      "🟧",
+      "🟣",
+      "❓"
+    ],
+    "opties": [
+      "🟪",
+      "🟠",
+      "🟣"
+    ],
+    "goed": "🟪",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 5
+  },
+  {
+    "soort": "tweeregels",
+    "opdracht": "Let op kleur én vorm. Wat komt hierna?",
+    "toon": [
+      "🟣",
+      "🟪",
+      "🟠",
+      "🟧",
+      "🟣",
+      "🟪",
+      "🟠",
+      "❓"
+    ],
+    "opties": [
+      "🟠",
+      "🟧",
+      "🟣"
+    ],
+    "goed": "🟧",
+    "uitleg": "Er lopen twee regels: de vorm wisselt rond-vierkant, en de kleur wisselt per paar.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🔴",
+      "🟥",
+      "🟡",
+      "❓"
+    ],
+    "opties": [
+      "🟥",
+      "🟡",
+      "🟨"
+    ],
+    "goed": "🟨",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is geel, kolom 2 is het vierkant, dus 🟨.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🔵",
+      "🟦",
+      "🟢",
+      "❓"
+    ],
+    "opties": [
+      "🟩",
+      "🟦",
+      "🟢"
+    ],
+    "goed": "🟩",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is groen, kolom 2 is het vierkant, dus 🟩.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🟡",
+      "🟨",
+      "🟣",
+      "❓"
+    ],
+    "opties": [
+      "🟨",
+      "🟣",
+      "🟪"
+    ],
+    "goed": "🟪",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is paars, kolom 2 is het vierkant, dus 🟪.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🟢",
+      "🟩",
+      "🟠",
+      "❓"
+    ],
+    "opties": [
+      "🟠",
+      "🟩",
+      "🟧"
+    ],
+    "goed": "🟧",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is oranje, kolom 2 is het vierkant, dus 🟧.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🟣",
+      "🟪",
+      "🔴",
+      "❓"
+    ],
+    "opties": [
+      "🟥",
+      "🔴",
+      "🟪"
+    ],
+    "goed": "🟥",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is rood, kolom 2 is het vierkant, dus 🟥.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 2,
+    "toon": [
+      "🟠",
+      "🟧",
+      "🔵",
+      "❓"
+    ],
+    "opties": [
+      "🔵",
+      "🟧",
+      "🟦"
+    ],
+    "goed": "🟦",
+    "uitleg": "Elke rij heeft één kleur en elke kolom één vorm. Rij 2 is blauw, kolom 2 is het vierkant, dus 🟦.",
+    "niveau": 5
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🔴",
+      "🟥",
+      "❤️",
+      "🔵",
+      "🟦",
+      "💙",
+      "🟡",
+      "🟨",
+      "❓"
+    ],
+    "opties": [
+      "❤️",
+      "💛",
+      "💙"
+    ],
+    "goed": "💛",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is geel en de laatste kolom is het hart, dus 💛.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🔵",
+      "🟦",
+      "💙",
+      "🟡",
+      "🟨",
+      "💛",
+      "🟢",
+      "🟩",
+      "❓"
+    ],
+    "opties": [
+      "💚",
+      "💙",
+      "💛"
+    ],
+    "goed": "💚",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is groen en de laatste kolom is het hart, dus 💚.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🟡",
+      "🟨",
+      "💛",
+      "🟢",
+      "🟩",
+      "💚",
+      "🟣",
+      "🟪",
+      "❓"
+    ],
+    "opties": [
+      "💚",
+      "💜",
+      "💛"
+    ],
+    "goed": "💜",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is paars en de laatste kolom is het hart, dus 💜.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🟢",
+      "🟩",
+      "💚",
+      "🟣",
+      "🟪",
+      "💜",
+      "🟠",
+      "🟧",
+      "❓"
+    ],
+    "opties": [
+      "💜",
+      "🧡",
+      "💚"
+    ],
+    "goed": "🧡",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is oranje en de laatste kolom is het hart, dus 🧡.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🟣",
+      "🟪",
+      "💜",
+      "🟠",
+      "🟧",
+      "🧡",
+      "🔴",
+      "🟥",
+      "❓"
+    ],
+    "opties": [
+      "💜",
+      "🧡",
+      "❤️"
+    ],
+    "goed": "❤️",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is rood en de laatste kolom is het hart, dus ❤️.",
+    "niveau": 6
+  },
+  {
+    "soort": "matrix",
+    "opdracht": "Wat hoort op de ❓-plek?",
+    "kolommen": 3,
+    "toon": [
+      "🟠",
+      "🟧",
+      "🧡",
+      "🔴",
+      "🟥",
+      "❤️",
+      "🔵",
+      "🟦",
+      "❓"
+    ],
+    "opties": [
+      "🧡",
+      "💙",
+      "❤️"
+    ],
+    "goed": "💙",
+    "uitleg": "Per rij verandert de kleur, per kolom de vorm. De laatste rij is blauw en de laatste kolom is het hart, dus 💙.",
+    "niveau": 6
   }
 ];
 if (typeof module !== 'undefined') module.exports = BEELD_DENKEN;
