@@ -1,8 +1,27 @@
-# Blokwereld
+# Archito
 
-Nederlandstalige leer-webapp voor de basisschool (groep 3 t/m 5+), gericht op **beelddenkers** en kinderen met (mogelijke) **dyslexie**. De app combineert oefenen (rekenen, spelling, lezen, talen, kritisch denken) met een game-beloningslus in blokjes-bouwstijl. Alles draait in één `index.html`, zonder framework en zonder build-stap.
+Nederlandstalige leer-webapp voor de basisschool (groep 3 t/m 12), gericht op **beelddenkers** en kinderen met (mogelijke) **dyslexie**. De app combineert oefenen (rekenen, spelling, lezen, talen, kritisch denken) met een game-beloningslus in blokjes-bouwstijl. Alles draait in één `index.html`, zonder framework en zonder build-stap.
 
-Versie: **3.25.0** (zichtbaar in de footer).
+Versie: **3.76.0** (zichtbaar in de footer). Het versienummer staat op één plek in `version.js`; gebruik `node release.js <versie>` om het te verhogen (werkt `index.html`, `sw.js` en deze regel in één keer bij en draait de tests).
+
+Nieuw in **3.67.0** — *alle groepen live-gereed*: de laatste domeinen zijn aangevuld voor groep 6/7/8 met `node gen_bovenbouw2.js` — **denken** (getalpatronen met grote stappen, verdubbelen, kwadraten, procenten, oppervlakte, kritisch-denken-beweringen), **beelddenken** (ABB/ABC/AAB-patronen en categorie-uitschieters), **beeldlab** (grotere grids, langere geheugenrijen, vollere zoekvelden, langere sorteerreeksen) en **begrijpend lezen** (6 nieuwe teksten: egel, sleutelbos, bijen, nieuwe klasgenoot, hoe een dijk werkt, reclame in je tijdlijn). `LEERLIJN.html` bevat nu ook een **live-gereed-oordeel per groep**: per domein een norm voor het minimale aantal eigen items (rekenen 150, spelling/flits/denken/beelddenken 20, memory/talen 12, lezen 3, beeldlab 5 per modus; klankenjacht en renlezer gelden alleen voor groep 3–5). **Alle groepen 3 t/m 8 halen die norm nu**, en een test bewaakt dat.
+
+Nieuw in **3.66.0** — *leerlijn doorlopend t/m groep 8*: het niveau-model liep tot nu toe maar tot niveau 3 (groep 6+), waardoor bovenbouwkinderen groep-5-stof kregen en groep 8 niet eens instelbaar was. Nu is er **één doorlopende ladder met 6 niveaus**: niveau = groep − 2, dus groep 3=1 … **groep 8=6** (`leeftijdNaarGroep` en `groepNaarNiveau`). De **rekenlijn is volledig herbouwd** (`node gen_sommen.js`, 4322 sommen: 361/307/831/977/827/1019 per groep) met een echte opbouw — groep 5 doet tafels en +/− tot 100, **delen begint pas in groep 6**, groep 7 doet 2-cijferig × 1-cijferig, groep 8 rekent t/m 10.000. Nieuw `node gen_bovenbouw.js` vult **spelling, flitslezen, talen en memory** aan voor groep 6/7/8 (o.a. samenstellingen, leenwoorden en meerlettergrepige woorden). En `node gen_leerlijn.js` maakt **`LEERLIJN.html`**: een printbaar overzicht per groep van alle stof, bedoeld om door een leerkracht/RT'er te laten aftekenen — inclusief een tabel die laat zien welke domeinen nog géén eigen bovenbouwstof hebben.
+
+Nieuw in **3.63.0** — *Springspel (leren = toegang) + rijkere bouwmodus*: er is een nieuw platformspel **`springspel.html`** (één zelfstandig bestand, geen libraries): 3 oplopend moeilijkere levels met platforms, muntjes, vijanden, lava en een eindvlag. De kern is **leren = toegang**: een level start pas als je genoeg **leerpunten** hebt, die je verdient met leervragen vóór elk level. De vragen **volgen het groepsniveau** van het kind uit het Archito-profiel, en het **poppetje is de mascotte van het gekozen thema** (Bram, Kosmo, Turbo, Fee, Spike of Luna). Werkt op desktop én op telefoon (iOS/Android) met grote **touch-knoppen** ◀ ▶ ⤒ en iOS safe-area. De vragen staan als eenvoudig aanpasbare lijst bovenaan de code.
+In de **bouwmodus**: **water stroomt** nu echt (schuivende golfstreepjes), er is een nieuw **lava**-blok om te kiezen (borrelend), **steen** heeft een normale steen-grijstint, en **cadeaus/schatkisten kun je uitpakken** — tik erop en je krijgt extra blokken om mee te bouwen.
+
+Nieuw in **3.48.0–3.53.0** — *volledig flat neo-brutalist beeld*: alle mascottes zijn hertekend als **blok-buddy's** in de app-icoon-stijl (`gen_mascottes.js` → `mascottes/mascotte-*-nb.png`) en verschijnen op het startscherm én de wereldkiezer. Alle **UI-iconen zijn nu flatte neo-brutalist emblemen** i.p.v. glimmende OS-emoji: spel-tegels, onderbalk (huis/wereld/stickers/spelers/menu), in-spel knoppen (terug/spelregels/hint/play), HUD (dagen/tijd/valuta), het ☰-menu, de voorlees-knoppen en de ouder-knoppen (profiel/instellingen/premium/weekrapport). Gegenereerd met `node gen_iconen.js`. Resterende emoji zijn nog decoratieve accenten in koppen/feedback/lesinhoud.
+
+Nieuw in **3.47.0** — *rijkere Memory + content-illustraties*: het geheugenspel is nu een echt **kaartspel**: neo-brutalist kaarten met een dichte accent-kant ("?"), een **omdraai-animatie** bij het openen en een pop bij een gevonden paar. De plaatjeskaarten tonen nu de **illustratie** uit `tegels/` (bijv. 🍎 → de appel-tekening), met de emoji als automatische terugval als er geen tekening is. Respecteert `prefers-reduced-motion`.
+
+Nieuw in **3.46.0** — *emoji-icoonstijl overal doorgevoerd*: ook de **wereldkiezer** (mascotte-emoji in gekleurd blokje per wereld), de **in-spel knoppen** (⬅️ Terug · ℹ️ Spelregels · 💡 Hint · ▶️), de **bovenbalk** (📅 oefendagen · ⏳ speeltijd · valuta-emoji), het **☰-menu / instellingen** en de **Beeldlab-kiezer** gebruiken nu dezelfde emoji-stijl. Alle losse UI-icoon-PNG's zijn daarmee uit de schermen; de avatar-tekeningen (`av-*`) blijven als karakterillustraties. Volledig consistent en cache-vrij.
+
+Nieuw in **3.45.0** — *consistente emoji-icoonstijl + nieuwe onderbalk*: alle spel-tegels tonen nu een **emoji in een gekleurd blokje** (dik `#0f172a` kader + harde schaduw) i.p.v. losse PNG-iconen — uniform, dyslexie-vriendelijk (grote herkenbare emoji) en zonder cache-/witruimte-problemen. De **navigatiebalk** onderin is nu een donkere balk met gekleurde emoji-blokjes (🏠 Thuis · 🌍 Wereld · 🏅 Stickers · 👥 Spelers · ☰ Meer) en witte labels. Elke `ui/`-afbeelding krijgt automatisch `?v=<versie>` mee, zodat updates altijd vers laden.
+
+Nieuw in **3.44.0** — *neo-brutalistische icoon-set*: alle sectie-, spel-, systeem-, HUD-, puzzel- en valuta-iconen (`ui/*.png`, 38 stuks) zijn vervangen door een consistente neo-brutalist set (witte tegel of los embleem, dik `#0f172a` contour, harde schaduw). De iconen worden gegenereerd met `node gen_iconen.js` (SVG → PNG via macOS QuickLook; `--install` kopieert naar `ui/`), zodat ze reproduceerbaar en uitbreidbaar zijn. Talen toont nu een spraakwolk met wereldbol (geen bal). Emoji blijft de terugval.
+
+Nieuw in **3.43.0** — *nieuw logo + neo-brutalistische restyle*: de app heeft een nieuw app-icoon (het blokjes-"A" karakter met lachend neon-blok, `icons/` + `manifest.json`) en een frisse **neo-brutalist** skin over de héle frontend: dikke `#0f172a` randen, harde schaduwen, afgeronde hoeken en een duidelijk indruk-effect op knoppen. Elk van de 6 werelden heeft nu een eigen levendige hoofdkleur + lichte achtergrond (Craft geel, Sterren blauw, Power-Up koraal, Unicorn fuchsia, Voetbal grasgroen, Zeemeermin turkoois). De mascottes van Voetbal en Zeemeermin heten nu **Spike de Spits** ⚽ en **Luna de Zeemeermin** 🧜‍♀️. Toegankelijkheid blijft voorop: lees-/oefentekst blijft in de rustige leesfont met ruime regels, en druk-animaties gaan uit bij `prefers-reduced-motion`.
 
 Nieuw in **3.25.0** — *uitgebreide oudersectie: zonder scherm spelen*: in het 👪 Ouders-scherm (achter de PIN) zit nu een sectie **"Zonder scherm oefenen"** met praktische tips & spelletjes om samen te spelen zónder telefoon of tablet. Gericht op beelddenkers en dyslexie (samen, met de handen, multisensorieel), verdeeld over rekenen, klanken/spelling, luisteren/begrijpen, beelddenken, geheugen en bewegen — met per spelletje wat je nodig hebt en hoe je het doet. De inhoud staat in `data/oudertips.js` en is vrij uit te breiden.
 
@@ -30,7 +49,7 @@ Nieuw in **3.14.0** — *bouwen moet je verdienen*: een kind start nu met **0 cr
 
 Nieuw in **3.13.0** — *je eigen poppetje + eigen diertjes*: het **bestuurbare poppetje** is nu duidelijk gemarkeerd met de **eigen naam van het kind** erboven en een eigen wip, zodat het opvalt tussen de rondlopende poppetjes — je loopt er weer makkelijk zelf mee (pijltjes of ⬅️➡️⬆️⬇️). De rondlopende dieren en poppetjes zijn nu **data-gestuurd** (`data/wezens.js`) en volledig **in het beheerscherm aan te passen**: er is een nieuw tabblad **"Dieren"** waar je per wereld (en voor "Te koop") figuurtjes toevoegt/verwijdert, de emoji wijzigt of een **eigen afbeelding uploadt** (zoals bij de mascottes; met dezelfde formaat-/maatcontrole). Een eigen plaatje vervangt de emoji, ook voor de figuurtjes die je bijkoopt.
 
-Nieuw in **3.12.0** — *een levende bouwwereld*: de bouwmodus heeft nu een aparte **levende laag** waarin **dieren én poppetjes vanzelf rondlopen** — ze glijden soepel van vakje naar vakje en wippen zachtjes, zodat er altijd actie in de wereld zit. Elke wereld wordt automatisch bevolkt (boerderijdieren in de Blokwereld, krab/meeuw op het strand, hond/eend/eekhoorn in het park, kat thuis) en **meer ruimte = meer leven**. Je kunt **losse maatjes bijkopen** (🐾-rij) die meteen gaan rondlopen. Het **land uitbreiden** kan nu verder (max **30×30**) en er staat een duidelijke **➕ Groter**-knop bij de wereldkiezer. Het poppetje beweegt voortaan via zijn eigen figuurtje (vloeiend, geen volledige hertekening meer per stap). Alles respecteert `prefers-reduced-motion` (geen glide/gewip, rustiger tempo). Gedekt door nieuwe tests.
+Nieuw in **3.12.0** — *een levende bouwwereld*: de bouwmodus heeft nu een aparte **levende laag** waarin **dieren én poppetjes vanzelf rondlopen** — ze glijden soepel van vakje naar vakje en wippen zachtjes, zodat er altijd actie in de wereld zit. Elke wereld wordt automatisch bevolkt (boerderijdieren in de Bouwwereld, krab/meeuw op het strand, hond/eend/eekhoorn in het park, kat thuis) en **meer ruimte = meer leven**. Je kunt **losse maatjes bijkopen** (🐾-rij) die meteen gaan rondlopen. Het **land uitbreiden** kan nu verder (max **30×30**) en er staat een duidelijke **➕ Groter**-knop bij de wereldkiezer. Het poppetje beweegt voortaan via zijn eigen figuurtje (vloeiend, geen volledige hertekening meer per stap). Alles respecteert `prefers-reduced-motion` (geen glide/gewip, rustiger tempo). Gedekt door nieuwe tests.
 
 Nieuw in **3.11.0** — *juice-laag: het voelt nu als een game*: elk goed antwoord geeft nu een **deeltjes-burst** (blokjes spatten weg), een korte **screen-pop** en een **stijgende toon** — hoe langer je goed hebt, hoe blijer het klinkt. Er is een **combo/reeks-teller** in de HUD (🔥): elke **5 goede antwoorden op rij** geeft een bonus in valuta en een groot combo-moment; je **beste reeks** wordt onthouden en de mascotte daagt je uit die te kraken. De mascotte **juicht en sprankelt** als je erop tikt. Nieuw is optionele, rustige **achtergrondmuziek** (🎵-knop in de balk, standaard uit; zachte pentatonische loop, geen bestanden). De hele app kreeg een **moderne pixel/flat-laag**: een subtiele voxel-gridtextuur, blok-achtige knoppen met highlight en een gehouwen-steen-look voor het rekenblok. Alles respecteert `prefers-reduced-motion` en de toegankelijkheid (leesfont, contrast) blijft ongewijzigd. Volledig gedekt door nieuwe tests.
 
@@ -62,7 +81,7 @@ Er is geen installatie of build nodig.
 - **Aanbevolen (PWA/offline/voorlezen):** serveer de map via een statische server, bijvoorbeeld:
 
   ```bash
-  cd blokwereld
+  cd archito
   python3 -m http.server 8000
   # open http://localhost:8000
   ```
@@ -137,7 +156,7 @@ Bij de eerste start (en via de 👤-knop) kiest het kind naam + leeftijd (5–12
 
 ## Levels & adaptief model
 
-100 levels per spel per groepsniveau (talen per taal), apart opgeslagen. Elke 5 goede antwoorden = level +1 (+2 valuta; +10 bij elk tiende level; 👑 bij 100). De stof groeit mee. De Rekenmijn gebruikt een **Bareka-geïnspireerd** model: per som goed/fout-tellers en een gewogen gemiddelde antwoordtijd (EMA). Status verloopt van *nieuw* → *nog oefenen* → *bijna* → *power* (≥3× goed) → *speed* (power én snel genoeg). De selectie weegt fout-sommen zwaarder, traint langzame power-sommen op snelheid en onderhoudt speed-sommen licht. Het **Mijn muur**-scherm toont dit als trots-overzicht met gekleurde chips.
+200 levels per spel per groepsniveau (talen per taal), apart opgeslagen. Elke 5 goede antwoorden = level +1 (+2 valuta; +10 bij elk tiende level; 👑 bij 200). De stof groeit mee. De Rekenmijn gebruikt een **Bareka-geïnspireerd** model: per som goed/fout-tellers en een gewogen gemiddelde antwoordtijd (EMA). Status verloopt van *nieuw* → *nog oefenen* → *bijna* → *power* (≥3× goed) → *speed* (power én snel genoeg). De selectie weegt fout-sommen zwaarder, traint langzame power-sommen op snelheid en onderhoudt speed-sommen licht. Het **Mijn muur**-scherm toont dit als trots-overzicht met gekleurde chips.
 
 ## Stemtips (voorlezen)
 
@@ -165,7 +184,7 @@ Aanbevolen uitbreiding van de kwaliteitsborging bij de commerciële herbouw: uni
 ## Mapstructuur
 
 ```
-blokwereld/
+archito/
 ├── index.html          # de complete app (HTML + CSS + JS)
 ├── manifest.json       # PWA-manifest
 ├── sw.js               # service worker (cache-first, offline)
@@ -181,7 +200,7 @@ blokwereld/
 
 De bouwmodus is een isometrische wereld waarin het kind zijn verdiende valuta uitgeeft. Nieuw sinds 3.1.0:
 
-- **Meerdere werelden** — naast de start-Blokwereld kun je een Strand, Park en Huis erbij hebben en met de wereldkiezer (de icoontjes bovenin) tussen je werelden wisselen. Elke wereld heeft een eigen landschap, poppetje-positie en opgeslagen bouwsels.
+- **Meerdere werelden** — naast de start-Bouwwereld kun je een Strand, Park en Huis erbij hebben en met de wereldkiezer (de icoontjes bovenin) tussen je werelden wisselen. Elke wereld heeft een eigen landschap, poppetje-positie en opgeslagen bouwsels.
 - **Bij kunnen kopen (🛒 Winkel)** — met je valuta koop je een **groter bouwveld** (+2 per keer, wordt telkens wat duurder, tot 24×24) of een **nieuwe wereld** erbij. Zo is uitbreiden onderdeel van de beloningslus.
 - **Groter & scrollbaar veld** — het bouwveld schaalt mee en zit in een scrollbaar venster, zodat ook grote werelden werken op een klein scherm.
 - **Meer speelse items** — naast de bouwblokken en dieren zijn er decoraties en meubels (bloem, struik, bankje, palmboom, boot, bed, tafel, lamp, ballon).

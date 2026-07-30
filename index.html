@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#4a7c3a">
+<meta name="theme-color" content="#7c3aed">
 <title>Archito</title>
 <meta name="description" content="Nederlandstalige leerapp voor beelddenkers: rekenen, spelling, lezen, talen en kritisch denken met een bouw-beloningslus.">
 <link rel="manifest" href="manifest.json">
@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="Archito">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lexend:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lexend:wght@400;500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 /* US-11: OpenDyslexic als optioneel leesfont.
    LET OP (offline): voor volledige offline-werking het .woff2-bestand lokaal meeleveren
@@ -30,7 +30,7 @@
 :root{
   --leesfont:'Andika','Lexend',system-ui,sans-serif;
   --pixelfont:'Press Start 2P',var(--leesfont);
-  --bg1:#7ec850; --bg2:#4a7c3a; --paneel:#ffffff; --paneeltekst:#20331a;
+  --bg1:#7ec850; --bg2:#4a7c3a; --paneel:#faf7ef; --paneeltekst:#20331a;
   --accent:#5a9b3a; --accent2:#3d6b28; --knop:#8ac66a; --knoptekst:#173312;
   --hud:#2f4a22; --valutakleur:#37c0ff; --xp:#ffd23f; --schaduw:rgba(0,0,0,.18);
   --goed:#3ab54a; --bijna:#f5a623; --fout:#e07b53; --letterspatie:.04em;
@@ -51,7 +51,7 @@ body[data-theme="unicorn"]{
   --hud:#7a2e78; --valutakleur:#ff5fb0; --xp:#8ad3ff;
 }
 body[data-theme="voetbal"]{
-  --bg1:#5bbf46; --bg2:#2f7d2a; --paneel:#ffffff; --paneeltekst:#173a12;
+  --bg1:#5bbf46; --bg2:#2f7d2a; --paneel:#faf7ef; --paneeltekst:#173a12;
   --accent:#2e9e3a; --accent2:#1c6b26; --knop:#ffffff; --knoptekst:#173a12;
   --hud:#123c0e; --valutakleur:#111; --xp:#ffd23f;
 }
@@ -157,6 +157,12 @@ button:active,.knop:active{ box-shadow:0 2px 0 var(--schaduw), 0 4px 8px rgba(0,
 /* ==== Beelddenken (visuele denkpuzzels) ==== */
 .beeldprompt{ display:flex; flex-wrap:wrap; gap:.35em; justify-content:center; align-items:center; background:#00000008; border:3px dashed var(--accent); border-radius:18px; padding:.7em; margin:.6em auto; max-width:460px; }
 .beeldprompt span{ font-size:2.9rem; line-height:1; }
+/* Matrixpuzzel (2x2 / 3x3): dezelfde tegels, maar in een raster i.p.v. één rij.
+   Een raster maakt de rij-regel én de kolom-regel zichtbaar — dat is precies de denkstap. */
+.beeldmatrix{ display:inline-grid; gap:.45em; justify-content:center; align-items:center;
+  background:#00000008; border:3px dashed var(--accent); border-radius:18px; padding:.7em; margin:.6em auto; }
+.beeldmatrix span{ font-size:2.7rem; line-height:1; width:1.35em; text-align:center; }
+.beeldmatrix .gat{ background:var(--accent); color:#fff; border-radius:12px; }
 #memGrid .ico{ font-size:3rem; }
 .beeldprompt .gat{ opacity:1; filter:none; background:var(--accent); color:#fff; border-radius:12px; padding:0 .15em; }
 .beeldopties{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:.8em; max-width:560px; margin:.6em auto; }
@@ -286,7 +292,26 @@ button::before, .knop::before, .spelknop::before{
 .bwwezen{ font-size:19px; filter:drop-shadow(0 3px 2px rgba(0,0,0,.25)); animation:bwbob 1.3s ease-in-out infinite; }
 .bwwezen .wimg{ width:22px; height:22px; object-fit:contain; display:block; }
 .bwspark{ font-size:16px; transition:none; }
-.isoblok.iso-water{ animation:waterGlinster 2.4s ease-in-out infinite; }
+/* Water STROOMT: golfstreepjes die over het blok schuiven (plus de zachte glinstering). */
+.isoblok.iso-water{
+  animation:waterGlinster 2.4s ease-in-out infinite, waterStroom 1.9s linear infinite;
+  background-image:repeating-linear-gradient(115deg,
+    rgba(255,255,255,.55) 0 4px, rgba(255,255,255,0) 4px 13px,
+    rgba(255,255,255,.28) 13px 16px, rgba(255,255,255,0) 16px 26px) !important;
+  background-size:52px 52px;
+}
+@keyframes waterStroom{ from{ background-position:0 0; } to{ background-position:52px 0; } }
+/* Lava BORRELT: langzaam schuivende gloed met gele adertjes. */
+.isoblok.iso-lava{
+  animation:lavaBorrel 2.8s ease-in-out infinite, lavaStroom 3.4s linear infinite;
+  background-image:repeating-linear-gradient(115deg,
+    rgba(255,209,71,.75) 0 5px, rgba(255,209,71,0) 5px 15px,
+    rgba(255,120,40,.55) 15px 19px, rgba(255,120,40,0) 19px 30px) !important;
+  background-size:56px 56px;
+}
+@keyframes lavaStroom{ from{ background-position:0 0; } to{ background-position:56px 0; } }
+@keyframes lavaBorrel{ 0%,100%{ filter:brightness(1) saturate(1.1); } 50%{ filter:brightness(1.25) saturate(1.4); } }
+@media (prefers-reduced-motion:reduce){ .isoblok.iso-lava{ animation:none; } }
 @keyframes waterGlinster{ 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.22) saturate(1.25); } }
 @media (prefers-reduced-motion:reduce){ .isoblok.iso-water{ animation:none; } }
 @keyframes bwbob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-3px); } }
@@ -336,6 +361,7 @@ button::before, .knop::before, .spelknop::before{
 .leestekst p{ font-size:1.18rem; line-height:1.75; margin:.3em 0 .6em; }
 .antwoorden.lezenantw{ grid-template-columns:1fr; max-width:460px; }
 .antwoorden.lezenantw button{ font-size:1.1rem; text-align:center; }
+.antwoorden button.letterknop{ font-size:2.4rem; font-weight:800; font-family:var(--leesfont); padding:.2em 0; text-transform:lowercase; }
 /* hamburgermenu + spelregels */
 #hud .hudmenu{ font-size:1.3rem; }
 .menugrid{ display:grid; grid-template-columns:1fr 1fr; gap:.5em; margin:.5em 0; }
@@ -375,7 +401,7 @@ body[data-tijdverborgen="1"] #hud .chip[title="Speeltijd over"]{ display:none; }
 .rustigpaneel{ background:var(--paneel); border-radius:22px; padding:1em; margin:1em 0; box-shadow:0 6px 20px var(--schaduw); text-align:center; }
 
 /* ===================== US-11: Leescomfort ===================== */
-:root{ --leesschaal:1; --regelafstand:1.5; --woordafstand:0em; }
+:root{ --leesschaal:1; --regelafstand:1.7; --woordafstand:0em; }
 body{ font-size:calc(1rem * var(--leesschaal)); word-spacing:var(--woordafstand); }
 main, .popup{ line-height:var(--regelafstand); }
 .sectie p, .beeldopdracht, .steenblok, .feedback, .klein, label, li, .leestekst p{ line-height:var(--regelafstand); }
@@ -406,6 +432,151 @@ body[data-leesfont="lexend"]{ --leesfont:'Lexend','Andika',system-ui,sans-serif;
 /* ruimte onder de inhoud zodat de balk niets afdekt op het startscherm */
 body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 @media (prefers-reduced-motion:reduce){ #bottombar button:active{ background:transparent; } }
+
+/* ===================== HERONTWERP: leesbaarheid & structuur (dyslexie / beelddenkers) =====================
+   De speelse themasfeer blijft; dit legt er rustiger structuur, duidelijke kaders en comfortabele
+   leesregels overheen. Alles via themavariabelen, dus uniform op ELK thema (craft, galaxy, unicorn,
+   powerup, voetbal, zeemeermin). Staat bewust als laatste blok zodat het de basisstijl netjes aanvult. */
+/* Zachte, NEUTRALE kaartrand = visuele rust en uniform over alle thema's; de themakleur
+   bewaren we voor waar hij structuur toevoegt (kop-onderlijn + highlight-accentbalk). */
+:root{ --leesbreedte:65ch; --kaartrand:rgba(20,32,15,.16); }
+body[data-theme="galaxy"]{ --kaartrand:rgba(255,255,255,.22); }   /* lichte rand op het donkere galaxy-paneel */
+
+/* Comfortabele regelbreedte voor lopende tekst — grids, knoppen en HUD blijven ongemoeid */
+.sectie p, .leestekst p, .leesregels, .tipslijst li{ max-width:var(--leesbreedte); }
+
+/* Rustige, duidelijke kaders rondom kaarten → houvast en structuur voor beelddenkers */
+.sectie, .card{ border:2px solid var(--kaartrand); }
+/* Koppen in kaarten krijgen een accent-onderlijn in de themakleur zodat secties visueel
+   afgebakend zijn én het thema herkenbaar blijft (één duidelijk accent i.p.v. felle randen overal) */
+.sectie h2, .card h2{ border-bottom:2px solid var(--accent); padding-bottom:.25em; }
+
+/* Herbruikbare kaart-primitive (zelfde rustige look als .sectie) */
+.card{ background:var(--paneel); color:var(--paneeltekst); border-radius:22px; padding:1em; margin:1em 0;
+  box-shadow:0 6px 20px var(--schaduw); }
+
+/* Uitgelicht vlak met linker-accentbalk (highlight-box) */
+.highlight-box{ background:var(--paneel); color:var(--paneeltekst);
+  border:2px solid var(--kaartrand); border-left:9px solid var(--accent);
+  border-radius:16px; padding:.9em 1.1em; margin:.8em 0; box-shadow:0 4px 14px var(--schaduw);
+  max-width:var(--leesbreedte); line-height:var(--regelafstand); }
+.highlight-box h2, .highlight-box h3{ margin:.1em 0 .4em; border:none; padding:0; }
+
+/* Bestaande callouts krijgen dezelfde highlight-box-uitstraling met accentbalk */
+.installtip{ border:2px solid var(--kaartrand); border-left:9px solid var(--accent); }
+.rustigpaneel{ border-left:9px solid var(--accent); }
+
+/* ============================================================================
+   NEO-BRUTALISME — volledige frontend-skin. Speels, hoog contrast, kindvriendelijk.
+   Bouwt op de bestaande component-klassen, dus het cascadeert over ALLE schermen
+   zonder de JS/knoppen te raken. Leestekst blijft de rustige leesfont.
+   ============================================================================ */
+:root{
+  --nb-ink:#0f172a;
+  --nb-radius:22px;
+  --nb-shadow:6px 6px 0 var(--nb-ink);
+  --nb-shadow-sm:3px 3px 0 var(--nb-ink);
+  --nb-accent:#fde047; --nb-bg:#fef9c3;            /* per thema hieronder overschreven */
+  --nb-display:'Lexend',var(--leesfont);
+}
+/* 6 werelden: levendige hoofdkleur + bijpassende lichte achtergrond */
+body[data-theme="craft"]     { --nb-accent:#fde047; --nb-bg:#fef9c3; }
+body[data-theme="galaxy"]    { --nb-accent:#3b82f6; --nb-bg:#eff6ff; }
+body[data-theme="powerup"]   { --nb-accent:#fca5a5; --nb-bg:#fff1f2; }
+body[data-theme="unicorn"]   { --nb-accent:#e879f9; --nb-bg:#fae8ff; }
+body[data-theme="voetbal"]   { --nb-accent:#4ade80; --nb-bg:#f0fdf4; }
+body[data-theme="zeemeermin"]{ --nb-accent:#2dd4bf; --nb-bg:#f0fdfa; }
+
+/* lichte wereld-achtergrond + donkere tekst (uniform hoog contrast op elk thema) */
+body{ background:var(--nb-bg) !important; color:var(--nb-ink); }
+body::before, body::after{ opacity:.45; }
+h1,h2,h3{ font-family:var(--nb-display); font-weight:800; color:var(--nb-ink); text-shadow:none; }
+.reset{ color:var(--nb-ink); text-shadow:none; }
+
+/* Kaarten: wit, dikke rand, harde schaduw */
+.sectie, .card, .popup, .rustigpaneel, .kindkaart, .statkaart, .maskaart{
+  background:#fff; color:var(--nb-ink);
+  border:5px solid var(--nb-ink); border-radius:var(--nb-radius); box-shadow:var(--nb-shadow);
+}
+.sectie h2, .card h2{ border:none; padding:0; }
+
+/* Knoppen: accentkleur, dikke rand, duidelijk druk-effect */
+button, .knop{
+  font-family:var(--nb-display); font-weight:800;
+  background:var(--nb-accent); color:var(--nb-ink);
+  border:4px solid var(--nb-ink); border-radius:16px; box-shadow:var(--nb-shadow-sm); text-shadow:none;
+}
+button::before, .knop::before, .spelknop::before{ display:none; }      /* vlak, geen gloss */
+button:active, .knop:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--nb-ink); }
+
+/* Spel-/wereld-tegels */
+.spelknop{
+  background:var(--nb-accent); color:var(--nb-ink);
+  border:5px solid var(--nb-ink); border-radius:var(--nb-radius); box-shadow:var(--nb-shadow);
+}
+.spelknop:active{ transform:translate(4px,4px); box-shadow:0 0 0 var(--nb-ink); }
+
+/* HUD (bovenbalk) */
+#hud{ background:var(--nb-accent); color:var(--nb-ink); border-bottom:5px solid var(--nb-ink); box-shadow:none; border-radius:0; }
+#hud .chip{ background:#fff; color:var(--nb-ink); border:3px solid var(--nb-ink); }
+#hud button{ background:#fff; color:var(--nb-ink); border:3px solid var(--nb-ink); box-shadow:none; }
+
+/* Onderbalk (navigatie) */
+#bottombar{ background:#fff; border:5px solid var(--nb-ink); border-bottom:0; border-radius:26px 26px 0 0; box-shadow:0 -6px 0 var(--nb-ink); }
+#bottombar button{ background:transparent; color:var(--nb-ink); border:none; box-shadow:none; }
+#bottombar button:active{ transform:translateY(3px); background:var(--nb-accent); }
+
+/* Voortgangsbalken: dik omlijnd met gevulde, afgeronde binnenkant */
+.xpbalk, .missiebalk{ background:#fff; border:3px solid var(--nb-ink); border-radius:12px; overflow:hidden; }
+.xpbalk > i, .missiebalk > i{ background:var(--nb-accent); }
+
+/* Toggles / schakelaars */
+.schakelaar[aria-pressed="true"]{ background:var(--nb-accent); outline:none; }
+
+/* Antwoord- en beeldtegels ook neo-brutalist */
+.antwoorden button, .beeldtegel{ border:4px solid var(--nb-ink); box-shadow:var(--nb-shadow-sm); }
+.beeldtegel:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--nb-ink); }
+
+@media (prefers-reduced-motion:reduce){
+  button:active, .knop:active, .spelknop:active, .beeldtegel:active, #bottombar button:active{ transform:none; }
+}
+
+/* ---- Consistente icoonstijl: emoji in een gekleurd blokje (dik contour + harde schaduw) ---- */
+.ico-box{ display:inline-flex; align-items:center; justify-content:center; width:58px; height:58px;
+  border:3px solid var(--nb-ink); border-radius:14px; box-shadow:3px 3px 0 var(--nb-ink);
+  font-size:2rem; line-height:1; background:#f3f4f6; }
+.spelknop .spelnaam{ font-weight:800; }
+
+/* ---- Onderbalk in ref-stijl: donkere balk, gekleurde icoon-blokjes, witte labels ---- */
+#bottombar{ background:var(--nb-ink); border:4px solid var(--nb-ink); border-bottom:0;
+  border-radius:24px 24px 0 0; box-shadow:0 -6px 0 #000; }
+#bottombar button{ background:transparent; color:#fff; border:none; box-shadow:none; }
+#bottombar button:active{ transform:translateY(3px); background:transparent; }
+#bottombar .bb-label{ color:#fff; font-size:.72rem; font-weight:800; }
+.bb-ico-box{ display:flex; align-items:center; justify-content:center; width:40px; height:40px;
+  border:3px solid var(--nb-ink); border-radius:12px; box-shadow:0 3px 0 var(--nb-ink);
+  font-size:1.3rem; line-height:1; }
+.bb-ico-box img{ width:26px; height:26px; object-fit:contain; }
+.ico-box img{ display:block; }
+@media (prefers-reduced-motion:reduce){ #bottombar button:active{ transform:none; } }
+
+/* ---- Rijkere Memory: echte kaarten met omdraai-animatie ---- */
+.memgrid{ display:grid; gap:.6em; max-width:460px; margin:.5em auto; }
+.memkaart{ aspect-ratio:3/4; border:4px solid var(--nb-ink); border-radius:16px; box-shadow:var(--nb-shadow);
+  background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; }
+.memkaart:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--nb-ink); }
+.memkaart.dicht{ background:var(--nb-accent); position:relative; }
+.memkaart.dicht::after{ content:"?"; font-family:var(--nb-display); font-weight:900; font-size:2.6rem; color:var(--nb-ink);
+  text-shadow:2px 2px 0 rgba(255,255,255,.55); }
+.memkaart .inhoud{ display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
+.memkaart .inhoud img{ width:78px; height:78px; object-fit:contain; }
+.memkaart .memwoord{ font-family:var(--leesfont); font-weight:800; font-size:1.4rem; text-align:center; padding:.1em .2em; }
+.memkaart.gevonden{ opacity:.6; }
+.memkaart.flipnu{ animation:memflip .32s ease-out; }
+@keyframes memflip{ 0%{ transform:rotateY(90deg) scale(.92); } 60%{ transform:rotateY(-8deg) scale(1.02); } 100%{ transform:rotateY(0) scale(1); } }
+.memkaart.raak{ animation:memraak .45s ease-out; }
+@keyframes memraak{ 0%{ transform:scale(1); } 40%{ transform:scale(1.12) rotate(-3deg); } 100%{ transform:scale(1); } }
+@media (prefers-reduced-motion:reduce){ .memkaart.flipnu, .memkaart.raak, .memkaart:active{ animation:none; transform:none; } }
 </style>
 </head>
 <body data-theme="craft">
@@ -415,42 +586,44 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
   <div class="xpbalk"><i id="hudXp"></i></div>
   <span class="chip valuta"><span id="hudValutaIco">💎</span> <span id="hudValuta">0</span></span>
   <span class="chip combo" id="hudCombo" title="Reeks goede antwoorden" hidden>🔥 <span id="hudComboN">0</span></span>
-  <span class="chip" title="Oefendagen"><img src="ui/hud-dagen.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudDagen">0</span></span>
-  <span class="chip" title="Speeltijd over"><img src="ui/hud-tijd.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudTijd">–</span></span>
+  <span class="chip" title="Oefendagen"><img src="ui/hud-dagen.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudDagen">0</span></span>
+  <span class="chip" title="Speeltijd over"><img src="ui/hud-tijd.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudTijd">–</span></span>
 </div>
 
 <main>
   <!-- Startscherm -->
   <section class="scherm actief" id="scherm-start">
-    <h1 class="pix midden" id="wereldTitel">Blokwereld</h1>
+    <h1 class="pix midden" id="wereldTitel">Archito</h1>
     <div id="installTip" class="installtip" hidden></div>
+    <div id="beloftenStrip"></div>
     <div class="mascotte" id="mascotteVak" onclick="mascottePraat()" title="Tik op je maatje"></div>
     <div class="sectie">
-      <h2>🎯 Oefenen</h2>
+      <h2><img src="ui/mi-target.png" alt="" style="width:30px;height:30px;object-fit:contain;vertical-align:middle;margin-right:.35em">Oefenen</h2>
       <div class="grid" id="oefenGrid"></div>
     </div>
     <div class="sectie">
-      <h2>🎨 Maken</h2>
+      <h2><img src="ui/mi-thema.png" alt="" style="width:30px;height:30px;object-fit:contain;vertical-align:middle;margin-right:.35em">Maken</h2>
       <div class="grid" id="maakGrid"></div>
     </div>
     <div id="missieVak"></div>
     <div class="midden" id="dagquestVak"></div>
+    <div id="trotsVak"></div>
   </section>
 
   <!-- Generiek spelscherm (inhoud wordt per spel gevuld) -->
   <section class="scherm" id="scherm-spel">
-    <div class="rij"><button onclick="naarStart()"><img src="ui/mi-terug.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug</button><h2 id="spelTitel" style="margin:0;flex:1"></h2><button onclick="toonSpelregels()" title="Spelregels"><img src="ui/mi-info.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button><button onclick="toonSpelHint()" title="Hint"><img src="ui/mi-hint.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button></div>
+    <div class="rij"><button onclick="naarStart()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em"> Terug</button><h2 id="spelTitel" style="margin:0;flex:1"></h2><button onclick="toonSpelregels()" title="Spelregels"><img src="ui/mi-info.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button><button onclick="toonSpelHint()" title="Hint"><img src="ui/mi-hint.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button></div>
     <div id="spelInhoud"></div>
   </section>
 </main>
 
 <!-- Vaste onderbalk (Squla-stijl): alleen op het startscherm, weg van de camera -->
 <nav id="bottombar" hidden aria-label="Hoofdmenu">
-  <button onclick="naarStart()"><img class="bb-ico" src="tegels/tegel-huis.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Thuis</span></button>
-  <button onclick="openThemakeuze()"><img class="bb-ico" src="ui/mi-thema.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Wereld</span></button>
-  <button onclick="openStickerboek()"><img class="bb-ico" src="ui/mi-sticker.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Stickers</span></button>
-  <button onclick="kiesProfielScherm()"><img class="bb-ico" src="ui/mi-kinderen.png" alt="" onerror="beeldVal(this)"><span class="bb-label">Spelers</span></button>
-  <button onclick="openMenu()"><span class="bb-ico bb-meer" aria-hidden="true">☰</span><span class="bb-label">Meer</span></button>
+  <button onclick="naarStart()"><span class="bb-ico-box" style="background:#facc15"><img src="ui/mi-home.png" alt=""></span><span class="bb-label">Thuis</span></button>
+  <button onclick="openThemakeuze()"><span class="bb-ico-box" style="background:#5eead4"><img src="ui/mi-wereld.png" alt=""></span><span class="bb-label">Wereld</span></button>
+  <button onclick="openStickerboek()"><span class="bb-ico-box" style="background:#c4b5fd"><img src="ui/mi-sticker.png" alt=""></span><span class="bb-label">Stickers</span></button>
+  <button onclick="kiesProfielScherm()"><span class="bb-ico-box" style="background:#86efac"><img src="ui/mi-kinderen.png" alt=""></span><span class="bb-label">Spelers</span></button>
+  <button onclick="openMenu()"><span class="bb-ico-box" style="background:#fca5a5"><img src="ui/mi-meer.png" alt=""></span><span class="bb-label">Meer</span></button>
 </nav>
 
 <!-- Overlays -->
@@ -460,6 +633,9 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 <div id="foutbalk"></div>
 <div id="versie"></div>
 
+<!-- Versie + instelbare config: vóór alle andere scripts -->
+<script src="version.js"></script>
+<script src="data/config.js"></script>
 <!-- Databestanden: vóór het hoofdscript -->
 <script src="data/sommen.js"></script>
 <script src="data/woorden.js"></script>
@@ -475,17 +651,24 @@ body.heeft-bottombar #scherm-start{ padding-bottom:76px; }
 <script src="data/lezen.js"></script>
 <script src="data/oudertips.js"></script>
 <script src="data/beeldlab.js"></script>
+<script src="data/klankletter.js"></script>
+<script src="data/renlezer.js"></script>
+<script src="data/rekentop.js"></script>\n<script src="data/audio-index.js"></script>
 <script src="data/creatief.js"></script>
 
 <script>
 /* =========================================================================
-   BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
+   ARCHITO — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.37.2";
+/* APP_VERSIE komt uit version.js (de enige versie-bron) en CONFIG uit data/config.js
+   (alle instelbare knoppen). Beide worden hierboven als <script> geladen. Terugval
+   zodat de app ook zonder die bestanden niet stukloopt. */
+if (typeof APP_VERSIE === "undefined") var APP_VERSIE = "0.0.0";
+if (typeof CONFIG === "undefined") var CONFIG = {};
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
-  craft:{ naam:"Craftwereld", wereld:"Blokwereld", valuta:"💎", valutaNaam:"diamanten", poppetje:"pixel",
+  craft:{ naam:"Craftwereld", wereld:"Bouwwereld", valuta:"💎", valutaNaam:"diamanten", poppetje:"pixel",
     spellen:{reken:"Diamantmijn",spelling:"Woordsmederij",verhaal:"Meesterbouwer",flits:"Bliksemflits",memory:"Schatgeheugen",denken:"Mysteriegrot",bouw:"Blokrijk"},
     goed:["Top! Blok gebroken! ⛏️","Raak! 💎","Yes, goed gehakt!"], bijna:["Bijna! Probeer nog eens 🙂","Net niet, jij kan dit!"], tekort:"Je hebt nog wat diamanten nodig." },
   galaxy:{ naam:"Galaxy", wereld:"Sterrenwereld", valuta:"⭐", valutaNaam:"sterren", poppetje:"🧑‍🚀",
@@ -509,11 +692,11 @@ var THEMAS = {
 function nieuweState(){
   return {
     versie:APP_VERSIE, naam:"", leeftijd:0, groep:3, niveau:1,
-    thema:"craft", stem:null, taal:"en", geluidAan:true, muziekAan:false,
+    thema:"craft", stem:null, stemProfiel:"fien", taal:"en", geluidAan:true, muziekAan:false,
     voorlezenAan:true,                               // US-04: voorlezen los van geluidseffecten (default aan)
     rustigeModus:false, tijdVerborgen:false,         // US-06: rustige modus + resttijd apart verbergen
-    leesSchaal:1, regelAfstand:1.5, woordAfstand:0, leesFontKeuze:"andika", // US-11: leescomfort
-    autoVerder:true, autoVerderSec:5,                // automatisch verder na X sec (naast de Verder-knop; uit in rustige modus)
+    leesSchaal:1, regelAfstand:1.7, woordAfstand:0, leesFontKeuze:"andika", // US-11: leescomfort (ruimere regelafstand voor dyslexie/beelddenkers)
+    autoVerder:true, autoVerderSec:5, leesTempo:1,   // 1 = normaal, 0.8 = rustig voorlezen                // automatisch verder na X sec (naast de Verder-knop; uit in rustige modus)
     foutenLog:[],                                    // US-10: fouten stil loggen voor ouders
     valuta:0, xp:0, oefendagen:0, ouderPin:"", besteCombo:0, bouwenVrij:false, avatar:"",
     tel:{verdiend:0, geoogst:0, gebouwd:0, dagquest:0, levelups:0, minigame:0}, missieIndex:0, stickers:[], oogstDag:null, hakDag:null,
@@ -523,7 +706,11 @@ function nieuweState(){
     somStats:{},          // somStats["3+4"] = {goed,fout,tijd}
     werelden:null, actieveWereld:0, gekochteWerelden:null,
     challengeKlaar:"", schermtijdOverT:false,
-    premium:false, premiumInteresse:false, installTipWeg:false
+    premium:false, premiumInteresse:false, installTipWeg:false,
+    historie:{},          // per dag: {xp, sec, goed:{spel:n}, fout:{spel:n}}  — voor het ouder-weekrapport
+    oefendoel:{minPerDag:10},   // instelbaar oefendoel (minuten per dag)
+    sprintBest:{},        // geesten-race: beste score per niveau  {niveau: {aantal, ...}}
+    beloftenWeg:false     // heeft de ouder de beloften-strip op het startscherm weggeklikt?
   };
 }
 var S = nieuweState();
@@ -600,7 +787,7 @@ function _verwijderKindDoe(idx){
   PROFIELDATA.profielen[PROFIELDATA.actief]=S;
   bewaarState(); pasThemaToe(); updateHud(); kiesProfielScherm();
 }
-function kindAvatar(p){ if(p&&p.avatar) return p.avatar; var m=(typeof MASCOTTES!=="undefined"&&MASCOTTES[p.thema])||null; if(!m) return "🙂"; if(!m.afbeelding) return m.emoji; var pad=m.afbeelding, i=pad.lastIndexOf('.'), t=(p&&(p.niveau||(typeof groepNaarNiveau==="function"&&groepNaarNiveau(p.groep||3))))||2, src=(i<0?pad:pad.slice(0,i)+'-t'+t+pad.slice(i)); return '<img src="'+src+'" data-base="'+pad+'" alt="" onerror="beeldVal(this)">'; }
+function kindAvatar(p){ if(p&&p.avatar) return p.avatar; var m=(typeof MASCOTTES!=="undefined"&&MASCOTTES[p.thema])||null; if(!m) return "🙂"; if(!m.afbeelding) return m.emoji; var pad=m.afbeelding, i=pad.lastIndexOf('.'), t=kunstTier((p&&(p.niveau||(typeof groepNaarNiveau==="function"&&groepNaarNiveau(p.groep||3))))||2), src=(i<0?pad:pad.slice(0,i)+'-t'+t+pad.slice(i)); return '<img src="'+src+'" data-base="'+pad+'" alt="" onerror="beeldVal(this)">'; }
 function kiesProfielScherm(){
   var kaarten = PROFIELDATA.profielen.map(function(p,i){
     var actief = i===PROFIELDATA.actief;
@@ -609,13 +796,13 @@ function kiesProfielScherm(){
       + '<div class="kindnaam" onclick="kiesKind('+i+')">'+(p.naam||"Nieuw kind")+'</div>'
       + '<div class="klein">'+(p.leeftijd?p.leeftijd+' jaar':'—')+'</div>'
       + '<div class="rij" style="justify-content:center;gap:.2em">'
-      + '<button class="mini" title="Naam voorlezen" aria-label="Naam voorlezen" onclick="zeg(\''+(p.naam||"Nieuw kind").replace(/\x27/g,"")+'\')">🔊</button>'
+      + '<button class="mini" title="Naam voorlezen" aria-label="Naam voorlezen" onclick="zeg(\''+(p.naam||"Nieuw kind").replace(/\x27/g,"")+'\')"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"></button>'
       + '<button class="knop2" onclick="kiesKind('+i+')">▶ Spelen</button>'
-      + '<button class="mini" title="Bewerken" onclick="kiesKind('+i+');setTimeout(openProfiel,50)">✏️</button>'
+      + '<button class="mini" title="Bewerken" onclick="kiesKind('+i+');setTimeout(openProfiel,50)"><img src="ui/mi-pencil.png" alt="Bewerken" style="width:18px;height:18px;object-fit:contain;vertical-align:middle"></button>'
       + (PROFIELDATA.profielen.length>1?'<button class="mini" title="Verwijderen" onclick="verwijderKind('+i+')">🗑️</button>':'')
       + '</div></div>';
   }).join("");
-  var html = '<h2><img src="ui/mi-kinderen.png" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:.35em">Wie gaat er spelen?</h2>'
+  var html = '<h2>👥 Wie gaat er spelen?</h2>'
     + '<p class="klein">Meerdere kinderen kunnen dit toestel delen — elk met een eigen profiel en eigen voortgang. Helemaal gratis.</p>'
     + '<div class="kindgrid">'+kaarten
     + '<div class="kindkaart nieuw" onclick="nieuwKind()"><div class="kindav">＋</div><div class="kindnaam">Nieuw kind</div></div>'
@@ -625,7 +812,7 @@ function kiesProfielScherm(){
 /* ---- Hamburgermenu: alle instellingen/acties gebundeld achter één ☰ ---- */
 function kanInstalleren(){ try{ return !!_installPrompt || isIOS(); }catch(e){ return false; } }
 function openMenu(){
-  var ic=function(p){return '<img src="ui/'+p+'" style="width:26px;height:26px;object-fit:contain;vertical-align:middle;margin-right:.45em">';};
+  var ic=function(p){return '<img src="ui/'+p+'" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:.45em">';};
   var geluid = S.geluidAan ? ic('mi-geluid-aan.png')+"Geluid aan" : ic('mi-geluid-uit.png')+"Geluid uit";
   var muziek = S.muziekAan ? ic('mi-muziek-aan.png')+"Muziek aan" : ic('mi-muziek-uit.png')+"Muziek uit";
   var voorlezen = ic('mi-stem.png') + (S.voorlezenAan ? "Voorlezen aan" : "Voorlezen uit");   // US-04
@@ -637,11 +824,11 @@ function openMenu(){
     + '<button onclick="menuToggleGeluid()">'+geluid+'</button>'
     + '<button onclick="menuToggleMuziek()">'+muziek+'</button>'
     + '<button onclick="openStemkiezer()">'+ic('mi-stem.png')+'Voorleesstem</button>'
-    + '<button onclick="openInstellingen()">⚙️ Instellingen</button>'
+    + '<button onclick="openInstellingen()"><img src="ui/mi-gear.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:.3em">Instellingen</button>'
     + '<button onclick="openOuders()">'+ic('mi-ouders.png')+'Ouders</button>'
     + (kanInstalleren() ? '<button onclick="installeerApp()">'+ic('mi-install.png')+'App installeren</button>' : '')
     + '</div>'
-    + '<p class="klein">Premium en aankopen staan in het oudergedeelte (👪 Ouders).</p>';   // US-07
+    + '<p class="klein">Premium en aankopen staan in het oudergedeelte (<img src="ui/mi-ouders.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em"> Ouders).</p>';   // US-07
   openOverlay(html);
 }
 function menuToggleGeluid(){ wisselGeluid(); openMenu(); }
@@ -678,6 +865,112 @@ if(typeof window!=="undefined"){
   window.addEventListener("error", function(ev){ logFout(ev.message||"Onbekende fout"); });
 }
 
+/* ---- Vooraf ingesproken audio (klinkt als een echte stem) -------------------
+   Toestelstemmen (Web Speech) klinken onvermijdelijk synthetisch. Daarom kan elke tekst
+   ook als MEEGELEVERD audiobestand bestaan: dat is één keer vooraf gemaakt met een neurale
+   of ingesproken stem. Tijdens het spelen gaat er dus niets naar internet — het bestand
+   staat in de app en wordt door de service worker gecachet.
+   Ontbreekt een bestand, dan valt de app netjes terug op de toestelstem, zodat álles
+   voorgelezen blijft (ook nieuw gegenereerde content).
+   Bestandsnaam = taal + hash van de tekst, zodat generator en app dezelfde naam berekenen:
+     audio/fien/nl-<hash>.mp3   ·  audio/daan/nl-<hash>.mp3   ·  audio/taal/en-<hash>.mp3   */
+function _audioHash(str){                       // FNV-1a, identiek in Node en in de browser
+  var h = 0x811c9dc5;
+  for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return h.toString(36);
+}
+function audioNormaliseer(tekst){
+  return String(tekst==null?"":tekst).replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+}
+function audioSleutel(tekst, taal){ return (taal||"nl") + "-" + _audioHash(audioNormaliseer(tekst)); }
+/* Bestaat er een opname voor deze tekst? Zo ja: het pad, anders "" (dan volgt de toestelstem). */
+function audioBestand(tekst, taal){
+  if(typeof AUDIO_INDEX === "undefined" || !AUDIO_INDEX) return "";
+  taal = taal || "nl";
+  var sl = audioSleutel(tekst, taal);
+  if(taal === "nl"){
+    var pid = stemProfiel().id;
+    if(AUDIO_INDEX[pid] && AUDIO_INDEX[pid][sl]) return "audio/" + pid + "/" + sl + ".mp3";
+    return "";
+  }
+  // Engels/Spaans: één gedeelde opname per taal (die moet in de doeltaal klinken, niet in een 'karakter')
+  if(AUDIO_INDEX.taal && AUDIO_INDEX.taal[sl]) return "audio/taal/" + sl + ".mp3";
+  return "";
+}
+var _audioSpeler = null;
+function stopAudio(){ try{ if(_audioSpeler){ _audioSpeler.pause(); _audioSpeler.currentTime = 0; } }catch(e){} }
+/* Speel de opname; lukt dat niet (bestand stuk, autoplay geblokkeerd), dan de toestelstem. */
+function speelOpname(pad, tekst, taalPrefix, rate, terugval){
+  try{
+    stopAudio();
+    if(!_audioSpeler){ _audioSpeler = new Audio(); }
+    _audioSpeler.src = pad;
+    var tempo = (S.leesTempo === undefined) ? 1 : S.leesTempo;
+    _audioSpeler.playbackRate = Math.max(0.5, Math.min(1.5, (rate ? rate / 0.95 : 1) * tempo));
+    _audioSpeler.onerror = function(){ if(terugval) terugval(); };
+    var p = _audioSpeler.play();
+    if(p && p.catch) p.catch(function(){ if(terugval) terugval(); });
+    return true;
+  }catch(e){ return false; }
+}
+
+/* ---- Twee kindvriendelijke stemmen ----------------------------------------
+   Beide stemmen zijn bewust rustig (laag tempo) en duidelijk: voor kinderen met dyslexie
+   is tempo belangrijker dan klankkleur. Elk profiel zoekt eerst zijn favoriete systeemstem;
+   is die er niet, dan valt het terug op de beste Nederlandse stem van het toestel met de
+   eigen toonhoogte en snelheid van het profiel.
+   LET OP: een extreme toonhoogte of een heel traag tempo laat een stem juist MEER als een
+   computer klinken (uitgerekte klanken). Daarom staan pitch en rate dicht bij normaal; wie
+   het langzamer wil, zet 'rustig voorlezen' aan in de instellingen (S.leesTempo). Zo hoor je ook op een toestel met maar één
+   Nederlandse stem nog steeds twee onderscheidbare stemmen.
+   Alles gebeurt op het toestel zelf (Web Speech API): geen server, geen internet, geen kosten. */
+var STEMPROFIELEN = [
+  { id:"fien", naam:"Fien", omschrijving:"vriendelijk en helder", emoji:"👧",
+    voorkeur:["Claire","Ellen","Lotte","Fenna","Hanna","Saskia","Google Nederlands"],
+    pitch:1.12, rate:0.95 },
+  { id:"daan", naam:"Daan", omschrijving:"rustig en wat lager", emoji:"👦",
+    voorkeur:["Xander","Frank","Bram","Google Nederlands"],
+    pitch:0.88, rate:0.90 }
+];
+/* Klinkt de stem robotachtig? Dan staat er meestal alleen een BASISSTEM op het toestel.
+   De verbeterde ("premium"/"enhanced") stemmen zijn gratis, maar moeten eenmalig gedownload
+   worden in de systeeminstellingen. Dat verschil is veel groter dan wat wij met toonhoogte
+   en tempo kunnen doen — daarom vragen we het de ouder actief. */
+function stemKwaliteit(){
+  laadStemmen();
+  var nl = _stemmen.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("nl")===0; });
+  if(!nl.length) return "geen";
+  return nl.some(function(v){ return /premium|enhanced|verbeterd|natural|neural|siri/i.test(v.name||""); })
+    ? "premium" : "basis";
+}
+function stemInstallatieUitleg(){
+  var iOS = (typeof isIOS==="function") && isIOS();
+  var ua = (typeof navigator!=="undefined" && navigator.userAgent) || "";
+  if(iOS) return "iPhone/iPad: <b>Instellingen → Toegankelijkheid → Gesproken materiaal → Stemmen → Nederlands</b>, "
+    + "en download daar een stem met de aanduiding <b>Verbeterd</b> of <b>Premium</b>.";
+  if(/android/i.test(ua)) return "Android: <b>Instellingen → Toegankelijkheid → Tekst-naar-spraak → Google Spraakservices → "
+    + "Spraakgegevens installeren → Nederlands</b>. Kies daar de variant van hoge kwaliteit.";
+  if(/mac os x|macintosh/i.test(ua)) return "Mac: <b>Systeeminstellingen → Toegankelijkheid → Gesproken materiaal → "
+    + "Systeemstem → Beheer stemmen</b>, en download een Nederlandse stem met <b>Premium</b> of <b>Verbeterd</b>.";
+  if(/windows/i.test(ua)) return "Windows: <b>Instellingen → Tijd en taal → Spraak → Stemmen beheren</b>, "
+    + "voeg <b>Nederlands</b> toe en kies daar een natuurlijke stem.";
+  return "Kijk in de instellingen van je toestel bij <b>Spraak</b> of <b>Toegankelijkheid</b> en download een "
+    + "Nederlandse stem van hoge kwaliteit (vaak <b>Verbeterd</b>, <b>Premium</b> of <b>Natural</b> genoemd).";
+}
+
+function stemProfiel(){
+  var id = S.stemProfiel || "fien";
+  return STEMPROFIELEN.filter(function(p){ return p.id===id; })[0] || STEMPROFIELEN[0];
+}
+function kiesStemProfiel(id){
+  S.stemProfiel = id;
+  S.stem = "";                       // handmatige keuze vervalt: het profiel bepaalt de stem
+  bewaarState();
+  var p = stemProfiel();
+  zeg("Hoi! Ik ben " + p.naam + ". Ik lees straks alles voor.");
+  openStemkiezer();
+}
+
 /* ---- Spraak (Web Speech API) ---- */
 var _stemmen = [];
 function laadStemmen(){
@@ -685,19 +978,66 @@ function laadStemmen(){
   return _stemmen;
 }
 function kiesBesteStem(taalPrefix){
-  var kand = _stemmen.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf(taalPrefix)===0; });
-  if(S.stem){ var g = kand.find(function(v){return v.name===S.stem;}); if(g) return g; }
-  var premium = kand.find(function(v){ return /premium|enhanced|natural/i.test(v.name); });
-  return premium || kand[0] || null;
+  taalPrefix = (taalPrefix||"nl").toLowerCase();
+  var norm = function(l){ return (l||"").toLowerCase().replace("_","-"); };
+  var kand = _stemmen.filter(function(v){ return v.lang && norm(v.lang).indexOf(taalPrefix)===0; });
+  // Sommige toestellen benoemen de Nederlandse stem alleen via de naam (niet via lang):
+  if(!kand.length && taalPrefix==="nl"){
+    kand = _stemmen.filter(function(v){ return /nederlands|dutch|\bnl[\b_-]/i.test((v.name||"")+" "+(v.lang||"")); });
+  }
+  if(S.stem){ var g = kand.find(function(v){ return v.name===S.stem; }); if(g) return g; }
+  // Het gekozen stemprofiel, maar ALTIJD eerst de verbeterde ("premium"/"enhanced"/"neural")
+  // variant: het verschil tussen een basisstem en een verbeterde stem is veel groter dan
+  // het verschil tussen twee basisstemmen. Een basisstem klinkt onvermijdelijk robotachtig.
+  var isBeter = function(v){ return /premium|enhanced|verbeterd|natural|neural|siri/i.test(v.name||""); };
+  if(taalPrefix==="nl"){
+    var vk = stemProfiel().voorkeur, i;
+    for(i=0;i<vk.length;i++){                                  // ronde 1: voorkeur + verbeterd
+      var beter = kand.find(function(v){ return isBeter(v) && (v.name||"").toLowerCase().indexOf(vk[i].toLowerCase())>=0; });
+      if(beter) return beter;
+    }
+    var anyBeter = kand.find(isBeter);                          // ronde 2: welke verbeterde stem dan ook
+    if(anyBeter) return anyBeter;
+    for(i=0;i<vk.length;i++){                                   // ronde 3: voorkeur, basiskwaliteit
+      var t = kand.find(function(v){ return (v.name||"").toLowerCase().indexOf(vk[i].toLowerCase())>=0; });
+      if(t) return t;
+    }
+  }
+  var doelExact = taalPrefix==="nl"?"nl-nl":(taalPrefix==="en"?"en-gb":taalPrefix);
+  var exact   = kand.find(function(v){ return norm(v.lang)===doelExact; });
+  var premium = kand.find(function(v){ return /premium|enhanced|natural|nederlands|dutch/i.test(v.name); });
+  return exact || premium || kand[0] || null;   // nooit een stem in een andere taal teruggeven
 }
 function zeg(tekst, taalPrefix, rate){
   if(!S.voorlezenAan) return;   // US-04: voorlezen staat los van geluidseffecten
+  // 1) is er een vooraf ingesproken opname? die klinkt als een echte stem
+  var pad = audioBestand(tekst, taalPrefix || "nl");
+  if(pad){
+    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+    if(speelOpname(pad, tekst, taalPrefix, rate, function(){ _zegPoging(tekst, taalPrefix, rate, 0); })) return;
+  }
+  // 2) anders de stem van het toestel
+  stopAudio();
+  _zegPoging(tekst, taalPrefix, rate, 0);
+}
+/* De stemmenlijst van het toestel laadt asynchroon. Spreken vóórdat die klaar is
+   levert de Engelse terugvalstem op ("de ene keer wel, de andere keer niet").
+   Daarom wachten we kort tot de stemmen geladen zijn, zodat consequent de NL-stem wordt gepakt. */
+function _zegPoging(tekst, taalPrefix, rate, poging){
   try{
     if(!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    laadStemmen();
+    if((!_stemmen || !_stemmen.length) && poging < 8){
+      setTimeout(function(){ _zegPoging(tekst, taalPrefix, rate, poging+1); }, 120);
+      return;   // wachten tot de stemmen er zijn (voorkomt Engelse terugval)
+    }
     window.speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(tekst);
     u.lang = taalPrefix==="en"?"en-GB":taalPrefix==="es"?"es-ES":"nl-NL";
-    u.rate = rate || 0.8; u.pitch = 1.25;
+    var pr = stemProfiel();
+    // 'rustig voorlezen' vertraagt apart, zodat de stem zelf natuurlijk kan blijven klinken
+    var tempo = (S.leesTempo === undefined) ? 1 : S.leesTempo;
+    u.rate = (rate || pr.rate) * tempo; u.pitch = pr.pitch;
     var v = kiesBesteStem(taalPrefix||"nl"); if(v) u.voice = v;
     window.speechSynthesis.speak(u);
   }catch(e){ /* stil falen: spraak is bijzaak */ }
@@ -872,19 +1212,32 @@ function stopMuziek(){ if(_muziek){ clearInterval(_muziek); _muziek = null; } }
 function wisselMuziek(){
   S.muziekAan = !S.muziekAan; bewaarState();
   if(S.muziekAan) startMuziek(); else stopMuziek();
-  var k = document.getElementById("knopMuziek"); if(k) k.textContent = S.muziekAan?"🎵":"🔇";
+  var k = document.getElementById("knopMuziek"); if(k) k.innerHTML = '<img src="ui/mi-muziek-'+(S.muziekAan?'aan':'uit')+'.png" alt="muziek" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">';
 }
 if(typeof window!=="undefined" && window.addEventListener){
   window.addEventListener("pointerdown", function(e){ _juiceXY = {x:e.clientX, y:e.clientY}; }, true);
 }
 
 /* ---- Leeftijd → groep → niveau ---- */
-function leeftijdNaarGroep(l){ if(l<=6)return 3; if(l===7)return 4; if(l===8)return 5; if(l===9)return 6; return 7; }
-function groepNaarNiveau(g){ if(g<=3)return 1; if(g<=5)return 2; return 3; }
+/* Leeftijd → groep → contentniveau, doorlopend t/m groep 8.
+   Eén schaal met 6 stappen: groep 3=1, 4=2, 5=3, 6=4, 7=5, 8=6.
+   Content werkt cumulatief (niveau <= S.niveau), dus lagere stof blijft als herhaling meedoen. */
+function leeftijdNaarGroep(l){ if(l<=6)return 3; if(l===7)return 4; if(l===8)return 5; if(l===9)return 6; if(l===10)return 7; return 8; }
+function groepNaarNiveau(g){ return Math.max(1, Math.min(6, (Number(g)||3) - 2)); }
+/* De tegel-/mascotte-kunst heeft maar 3 varianten (-t1/-t2/-t3): niveau daarop afronden. */
+function kunstTier(niv){ return Math.max(1, Math.min(3, Math.round((Number(niv)||2) / 2))); }
 /* ---- Leeftijd-varianten van beelden: kies -t1/-t2/-t3 op basis van niveau ---- */
-function beeldTier(pad){ if(!pad || pad.indexOf("data:")===0) return pad; var i=pad.lastIndexOf("."); if(i<0) return pad; var t=(typeof S!=="undefined"&&S.niveau)||2; return pad.slice(0,i)+"-t"+t+pad.slice(i); }
+function beeldTier(pad){ if(!pad || pad.indexOf("data:")===0) return pad; var i=pad.lastIndexOf("."); if(i<0) return pad; var t=kunstTier((typeof S!=="undefined"&&S.niveau)||2); return pad.slice(0,i)+"-t"+t+pad.slice(i); }
 function beeldVal(img){ img.onerror=null; var b=img.getAttribute("data-base"); if(b && img.getAttribute("src")!==b){ img.src=b; } else { img.style.display="none"; } }
 function beeldTag(pad, alt, cls, style){ return '<img '+(cls?'class="'+cls+'" ':'')+'src="'+beeldTier(pad)+'" data-base="'+pad+'" alt="'+(alt||"")+'"'+(style?' style="'+style+'"':'')+' onerror="beeldVal(this)">'; }
+/* Content-illustratie voor de spellen: toont de tekening uit tegels/ met de emoji als terugval. */
+function contentBeeld(woord, emoji, sz){
+  var naam=(woord||"").toLowerCase().replace(/[^a-z]/g,"");
+  var pad="tegels/tegel-"+naam+".png"; sz=sz||78;
+  var alt=String(woord||"").replace(/["<>]/g,""), em=String(emoji||"").replace(/["<>]/g,"");
+  return '<img src="'+pad+'" alt="'+alt+'" data-emoji="'+em+'" style="width:'+sz+'px;height:'+sz+'px;object-fit:contain" onerror="emojiVervang(this)">';
+}
+function emojiVervang(img){ var e=img.getAttribute("data-emoji")||"❔"; var s=document.createElement("span"); s.textContent=e; s.style.fontSize="2.6rem"; if(img.parentNode) img.parentNode.replaceChild(s,img); }
 /* emoji → eigen figuur-afbeelding (ook voor eerder gekochte maatjes in opgeslagen data) */
 var EMOJIBEELD={"🐔":"kip","🐑":"schaap","🐷":"varken","🐴":"paard","🐤":"kuiken","🐕":"hond","🐶":"hond","🧒":"kind","🧑":"persoon","🧑‍🌾":"boer","🦀":"krab","🦆":"eend","🏄":"surfer","🐇":"konijn","🐰":"konijn","🐿️":"eekhoorn","🐈":"kat","🐱":"kat","🐁":"muis","🐭":"muis","🐮":"koe","⛄":"sneeuwpop","🤖":"robot"};
 function wezenAfb(z){ if(z&&z.afb) return z.afb; var n=z&&EMOJIBEELD[z.s]; return n?("tegels/tegel-"+n+".png"):""; }
@@ -909,7 +1262,7 @@ function pasThemaToe(){
   THEMA = THEMAS[S.thema] || THEMAS.craft;
   if(document.body) document.body.setAttribute("data-theme", S.thema);
   var wt = document.getElementById("wereldTitel"); if(wt) wt.textContent = THEMA.wereld;
-  var vi = document.getElementById("hudValutaIco"); if(vi) vi.textContent = THEMA.valuta;
+  var vi = document.getElementById("hudValutaIco"); if(vi){ var _vb=VALUTABEELD[S.thema]; vi.innerHTML = _vb ? '<img src="'+_vb+'" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">' : THEMA.valuta; }
   bouwStartscherm(); updateHud();
 }
 
@@ -919,18 +1272,18 @@ function updateHud(){
   g.hidden = !S.naam;
   var set=function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
   set("hudNaam", S.naam||"—"); set("hudValuta", S.valuta); set("hudDagen", S.oefendagen);
-  var hvi=document.getElementById("hudValutaIco"); if(hvi){ var vb=VALUTABEELD[S.thema]; hvi.innerHTML = vb ? '<img src="'+vb+'" style="width:20px;height:20px;object-fit:contain;vertical-align:middle">' : THEMA.valuta; }
+  var hvi=document.getElementById("hudValutaIco"); if(hvi){ var _vb2=VALUTABEELD[S.thema]; hvi.innerHTML = _vb2 ? '<img src="'+_vb2+'" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">' : THEMA.valuta; }
   var xp = document.getElementById("hudXp"); if(xp) xp.style.width = (S.xp%100)+"%";
   var tijd = document.getElementById("hudTijd");
   if(tijd){ if(S.speeltijdMin>=999){ tijd.textContent="∞"; } else { var over=Math.max(0,S.speeltijdMin - Math.floor(S.tijdGebruiktSec/60)); tijd.textContent=over+"m"; } }
   var kg=document.getElementById("knopGeluid"); if(kg) kg.textContent=S.geluidAan?"🔔":"🔕";
-  var km=document.getElementById("knopMuziek"); if(km) km.textContent=S.muziekAan?"🎵":"🔇";
+  var km=document.getElementById("knopMuziek"); if(km) km.innerHTML='<img src="ui/mi-muziek-'+(S.muziekAan?'aan':'uit')+'.png" alt="muziek" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">';
   var _act=document.querySelector(".scherm.actief"); if(typeof werkBottombarBij==="function") werkBottombarBij(_act?_act.id:"");
   updateComboHud();
 }
 
 /* ---- Valuta & XP ---- */
-var DREMPEL_BOUWEN = 10;   // zoveel moet een kind eerst verdienen voordat de bouwmodus opengaat
+var DREMPEL_BOUWEN = CONFIG.drempelBouwen != null ? CONFIG.drempelBouwen : 10;   // zoveel moet een kind eerst verdienen voordat de bouwmodus opengaat
 function bouwenIsVrij(){ return !!S.bouwenVrij; }
 function geefValuta(n){
   S.valuta = Math.max(0, S.valuta + n);
@@ -941,7 +1294,27 @@ function geefValuta(n){
 }
 /* ---- Tellers voor missies ---- */
 function telOp(soort, aantal){ if(!S.tel) S.tel={}; S.tel[soort]=(S.tel[soort]||0)+(aantal||1); bewaarState(); checkMissie(); }
-function geefXp(n){ S.xp += n; updateHud(); }
+function geefXp(n){ S.xp += n; noteerHist("xp", n); updateHud(); }
+
+/* ---- Dag-historie: stille logging per dag voor het ouder-weekrapport ----
+   Alles blijft lokaal in het profiel; geen server, geen tracking van derden. */
+function histVandaag(){
+  if(!S.historie) S.historie={};
+  var d=vandaagStr();
+  if(!S.historie[d]) S.historie[d]={xp:0, sec:0, goed:{}, fout:{}};
+  var r=S.historie[d];
+  if(!r.goed) r.goed={}; if(!r.fout) r.fout={};
+  // niet oneindig laten groeien: hooguit ~120 dagen bewaren
+  var keys=Object.keys(S.historie);
+  if(keys.length>140){ keys.sort(); keys.slice(0, keys.length-120).forEach(function(k){ delete S.historie[k]; }); }
+  return r;
+}
+function noteerHist(veld, n){ try{ var r=histVandaag(); r[veld]=(r[veld]||0)+(n||0); }catch(e){} }
+function noteerAntwoord(spel, goed){
+  try{ var r=histVandaag(); var b=goed?r.goed:r.fout; b[spel]=(b[spel]||0)+1; bewaarState(); }catch(e){}
+}
+/* Korte, herbruikbare fout-melder voor elk spel (houdt % goed per domein zuiver). */
+function noteerFout(spel){ noteerAntwoord(spel, false); }
 /* De bouwmodus is zojuist ontgrendeld: duidelijk vieren en het startscherm bijwerken. */
 function ontgrendelBouwen(){
   try{
@@ -1022,6 +1395,14 @@ function openStickerboek(){
     html+='<div class="stickerkaart'+(got?" heb":"")+'"><span class="stico">'+(got?stickerBeeld(s):"❓")+'</span><span class="klein">'+(got?s.naam:"???")+'</span></div>'; });
   html+='</div>'; openOverlay(html);
 }
+/* ---- Springavontuur: apart platformspel in springspel.html ----
+   Het spel leest het actieve profiel (groepsniveau + thema/mascotte) uit dezelfde
+   localStorage-sleutel, dus eerst bewaren en dan pas navigeren. */
+function openSpringspel(){
+  try{ bewaarState(); }catch(e){}
+  try{ location.href = "springspel.html"; }catch(e){ logFout("Springspel openen mislukt: "+e.message); }
+}
+
 /* ---- Mini-games (verschijnen na een level-up) ---- */
 var _mini={};
 function miniGameStart(){ (Math.random()<0.5 ? miniSchatkist : miniDiamanttik)(); }
@@ -1083,9 +1464,10 @@ function openSpel(sleutel){
   var starters = {
     reken:startRekenmijn, spelling:startSmederij, verhaal:startBouwmeester,
     flits:startFlitser, memory:startMemory, engels:function(){startTaal("en");}, spaans:function(){startTaal("es");},
-    denken:startDenkgrot, beeldlab:startBeeldlab, lezen:startLezen, bouw:startBouwmodus
+    denken:startDenkgrot, beeldlab:startBeeldlab, lezen:startLezen, bouw:startBouwmodus,
+    klankletter:startKlankletter, renlezer:startRenlezer, rekentop:startRekentoppers
   };
-  var titels = Object.assign({engels:"Engelse Expeditie 🇬🇧", spaans:"Spaanse Expeditie 🇪🇸", beeldlab:"Puzzellab 🧩", lezen:"Leesavontuur 📚"}, THEMA.spellen);
+  var titels = Object.assign({engels:"Engelse Expeditie 🇬🇧", spaans:"Spaanse Expeditie 🇪🇸", beeldlab:"Puzzellab 🧩", lezen:"Leesavontuur 📚", klankletter:"Klankenjacht 🔤", renlezer:"Renlezer 🏃", rekentop:"Rekentoppers 🧮"}, THEMA.spellen);
   if(titelEl) titelEl.textContent = titels[sleutel]||"";
   _huidigSpel = sleutel;
   var fn = starters[sleutel];
@@ -1104,6 +1486,9 @@ var SPELREGELS = {
   denken:"Kijk goed naar de plaatjes en kies er eentje. Denk na over wat er anders is of wat erbij hoort.",
   beeldlab:"Kies een doe-puzzel: op volgorde leggen, nabouwen, onthouden of zoeken.",
   lezen:"Het verhaal wordt voorgelezen. Luister goed en beantwoord daarna de vragen. Je mag zo vaak luisteren als je wilt.",
+  klankletter:"Je ziet een plaatje en hoort het woord. Kies de juiste letter. Let goed op de b, d en p — die lijken op elkaar!",
+  renlezer:"Lees de zin en kies snel de goede actie: springen, bukken of stoppen. Zo ren je verder over het pad.",
+  rekentop:"Lees het verhaaltje en reken uit wat er gevraagd wordt: breuken, procenten, kommagetallen, meten of oppervlakte. Na een goed antwoord hoor je hoe je het uitrekent.",
   bouw:"Loop met de pijltjes. Kies een blok en bouw je eigen wereld. Verdien diamanten met oefenen om meer te bouwen. Op akkers groeit eten dat je kunt oogsten."
 };
 var HINTS = {
@@ -1117,16 +1502,18 @@ var HINTS = {
   denken:"Vergelijk de plaatjes: wat hebben ze gemeen, en welke past niet in het rijtje?",
   beeldlab:"Kijk eerst rustig naar het voorbeeld voordat je begint.",
   lezen:"Weet je het niet zeker? Luister het verhaal nog een keer en let op wie, wat en waar.",
+  klankletter:"Zeg het woord zachtjes en let op de éérste klank. Bij een b kijkt de bolle buik naar rechts; bij een d naar links.",
+  renlezer:"Lees de zin rustig. Zoek het woord dat zegt wat er in de weg staat — dat vertelt wat je moet doen.",
   bouw:"Verdien eerst diamanten met de oefenspellen; daarmee koop en bouw je meer. Loop over rijp gewas om te oogsten."
 };
 function toonSpelregels(){
   var t = SPELREGELS[_huidigSpel] || "Kies een spel en volg de aanwijzingen. Alles kan worden voorgelezen.";
-  openOverlay('<h2>ℹ️ Hoe werkt het?</h2><p class="leesregels">'+t+'</p><button onclick="zeg(SPELREGELS[_huidigSpel]||\'\')">🔊 Lees voor</button>');
+  openOverlay('<h2>ℹ️ Hoe werkt het?</h2><p class="leesregels">'+t+'</p><button onclick="zeg(SPELREGELS[_huidigSpel]||\'\')"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>');
   zeg(t);
 }
 function toonSpelHint(){
   var t = HINTS[_huidigSpel] || "Kijk rustig, je kunt het! Gebruik de knoppen om iets te laten voorlezen.";
-  openOverlay('<h2>💡 Hint</h2><p class="leesregels">'+t+'</p><button onclick="zeg(HINTS[_huidigSpel]||\'\')">🔊 Lees voor</button>');
+  openOverlay('<h2>💡 Hint</h2><p class="leesregels">'+t+'</p><button onclick="zeg(HINTS[_huidigSpel]||\'\')"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>');
   zeg(t);
 }
 
@@ -1155,37 +1542,68 @@ function bouwStartscherm(){
     {k:"reken", ico:"⛏️", img:"ui/menu-reken.png", naam:sp.reken},
     {k:"spelling", ico:"🔨", img:"ui/menu-spelling.png", naam:sp.spelling},
     {k:"lezen", ico:"📚", img:"ui/menu-lezen.png", naam:"Leesavontuur"},
+    {k:"klankletter", ico:"🔤", naam:"Klankenjacht"},
+    {k:"renlezer", ico:"🏃", naam:"Renlezer"},
     {k:"verhaal", ico:"📖", img:"ui/menu-verhaal.png", naam:sp.verhaal, groep:4},
     {k:"flits", ico:"⚡", img:"ui/menu-flits.png", naam:sp.flits},
     {k:"memory", ico:"🃏", img:"ui/menu-memory.png", naam:sp.memory},
     {k:"engels", ico:"🇬🇧", img:"ui/menu-engels.png", naam:"Engelse Expeditie"},
     {k:"spaans", ico:"🇪🇸", img:"ui/menu-spaans.png", naam:"Spaanse Expeditie"},
     {k:"denken", ico:"🧠", img:"ui/menu-denken.png", naam:sp.denken},
-    {k:"beeldlab", ico:"🧩", img:"ui/menu-beeldlab.png", naam:"Puzzellab"}
+    {k:"beeldlab", ico:"🧩", img:"ui/menu-beeldlab.png", naam:"Puzzellab"},
+    {k:"rekentop", ico:"🧮", naam:"Rekentoppers", groep:6}   // 2F-rekenen: breuken, procenten, meten
   ];
   oefen.innerHTML="";
+  var ICOKLEUR={reken:"#bfdbfe",spelling:"#fed7aa",lezen:"#bbf7d0",klankletter:"#fbcfe8",renlezer:"#bbf7d0",verhaal:"#ddd6fe",flits:"#fef08a",memory:"#fbcfe8",engels:"#bfdbfe",spaans:"#fecaca",denken:"#fde68a",beeldlab:"#f5d0fe",bouw:"#fecaca"};
   lijst.forEach(function(item){
     if(item.groep && S.groep < item.groep) return; // verhaaltjessommen pas vanaf groep 4
     var d = document.createElement("div");
     d.className="spelknop"; d.setAttribute("onclick","openSpel('"+item.k+"')");
-    var ic = item.img ? '<img src="'+item.img+'" style="width:44px;height:44px;object-fit:contain">' : item.ico;
-    d.innerHTML='<span class="ico">'+ic+'</span><span>'+item.naam+'</span>';
+    var kleur = ICOKLEUR[item.k] || "#f3f4f6";
+    d.innerHTML='<span class="ico-box" style="background:'+kleur+'"><img src="ui/menu-'+item.k+'.png" alt="" style="width:42px;height:42px;object-fit:contain"></span><span class="spelnaam">'+item.naam+'</span>';
     oefen.appendChild(d);
   });
   maak.innerHTML="";
   var b = document.createElement("div");
   if(bouwenIsVrij()){
     b.className="spelknop"; b.setAttribute("onclick","openSpel('bouw')");
-    b.innerHTML='<span class="ico"><img src="ui/menu-bouw.png" style="width:44px;height:44px;object-fit:contain"></span><span>'+sp.bouw+'</span>';
+    b.innerHTML='<span class="ico-box" style="background:#fecaca"><img src="ui/menu-bouw.png" alt="" style="width:42px;height:42px;object-fit:contain"></span><span class="spelnaam">'+sp.bouw+'</span>';
   } else {
     var nog = Math.max(0, DREMPEL_BOUWEN - S.valuta);
     b.className="spelknop opslot"; b.setAttribute("onclick","bouwGeblokkeerdMelding()");
-    b.innerHTML='<span class="ico"><img src="ui/menu-slot.png" style="width:44px;height:44px;object-fit:contain"></span><span>'+sp.bouw+'</span><b class="slotinfo">Nog '+nog+' te gaan</b>';
+    b.innerHTML='<span class="ico-box" style="background:#e2e8f0"><img src="ui/menu-slot.png" alt="" style="width:42px;height:42px;object-fit:contain"></span><span class="spelnaam">'+sp.bouw+'</span><b class="slotinfo">Nog '+nog+' te gaan</b>';
   }
   maak.appendChild(b);
+  // Springspel: apart platformspel (eigen bestand) — leren = toegang tot de levels
+  var sprg = document.createElement("div");
+  sprg.className = "spelknop"; sprg.setAttribute("onclick","openSpringspel()");
+  sprg.innerHTML = '<span class="ico-box" style="background:#bbf7d0"><img src="ui/menu-springen.png" alt="" style="width:42px;height:42px;object-fit:contain"></span>'
+    + '<span class="spelnaam">Springavontuur</span>';
+  maak.appendChild(sprg);
   tekenMissie();
   tekenDagquest();
   tekenMascotte();
+  tekenBeloftenStrip();
+  tekenTrots();
+}
+/* ---- Mijn muur als vast trots-moment op het startscherm (eigen groei, geen ranglijst) ---- */
+function tekenTrots(){
+  var vak=document.getElementById("trotsVak"); if(!vak) return;
+  if(S.rustigeModus && !_rustigToonAlles){ vak.innerHTML=""; return; }
+  var b=barekaSamenvatting();
+  var gekend=b.tel.power+b.tel.speed;
+  var totaalLevels=Object.keys(S.levels||{}).reduce(function(a,k){ return a+((S.levels[k]&&S.levels[k].level)||0); },0);
+  var regel = gekend>0
+    ? 'Je hebt al <b>'+gekend+'</b> sommen helemaal gekend! 💪'
+    : (totaalLevels>0 ? 'Samen <b>'+totaalLevels+'</b> levels verdiend — kijk hoe je groeit!' : 'Begin met oefenen en zie je muur groeien!');
+  var best=sprintBestVan();
+  vak.innerHTML='<div class="sectie" style="background:linear-gradient(160deg,#fff6df,#ffe9b8);border:2px solid #f5c542;text-align:center">'
+    + '<div style="font-size:1.05rem"><b>🧱 Mijn muur</b></div>'
+    + '<div class="klein" style="margin:.2em 0">'+regel+'</div>'
+    + '<div class="rij" style="justify-content:center;flex-wrap:wrap">'
+      + '<button class="knop" onclick="toonMuur(\'start\')">Bekijk mijn muur 🧱</button>'
+      + '<button class="knop2" onclick="startSprint()">⚡ Sprintduel'+(best?' (record: '+best.aantal+')':'')+'</button>'
+    + '</div></div>';
 }
 
 /* ---- Mascotte per thema (uit data/mascottes.js) ---- */
@@ -1270,6 +1688,7 @@ function haalLevel(spel, extra){
   return S.levels[k];
 }
 function goedAntwoordLevel(spel, extra){
+  noteerAntwoord(spel, true);   // weekrapport: goed antwoord per domein
   var lv = haalLevel(spel, extra); lv.teller++;
   var omhoog=false;
   if(lv.teller>=5){ lv.teller=0; lv.level++; omhoog=true;
@@ -1281,7 +1700,7 @@ function goedAntwoordLevel(spel, extra){
     if(typeof window!=="undefined" && !window.__BLOKWERELD_TEST__ && Math.random()<0.4) miniGameStart();  // soms een mini-game als beloning
   } else { geefXp(4); }
   bewaarState();
-  return {omhoog:omhoog, level:lv.level, kroon:lv.level>=100};
+  return {omhoog:omhoog, level:lv.level, kroon:lv.level>=200};
 }
 function levelBadge(spel, extra){
   var lv=haalLevel(spel,extra); var bol="";
@@ -1314,7 +1733,7 @@ function openProfiel(eerste){
    + '<p><b>Ouder-PIN (4 cijfers):</b></p>'
    + '<p class="klein">Met een PIN kan je kind het oudergedeelte, de instellingen en het verwijderen van profielen niet zelf openen. Sterk aanbevolen.</p>'
    + '<input id="pfPin" inputmode="numeric" maxlength="4" style="font-size:1.2rem;padding:.5em;border-radius:10px;border:2px solid #ccc;width:120px" value="'+(S.ouderPin||"")+'">'
-   + '<p><button class="groot" onclick="bewaarProfiel()">Spelen! <img src="ui/mi-play.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"></button></p>';
+   + '<p><button class="groot" onclick="bewaarProfiel()">Spelen! <img src="ui/mi-play.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"></button></p>';
   openOverlay(html);
   // sluitknop verbergen bij allereerste profiel
   var sl = document.querySelector("#overlay .sluit"); if(sl) sl.style.display = eerste && !S.naam ? "none":"block";
@@ -1347,7 +1766,7 @@ var _ob = { stap:0 };
 function startOnboarding(){ _ob={stap:0}; obStap(0); }
 function obNav(stap, label, actie){
   var dots=""; for(var i=0;i<3;i++) dots+='<span class="obdot'+(i===stap?" aan":"")+'"></span>';
-  var terug = stap>0 ? '<button onclick="obStap('+(stap-1)+')"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug</button>' : '';
+  var terug = stap>0 ? '<button onclick="obStap('+(stap-1)+')"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug</button>' : '';
   return '<div class="obdots">'+dots+'</div><div class="rij" style="justify-content:center">'+terug+'<button class="groot" onclick="'+actie+'">'+label+'</button></div>';
 }
 function obStap(n){
@@ -1362,9 +1781,9 @@ function obStap(n){
       +'<div class="rij" id="obLeeftijd" style="justify-content:center;flex-wrap:wrap"></div>'
       +obNav(1,"Volgende","obNaarAvatar()")+'</div>';
   } else {
-    html='<div class="onbo"><div class="obfig"><img src="ui/mi-thema.png" style="width:64px;height:64px;object-fit:contain"></div><h2>Kies je poppetje!</h2>'
+    html='<div class="onbo"><div class="obfig">🎨</div><h2>Kies je poppetje!</h2>'
       +'<div class="rij" id="obAvatar" style="justify-content:center;flex-wrap:wrap"></div>'
-      +obNav(2,'Spelen! <img src="ui/mi-play.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">',"obKlaar()")+'</div>';
+      +obNav(2,'Spelen! <img src="ui/mi-play.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">',"obKlaar()")+'</div>';
   }
   openOverlay(html);
   var sl=document.querySelector("#overlay .sluit"); if(sl) sl.style.display="none";   // niet weg te klikken
@@ -1421,12 +1840,12 @@ function onboardingPinBewaren(){
 /* ---- Themakeuze (preview-kaarten, nooit direct wisselen) ---- */
 function openThemakeuze(){
   var html='<h2>Kies je wereld</h2><div class="grid">';
-  Object.keys(THEMAS).forEach(function(k){ var t=THEMAS[k];
-    var masc = THEMAMASCOTTE[k] ? '<img src="mascottes/mascotte-'+THEMAMASCOTTE[k]+'.png" style="width:58px;height:58px;object-fit:contain">' : (t.poppetje==="pixel"?"🧍":t.poppetje);
-    var valb = VALUTABEELD[k] ? '<img src="'+VALUTABEELD[k]+'" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> ' : (t.valuta+' ');
-    html += '<div class="spelknop" style="background:var(--paneel);color:var(--paneeltekst);border:3px solid '+(k===S.thema?'var(--accent)':'#0002')+'" onclick="kiesThema(\''+k+'\')">'
-      + '<span class="ico">'+masc+'</span><b>'+t.naam+'</b>'
-      + '<span>'+valb+t.valutaNaam+'</span></div>';
+  var TKLEUR={craft:"#fde047",galaxy:"#3b82f6",powerup:"#fca5a5",unicorn:"#e879f9",voetbal:"#4ade80",zeemeermin:"#2dd4bf"};
+  Object.keys(THEMAS).forEach(function(k){ var t=THEMAS[k]; var m=(typeof MASCOTTES!=="undefined"&&MASCOTTES[k])||{};
+    var fig = m.afbeelding ? '<img src="'+m.afbeelding+'" alt="" style="width:50px;height:50px;object-fit:contain">' : (m.emoji||(t.poppetje==="pixel"?"🧍":t.poppetje));
+    html += '<div class="spelknop" style="background:var(--paneel);color:var(--paneeltekst);border:3px solid '+(k===S.thema?'var(--accent)':'var(--nb-ink)')+'" onclick="kiesThema(\''+k+'\')">'
+      + '<span class="ico-box" style="background:'+(TKLEUR[k]||"#f3f4f6")+'">'+fig+'</span><b>'+t.naam+'</b>'
+      + '<span>'+t.valuta+' '+t.valutaNaam+'</span></div>';
   });
   html+='</div>';
   openOverlay(html);
@@ -1436,18 +1855,67 @@ function kiesThema(k){ setThema(k); sluitOverlay(); }
 /* ---- Stemkiezer ---- */
 function openStemkiezer(){
   laadStemmen();
-  var nl=_stemmen.filter(function(v){return v.lang&&v.lang.toLowerCase().indexOf("nl")===0;});
-  var html='<h2>🗣️ Kies een stem</h2>';
-  if(nl.length===0){ html+='<p class="klein">Nog geen Nederlandse stem gevonden. Tip: installeer een NL-stem via de instellingen van je toestel (Spraak/Toegankelijkheid) voor het mooiste voorlezen.</p>'; }
-  html+='<div id="stemLijst"></div><p><button onclick="testStem()">🔊 Test</button></p>';
+  var nl = _stemmen.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("nl")===0; });
+  var actief = S.stemProfiel || "fien";
+  // twee grote stemkaarten: dit is de keuze voor het kind
+  var kaarten = STEMPROFIELEN.map(function(p){
+    var aan = p.id===actief;
+    return '<div class="kindkaart'+(aan?' actief':'')+'" style="cursor:pointer" onclick="kiesStemProfiel(\''+p.id+'\')">'
+      + '<div class="kindav">'+p.emoji+'</div>'
+      + '<div class="kindnaam">'+p.naam+'</div>'
+      + '<div class="klein">'+p.omschrijving+'</div>'
+      + '<div class="klein">'+(aan?'✓ gekozen':'tik om te kiezen')+'</div></div>';
+  }).join("");
+  var html = '<h2><img src="ui/mi-stem.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em"> Wie leest voor?</h2>'
+    + '<p class="klein">Beide stemmen praten rustig en duidelijk. Tik op een naam om te horen hoe die klinkt.</p>'
+    + '<div class="kindgrid">'+kaarten+'</div>'
+    + '<p class="midden"><button onclick="testStem()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Nog eens voorlezen</button></p>';
+  var kwal = stemKwaliteit();
+  if(kwal === "basis"){
+    html += '<div class="highlight-box"><b>Klinkt de stem wat robotachtig?</b><br>'
+      + '<span class="klein">Dit toestel heeft alleen de <b>basisstem</b>. Er is gratis een veel natuurlijkere stem '
+      + 'te downloaden — dat scheelt meer dan welke instelling in de app ook.<br>'
+      + stemInstallatieUitleg() + '<br>Kom daarna hier terug en kies opnieuw.</span></div>';
+  } else if(kwal === "premium"){
+    html += '<p class="klein">✓ Dit toestel heeft een verbeterde Nederlandse stem — die gebruiken we.</p>';
+  }
+  // rustig voorlezen los van de stem: traag rekken maakt een stem juist onnatuurlijker
+  var rustig = (S.leesTempo || 1) < 1;
+  html += '<div class="instelrij"><span>Rustig voorlezen (langzamer)</span>'
+    + '<button class="knop schakelaar" role="switch" aria-checked="'+(rustig?'true':'false')+'" '
+    + 'aria-pressed="'+(rustig?'true':'false')+'" onclick="zetLeesTempo()">'+(rustig?'Aan':'Uit')+'</button></div>';
+  if(nl.length===0){
+    html += '<p class="klein">Er is nog geen Nederlandse stem op dit toestel gevonden. '+stemInstallatieUitleg()+'</p>';
+  } else {
+    // fijnregeling voor de ouder: een specifieke systeemstem kiezen
+    html += '<details style="margin-top:.6em"><summary class="klein">Voor de ouder: kies zelf een stem van dit toestel ('+nl.length+')</summary>'
+      + '<div id="stemLijst"></div>'
+      + '<p class="klein">Een eigen keuze overschrijft het profiel; kies hierboven weer Fien of Daan om terug te gaan.</p></details>';
+  }
   openOverlay(html);
-  var lijst=document.getElementById("stemLijst");
-  nl.forEach(function(v){ var b=document.createElement("button"); b.textContent=v.name; b.style.display="block"; b.style.width="100%";
-    if(v.name===S.stem) b.style.outline="3px solid var(--accent)";
-    b.onclick=function(){ S.stem=v.name; bewaarState(); [].forEach.call(lijst.children,function(c){c.style.outline="";}); b.style.outline="3px solid var(--accent)"; testStem(); };
-    if(lijst) lijst.appendChild(b); });
+  var lijst = document.getElementById("stemLijst");
+  if(lijst){
+    nl.forEach(function(v){
+      var b = document.createElement("button"); b.textContent = v.name;
+      b.style.display = "block"; b.style.width = "100%";
+      if(v.name===S.stem) b.style.outline = "3px solid var(--accent)";
+      b.onclick = function(){
+        S.stem = v.name; bewaarState();
+        [].forEach.call(lijst.children, function(c){ c.style.outline = ""; });
+        b.style.outline = "3px solid var(--accent)";
+        testStem();
+      };
+      lijst.appendChild(b);
+    });
+  }
 }
-function testStem(){ zeg("Hallo! Ik lees straks alles voor."); }
+function zetLeesTempo(){
+  S.leesTempo = (S.leesTempo || 1) < 1 ? 1 : 0.8;
+  bewaarState();
+  openStemkiezer();
+  zeg(S.leesTempo < 1 ? "Ik lees nu rustiger voor." : "Ik lees nu op normale snelheid voor.");
+}
+function testStem(){ var p = stemProfiel(); zeg("Hoi! Ik ben "+p.naam+". Ik lees straks alles voor."); }
 
 /* ---- Schermtijd (anti-verslaving) ---- */
 var _schermtijdInt=null;
@@ -1459,8 +1927,9 @@ function startSchermtijdKlok(){
 }
 function schermtijdTik(){
   if(typeof document!=="undefined" && document.hidden) return;   // alleen tellen als zichtbaar
-  if(S.speeltijdMin>=999) return;
   S.tijdGebruiktSec++;
+  noteerHist("sec", 1);   // weekrapport: geoefende tijd per dag (ook bij onbeperkte speeltijd)
+  if(S.speeltijdMin>=999){ if(S.tijdGebruiktSec%10===0) bewaarState(); return; }
   var overSec = S.speeltijdMin*60 - S.tijdGebruiktSec;
   if(overSec===300){ toonToast("Nog 5 minuten spelen 🙂"); zeg("Nog vijf minuten spelen."); }
   if(overSec<=0 && !S.schermtijdOverT){ S.schermtijdOverT=true; toonSchermtijdEind(); }
@@ -1488,7 +1957,7 @@ function _verlengNu(){
 }
 
 /* ---- Ouder-scherm: voortgang + instellingen (achter PIN) ---- */
-var OUDER_NAMEN = {reken:"Rekenen",spelling:"Spelling",verhaal:"Verhaaltjessommen",flits:"Flitslezen",memory:"Fotomemory",denken:"Denken",beeldlab:"Beeldlab",bouw:"Bouwen",taalen:"Engels",taales:"Spaans"};
+var OUDER_NAMEN = {reken:"Rekenen",spelling:"Spelling",verhaal:"Verhaaltjessommen",flits:"Flitslezen",memory:"Fotomemory",denken:"Denken",beeldlab:"Beeldlab",bouw:"Bouwen",taalen:"Engels",taales:"Spaans",lezen:"Begrijpend lezen",klankletter:"Klanken & letters",renlezer:"Renlezer", rekentop:"Rekentoppers (2F)"};
 function ouderVoortgangHtml(){
   var keys = Object.keys(S.levels||{}).sort();
   if(!keys.length) return '<p class="klein">Nog geen voortgang — laat je kind een spel spelen.</p>';
@@ -1512,7 +1981,9 @@ function ouderScherm(){
         }).join('')
       + '</table></div><p class="klein">Eén app, meerdere kinderen — elk eigen voortgang, geen extra kosten.</p>';
   }
-  var html = '<h2>👪 Ouders</h2>' + kinderen
+  var html = '<h2><img src="ui/mi-ouders.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em"> Ouders</h2>'
+    + beloftenHtml()
+    + kinderen
     + '<h3>'+ (aantalProfielen()>1?'Actief kind':'Kind') +'</h3>'
     + '<div class="sectie" style="margin:.4em 0"><b>'+(S.naam||"—")+'</b> · '+(S.leeftijd||"?")+' jaar · groep '+S.groep+'</div>'
     + '<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:.5em">'
@@ -1520,17 +1991,19 @@ function ouderScherm(){
       + '<div class="statkaart"><div class="statnum">'+S.valuta+'</div><div class="klein">'+(THEMA.valutaNaam||"munten")+'</div></div>'
       + '<div class="statkaart"><div class="statnum">'+S.xp+'</div><div class="klein">XP</div></div>'
     + '</div>'
+    + '<div class="sectie" style="background:linear-gradient(160deg,#eaf3ff,#d5e8ff);border:2px solid #9ec6f0"><b><img src="ui/pz-sorteer.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">Weekrapport</b><br><span class="klein">Zie in één oogopslag hoeveel je kind deze week oefende, de XP-groei en hoe goed het per onderdeel gaat. Printbaar of te bewaren.</span><br><button class="knop" style="margin-top:.5em" onclick="openWeekrapport()">Bekijk het weekrapport →</button></div>'
+    + '<div class="sectie" style="background:#f7f2ff;border:2px solid #cdb8ef"><b>🔬 Waarom dit werkt</b><br><span class="klein">De onderbouwing achter onze keuzes voor beelddenkers en kinderen met dyslexie.</span><br><button class="knop" style="margin-top:.5em" onclick="openWaaromWerkt()">Lees waarom dit werkt →</button></div>'
     + '<div class="sectie" style="background:linear-gradient(160deg,#eaf5e2,#d7ecc8);border:2px solid var(--accent2)"><b>🎲 Zonder scherm oefenen</b><br><span class="klein">Tips &amp; spelletjes om samen te spelen zonder telefoon of tablet.</span><br><button class="knop" style="margin-top:.5em" onclick="openOuderTips()">Bekijk tips &amp; spelletjes →</button></div>'
     + '<h3>Voortgang per onderdeel</h3>' + ouderVoortgangHtml()
     + (somGeoefend? '<p class="klein">Rekensommen geoefend: '+somGeoefend+' · <a href="#" onclick="toonMuur(\'ouders\');return false">Mijn muur bekijken 🧱</a></p>' : '')
     + '<h3>Instellingen</h3>'
     + '<p class="klein">Speeltijd: <b>'+speeltijd+'</b>'+(S.ouderPin?' · PIN ingesteld 🔒':' · geen PIN — stel er een in voor betere beveiliging')+'</p>'
-    + '<div class="rij"><button onclick="openProfiel()">✏️ Profiel &amp; PIN</button>'
-    + '<button onclick="_verlengNu()">⏳ +10 min vandaag</button>'
-    + '<button onclick="openInstellingen()">⚙️ Instellingen</button></div>'
+    + '<div class="rij"><button onclick="openProfiel()"><img src="ui/mi-pencil.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">Profiel &amp; PIN</button>'
+    + '<button onclick="_verlengNu()"><img src="ui/hud-tijd.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">+10 min vandaag</button>'
+    + '<button onclick="openInstellingen()"><img src="ui/mi-gear.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:.3em">Instellingen</button></div>'
     + '<h3>⭐ Premium</h3>'
     + '<p class="klein">Informatie over Premium en eventuele aankopen staat hier, in het oudergedeelte — niet in het spel van het kind.</p>'
-    + '<div class="rij"><button onclick="openPremium()">⭐ Premium bekijken</button></div>'
+    + '<div class="rij"><button onclick="openPremium()"><img src="ui/mi-sticker.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">Premium bekijken</button></div>'
     + oudersFoutenHtml()
     + '<a class="reset" style="color:#c0392b" href="#" onclick="resetAlles();return false">Alle gegevens wissen (reset)</a>';
   openOverlay(html);
@@ -1557,7 +2030,233 @@ function openOuderTips(){
     });
     html += '</div>';
   });
-  html += '<div class="rij"><button onclick="ouderScherm()"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug naar ouders</button></div>';
+  html += '<div class="rij"><button onclick="ouderScherm()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar ouders</button></div>';
+  openOverlay(html);
+}
+
+/* =========================================================================
+   OUDER-WEEKRAPPORT (US-weekrapport) — privacyvriendelijk, volledig lokaal.
+   Berekent uit S.historie: oefendagen, tijd, XP-groei en % goed per domein.
+   Plus een Bareka-samenvatting (rekenen) en een instelbaar oefendoel.
+   Printbaar (window.print) en downloadbaar als los HTML-bestand.
+   ========================================================================= */
+var RAP_NAMEN = {reken:"Rekenen", spelling:"Spelling", verhaal:"Verhaaltjessommen", flits:"Flitslezen", lezen:"Lezen", memory:"Fotomemory", denken:"Denken", beeldlab:"Puzzellab", taal:"Talen (Engels/Spaans)", rekentop:"Rekentoppers (2F)"};
+var RAP_VOLGORDE = ["reken","rekentop","spelling","flits","lezen","verhaal","memory","denken","beeldlab","taal"];
+
+function _rapMin(sec){ return Math.round((sec||0)/60); }
+function _rapDatumNL(k){ try{ var d=new Date(k+"T00:00:00"); return d.getDate()+" "+["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"][d.getMonth()]; }catch(e){ return k; } }
+function _rapWeekdag(k){ try{ return ["zo","ma","di","wo","do","vr","za"][new Date(k+"T00:00:00").getDay()]; }catch(e){ return ""; } }
+
+/* Verzamel de gegevens van de afgelopen N dagen (default 7). */
+function weekTotalen(dagen){
+  dagen = dagen||7;
+  var H=S.historie||{}; var lijst=[]; var nu=new Date();
+  for(var i=dagen-1;i>=0;i--){
+    var dt=new Date(nu.getTime()-i*86400000); var k=dt.toISOString().slice(0,10);
+    lijst.push({datum:k, rec:H[k]||{xp:0,sec:0,goed:{},fout:{}}});
+  }
+  var totSec=0, totXp=0, actief=0, doelDagen=0, perDomein={}, gTot=0, fTot=0;
+  var doel=(S.oefendoel&&S.oefendoel.minPerDag)||0;
+  lijst.forEach(function(x){
+    var r=x.rec, sec=r.sec||0, goedN=0;
+    totSec+=sec; totXp+=(r.xp||0);
+    Object.keys(r.goed||{}).forEach(function(sp){ var n=r.goed[sp]||0; goedN+=n; perDomein[sp]=perDomein[sp]||{goed:0,fout:0}; perDomein[sp].goed+=n; gTot+=n; });
+    Object.keys(r.fout||{}).forEach(function(sp){ var n=r.fout[sp]||0; perDomein[sp]=perDomein[sp]||{goed:0,fout:0}; perDomein[sp].fout+=n; fTot+=n; });
+    var actiefVandaag = sec>=30 || goedN>0;
+    if(actiefVandaag) actief++;
+    if(doel && _rapMin(sec)>=doel) doelDagen++;
+  });
+  var gemPct = (gTot+fTot)>0 ? Math.round(100*gTot/(gTot+fTot)) : null;
+  return {lijst:lijst, dagen:dagen, totSec:totSec, totMin:_rapMin(totSec), totXp:totXp, actief:actief, doelDagen:doelDagen, doel:doel, perDomein:perDomein, gemPct:gemPct};
+}
+
+/* Bareka-samenvatting: hoeveel rekensommen op power/speed staan. */
+function barekaSamenvatting(){
+  var pool = (typeof rmPool==="function") ? rmPool() : [];
+  var tel={speed:0,power:0,bijna:0,nogOefenen:0,nieuw:0}, geoefend=0;
+  pool.forEach(function(s){ var st=somStatus(s); tel[st]=(tel[st]||0)+1; if(st!=="nieuw") geoefend++; });
+  return {tel:tel, geoefend:geoefend, totaal:pool.length};
+}
+
+function _rapKaart(num, label){ return '<div style="flex:1;min-width:90px;background:#f4f8ee;border:2px solid var(--accent2,#8ac66a);border-radius:14px;padding:.6em;text-align:center"><div style="font-size:1.7rem;font-weight:800;color:#2b6a1f">'+num+'</div><div class="klein">'+label+'</div></div>'; }
+
+/* De volledige rapport-body (herbruikbaar in de app-overlay én in het losse bestand). */
+function weekrapportBody(){
+  var w=weekTotalen(7), b=barekaSamenvatting();
+  var naam=S.naam||"—";
+  var periode=_rapDatumNL(w.lijst[0].datum)+" t/m "+_rapDatumNL(w.lijst[w.lijst.length-1].datum);
+  var gem = w.gemPct===null ? "—" : w.gemPct+"%";
+  // Balkjes: minuten per dag
+  var maxMin=Math.max(w.doel||0,1); w.lijst.forEach(function(x){ var m=_rapMin(x.rec.sec); if(m>maxMin) maxMin=m; });
+  var bars=w.lijst.map(function(x){
+    var m=_rapMin(x.rec.sec), h=Math.round(4+(m/maxMin)*66), haalt=w.doel&&m>=w.doel;
+    return '<div style="flex:1;text-align:center"><div class="klein" style="height:1em">'+(m||"")+'</div>'
+      +'<div style="margin:2px auto 0;width:60%;height:'+h+'px;border-radius:5px 5px 0 0;background:'+(haalt?"#3ab54a":"#9ec6f0")+'"></div>'
+      +'<div class="klein" style="margin-top:2px">'+_rapWeekdag(x.datum)+'</div></div>';
+  }).join("");
+  var doelregel = w.doel ? '<div class="klein" style="text-align:center;margin-top:.2em">Groene balk = oefendoel ('+w.doel+' min) gehaald · deze week '+w.doelDagen+'/'+w.dagen+' dagen gehaald</div>' : '';
+
+  // Per-domein tabel
+  var rijen=RAP_VOLGORDE.filter(function(sp){ return w.perDomein[sp]; }).map(function(sp){
+    var d=w.perDomein[sp], tot=d.goed+d.fout, pct=tot>0?Math.round(100*d.goed/tot):0;
+    var kleur = pct>=80?"#3ab54a":pct>=60?"#f5a623":"#e07b53";
+    var bar='<div style="background:#eee;border-radius:6px;height:12px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+kleur+'"></div></div>';
+    return '<tr><td><b>'+(RAP_NAMEN[sp]||sp)+'</b></td><td style="text-align:center">'+d.goed+'</td><td style="min-width:90px">'+bar+'</td><td style="text-align:right">'+pct+'%</td></tr>';
+  }).join("");
+  if(!rijen) rijen='<tr><td colspan="4" class="klein">Nog geen antwoorden deze week — laat je kind een spel spelen.</td></tr>';
+
+  // Bareka
+  var bk='<div class="klein" style="margin:.3em 0">'
+    + '<b>'+b.geoefend+'</b> van '+b.totaal+' rekensommen al geoefend · '
+    + '<span style="color:#3ab54a">gekend/supersnel: '+(b.tel.power+b.tel.speed)+'</span> · '
+    + '<span style="color:#f5a623">bijna: '+b.tel.bijna+'</span> · '
+    + '<span style="color:#e07b53">nog oefenen: '+b.tel.nogOefenen+'</span></div>';
+
+  return ''
+    + '<div style="text-align:center;margin-bottom:.4em"><div style="font-size:1.2rem;font-weight:800">📊 Weekrapport — '+naam+'</div><div class="klein">'+periode+' · groep '+S.groep+'</div></div>'
+    + '<div class="rij" style="gap:.5em;flex-wrap:wrap;margin:.4em 0">'
+      + _rapKaart(w.actief+'/'+w.dagen, "dagen geoefend")
+      + _rapKaart(w.totMin, "minuten totaal")
+      + _rapKaart("+"+w.totXp, "XP erbij")
+      + _rapKaart(gem, "gem. goed")
+    + '</div>'
+    + '<h3 style="margin:.6em 0 .2em">Oefentijd per dag</h3>'
+    + '<div class="rij" style="align-items:flex-end;gap:4px;height:96px;padding:.2em .1em;background:#fafcff;border-radius:12px">'+bars+'</div>'
+    + doelregel
+    + '<h3 style="margin:.7em 0 .2em">Per onderdeel — hoeveel goed</h3>'
+    + '<table class="oudertabel" style="width:100%"><thead><tr><th style="text-align:left">Onderdeel</th><th>goed</th><th></th><th>%</th></tr></thead><tbody>'+rijen+'</tbody></table>'
+    + '<h3 style="margin:.7em 0 .2em">Rekenen — beheersing (Bareka-stijl)</h3>'+bk;
+}
+
+function oefendoelHtml(){
+  var doel=(S.oefendoel&&S.oefendoel.minPerDag)||0;
+  var vandaagMin=_rapMin((S.historie&&S.historie[vandaagStr()]&&S.historie[vandaagStr()].sec)||0);
+  var pct=doel?Math.min(100,Math.round(100*vandaagMin/doel)):0;
+  var haalt=doel&&vandaagMin>=doel;
+  return '<div class="sectie" style="background:#eef6ff;border:2px solid #9ec6f0">'
+    + '<b>🎯 Oefendoel</b> <span class="klein">— '+(doel? doel+' minuten per dag':'geen doel ingesteld')+'</span>'
+    + (doel? '<div style="margin:.4em 0;background:#fff;border-radius:8px;height:16px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+(haalt?"#3ab54a":"#37a0e0")+'"></div></div>'
+        + '<div class="klein">Vandaag: '+vandaagMin+' / '+doel+' min'+(haalt?' — gehaald! 🎉':'')+'</div>' : '')
+    + '<div class="rij" style="margin-top:.4em"><button class="mini" onclick="openOefendoel()">Doel aanpassen</button></div></div>';
+}
+
+function openWeekrapport(){
+  var html = weekrapportBody()
+    + oefendoelHtml()
+    + '<p class="klein" style="margin-top:.6em">🔒 Dit rapport wordt volledig op dit toestel berekend. Er gaat niets naar internet.</p>'
+    + '<div class="rij" style="flex-wrap:wrap;margin-top:.4em">'
+      + '<button class="knop" onclick="printWeekrapport()">🖨️ Print / opslaan als PDF</button>'
+      + '<button onclick="downloadWeekrapport()">⬇️ Download rapport</button>'
+      + '<button onclick="ouderScherm()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar ouders</button>'
+    + '</div>';
+  openOverlay(html);
+}
+
+function openOefendoel(){
+  var doel=(S.oefendoel&&S.oefendoel.minPerDag)||0;
+  var knoppen=[0,5,10,15,20,30].map(function(m){
+    var actief=m===doel;
+    return '<button class="'+(actief?'knop':'mini')+'" onclick="zetOefendoel('+m+')">'+(m===0?'Geen':m+' min')+'</button>';
+  }).join("");
+  openOverlay('<h2>🎯 Oefendoel instellen</h2>'
+    + '<p class="klein">Kies hoeveel minuten je kind per dag mag oefenen als doel. Het weekrapport laat zien op welke dagen het doel gehaald is. Dit is een zacht doel — de app blijft altijd vrij spelen.</p>'
+    + '<div class="rij" style="flex-wrap:wrap">'+knoppen+'</div>'
+    + '<div class="rij" style="margin-top:.6em"><button onclick="openWeekrapport()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar weekrapport</button></div>');
+}
+function zetOefendoel(m){
+  if(!S.oefendoel) S.oefendoel={};
+  S.oefendoel.minPerDag=m; bewaarState();
+  toonToast(m?("Oefendoel: "+m+" min/dag"):"Oefendoel uit");
+  openWeekrapport();
+}
+
+/* Standalone HTML-versie voor print en download (los, offline te bewaren). */
+function weekrapportStandalone(){
+  var naam=(S.naam||"kind");
+  var body=weekrapportBody();
+  var css="body{font-family:system-ui,Segoe UI,Roboto,sans-serif;color:#222;max-width:720px;margin:24px auto;padding:0 16px;line-height:1.4}"
+    + "h3{margin:.9em 0 .3em;font-size:1.05rem}table{width:100%;border-collapse:collapse;font-size:.95rem}"
+    + "td,th{padding:.28em .4em;border-bottom:1px solid #eee}.klein{font-size:.8rem;color:#555}"
+    + ".rij{display:flex}.sectie{padding:.6em;border-radius:12px;margin:.5em 0}"
+    + ".merk{color:#888;font-size:.75rem;text-align:center;margin-top:1.5em}"
+    + "@media print{button{display:none}}";
+  return '<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    + '<title>Weekrapport '+naam+' — Archito</title><style>'+css+'</style></head><body>'
+    + body
+    + '<p class="klein" style="margin-top:1em">🔒 Volledig lokaal berekend op het toestel — geen accounts, geen tracking, geen server.</p>'
+    + '<p class="merk">Archito · leerapp voor beelddenkers &amp; kinderen met dyslexie · v'+APP_VERSIE+'</p>'
+    + '</body></html>';
+}
+function printWeekrapport(){
+  try{
+    var doc=weekrapportStandalone();
+    var w=window.open("", "_blank");
+    if(w && w.document){ w.document.open(); w.document.write(doc); w.document.close(); w.focus();
+      setTimeout(function(){ try{ w.print(); }catch(e){} }, 500); return; }
+  }catch(e){}
+  downloadWeekrapport();   // terugval als pop-ups geblokkeerd zijn
+}
+function downloadWeekrapport(){
+  try{
+    var doc=weekrapportStandalone();
+    var blob=new Blob([doc],{type:"text/html"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url; a.download="weekrapport-"+(S.naam||"kind")+"-"+vandaagStr()+".html";
+    if(document.body){ document.body.appendChild(a); a.click(); document.body.removeChild(a); }
+    setTimeout(function(){ try{ URL.revokeObjectURL(url); }catch(e){} }, 1500);
+    toonToast("Weekrapport opgeslagen 📄");
+  }catch(e){ toonFout("Download weekrapport mislukt: "+e.message); }
+}
+
+/* =========================================================================
+   PRIVACY- & NICHE-BELOFTEN (US-beloften) — vertrouwen vooraan zetten.
+   Drie kernbeloften, herbruikbaar op start-, ouder- en premiumscherm.
+   ========================================================================= */
+var BELOFTEN = [
+  {ico:'<img src="ui/menu-slot.png" alt="" style="width:30px;height:30px;object-fit:contain;vertical-align:middle">', titel:"Geen accounts, geen tracking", tekst:"Geen inlog, geen server, geen advertenties. Alle gegevens blijven op dit toestel."},
+  {ico:'<img src="ui/mi-brein.png" alt="" style="width:30px;height:30px;object-fit:contain;vertical-align:middle">', titel:"Voor beelddenkers &amp; dyslexie", tekst:"Visueel, rustig en volledig voorleesbaar — met een OpenDyslexic-leesfont."},
+  {ico:'<img src="ui/mi-offline.png" alt="" style="width:30px;height:30px;object-fit:contain;vertical-align:middle">', titel:"Werkt offline", tekst:"Installeer als app en oefen overal, ook zonder internet."}
+];
+function beloftenHtml(stijl){
+  if(stijl==="strip"){
+    var items=BELOFTEN.map(function(b){ return '<span style="white-space:nowrap;margin:0 .5em"><span aria-hidden="true">'+b.ico+'</span> '+b.titel+'</span>'; }).join("");
+    return '<div id="beloftenStrip" class="klein" style="background:#f3f8ff;border:1px solid #cfe0f5;border-radius:12px;padding:.35em .5em;margin:.2em 0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.1em">'
+      + '<span style="opacity:.85">'+items+'</span>'
+      + '<button class="mini" aria-label="Sluit" title="Sluit" style="margin-left:.4em" onclick="sluitBeloften()">✕</button></div>';
+  }
+  var kaarten=BELOFTEN.map(function(b){ return '<div style="flex:1;min-width:150px;background:#f3f8ff;border:2px solid #cfe0f5;border-radius:12px;padding:.6em"><div style="font-size:1.3rem">'+b.ico+'</div><b>'+b.titel+'</b><div class="klein">'+b.tekst+'</div></div>'; }).join("");
+  return '<div class="rij" style="gap:.5em;flex-wrap:wrap;margin:.3em 0">'+kaarten+'</div>';
+}
+function tekenBeloftenStrip(){
+  var vak=document.getElementById("beloftenStrip"); if(!vak) return;
+  if(S.beloftenWeg){ vak.style.display="none"; vak.innerHTML=""; return; }
+  vak.style.display=""; vak.outerHTML=beloftenHtml("strip");
+}
+function sluitBeloften(){ S.beloftenWeg=true; bewaarState(); var vak=document.getElementById("beloftenStrip"); if(vak){ vak.style.display="none"; vak.innerHTML=""; } }
+
+/* =========================================================================
+   "WAAROM DIT WERKT" — korte, niche-gerichte onderbouwing voor ouders.
+   Drie pijlers met bronvermelding, toegespitst op dyslexie/beelddenken.
+   ========================================================================= */
+function openWaaromWerkt(){
+  var html = '<h2>🔬 Waarom dit werkt</h2>'
+    + '<p class="klein">Archito is geen "alles-voor-iedereen"-app. We kiezen bewust voor diepte in één groep: beelddenkers en kinderen met (mogelijke) dyslexie. Dat zie je terug in drie onderbouwde keuzes.</p>'
+
+    + '<div class="sectie"><b>🧠 1. Multisensorisch leren</b>'
+    + '<p class="klein">Leren via beeld, geluid én doen tegelijk helpt kinderen met dyslexie om woorden en getallen te verankeren. Daarom is bij ons vrijwel alles visueel, kun je alles laten voorlezen, en zijn er doe-puzzels in plaats van alleen leeswerk. Dit sluit aan bij de multisensoriële, gestructureerde aanpak (Orton-Gillingham) die internationaal wordt aanbevolen bij dyslexie.</p>'
+    + '<p class="klein">Bron: International Dyslexia Association — <i>Multisensory Structured Language Education</i> (dyslexiaida.org).</p></div>'
+
+    + '<div class="sectie"><b>📖 2. Leescomfort bij dyslexie</b>'
+    + '<p class="klein">Een rustiger lettertype, meer regel- en woordafstand en de mogelijkheid om alles te laten voorlezen verlagen de leesdrempel, zodat het kind energie overhoudt voor het leren zelf. Archito heeft daarom een instelbaar OpenDyslexic-leesfont, ruimere spatiëring en voorlezen op elk scherm.</p>'
+    + '<p class="klein">Bron: Stichting Dyslexie Nederland (SDN) en het <i>Protocol Leesproblemen en Dyslexie</i> (Expertisecentrum Nederlands).</p></div>'
+
+    + '<div class="sectie"><b>🔁 3. Herhalen met tussenpozen (spaced repetition)</b>'
+    + '<p class="klein">Kennis beklijft beter als je haar met tussenpozen herhaalt in plaats van in één keer stampt — het zogenoemde <i>spacing-effect</i>. De Rekenmijn gebruikt daarom een Bareka-geïnspireerd model: foute sommen komen vaker terug, gekende sommen worden licht onderhouden, en het kind ziet de groei op "Mijn muur".</p>'
+    + '<p class="klein">Bron: Cepeda, Pashler, Vul, Wixted &amp; Rohrer (2006), <i>Distributed practice in verbal recall tasks</i>, Psychological Bulletin; rekenmodel geïnspireerd op Bareka.</p></div>'
+
+    + '<p class="klein">Kort samengevat: minder tekst, meer beeld en geluid, en slim herhalen — precies wat deze doelgroep nodig heeft.</p>'
+    + '<div class="rij"><button onclick="ouderScherm()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar ouders</button></div>';
   openOverlay(html);
 }
 
@@ -1667,7 +2366,7 @@ function rmTeken(){
   inh.innerHTML='<div class="midden">'
     + '<div class="klein" id="rmBadge">'+levelBadge("reken")+'</div>'
     + '<div class="steenblok" id="rmBlok">'+somDisplay(s)+' = ?</div>'
-    + '<button onclick="rmLees()">🔊 Lees voor</button>'
+    + '<button onclick="rmLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
     + '<div class="antwoorden" id="rmAntw"></div>'
     + '<div class="feedback" id="rmFb"></div>'
     + '<div id="rmHint"></div>'
@@ -1692,7 +2391,7 @@ function rmKies(val){
     goedAntwoordLevel("reken"); dagquestVoortgang("reken"); bewaarState();
     toonVerder(rmVolgende);   // US-05: kind gaat zelf verder
   } else {
-    st.fout++; speelGeluid("bijna");
+    st.fout++; noteerFout("reken"); speelGeluid("bijna");
     if(fb){ fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna"); }
     if(blok){ blok.classList.add("schud"); setTimeout(function(){ blok.classList.remove("schud"); },350); }
     rmHintTonen(); bewaarState();   // automatische visuele hint bij fout
@@ -1756,12 +2455,77 @@ function toonMuur(vanuit){
   }).join("");
   // Duidelijke terugkeer: naar het ouderscherm indien vandaar geopend, anders overlay sluiten.
   var terug = (vanuit==="ouders")
-    ? '<button class="groot" onclick="ouderScherm()"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug naar ouders</button>'
-    : '<button class="groot" onclick="sluitOverlay()"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug naar het spel</button>';
-  openOverlay('<h2>🧱 Mijn muur</h2><p class="klein">'+legenda+'</p><div>'+chips+'</div><div class="rij" style="justify-content:center;margin-top:.8em">'+terug+'</div>');
+    ? '<button class="groot" onclick="ouderScherm()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar ouders</button>'
+    : '<button class="groot" onclick="sluitOverlay()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Terug naar het spel</button>';
+  var bk=barekaSamenvatting(); var gekend=bk.tel.power+bk.tel.speed;
+  var trots = '<p class="blij" style="text-align:center;margin:.2em 0">'+(gekend>0?('Je hebt al <b>'+gekend+'</b> sommen gekend — knap gedaan! 🎉'):'Elke gekleurde steen is iets wat jij oefent. Zo groeit je muur! 💪')+'</p>';
+  openOverlay('<h2>🧱 Mijn muur</h2>'+trots+'<p class="klein">'+legenda+'</p><div>'+chips+'</div><div class="rij" style="justify-content:center;margin-top:.8em">'+terug+'</div>');
 }
 
 function _shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* =====================  SPRINTDUEL / GEESTEN-RACE  =====================
+   "Iedereen wint" zonder server: je racet 60 seconden tegen je eigen vorige
+   besttijd (de 'geest'). Geen ranglijst, geen verliezers — elke ronde levert
+   munten op. Later eventueel uit te breiden naar een duel tussen twee profielen
+   op hetzelfde toestel of een anonieme koppelcode. */
+var _sp=null;
+function sprintBestVan(){ if(!S.sprintBest) S.sprintBest={}; return S.sprintBest[S.niveau]||null; }
+function sprintSecOver(){ return _sp ? Math.max(0, Math.ceil((_sp.eind-Date.now())/1000)) : 0; }
+function startSprint(){
+  var pool=(typeof rmPool==="function")?rmPool():[]; if(!pool.length){ toonToast("Nog geen sommen beschikbaar."); return; }
+  if(_sp&&_sp.timer){ try{ clearInterval(_sp.timer); }catch(e){} }
+  _sp={pool:pool, goed:0, fout:0, som:null, eind:Date.now()+60000, timer:null};
+  sprintVolgende();
+  try{ _sp.timer=setInterval(sprintTik, 250); }catch(e){}
+}
+function sprintVolgende(){ if(!_sp) return; _sp.som=_sp.pool[Math.floor(Math.random()*_sp.pool.length)]; sprintTeken(); }
+function sprintTeken(){
+  if(!_sp) return; var s=_sp.som, best=sprintBestVan();
+  var html='<div class="midden"><h2>⚡ Sprintduel</h2>'
+    + '<div class="rij" style="justify-content:space-between;max-width:320px;margin:0 auto"><span class="klein">⏱️ <b id="spTijd">'+sprintSecOver()+'</b>s</span>'
+      + '<span class="klein">✅ <b id="spGoed">'+_sp.goed+'</b></span>'
+      + '<span class="klein">👻 record: '+(best?best.aantal:'—')+'</span></div>'
+    + '<div class="steenblok" style="margin:.5em auto" id="spBlok">'+somDisplay(s)+' = ?</div>'
+    + '<div class="antwoorden" id="spAntw"></div></div>';
+  openOverlay(html);
+  var an=document.getElementById("spAntw");
+  rmOpties(s).forEach(function(o){ var b=document.createElement("button"); b.textContent=o; b.onclick=(function(v){return function(){ sprintKies(v); };})(o); an&&an.appendChild(b); });
+  var sl=document.querySelector("#overlay .sluit"); if(sl) sl.onclick=function(){ sprintStop(); sluitOverlay(); };
+}
+function sprintKies(v){
+  if(!_sp) return;
+  if(sprintSecOver()<=0){ sprintEinde(); return; }
+  if(v===somAntwoord(_sp.som)){ _sp.goed++; speelGeluid("goed"); noteerAntwoord("reken",true); geefXp(2); }
+  else { _sp.fout++; speelGeluid("bijna"); noteerFout("reken"); }
+  var g=document.getElementById("spGoed"); if(g) g.textContent=_sp.goed;
+  sprintVolgende();
+}
+function sprintTik(){
+  if(!_sp) return;
+  var o=(typeof document!=="undefined")&&document.getElementById("overlay");
+  if(o && o.classList && !o.classList.contains("actief")){ sprintStop(); return; }   // overlay gesloten → netjes stoppen
+  var over=sprintSecOver(); var t=document.getElementById("spTijd"); if(t) t.textContent=over;
+  if(over<=0) sprintEinde();
+}
+function sprintStop(){ if(_sp&&_sp.timer){ try{ clearInterval(_sp.timer); }catch(e){} } _sp=null; }
+function sprintEinde(){
+  if(!_sp) return;
+  if(_sp.timer){ try{ clearInterval(_sp.timer); }catch(e){} }
+  var goed=_sp.goed, best=sprintBestVan(), record=!best||goed>best.aantal;
+  if(!S.sprintBest) S.sprintBest={};
+  if(record && goed>0) S.sprintBest[S.niveau]={aantal:goed, datum:vandaagStr()};
+  var beloning=3+goed; geefValuta(beloning); telOp("minigame"); speelGeluid("schat"); bewaarState();
+  var kop = (record&&goed>0) ? '🏆 Nieuw record!' : '⚡ Goed gesprint!';
+  var vgl = best ? ((record&&goed>0)?'Je verbrak je oude record van '+best.aantal+'!':'Je record staat op '+best.aantal+' — volgende keer pak je \'m!') : 'Dit is meteen je eerste record!';
+  _sp=null;
+  openOverlay('<div class="midden"><h2>'+kop+'</h2>'
+    + '<p style="font-size:1.2rem">Je had <b>'+goed+'</b> goed in 60 seconden.</p>'
+    + '<p class="blij">'+vgl+'</p>'
+    + '<p>Iedereen wint: <b>+'+beloning+' '+THEMA.valutaNaam+'</b> 🎁</p>'
+    + '<div class="rij" style="justify-content:center"><button class="groot" onclick="startSprint()">⚡ Nog een keer</button>'
+    + '<button onclick="sluitOverlay();naarStart()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em">Klaar</button></div></div>');
+}
 
 /* =====================  SPELLINGSMEDERIJ  ===================== */
 var _sm={woord:null, gebouwd:[], fase:"foto"};
@@ -1773,7 +2537,7 @@ function smTekenFoto(){
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("spelling")+'</div>'
    +'<p>Fotografeer het woord met je ogen 📸</p>'
    +'<div style="display:inline-block;background:#fff;border:8px solid #eee;box-shadow:0 6px 18px #0004;padding:1.2em 1.6em;border-radius:6px"><span style="font-family:var(--leesfont);font-size:2rem;letter-spacing:.12em">'+w.w+'</span><br><span class="klein">📷</span></div>'
-   +'<p><button onclick="smLees()">🔊 Luister</button> <button onclick="smLeesLangzaam()">🐢 Langzaam</button></p>'
+   +'<p><button onclick="smLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Luister</button> <button onclick="smLeesLangzaam()">🐢 Langzaam</button></p>'
    +'<p><button class="groot" onclick="smNaarBouwen()">Ik heb de foto! Bouwen ➡️</button></p></div>';
   zeg(w.w);
 }
@@ -1787,7 +2551,7 @@ function smTekenBouwen(){
    +'<div class="steenblok" id="smGebouwd" style="min-height:1.4em">'+(_sm.gebouwd.join("")||"…")+'</div>'
    +'<div class="rij" style="justify-content:center" id="smBlokken"></div>'
    +'<div class="feedback" id="smFb"></div>'
-   +'<p><button onclick="smLees()">🔊 Luister</button> <button onclick="smLeesLangzaam()">🐢 Langzaam</button> <button onclick="smNaarBouwen()">↩️ Opnieuw</button></p></div>';
+   +'<p><button onclick="smLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Luister</button> <button onclick="smLeesLangzaam()">🐢 Langzaam</button> <button onclick="smNaarBouwen()">↩️ Opnieuw</button></p></div>';
   inh.innerHTML=html;
   var vak=document.getElementById("smBlokken");
   blokken.forEach(function(d){ var b=document.createElement("button"); b.textContent=d; b.style.fontSize="1.4rem";
@@ -1806,30 +2570,40 @@ function smControleer(){
     geefValuta(1); goedAntwoordLevel("spelling"); dagquestVoortgang("woord"); zeg(_sm.woord.w); bewaarState();
     _sm.fase="bonus"; setTimeout(smTekenBonus, 700);
   } else {
-    speelGeluid("bijna"); if(fb){ fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna"); }
+    speelGeluid("bijna"); noteerFout("spelling"); if(fb){ fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna"); }
     _sm.gebouwd=[]; var g=document.getElementById("smGebouwd"); if(g) g.textContent="…";
   }
   return goed;
 }
+/* Achterstevoren = het woord LETTER VOOR LETTER omgekeerd (patat → tatap).
+   Daarom lettertegels i.p.v. klankdelen; anders zou je een niet-kloppende omkering krijgen. */
+function smAchterDoel(){ return (_sm.woord.w||"").split("").reverse().join(""); }
 function smTekenBonus(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return;
+  var letters=(_sm.woord.w||"").split("");
+  if(letters.length<3){ smVolgende(); return; }   // te kort voor een zinvolle omkering → volgend woord
   _sm.gebouwd=[];
-  inh.innerHTML='<div class="midden"><h3>✨ Bonus: achterstevoren!</h3><p>Leg '+_sm.woord.w+' achterstevoren (+2)</p>'
+  inh.innerHTML='<div class="midden"><h3>✨ Bonus: achterstevoren!</h3><p>Leg <b>'+_sm.woord.w+'</b> achterstevoren — letter voor letter (+2)</p>'
    +'<div class="steenblok" id="smGebouwd">…</div><div class="rij" style="justify-content:center" id="smBlokken"></div>'
-   +'<div class="feedback" id="smFb"></div><p><button onclick="smVolgende()">Overslaan ➡️</button></p></div>';
+   +'<div class="feedback" id="smFb"></div><p><button onclick="smBonusLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button> <button onclick="smVolgende()">Overslaan ➡️</button></p></div>';
   var vak=document.getElementById("smBlokken");
-  _shuffle(_sm.woord.delen).forEach(function(d){ var b=document.createElement("button"); b.textContent=d; b.style.fontSize="1.4rem"; b.onclick=function(){ smBonusKies(d); }; vak&&vak.appendChild(b); });
+  _shuffle(letters).forEach(function(ltr){ var b=document.createElement("button"); b.textContent=ltr; b.style.fontSize="1.4rem"; b.style.minWidth="52px"; b.onclick=function(){ smBonusKies(ltr, b); }; vak&&vak.appendChild(b); });
 }
-function smBonusKies(deel){
-  _sm.gebouwd.push(deel); var g=document.getElementById("smGebouwd"); if(g) g.textContent=_sm.gebouwd.join("");
-  if(_sm.gebouwd.length>=_sm.woord.delen.length) smBonusControleer();
+function smBonusLees(){ var d=smAchterDoel(); zeg(d.split("").join(" ")); }   // spel de omgekeerde letters
+function smBonusKies(letter, knop){
+  _sm.gebouwd.push(letter); if(knop){ knop.disabled=true; }
+  var g=document.getElementById("smGebouwd"); if(g) g.textContent=_sm.gebouwd.join("");
+  if(_sm.gebouwd.join("").length >= (_sm.woord.w||"").length) smBonusControleer();
 }
 function smBonusControleer(){
-  var achterstevoren=_sm.woord.delen.slice().reverse().join("");
-  var goed=_sm.gebouwd.join("")===achterstevoren;
+  var goed=_sm.gebouwd.join("")===smAchterDoel();
   var fb=document.getElementById("smFb");
   if(goed){ speelGeluid("schat"); if(fb){fb.className="feedback goed"; fb.textContent="Knap! +2 ✨";} geefValuta(2); bewaarState(); toonVerder(smVolgende); }
-  else { if(fb){fb.className="feedback bijna"; fb.textContent="Bijna! Nog eens of sla over.";} _sm.gebouwd=[]; var g=document.getElementById("smGebouwd"); if(g)g.textContent="…"; }
+  else {
+    if(fb){fb.className="feedback bijna"; fb.textContent="Bijna! Probeer nog eens of sla over.";}
+    _sm.gebouwd=[]; var g=document.getElementById("smGebouwd"); if(g)g.textContent="…";
+    var vak=document.getElementById("smBlokken"); if(vak){ Array.prototype.forEach.call(vak.querySelectorAll("button"), function(b){ b.disabled=false; }); }
+  }
   return goed;
 }
 
@@ -1893,7 +2667,7 @@ function bmTeken(){
   if(o.svg) html+='<div>'+o.svg+'</div>';
   html+='<div class="sectie">'+o.vraag+'</div>';
   if(o.visueel) html+='<div>'+o.visueel+'</div>';
-  html+='<button onclick="bmLees()">🔊 Lees voor</button><div class="antwoorden" id="bmAntw"></div><div class="feedback" id="bmFb"></div></div>';
+  html+='<button onclick="bmLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button><div class="antwoorden" id="bmAntw"></div><div class="feedback" id="bmFb"></div></div>';
   inh.innerHTML=html;
   var an=document.getElementById("bmAntw");
   bmOpties(o).forEach(function(v){ var b=document.createElement("button"); b.textContent=v; b.onclick=function(){ bmKies(v); }; an&&an.appendChild(b); });
@@ -1903,7 +2677,7 @@ function bmKies(v){
   var o=_bm.opgave; var goed = (""+v)===(""+o.goed);
   var fb=document.getElementById("bmFb");
   if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("verhaal"); bewaarState(); toonVerder(bmVolgende); }
-  else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} }
+  else { speelGeluid("bijna"); noteerFout("verhaal"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} }
   return goed;
 }
 
@@ -1930,12 +2704,12 @@ function flTeken(flits){
 function flKies(w){
   var goed = w===_fl.item.w; var fb=document.getElementById("flFb");
   if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); goedAntwoordLevel("flits"); dagquestVoortgang("flits"); bewaarState(); toonVerder(flVolgende); }
-  else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent="Het was: "+_fl.item.w;} var wv=document.getElementById("flWoord"); if(wv) wv.textContent=_fl.item.w; }
+  else { speelGeluid("bijna"); noteerFout("flits"); if(fb){fb.className="feedback bijna"; fb.textContent="Het was: "+_fl.item.w;} var wv=document.getElementById("flWoord"); if(wv) wv.textContent=_fl.item.w; }
   return goed;
 }
 
 /* =====================  FOTOMEMORY  ===================== */
-var _mem={kaarten:[], open:[], gevonden:0, bezig:false};
+var _mem={kaarten:[], open:[], gevonden:0, bezig:false, flipIdx:-1};
 function memAantalParen(){ var lv=haalLevel("memory").level; return lv<20?4:lv<60?6:8; }
 function startMemory(){
   var p=MEMORY.filter(function(m){ return m.niveau<=S.niveau; });
@@ -1949,19 +2723,29 @@ function startMemory(){
 }
 function memTeken(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return;
-  var html='<div class="midden"><p>Zoek de paren 🃏 ('+_mem.gevonden+'/'+(_mem.kaarten.length/2)+')</p><div class="grid" id="memGrid" style="grid-template-columns:repeat(4,1fr)"></div><div class="feedback" id="memFb"></div></div>';
+  var kol = _mem.kaarten.length<=8 ? 4 : (_mem.kaarten.length<=12 ? 4 : 4);
+  var html='<div class="midden"><p>Zoek de paren 🃏 ('+_mem.gevonden+'/'+(_mem.kaarten.length/2)+')</p><div class="memgrid" id="memGrid" style="grid-template-columns:repeat('+kol+',1fr)"></div><div class="feedback" id="memFb"></div></div>';
   inh.innerHTML=html; var g=document.getElementById("memGrid");
-  _mem.kaarten.forEach(function(kaart,i){ var d=document.createElement("div"); d.className="spelknop";
+  _mem.kaarten.forEach(function(kaart,i){
+    var d=document.createElement("div"); d.className="memkaart";
     var zichtbaar = kaart.gevonden || _mem.open.indexOf(i)>=0;
-    var voor = !zichtbaar ? "❔" : (kaart.type==="plaatje" && kaart.afb ? beeldTag(kaart.afb, kaart.woord, null, "width:64px;height:64px;object-fit:contain") : kaart.inhoud);
-    d.innerHTML='<span class="ico">'+voor+'</span>';
-    if(kaart.gevonden) d.style.opacity="0.6";
-    d.onclick=function(){ memKlik(i); }; g&&g.appendChild(d); });
+    if(!zichtbaar){ d.className+=" dicht"; }
+    else {
+      var inhoud;
+      if(kaart.type==="plaatje"){ inhoud = kaart.afb ? '<img src="'+kaart.afb+'" style="width:78px;height:78px;object-fit:contain">' : contentBeeld(kaart.woord, kaart.inhoud, 78); }
+      else { inhoud = '<span class="memwoord">'+kaart.inhoud+'</span>'; }
+      d.innerHTML='<span class="inhoud">'+inhoud+'</span>';
+      if(i===_mem.flipIdx) d.className+=" flipnu";
+      if(kaart.gevonden) d.className+=" gevonden raak";
+    }
+    d.onclick=function(){ memKlik(i); }; g&&g.appendChild(d);
+  });
+  _mem.flipIdx=-1;
 }
 function memKlik(i){
   if(_mem.bezig) return; var kaart=_mem.kaarten[i];
   if(kaart.gevonden || _mem.open.indexOf(i)>=0) return;
-  _mem.open.push(i); zeg(kaart.woord); memTeken();
+  _mem.open.push(i); _mem.flipIdx=i; zeg(kaart.woord); memTeken();
   if(_mem.open.length===2){
     var a=_mem.kaarten[_mem.open[0]], b=_mem.kaarten[_mem.open[1]];
     if(a.paar===b.paar){ a.gevonden=b.gevonden=true; _mem.gevonden++; _mem.open=[]; speelGeluid("paar"); geefValuta(1); bewaarState();
@@ -1996,20 +2780,71 @@ function tlTeken(){
   var an=document.getElementById("tlAntw");
   _tl.opties.forEach(function(w){ var rij=document.createElement("div"); rij.className="rij"; rij.style.justifyContent="center";
     var b=document.createElement("button"); b.textContent=w; b.style.minWidth="150px"; b.onclick=function(){ tlKies(w); };
-    var s=document.createElement("button"); s.textContent="🔊"; s.onclick=function(){ zegTaal(w,_tl.taal); };
+    var s=document.createElement("button"); s.innerHTML='<img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle">'; s.onclick=function(){ zegTaal(w,_tl.taal); };
     rij.appendChild(b); rij.appendChild(s); an&&an.appendChild(rij); });
 }
 function tlKies(w){
   var it=_tl.item; var goed = w===it[_tl.taal]; var fb=document.getElementById("tlFb");
-  if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1);
+  if(goed){ speelGeluid("goed"); noteerAntwoord("taal", true); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");} geefValuta(1); geefXp(4);
     var lv=haalLevel(tlSpelSleutel(),1); lv.teller++; if(lv.teller>=5){lv.teller=0; lv.level++; geefValuta(2); speelGeluid("levelup");}
     zegTaal(it[_tl.taal],_tl.taal); bewaarState(); toonVerder(tlVolgende); }
-  else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} zegTaal(it[_tl.taal],_tl.taal); }
+  else { speelGeluid("bijna"); noteerFout("taal"); if(fb){fb.className="feedback bijna"; fb.textContent=feedbackZin("bijna");} zegTaal(it[_tl.taal],_tl.taal); }
   return goed;
 }
 
 /* =====================  DENKGROT (kritisch denken)  ===================== */
 var _dg={item:null, wonder:false, beeld:false};
+/* =========================================================================
+   REKENTOPPERS — rekenen op referentieniveau 2F (groep 6, 7 en 8).
+   De gewone Rekenmijn doet kale bewerkingen; hier gaat het om breuken, procenten,
+   kommagetallen, verhoudingen, meten en meetkunde, altijd in een verhaaltje.
+   Alleen zichtbaar vanaf groep 6. Elke opgave wordt voorgelezen en na een goed
+   antwoord volgt de uitleg van de rekenstap (belangrijk voor beelddenkers).
+   ========================================================================= */
+var _rt = { item:null };
+function rtPool(){
+  var alles = (typeof REKENTOP !== "undefined") ? REKENTOP : [];
+  // alleen bovenbouwstof, en niet boven het niveau van het kind
+  return alles.filter(function(x){ return x.niveau >= 4 && x.niveau <= S.niveau; });
+}
+function startRekentoppers(){ rtVolgende(); }
+function rtVolgende(){
+  var p = rtPool();
+  if(!p.length){ toonToast("Rekentoppers komt vanaf groep 6."); naarStart(); return; }
+  _rt.item = p[Math.floor(Math.random()*p.length)];
+  rtTeken();
+}
+function rtTeken(){
+  var inh = document.getElementById("spelInhoud"); if(!inh) return; var d = _rt.item;
+  inh.innerHTML = '<div class="midden"><div class="klein">'+levelBadge("rekentop")+'</div>'
+   + '<div class="sectie leestekst"><p>'+d.vraag+'</p></div>'
+   + '<button onclick="rtLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
+   + '<div class="antwoorden lezenantw" id="rtAntw"></div>'
+   + '<div class="feedback" id="rtFb" role="status" aria-live="polite"></div><div id="rtUitleg"></div></div>';
+  var an = document.getElementById("rtAntw");
+  _shuffle(d.opties.slice()).forEach(function(o){
+    var b = document.createElement("button"); b.textContent = o;
+    b.onclick = function(){ rtKies(o); }; an && an.appendChild(b);
+  });
+  zeg(d.vraag);
+}
+function rtLees(){ zeg(_rt.item.vraag); }
+function rtKies(gekozen){
+  var d = _rt.item, fb = document.getElementById("rtFb"), uit = document.getElementById("rtUitleg");
+  if(gekozen === d.goed){
+    speelGeluid("goed");
+    geefValuta(1);
+    goedAntwoordLevel("rekentop");
+    if(fb){ fb.className = "feedback goed"; fb.textContent = feedbackZin("goed"); }
+    if(uit) uit.innerHTML = '<div class="sectie leestekst"><p><b>Zo werkt het:</b> '+d.uitleg+'</p></div>';
+    zeg("Goed! " + d.uitleg);
+    bewaarState(); toonVerder(rtVolgende);
+  } else {
+    speelGeluid("bijna"); noteerFout("rekentop");
+    if(fb){ fb.className = "feedback bijna"; fb.textContent = feedbackZin("bijna"); }
+    zeg("Kijk nog eens goed.");
+  }
+}
 function dgPool(){ return DENKEN.filter(function(d){ return d.niveau<=S.niveau; }); }
 function dgBeeldPool(){ return (typeof BEELD_DENKEN!=="undefined"?BEELD_DENKEN:[]).filter(function(d){ return d.niveau<=S.niveau; }); }
 function startDenkgrot(){ dgVolgende(); }
@@ -2028,11 +2863,15 @@ function dgTekenBeeld(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return; var d=_dg.item;
   var prompt="";
   if(d.toon && d.toon.length){
-    prompt='<div class="beeldprompt">'+d.toon.map(function(t){ return t==="❓"?'<span class="gat">❓</span>':'<span>'+t+'</span>'; }).join('')+'</div>';
+    var cellen = d.toon.map(function(t){ return t==="❓"?'<span class="gat">❓</span>':'<span>'+t+'</span>'; }).join('');
+    // matrixpuzzel: in een raster met het opgegeven aantal kolommen; anders in één rij
+    prompt = d.kolommen
+      ? '<div class="midden"><div class="beeldmatrix" style="grid-template-columns:repeat('+d.kolommen+',auto)">'+cellen+'</div></div>'
+      : '<div class="beeldprompt">'+cellen+'</div>';
   }
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("denken")+'</div>'
    +'<div class="beeldopdracht">'+d.opdracht+'</div>'
-   +'<button onclick="dgLees()">🔊 Lees voor</button>'
+   +'<button onclick="dgLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
    +prompt
    +'<div class="beeldopties" id="dgAntw"></div><div class="feedback" id="dgFb"></div></div>';
   var an=document.getElementById("dgAntw");
@@ -2045,13 +2884,13 @@ function dgKiesBeeld(el, o){
     if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); }
     geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); toonVerder(dgVolgende); }
   else { if(el){ el.className="beeldtegel fout"; setTimeout(function(){ if(el&&el.className.indexOf("raak")<0) el.className="beeldtegel"; },400); }
-    speelGeluid("bijna"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } zeg("Kijk nog eens goed."); }
+    speelGeluid("bijna"); noteerFout("denken"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } zeg("Kijk nog eens goed."); }
   return goed;
 }
 function dgTeken(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return; var d=_dg.item;
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("denken")+'</div>'
-   +'<div class="sectie">'+d.vraag+'</div><button onclick="dgLees()">🔊 Lees voor</button>'
+   +'<div class="sectie">'+d.vraag+'</div><button onclick="dgLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
    +'<div id="dgAntw"></div><div class="feedback" id="dgFb"></div><div id="dgUitleg"></div></div>';
   var an=document.getElementById("dgAntw");
   _shuffle(d.opties).forEach(function(o){ var b=document.createElement("button"); b.textContent=o; b.style.display="block"; b.style.width="100%"; b.onclick=function(){ dgKies(o); }; an&&an.appendChild(b); });
@@ -2070,7 +2909,7 @@ function dgKies(o){
   if(goed){ speelGeluid("goed"); if(fb){fb.className="feedback goed"; fb.textContent=feedbackZin("goed");}
     if(u) u.innerHTML='<div class="sectie"><b>Waarom?</b><br>'+d.uitleg+'</div>';
     geefValuta(1); goedAntwoordLevel("denken"); zeg(d.uitleg); bewaarState(); toonVerder(dgVolgende); }
-  else { speelGeluid("bijna"); if(fb){fb.className="feedback bijna"; fb.textContent="Denk nog eens: klopt dat echt voor élk geval?";} }
+  else { speelGeluid("bijna"); noteerFout("denken"); if(fb){fb.className="feedback bijna"; fb.textContent="Denk nog eens: klopt dat echt voor élk geval?";} }
   return goed;
 }
 
@@ -2083,10 +2922,10 @@ function startBeeldlab(){
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("beeldlab")+'</div>'
    +'<p class="beeldopdracht">Kies een puzzel</p>'
    +'<div class="beeldopties">'
-   +'<button class="beeldtegel" onclick="blStart(\'sorteer\')"><img src="ui/pz-sorteer.png"><div class="bllabel">Op volgorde</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'nabouw\')"><img src="ui/menu-bouw.png"><div class="bllabel">Na-bouwen</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'geheugen\')"><img src="ui/menu-denken.png"><div class="bllabel">Geheugen</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'zoek\')"><img src="ui/pz-zoek.png"><div class="bllabel">Zoekplaat</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'sorteer\')">📊<div class="bllabel">Op volgorde</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'nabouw\')">🧱<div class="bllabel">Na-bouwen</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'geheugen\')">🧠<div class="bllabel">Geheugen</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'zoek\')">🔍<div class="bllabel">Zoekplaat</div></button>'
    +'</div></div>';
 }
 function blStart(modus){
@@ -2097,15 +2936,15 @@ function blStart(modus){
   else if(modus==="geheugen") blTekenGeheugen();
   else if(modus==="zoek") blTekenZoek();
 }
-function blKop(){ return '<div class="rij" style="justify-content:center;gap:.5em"><button class="knop2" onclick="startBeeldlab()">⬅️</button><span class="klein">'+levelBadge("beeldlab")+'</span></div>'; }
+function blKop(){ return '<div class="rij" style="justify-content:center;gap:.5em"><button class="knop2" onclick="startBeeldlab()"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em"></button><span class="klein">'+levelBadge("beeldlab")+'</span></div>'; }
 function blGoed(){ speelGeluid("goed"); geefValuta(1); goedAntwoordLevel("beeldlab"); bewaarState(); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); } zeg(feedbackZin("goed")); toonVerder(function(){ blStart(_bl.modus); }); }
-function blMis(){ speelGeluid("bijna"); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } }
+function blMis(){ speelGeluid("bijna"); noteerFout("beeldlab"); var fb=document.getElementById("blFb"); if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed 👀"; } }
 
 /* ---- Modus 1: Op volgorde (tik/sleep) ---- */
 function blTekenSorteer(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return; var d=_bl.item;
   _bl.pool=_shuffle(d.items.slice()); _bl.antwoord=[];
-  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+'</div><button onclick="zeg(_bl.item.opdracht)">🔊 Lees voor</button>'
+  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+'</div><button onclick="zeg(_bl.item.opdracht)"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
    +'<div class="blrij" id="blAntw"></div><p class="klein">Tik in de goede volgorde</p><div class="blrij" id="blPool"></div><div class="feedback" id="blFb"></div>';
   blSorteerTeken(); zeg(d.opdracht);
 }
@@ -2127,7 +2966,7 @@ function blTekenNabouw(){
   var kleuren={}; d.grid.forEach(function(r){ r.forEach(function(c){ if(c) kleuren[c]=1; }); });
   var pal='<div class="blpal">'+Object.keys(kleuren).map(function(c){ return '<button class="blchip" data-k="'+c+'" style="background:'+BL_KLEUR[c]+'" onclick="blKies(\''+c+'\')"></button>'; }).join('')
     +'<button class="blchip gum" data-k="" onclick="blKies(\'\')">✕</button></div>';
-  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+'</div><button onclick="zeg(_bl.item.opdracht)">🔊 Lees voor</button>'
+  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+'</div><button onclick="zeg(_bl.item.opdracht)"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
    +'<p class="klein">Voorbeeld</p>'+blGridHtml(d.grid,false)
    +'<p class="klein">Kies een kleur en tik in jouw vak</p>'+pal+blGridHtml(_bl.grid,true)
    +'<div class="acties" style="justify-content:center"><button class="knop" onclick="blNabouwControleer()">Klaar!</button></div><div class="feedback" id="blFb"></div>';
@@ -2165,7 +3004,7 @@ function blTekenZoek(){
   _bl.gevonden=[]; _bl._doelTotaal=d.veld.filter(function(x){return x===d.doel;}).length;
   var kols=Math.min(6, Math.ceil(Math.sqrt(d.veld.length)));
   var cellen=d.veld.map(function(x,i){ return '<button class="beeldtegel klein" id="bz'+i+'" onclick="blZoekTik('+i+')">'+x+'</button>'; }).join('');
-  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+' <span class="blteller" id="blTeller">0/'+_bl._doelTotaal+'</span></div><button onclick="zeg(_bl.item.opdracht)">🔊 Lees voor</button>'
+  inh.innerHTML=blKop()+'<div class="beeldopdracht">'+d.opdracht+' <span class="blteller" id="blTeller">0/'+_bl._doelTotaal+'</span></div><button onclick="zeg(_bl.item.opdracht)"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button>'
    +'<div class="blveld" style="grid-template-columns:repeat('+kols+',1fr)">'+cellen+'</div><div class="feedback" id="blFb"></div>';
   zeg(d.opdracht);
 }
@@ -2191,9 +3030,9 @@ function lzTeken(){
   var vr=v.vragen[_lz.idx];
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("lezen")+'</div>'
     +'<div class="sectie leestekst"><h2 class="pix" style="font-size:1.05rem">'+v.titel+'</h2><p>'+v.tekst+'</p>'
-    +'<button onclick="lzLeesVerhaal()">🔊 Lees het verhaal voor</button></div>'
+    +'<button onclick="lzLeesVerhaal()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees het verhaal voor</button></div>'
     +'<div class="beeldopdracht">Vraag '+(_lz.idx+1)+' van '+v.vragen.length+'</div>'
-    +'<div class="sectie"><b>'+vr.vraag+'</b> <button class="mini" onclick="lzLeesVraag()">🔊</button></div>'
+    +'<div class="sectie"><b>'+vr.vraag+'</b> <button class="mini" onclick="lzLeesVraag()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"></button></div>'
     +'<div class="antwoorden lezenantw" id="lzOpties"></div>'
     +'<div class="feedback" id="lzFb"></div><div id="lzUitleg"></div></div>';
   var o=document.getElementById("lzOpties");
@@ -2215,15 +3054,99 @@ function lzKies(val){
     else { toonVerder(startLezen); }   // verhaal uit → volgend verhaal
     return true;
   } else {
-    speelGeluid("bijna"); if(fb){ fb.className="feedback bijna"; fb.textContent="Luister nog eens goed naar het verhaal 👂"; }
+    speelGeluid("bijna"); noteerFout("lezen"); if(fb){ fb.className="feedback bijna"; fb.textContent="Luister nog eens goed naar het verhaal 👂"; }
     lzLeesVerhaal(); return false;
+  }
+}
+
+/* =====================  KLANKENJACHT (klank → letter koppelen)  =====================
+   Plaatje + voorgelezen woord; het kind kiest de juiste letter. Nadruk op de spiegel-letters
+   b/d/p. Data-gestuurd via data/klankletter.js. Geschikt voor groep 3 (beginnend lezen). */
+var _kl = { item:null };
+function klPool(){ return (typeof KLANKLETTER!=="undefined"?KLANKLETTER:[]).filter(function(v){ return v.niveau<=S.niveau; }); }
+function klVraagTekst(it){ return (it.positie==="eind" ? "Met welke letter eindigt " : "Met welke letter begint ") + it.woord + "?"; }
+function startKlankletter(){
+  var p=klPool();
+  if(!p.length){ var inh=document.getElementById("spelInhoud"); if(inh) inh.innerHTML='<p class="klein">Nog geen klanken op dit niveau.</p>'; return; }
+  _kl.item = p[Math.floor(Math.random()*p.length)]; klTeken(); klLees();
+}
+function klTeken(){
+  var inh=document.getElementById("spelInhoud"); if(!inh) return; var it=_kl.item; if(!it) return;
+  inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("klankletter")+'</div>'
+    +'<div class="sectie" style="text-align:center"><div style="line-height:1.2">'+contentBeeld(it.woord, it.plaatje, 96)+'</div>'
+    +'<div class="pix" style="font-size:1.3rem">'+it.woord+'</div>'
+    +'<button onclick="klLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Hoor het woord</button></div>'
+    +'<div class="beeldopdracht">'+klVraagTekst(it)+' <button class="mini" onclick="klLeesVraag()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"></button></div>'
+    +'<div class="antwoorden" id="klOpties"></div>'
+    +'<div class="feedback" id="klFb"></div></div>';
+  var o=document.getElementById("klOpties");
+  _shuffle(it.opties).forEach(function(opt){ var b=document.createElement("button");
+    b.className="letterknop"; b.textContent=opt;
+    b.onclick=(function(val){ return function(){ klKies(val); }; })(opt); o&&o.appendChild(b); });
+}
+function klLees(){ var it=_kl.item; if(it) zeg(it.woord); }
+function klLeesVraag(){ var it=_kl.item; if(it) zeg(klVraagTekst(it)); }
+function klKies(letter){
+  var it=_kl.item; var fb=document.getElementById("klFb");
+  if(letter===it.letter){
+    speelGeluid("goed"); if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed"); }
+    geefValuta(1); goedAntwoordLevel("klankletter"); dagquestVoortgang("flits");
+    zeg("Goed! De "+it.letter+" van "+it.woord+"."); bewaarState();
+    toonVerder(startKlankletter);
+    return true;
+  } else {
+    speelGeluid("bijna"); noteerFout("klankletter");
+    if(fb){ fb.className="feedback bijna"; fb.textContent="Luister nog eens naar het woord 👂"; }
+    klLees(); return false;
+  }
+}
+
+/* =====================  RENLEZER (lees-en-doe)  =====================
+   Korte zin lezen en de juiste actie kiezen. Koppelt lezen aan doen (motiverend, concreet).
+   Data-gestuurd via data/renlezer.js. Voorlezen is een hint, niet standaard aan. */
+var _rl = { item:null, afstand:0 };
+function rlPool(){ return (typeof RENLEZER!=="undefined"?RENLEZER:[]).filter(function(v){ return v.niveau<=S.niveau; }); }
+function startRenlezer(){
+  var p=rlPool();
+  if(!p.length){ var inh=document.getElementById("spelInhoud"); if(inh) inh.innerHTML='<p class="klein">Nog geen zinnen op dit niveau.</p>'; return; }
+  _rl.afstand=0; _rl.item = p[Math.floor(Math.random()*p.length)]; rlTeken();
+}
+function rlTeken(){
+  var inh=document.getElementById("spelInhoud"); if(!inh) return; var it=_rl.item; if(!it) return;
+  inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("renlezer")+'</div>'
+    +'<div class="beeldopdracht">🏁 Afstand: '+_rl.afstand+' meter</div>'
+    +'<div class="sectie" style="text-align:center"><div style="font-size:2.4rem">🏃💨</div></div>'
+    +'<div class="sectie leestekst" style="text-align:center"><p style="font-size:1.15rem">'+it.zin+'</p>'
+    +'<button class="mini" onclick="rlLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Lees voor</button></div>'
+    +'<div class="beeldopdracht">Wat doe je?</div>'
+    +'<div class="antwoorden" id="rlOpties"></div>'
+    +'<div class="feedback" id="rlFb"></div></div>';
+  var o=document.getElementById("rlOpties");
+  _shuffle(it.opties).forEach(function(opt){ var b=document.createElement("button"); b.textContent=opt;
+    b.onclick=(function(val){ return function(){ rlKies(val); }; })(opt); o&&o.appendChild(b); });
+}
+function rlLees(){ var it=_rl.item; if(it) zeg(it.zin); }
+function rlKies(opt){
+  var it=_rl.item; var fb=document.getElementById("rlFb");
+  if(opt===it.goed){
+    speelGeluid("goed"); _rl.afstand += 10;
+    if(fb){ fb.className="feedback goed"; fb.textContent=feedbackZin("goed")+" +10 meter!"; }
+    geefValuta(1); goedAntwoordLevel("renlezer"); dagquestVoortgang("flits");
+    zeg("Goed gelezen!"); bewaarState();
+    toonVerder(function(){ var p=rlPool(); _rl.item=p[Math.floor(Math.random()*p.length)]; rlTeken(); });
+    return true;
+  } else {
+    speelGeluid("bijna"); noteerFout("renlezer");
+    if(fb){ fb.className="feedback bijna"; fb.textContent="Kijk nog eens goed naar de zin 👀"; }
+    rlLees(); return false;
   }
 }
 
 /* =====================  BOUWMODUS (isometrisch, meerdere werelden)  ===================== */
 var BLOKKEN = {
   gras:{prijs:1,kleur:"#8ed36a"}, zand:{prijs:1,kleur:"#f0dc9a"}, straat:{prijs:1,kleur:"#b7b2ad"},
-  water:{prijs:1,kleur:"#6ec3ea"}, steen:{prijs:1,kleur:"#b0aca8"}, rots:{prijs:1,kleur:"#8a7a68"},
+  water:{prijs:1,kleur:"#6ec3ea"}, lava:{prijs:2,kleur:"#e24b4a"},
+  steen:{prijs:1,kleur:"#c9c6c2"}, rots:{prijs:1,kleur:"#8a7a68"},
   hout:{prijs:1,kleur:"#c08a55"}, blad:{prijs:1,kleur:"#69bd54"}, akker:{prijs:2,kleur:"#7b4a24"},
   boom:{prijs:2,emoji:"🌳",afbeelding:"tegels/tegel-boom.png"}, goud:{prijs:3,kleur:"#ffd23f",glans:true}, schatkist:{prijs:5,emoji:"🎁",afbeelding:"tegels/tegel-cadeau.png"},
   kip:{prijs:2,emoji:"🐔",afbeelding:"tegels/tegel-kip.png"}, varken:{prijs:3,emoji:"🐷",afbeelding:"tegels/tegel-varken.png"}, schaap:{prijs:3,emoji:"🐑",afbeelding:"tegels/tegel-schaap.png"}, paard:{prijs:4,emoji:"🐴",afbeelding:"tegels/tegel-paard.png"},
@@ -2244,10 +3167,10 @@ var BLOKKEN = {
    het bouwpalet (geen plaatsbare blokken, alleen groei-beeldjes). */
 var GEWAS = { kiem:{emoji:"🌱"}, wortel:{emoji:"🥕"}, aardbei:{emoji:"🍓"}, mais:{emoji:"🌽"}, appel:{emoji:"🍎"}, druiven:{emoji:"🍇"}, tomaat:{emoji:"🍅"} };
 var GEWAS_RIJP = ["wortel","aardbei","mais","appel","druiven","tomaat"];
-var GEWAS_KANS = 0.06;      // groeikans per beweegtik per akker (langzaam → minimale opbrengst)
-var OOGST_OPBRENGST = 1;    // één diamant per geoogst gewas
-var OOGST_MAX_PER_DAG = 10; // grens: zoveel diamanten kun je per dag uit oogsten verdienen (leren blijft de hoofdbron)
-var HAK_MAX_PER_DAG = 10;   // grens: zoveel diamanten kun je per dag terugverdienen met weghakken
+var GEWAS_KANS = CONFIG.gewasKans != null ? CONFIG.gewasKans : 0.06;             // groeikans per beweegtik per akker (langzaam → minimale opbrengst)
+var OOGST_OPBRENGST = CONFIG.oogstOpbrengst != null ? CONFIG.oogstOpbrengst : 1; // één diamant per geoogst gewas
+var OOGST_MAX_PER_DAG = CONFIG.oogstMaxPerDag != null ? CONFIG.oogstMaxPerDag : 10; // grens: zoveel diamanten kun je per dag uit oogsten verdienen (leren blijft de hoofdbron)
+var HAK_MAX_PER_DAG = CONFIG.hakMaxPerDag != null ? CONFIG.hakMaxPerDag : 10;    // grens: zoveel diamanten kun je per dag terugverdienen met weghakken
 function blokDef(type){ return BLOKKEN[type] || GEWAS[type] || {kleur:"#ccc"}; }
 function bwIsRijp(type){ return !!(GEWAS[type] && type!=="kiem"); }
 var BW_MAXHOOG=6, BW_MAXVELD=30;
@@ -2257,7 +3180,7 @@ var _bwTimer=null;
 /* Rondlopend leven per wereldtype: dieren + poppetjes die vanzelf bewegen (actie!).
    Data-gestuurd via data/wezens.js (bewerkbaar in beheer.html). Valt terug op onderstaande
    standaardlijst als het databestand ontbreekt, zodat de app altijd blijft werken. */
-var WEZEN_PRIJS = 3;
+var WEZEN_PRIJS = CONFIG.wezenPrijs != null ? CONFIG.wezenPrijs : 3;
 var WEZENS_FALLBACK = {
   start:["🐔","🐑","🐷","🐴","🐤","🐕","🧒","🧑‍🌾"],
   strand:["🦀","🦆","🐕","🐤","🧒","🏄"],
@@ -2272,7 +3195,7 @@ function wezenKoopbaar(){ return (wezenBron().koopbaar||[]).map(_normWezen); }
 
 /* ---- Wereld-definities (uitbreidbaar: nieuw type = alleen hier + een generator) ---- */
 function bwDef(type){ return ({
-  start:{naam:"Blokwereld", ico:"⛏️", prijs:0, gen:genStart},
+  start:{naam:"Bouwwereld", ico:"⛏️", prijs:0, gen:genStart},
   strand:{naam:"Strand", ico:"🏖️", prijs:25, gen:genStrand},
   park:{naam:"Park", ico:"🏞️", prijs:25, gen:genPark},
   huis:{naam:"Huis", ico:"🏠", prijs:30, gen:genHuis}
@@ -2352,7 +3275,7 @@ function bwPakTerug(){
 function bwKiesBlok(b){ _bw.blok=b; _bw.modus="bouwen"; bwTeken(); }
 /* ---- Blok-kiezer: categorieën in een aparte pop-up, zodat het speelveld vrij blijft ---- */
 var BLOK_CATS = [
-  {naam:"🌿 Grond", items:["gras","zand","straat","water","steen","rots","hout","blad","akker"]},
+  {naam:"🌿 Grond", items:["gras","zand","straat","water","lava","steen","rots","hout","blad","akker"]},
   {naam:"🏠 Huis bouwen", items:["muur","raam","deur","dak","trap","hek","toren","vlag"]},
   {naam:"🌳 Natuur", items:["boom","struik","bloem","palm","cactus","paddenstoel"]},
   {naam:"🐴 Dieren", items:["kip","varken","schaap","paard"]},
@@ -2390,9 +3313,25 @@ function bwBeweeg(dx,dy){
   bewaarState(); bwTekenLeven();   // alleen de levende laag verversen → vloeiend, geen volledige hertekening
 }
 function bwActie(){ var w=bwWereld(); if(oogst(w.pop.x,w.pop.y)) return; if(_bw.modus==="bouwen") bwPlaats(w.pop.x,w.pop.y); else if(_bw.modus==="weghakken") bwHak(w.pop.x,w.pop.y); }
+/* Cadeau/schatkist UITPAKKEN: tik erop (of loop erover) en je krijgt extra blokken.
+   De schatkist is duurder en geeft daarom meer terug dan het cadeautje. */
+var UITPAK = { schatkist:6, cadeau:3 };
+function pakUit(x,y){
+  var w=bwWereld(), cel=w.grid[y] && w.grid[y][x]; if(!cel || !cel.length) return false;
+  var top=cel[cel.length-1], bonus=UITPAK[top];
+  if(!bonus) return false;
+  cel.pop();
+  geefValuta(bonus);
+  speelGeluid("schat");
+  puntenSignaal("🎁 Uitgepakt! +"+bonus+" "+THEMA.valutaNaam+" — extra blokken om te bouwen!");
+  zeg("Uitgepakt! Je krijgt "+bonus+" extra blokken.");
+  bewaarState(); bwHertekenTiles(); updateHud();
+  return true;
+}
 /* Oogsten: staat er rijp gewas op deze cel? Haal het weg en geef een beetje valuta. */
 function oogst(x,y){
   var w=bwWereld(), cel=w.grid[y] && w.grid[y][x]; if(!cel) return false;
+  if(pakUit(x,y)) return true;                       // eerst: cadeau/schatkist uitpakken
   if(!bwIsRijp(cel[cel.length-1])) return false;
   cel.pop(); speelGeluid("paar"); telOp("geoogst");
   var d=vandaagStr();
@@ -2495,7 +3434,7 @@ function isoBlokHtml(sx, sy, def, z, x, y, type){
   if(def.emoji){
     return '<div '+klik+'style="cursor:pointer;position:absolute;left:'+(sx-11)+'px;top:'+(sy-12)+'px;z-index:'+z+';font-size:20px">'+def.emoji+'</div>';
   }
-  var kl=(type==="water"?" iso-water":"");
+  var kl=(type==="water"?" iso-water":(type==="lava"?" iso-lava":""));
   var glans=def.glans?"box-shadow:0 0 8px 2px #ffe98a;":"";
   var kleur=def.kleur;
   // linker zijkant (donkerst) en rechter zijkant (half donker) — geven de kubus diepte
@@ -2521,7 +3460,8 @@ function bwTilesHtml(wl){
 function bwTikCel(x,y){
   var w=bwWereld();
   if(_bw.modus==="weghakken"){ w.pop.x=x; w.pop.y=y; bwHak(x,y); }
-  else if(_bw.modus==="bouwen"){ w.pop.x=x; w.pop.y=y; bwPlaats(x,y); }
+  // Tik je op een cadeau/schatkist, dan pak je die uit i.p.v. er een blok op te zetten.
+  else if(_bw.modus==="bouwen"){ w.pop.x=x; w.pop.y=y; if(!pakUit(x,y)) bwPlaats(x,y); }
   else if(_bw.modus==="verplaats"){ bwVerplaatsTik(x,y); }
   else { w.pop.x=x; w.pop.y=y; oogst(x,y); bewaarState(); bwTekenLeven(); }   // avontuur: erheen lopen
 }
@@ -2562,11 +3502,11 @@ function bwTeken(){
    +'<div id="bwScroll" style="overflow:auto;max-width:100%;max-height:58vh;border-radius:22px;background:'+(wl.nacht?'linear-gradient(#0b1030,#1a2452)':'#ffffff33')+';padding:6px;position:relative"><div id="bwVeld" style="position:relative;width:'+breedte+'px;height:'+hoogte+'px;margin:0 auto"><div id="bwTiles">'+bwTilesHtml(wl)+'</div><div id="bwLeven"></div></div>'+(wl.nacht?'<div style="position:absolute;inset:0;pointer-events:none;border-radius:18px;background:radial-gradient(130% 90% at 72% 12%, rgba(255,255,210,.12), rgba(6,10,30,.42) 70%);box-shadow:inset 0 0 70px rgba(0,10,45,.6)"><div style="position:absolute;top:10px;right:16px;font-size:1.7rem">🌙</div></div>':'')+'</div>'
    +'<div class="midden">'
      +'<div><button onclick="bwBeweeg(0,-1)">⬆️</button></div>'
-     +'<div><button onclick="bwBeweeg(-1,0)">⬅️</button><button onclick="bwActie()">✋</button><button onclick="bwBeweeg(1,0)">➡️</button></div>'
+     +'<div><button onclick="bwBeweeg(-1,0)"><img src="ui/mi-terug.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.25em"></button><button onclick="bwActie()">✋</button><button onclick="bwBeweeg(1,0)">➡️</button></div>'
      +'<div><button onclick="bwBeweeg(0,1)">⬇️</button></div>'
    +'</div>'
    +'<div class="sectie"><b>📖 Verhalenverteller:</b> <span id="bwZin">'+bwStartzin()+'</span> '
-     +'<button onclick="bwVerhaalLees()">🔊</button> <button onclick="bwVerhaalKlaar()">Ik heb verteld! (+1)</button></div>';
+     +'<button onclick="bwVerhaalLees()"><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"></button> <button onclick="bwVerhaalKlaar()">Ik heb verteld! (+1)</button></div>';
   bwSpawnLeven();
 }
 /* ---- Levende laag: persistente figuurtjes die vloeiend bewegen ---- */
@@ -2656,18 +3596,20 @@ function stopBouwmodus(){ bwPakTerug(); _bw.actief=false; bwStopLoop(); bewaarSt
 //__SPELLEN_EINDE__
 
 /* =====================  FREEMIUM (testfase: alles gratis)  ===================== */
-var TESTMODUS = true;                    // tijdens de testronde is alles ontgrendeld
-var FEEDBACK_EMAIL = "mvermaas@nsecure.nl";
+var TESTMODUS = CONFIG.testmodus != null ? CONFIG.testmodus : true;   // uit data/config.js — tijdens de testronde is alles ontgrendeld
+var FEEDBACK_EMAIL = CONFIG.feedbackEmail || "mvermaas@nsecure.nl";
 function heeftPremium(){ return TESTMODUS || !!S.premium; }
 function openPremium(){
   var test = TESTMODUS ? '<p class="klein" style="background:#e2f5e6;color:#1e7a2c;padding:.5em;border-radius:10px">🎉 Tijdens de test is <b>alles gratis</b> en volledig ontgrendeld. Je hoeft niets te kopen.</p>' : '';
   var html = '<div class="premiumkaart"><h2>⭐ Archito Premium</h2>'
     + '<p>Met Premium krijgt je kind straks:</p>'
-    + '<ul><li>Alle niveaus en 100 levels per spel</li><li>Het complete Beeldlab en alle werelden</li><li>Alle talen, denk- en beelddenkpuzzels</li><li>Geen limieten — onbeperkt oefenen en bouwen</li></ul></div>'
+    + '<ul><li>Alle niveaus en 200 levels per spel</li><li>Het complete Beeldlab en alle werelden</li><li>Alle talen, denk- en beelddenkpuzzels</li><li>Geen limieten — onbeperkt oefenen en bouwen</li></ul></div>'
+    + '<div style="margin:.4em 0"><b class="klein">Waar we voor staan:</b>'+beloftenHtml()+'</div>'
     + test
     + '<p class="midden">Zou je hiervoor willen betalen? Jouw mening helpt ons enorm.</p>'
     + '<div class="rij" style="justify-content:center">'
     + '<button class="groot" onclick="premiumInteresse()">👍 Ja, hier heb ik interesse in</button>'
+    + '<button onclick="openWaaromWerkt()">🔬 Waarom dit werkt</button>'
     + '<button onclick="stuurFeedback()">✉️ Feedback sturen</button></div>'
     + '<div class="feedback midden" id="premiumDank"></div>';
   openOverlay(html);
@@ -2728,6 +3670,13 @@ function verrijkToegankelijkheid(root){
   Array.prototype.forEach.call(root.querySelectorAll(".feedback"), function(el){
     if(!el.getAttribute("aria-live")){ el.setAttribute("aria-live","polite"); el.setAttribute("role","status"); }
   });
+  // Cache-bust voor ui-iconen: hang ?v=<versie> achter elke ui/-afbeelding, zodat een nieuwe
+  // versie gegarandeerd de verse (neo-brutalist) iconen laadt i.p.v. een oude uit de cache.
+  Array.prototype.forEach.call(root.querySelectorAll('img'), function(im){
+    if(im.getAttribute('data-v')) return;
+    var s = im.getAttribute('src') || "";
+    if(s.indexOf('ui/')===0 && s.indexOf('?')<0){ im.setAttribute('data-v','1'); im.setAttribute('src', s+'?v='+APP_VERSIE); }
+  });
 }
 function startToegankelijkheidObserver(){
   if(typeof MutationObserver==="undefined" || !document.body) return;
@@ -2772,7 +3721,7 @@ function toonVerder(volgendeFn){
   function opruimen(){ if(timer){ clearTimeout(timer); timer=null; } if(iv){ clearInterval(iv); iv=null; } }
   function ga(){
     if(klaar) return; klaar=true; opruimen();
-    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}   // US-05 AC4
+    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}   // US-05 AC4\n    stopAudio();
     if(wrap.remove) wrap.remove();
     if(volgendeFn) volgendeFn();
   }
@@ -2821,13 +3770,13 @@ function _stapper(label, waarde, actie){
 }
 function openInstellingen(){
   var schaalTekst = Math.round((S.leesSchaal||1)*100)+"%";
-  var html = '<h2>⚙️ Instellingen</h2>'
-    + '<h3>🔊 Geluid</h3>'
+  var html = '<h2><img src="ui/mi-gear.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:.3em">Instellingen</h2>'
+    + '<h3><img src="ui/mi-geluid-aan.png" alt="voorlezen" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> Geluid</h3>'
     + _schakel("Voorlezen (uitleg &amp; vragen)", S.voorlezenAan, "zetVoorlezen()")
     + _schakel("Geluidseffecten", S.geluidAan, "zetGeluid()")
     + _schakel("Muziek", S.muziekAan, "zetMuziek()")
     + '<p class="klein">Voorlezen werkt ook als de geluidseffecten uit staan.</p>'
-    + '<div class="rij"><button onclick="openStemkiezer()">🗣️ Kies een stem</button></div>'
+    + '<div class="rij"><button onclick="openStemkiezer()"><img src="ui/mi-stem.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em"> Kies een stem</button></div>'
     + '<h3>🌿 Rust &amp; focus</h3>'
     + _schakel("Rustige modus (minder prikkels)", S.rustigeModus, "zetRustig()")
     + _schakel("Speeltijd-teller tonen", !S.tijdVerborgen, "zetTijdVerborgen()")

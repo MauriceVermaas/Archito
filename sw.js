@@ -1,12 +1,15 @@
-/* Blokwereld service worker — cache-first, offline na eerste (https) bezoek.
-   CACHE_VERSIE loopt mee met APP_VERSIE zodat een nieuwe versie de oude cache vervangt. */
-var CACHE_VERSIE = "archito-3.37.2";
+/* Archito service worker — cache-first, offline na eerste (https) bezoek.
+   CACHE_VERSIE wordt afgeleid van APP_VERSIE uit version.js (de enige versie-bron),
+   zodat een nieuwe versie de oude cache vervangt zonder dubbel bijwerken. */
+importScripts("version.js");                 // definieert APP_VERSIE
+var CACHE_VERSIE = "archito-" + APP_VERSIE;
 var BESTANDEN = [
-  "./", "./index.html", "./manifest.json",
+  "./", "./index.html", "./springspel.html", "./manifest.json", "./version.js", "./data/config.js", "./data/audio-index.js",
   "./data/sommen.js", "./data/woorden.js", "./data/flitswoorden.js",
   "./data/memory.js", "./data/talen.js", "./data/denken.js", "./data/beelddenken.js",
   "./data/beeldlab.js", "./data/mascottes.js", "./data/wezens.js",
   "./data/missies.js", "./data/stickers.js", "./data/lezen.js", "./data/oudertips.js", "./data/creatief.js",
+  "./data/klankletter.js", "./data/renlezer.js",
   "./icons/icon-192.png", "./icons/icon-512.png"
 ];
 

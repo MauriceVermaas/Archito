@@ -1,20 +1,20 @@
-# Blokwereld publiceren voor de kids-test (freemium)
+# Archito publiceren voor de kids-test (freemium)
 
-Deze gids brengt Blokwereld online zodat kinderen het op **iPhone én Android** kunnen testen. Tijdens de test is alles gratis en volledig ontgrendeld; de Premium-knop is aanwezig om interesse te peilen (er wordt niets afgeschermd en niets verkocht).
+Deze gids brengt Archito online zodat kinderen het op **iPhone én Android** kunnen testen. Tijdens de test is alles gratis en volledig ontgrendeld; de Premium-knop is aanwezig om interesse te peilen (er wordt niets afgeschermd en niets verkocht).
 
-Er is **geen app store** nodig: Blokwereld is een PWA (web-app). Kinderen openen een link en zetten die op hun beginscherm.
+Er is **geen app store** nodig: Archito is een PWA (web-app). Kinderen openen een link en zetten die op hun beginscherm.
 
 ---
 
 ## 1. Zet de app online (GitHub Pages, gratis + https)
 
 1. Maak een gratis account op github.com (als je dat nog niet hebt).
-2. Maak een nieuwe repository, bijvoorbeeld `blokwereld`. Zet die op **Public**.
+2. Maak een nieuwe repository, bijvoorbeeld `archito`. Zet die op **Public**.
 3. Upload de **inhoud van deze map** naar de repository (sleep de bestanden in de browser naar *Add file → Upload files*, of gebruik git). De bestanden `index.html`, `installeren.html`, `manifest.json`, `sw.js`, de mappen `data/` en `icons/` moeten in de **hoofdmap** van de repo staan.
 4. Ga naar **Settings → Pages**. Zet *Build and deployment → Source* op **GitHub Actions**. De meegeleverde workflow draait eerst de tests en publiceert daarna automatisch bij elke push naar `main`.
 5. Na een paar minuten staat de app op:
-   - App: `https://<jouw-gebruikersnaam>.github.io/blokwereld/`
-   - Uitleg voor ouders: `https://<jouw-gebruikersnaam>.github.io/blokwereld/installeren.html`
+   - App: `https://<jouw-gebruikersnaam>.github.io/archito/`
+   - Uitleg voor ouders: `https://<jouw-gebruikersnaam>.github.io/archito/installeren.html`
 
 > Werkt de eerste keer nog niet? Wacht 1–2 minuten en ververs. Controleer dat *Pages → Source* op *GitHub Actions* staat.
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blokwereld — Beheer (CMS)</title>
+<title>Archito — Beheer (CMS)</title>
 <style>
   :root{ --bg:#f4f1ea; --paneel:#fff; --tekst:#20331a; --accent:#5a9b3a; --accent2:#3d6b28; --fout:#c0392b; --goed:#2e8b3d; --rand:#0002; }
   *{box-sizing:border-box}
@@ -61,7 +61,7 @@
 </head>
 <body>
 <header>
-  <div><h1>🛠️ Blokwereld — Beheer</h1><div class="sub">Wijzig content, afbeeldingen en mascottes. Exporteer en zet terug in de map.</div></div>
+  <div><h1>🛠️ Archito — Beheer</h1><div class="sub">Wijzig content, afbeeldingen en mascottes. Exporteer en zet terug in de map.</div></div>
 </header>
 <div class="layout">
   <aside id="nav"></aside>
@@ -161,7 +161,7 @@ var CRE={ CHALLENGE_DATA:kloon(window.CHALLENGE_DATA||[]), WONDER_DATA:kloon(win
 var MAS=kloon(window.MASCOTTES||{});
 var WEZ=kloon(window.WEZENS||{start:[],strand:[],park:[],huis:[],koopbaar:[]});
 var WEZ_GROEPEN=["start","strand","park","huis","koopbaar"];
-function wezLabel(g){ return {start:"Blokwereld ⛏️",strand:"Strand 🏖️",park:"Park 🏞️",huis:"Huis 🏠",koopbaar:"Te koop 🐾"}[g]||g; }
+function wezLabel(g){ return {start:"Bouwwereld ⛏️",strand:"Strand 🏖️",park:"Park 🏞️",huis:"Huis 🏠",koopbaar:"Te koop 🐾"}[g]||g; }
 var ICONS={ icon192:"", icon512:"" };
 
 /* ========== validatie ========== */
@@ -175,7 +175,7 @@ function valideer(key){
   else if(key==="talen"){ rows.forEach(function(t,i){ if(!t.nl||!t.en||!t.es||(!t.plaatje&&!t.afb)) f.push("rij "+(i+1)+": nl, en, es en (plaatje of afbeelding) verplicht"); }); }
   else if(key==="denken"){ rows.forEach(function(d,i){ if(!(d.opties||[]).includes(d.goed)) f.push("rij "+(i+1)+": 'goed' niet in opties"); if(!d.uitleg) f.push("rij "+(i+1)+": uitleg verplicht"); }); }
   else if(key==="beelddenken"){ rows.forEach(function(p,i){ if(!p.opdracht||p.opdracht.length>45) f.push("rij "+(i+1)+": opdracht ontbreekt of >45 tekens"); if((p.opties||[]).length<2) f.push("rij "+(i+1)+": min. 2 opties"); if(!(p.opties||[]).includes(p.goed)) f.push("rij "+(i+1)+": 'goed' niet in opties"); if((p.opties||[]).filter(function(o){return o===p.goed;}).length!==1) f.push("rij "+(i+1)+": 'goed' niet uniek"); if(!p.uitleg) f.push("rij "+(i+1)+": uitleg verplicht"); }); }
-  rows.forEach(function(r,i){ if(![1,2,3].includes(Number(r.niveau))) f.push("rij "+(i+1)+": niveau moet 1/2/3 zijn"); });
+  rows.forEach(function(r,i){ if(![1,2,3,4,5,6].includes(Number(r.niveau))) f.push("rij "+(i+1)+": niveau moet 1 t/m 6 zijn (groep 3 t/m 8)"); });
   return f;
 }
 function valideerMascottes(){ var f=[]; Object.keys(MAS).forEach(function(k){ var m=MAS[k]; if(!m.emoji) f.push(k+": emoji (terugval) verplicht"); if(!m.naam) f.push(k+": naam verplicht"); if(!(m.zinnen||[]).length) f.push(k+": min. 1 zin"); }); return f; }
@@ -230,7 +230,7 @@ function celInput(key,i,veld){ var r=DATA[key][i], v=r[veld.k];
   if(veld.type==="list") return '<td><input data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="list" value="'+esc(lijstNaarStr(v))+'" placeholder="komma-gescheiden"></td>';
   if(veld.type==="area") return '<td><textarea data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text">'+esc(v)+'</textarea></td>';
   if(veld.type==="num") return '<td class="num"><input type="number" data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="num" value="'+(v==null?"":v)+'"></td>';
-  if(veld.type==="niveau"){ var o=[1,2,3].map(function(n){return '<option value="'+n+'"'+(Number(v)===n?" selected":"")+'>'+n+'</option>';}).join(""); return '<td class="niv"><select data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="num">'+o+'</select></td>'; }
+  if(veld.type==="niveau"){ var o=[1,2,3,4,5,6].map(function(n){return '<option value="'+n+'"'+(Number(v)===n?" selected":"")+'>'+n+'</option>';}).join(""); return '<td class="niv"><select data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="num">'+o+'</select></td>'; }
   if(veld.type==="select"){ var op=veld.opts.map(function(x){return '<option'+(v===x?" selected":"")+'>'+x+'</option>';}).join(""); return '<td><select data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text">'+op+'</select></td>'; }
   return '<td><input data-k="'+key+'" data-i="'+i+'" data-f="'+veld.k+'" data-t="text" value="'+esc(v)+'"></td>'; }
 function renderTabel(key){ var sc=SCHEMAS[key], rows=DATA[key];
