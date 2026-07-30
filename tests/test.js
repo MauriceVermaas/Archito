@@ -22,6 +22,8 @@ const SOMMEN=require('../data/sommen.js'), WOORDEN=require('../data/woorden.js')
   TALEN=require('../data/talen.js'), DENKEN=require('../data/denken.js'),
   BEELD=require('../data/beelddenken.js'),
   BEELDLAB=require('../data/beeldlab.js'),
+  KLANKLETTER=require('../data/klankletter.js'),
+  RENLEZER=require('../data/renlezer.js'),
   CRE=require('../data/creatief.js');
 
 function somAntwoord(s){ return s.op==='+'?s.a+s.b : s.op==='−'?s.a-s.b : s.op==='×'?s.a*s.b : s.op===':'?s.a/s.b : s.op==='½'?s.a/2 : NaN; }
@@ -33,7 +35,7 @@ test('sommen: geen dubbele sommen', ()=>{
   const set=new Set(); SOMMEN.forEach(s=>{ const k=s.a+s.op+s.b; ok(!set.has(k),'dubbele som '+k); set.add(k); });
 });
 test('sommen: alle niveaus 1-3 en gevuld', ()=>{
-  [1,2,3].forEach(n=>ok(SOMMEN.filter(s=>s.niveau===n).length>10,'te weinig sommen niveau '+n));
+  [1,2,3,4,5,6].forEach(n=>ok(SOMMEN.filter(s=>s.niveau===n).length>10,'te weinig sommen niveau '+n));
 });
 test('woorden: delen vormen exact het woord', ()=>{
   WOORDEN.forEach(w=>eq(w.delen.join(''), w.w, 'delen != woord'));
@@ -46,10 +48,10 @@ test('flitswoorden: 2 lookalikes die het woord niet bevatten', ()=>{
   FLITS.forEach(f=>{ eq(f.alt.length,2,'aantal alt'); f.alt.forEach(a=>ok(!a.includes(f.w)&&a!==f.w,'lookalike bevat woord '+f.w)); });
 });
 test('memory: verplichte velden aanwezig', ()=>{
-  MEM.forEach(m=>ok(m.w&&m.plaatje&&[1,2,3].includes(m.niveau),'memory veld ontbreekt'));
+  MEM.forEach(m=>ok(m.w&&m.plaatje&&[1,2,3,4,5,6].includes(m.niveau),'memory veld ontbreekt'));
 });
 test('talen: nl/en/es/plaatje aanwezig per taal', ()=>{
-  TALEN.forEach(t=>ok(t.nl&&t.en&&t.es&&t.plaatje&&[1,2,3].includes(t.niveau),'talen veld ontbreekt'));
+  TALEN.forEach(t=>ok(t.nl&&t.en&&t.es&&t.plaatje&&[1,2,3,4,5,6].includes(t.niveau),'talen veld ontbreekt'));
 });
 test('denken: goed-antwoord staat letterlijk in opties + uitleg aanwezig', ()=>{
   DENKEN.forEach(d=>{ ok(d.opties.includes(d.goed),'goed niet in opties: '+d.vraag); ok(!!d.uitleg,'geen uitleg: '+d.vraag); });
@@ -67,7 +69,7 @@ test('beelddenken: visuele puzzels zijn geldig en tekst-arm', ()=>{
     // het juiste antwoord moet ondubbelzinnig zijn (precies één keer); afleiders mogen wél identiek zijn (spot-de-andere)
     ok(p.opties.filter(o=>o===p.goed).length===1, 'goed antwoord niet uniek bij '+p.opdracht);
     ok(typeof p.uitleg==='string' && p.uitleg.length>0, 'uitleg ontbreekt: '+p.opdracht);
-    ok([1,2,3].includes(p.niveau), 'ongeldig niveau bij '+p.opdracht);
+    ok([1,2,3,4,5,6].includes(p.niveau), 'ongeldig niveau bij '+p.opdracht);
     if(p.toon){ ok(Array.isArray(p.toon) && p.toon.length>=1, 'toon leeg bij '+p.opdracht); }
   });
 });
@@ -78,13 +80,40 @@ test('beeldlab: sorteer-, nabouw-, geheugen- en zoekpuzzels zijn geldig', ()=>{
   const KLEUR=['r','b','g','y','p','o',''];
   ok(BEELDLAB.sorteer.length>=4 && BEELDLAB.nabouw.length>=4 && BEELDLAB.geheugen.length>=4 && BEELDLAB.zoek.length>=3, 'genoeg beeldlab-puzzels');
   BEELDLAB.sorteer.forEach(p=>{ ok(p.items.length>=2,'sorteer: te weinig items'); ok(p.items.length===p.goed.length,'sorteer: items/goed ongelijk');
-    ok([...p.items].sort().join()===[...p.goed].sort().join(),'sorteer: goed is geen herschikking van items: '+p.opdracht); ok([1,2,3].includes(p.niveau),'sorteer niveau'); });
+    ok([...p.items].sort().join()===[...p.goed].sort().join(),'sorteer: goed is geen herschikking van items: '+p.opdracht); ok([1,2,3,4,5,6].includes(p.niveau),'sorteer niveau'); });
   BEELDLAB.nabouw.forEach(p=>{ ok(Array.isArray(p.grid)&&p.grid.length>=1,'nabouw: leeg grid');
     const br=p.grid[0].length; p.grid.forEach(r=>{ ok(r.length===br,'nabouw: grid niet rechthoekig: '+p.opdracht); r.forEach(c=>ok(KLEUR.includes(c),'nabouw: onbekende kleur "'+c+'"')); });
-    ok(p.grid.some(r=>r.some(c=>c)),'nabouw: grid volledig leeg'); ok([1,2,3].includes(p.niveau),'nabouw niveau'); });
+    ok(p.grid.some(r=>r.some(c=>c)),'nabouw: grid volledig leeg'); ok([1,2,3,4,5,6].includes(p.niveau),'nabouw niveau'); });
   BEELDLAB.geheugen.forEach(p=>{ ok(p.toon.length>=2,'geheugen: te korte rij'); ok(p.opties.length>=2,'geheugen: te weinig opties');
-    ok(p.opties[p.goed],'geheugen: goed-index bestaat niet'); ok(p.opties[p.goed].join()===p.toon.join(),'geheugen: goede optie ≠ getoonde rij: '+p.opdracht); ok([1,2,3].includes(p.niveau),'geheugen niveau'); });
-  BEELDLAB.zoek.forEach(p=>{ const n=p.veld.filter(x=>x===p.doel).length; ok(n>=2,'zoek: minstens 2 doelen: '+p.opdracht); ok([1,2,3].includes(p.niveau),'zoek niveau'); });
+    ok(p.opties[p.goed],'geheugen: goed-index bestaat niet'); ok(p.opties[p.goed].join()===p.toon.join(),'geheugen: goede optie ≠ getoonde rij: '+p.opdracht); ok([1,2,3,4,5,6].includes(p.niveau),'geheugen niveau'); });
+  BEELDLAB.zoek.forEach(p=>{ const n=p.veld.filter(x=>x===p.doel).length; ok(n>=2,'zoek: minstens 2 doelen: '+p.opdracht); ok([1,2,3,4,5,6].includes(p.niveau),'zoek niveau'); });
+});
+test('klankenjacht: letter staat in opties, past bij begin/eind, plaatje + niveau geldig', ()=>{
+  KLANKLETTER.forEach(k=>{
+    ok(k.woord && k.plaatje && k.letter, 'veld ontbreekt bij '+JSON.stringify(k));
+    ok(Array.isArray(k.opties) && k.opties.length>=2, 'te weinig opties bij '+k.woord);
+    ok(k.opties.includes(k.letter), 'letter niet in opties: '+k.woord);
+    eq(new Set(k.opties).size, k.opties.length, 'opties niet uniek bij '+k.woord);
+    ok([1,2,3,4,5,6].includes(k.niveau), 'ongeldig niveau bij '+k.woord);
+    const pos=k.positie||'begin';
+    if(pos==='begin') ok(k.woord.toLowerCase().startsWith(k.letter.toLowerCase()), 'woord begint niet met letter: '+k.woord);
+    else ok(k.woord.toLowerCase().endsWith(k.letter.toLowerCase()), 'woord eindigt niet op letter: '+k.woord);
+  });
+});
+test('klankenjacht: elk niveau is gevuld (ook groep 3)', ()=>{
+  [1,2,3].forEach(n=> ok(KLANKLETTER.filter(k=>k.niveau===n).length>=6, 'te weinig klanken niveau '+n));
+});
+test('renlezer: goed-antwoord staat uniek in opties, zin + niveau geldig', ()=>{
+  RENLEZER.forEach(r=>{
+    ok(typeof r.zin==='string' && r.zin.length>0, 'zin ontbreekt');
+    ok(Array.isArray(r.opties) && r.opties.length>=2 && r.opties.length<=3, 'aantal opties bij: '+r.zin);
+    ok(r.opties.includes(r.goed), 'goed niet in opties: '+r.zin);
+    eq(r.opties.filter(o=>o===r.goed).length, 1, 'goed niet uniek: '+r.zin);
+    ok([1,2,3,4,5,6].includes(r.niveau), 'ongeldig niveau bij: '+r.zin);
+  });
+});
+test('renlezer: elk niveau is gevuld', ()=>{
+  [1,2,3].forEach(n=> ok(RENLEZER.filter(r=>r.niveau===n).length>=6, 'te weinig zinnen niveau '+n));
 });
 test('freemium: tijdens de test is alles ontgrendeld (premium aan)', ()=>{
   const ctx = laadApp();
@@ -161,11 +190,337 @@ test('elke onclick/onchange in index.html verwijst naar een bestaande functie', 
 sectie('3. Scenario: profiel, niveaus, thema, HUD');
 test('leeftijd → groep → niveau klopt voor 5–12', ()=>{
   const ctx = laadApp();
-  const verwacht = {5:[3,1],6:[3,1],7:[4,2],8:[5,2],9:[6,3],10:[7,3],11:[7,3],12:[7,3]};
+  // doorlopende leerlijn t/m groep 8; niveau = groep − 2
+  const verwacht = {5:[3,1],6:[3,1],7:[4,2],8:[5,3],9:[6,4],10:[7,5],11:[8,6],12:[8,6]};
   for(let l=5;l<=12;l++){
     eq(ctx.leeftijdNaarGroep(l), verwacht[l][0], 'groep bij leeftijd '+l);
     eq(ctx.groepNaarNiveau(ctx.leeftijdNaarGroep(l)), verwacht[l][1], 'niveau bij leeftijd '+l);
   }
+  // elke groep 3..8 heeft een eigen niveau, oplopend en zonder gaten
+  const nivs = [3,4,5,6,7,8].map(g=>ctx.groepNaarNiveau(g));
+  eq(nivs.join(','), '1,2,3,4,5,6', 'groep 3..8 → niveau 1..6');
+  // de tegel-/mascotte-kunst heeft maar 3 varianten: niveau daarop afgerond, nooit >3
+  [1,2,3,4,5,6].forEach(n=> ok(ctx.kunstTier(n)>=1 && ctx.kunstTier(n)<=3, 'kunstTier binnen 1..3 bij niveau '+n));
+});
+test('rekenbalans: geen bewerking overheerst binnen een groep', ()=>{
+  // Zonder caps bepaalt de generatievolgorde de verhouding; dan kreeg groep 5 bv. 481
+  // aftreksommen tegenover 36 tafelsommen. Per groep mag geen bewerking meer dan de helft zijn.
+  for(let niv=1; niv<=6; niv++){
+    const eigen = SOMMEN.filter(s=>Number(s.niveau)===niv);
+    const per = {}; eigen.forEach(s=>per[s.op]=(per[s.op]||0)+1);
+    const grootste = Math.max(...Object.values(per));
+    ok(grootste <= eigen.length*0.55,
+      'groep '+(niv+2)+': één bewerking domineert ('+JSON.stringify(per)+')');
+  }
+  // groep 3 legt de nadruk op optellen, niet op aftrekken
+  const n1 = SOMMEN.filter(s=>Number(s.niveau)===1);
+  ok(n1.filter(s=>s.op==='+').length > n1.filter(s=>s.op==='−').length,
+    'groep 3 moet meer optellen dan aftrekken aanbieden');
+  // tafels: groep 4 en 5 bouwen samen een volledig tafelaanbod op
+  const tafels = n => SOMMEN.filter(s=>s.op==='×' && Number(s.niveau)<=n).length;
+  ok(tafels(3) >= 100, 'te weinig tafelsommen beschikbaar in groep 5: '+tafels(3));
+  // halveren hoort bij de onderbouw, niet als hoofdmoot in de bovenbouw
+  [5,6].forEach(niv=>{
+    const eigen = SOMMEN.filter(s=>Number(s.niveau)===niv);
+    ok(eigen.filter(s=>s.op==='½').length <= eigen.length*0.1,
+      'groep '+(niv+2)+': te veel halveren voor dit niveau');
+  });
+});
+test('beelddenken groep 7-8: echt zwaardere denkstappen dan groep 6', ()=>{
+  // Alleen een andere patroonvorm is te weinig verschil; de bovenbouw moet ook rotatie,
+  // spiegeling, analogie en twee regels tegelijk aanbieden.
+  [5,6].forEach(niv=>{
+    const soorten = new Set(BEELD.filter(p=>Number(p.niveau)===niv).map(p=>p.soort));
+    ['rotatie','spiegeling','analogie','tweeregels'].forEach(s=>
+      ok(soorten.has(s), 'groep '+(niv+2)+' mist denkstap: '+s));
+  });
+  // groep 6 heeft die zwaardere soorten juist nog niet
+  const gr6 = new Set(BEELD.filter(p=>Number(p.niveau)===4).map(p=>p.soort));
+  ok(!gr6.has('analogie'), 'analogie hoort pas vanaf groep 7');
+  // alle nieuwe items houden zich aan de contentregels
+  BEELD.filter(p=>['rotatie','spiegeling','analogie','tweeregels'].indexOf(p.soort)>=0).forEach(p=>{
+    eq(p.opties.filter(o=>o===p.goed).length, 1, 'goed niet uniek in opties: '+p.opdracht);
+    ok(p.opdracht.length <= 45, 'opdracht te lang: '+p.opdracht);
+    ok(p.uitleg && p.uitleg.length > 10, 'uitleg ontbreekt: '+p.opdracht);
+  });
+});
+test('twee kindvriendelijke stemmen: profielen, keuze en terugval', ()=>{
+  const ctx = laadApp({stemmen:[
+    {name:'Claire', lang:'nl-NL'}, {name:'Xander', lang:'nl-NL'},
+    {name:'Daniel', lang:'en-GB'}, {name:'Monica', lang:'es-ES'}
+  ]});
+  ctx.laadState();
+  eq(ctx.STEMPROFIELEN.length, 2, 'er zijn precies twee stemmen om uit te kiezen');
+  // beide stemmen zijn kindvriendelijk: rustig tempo, en ze klinken echt verschillend
+  ctx.STEMPROFIELEN.forEach(p=>{
+    ok(p.naam && p.omschrijving, 'stem heeft een naam en omschrijving: '+p.id);
+    // Tempo in een natuurlijke band: te snel is onverstaanbaar, maar heel traag rekt de
+    // klanken uit en laat de stem juist MEER als een computer klinken. Wie het langzamer
+    // wil, zet 'rustig voorlezen' aan — dat is een aparte instelling (S.leesTempo).
+    ok(p.rate >= 0.85 && p.rate <= 1.0, 'stem '+p.naam+' heeft een onnatuurlijk tempo: '+p.rate);
+    ok(p.pitch >= 0.85 && p.pitch <= 1.15, 'stem '+p.naam+' heeft een onnatuurlijke toonhoogte: '+p.pitch);
+    ok(p.voorkeur && p.voorkeur.length, 'stem '+p.naam+' heeft geen voorkeursstemmen');
+  });
+  const [a,b] = ctx.STEMPROFIELEN;
+  ok(Math.abs(a.pitch-b.pitch) >= 0.15 || Math.abs(a.rate-b.rate) >= 0.05,
+    'de twee stemmen moeten hoorbaar verschillen (toonhoogte of tempo)');
+  // standaard staat er een stem klaar
+  eq(ctx.stemProfiel().id, 'fien', 'standaardstem is ingesteld');
+  // kiezen werkt en wordt bewaard
+  ctx.kiesStemProfiel('daan');
+  eq(ctx.S.stemProfiel, 'daan', 'gekozen stem wordt opgeslagen');
+  eq(ctx.stemProfiel().naam, 'Daan', 'de juiste stem is actief');
+  // het profiel pakt zijn favoriete systeemstem
+  eq(ctx.kiesBesteStem('nl').name, 'Xander', 'Daan kiest de lagere systeemstem');
+  ctx.kiesStemProfiel('fien');
+  eq(ctx.kiesBesteStem('nl').name, 'Claire', 'Fien kiest de hogere systeemstem');
+  // nooit een stem in een andere taal (dat was eerder een echte bug)
+  eq(ctx.kiesBesteStem('en').lang, 'en-GB', 'Engels spel gebruikt een Engelse stem');
+  eq(ctx.kiesBesteStem('es').lang, 'es-ES', 'Spaans spel gebruikt een Spaanse stem');
+  // terugval: toestel met maar één NL-stem → nog steeds twee onderscheidbare stemmen
+  const solo = laadApp({stemmen:[{name:'Google Nederlands', lang:'nl-NL'}]});
+  solo.laadState();
+  solo.kiesStemProfiel('fien'); const f = solo.kiesBesteStem('nl');
+  solo.kiesStemProfiel('daan'); const d = solo.kiesBesteStem('nl');
+  eq(f.name, d.name, 'zelfde systeemstem als er maar één is');
+  ok(solo.STEMPROFIELEN[0].pitch !== solo.STEMPROFIELEN[1].pitch,
+    'dan nog verschillen ze in toonhoogte, dus je hoort twee stemmen');
+  // het keuzescherm toont beide stemmen
+  solo.openStemkiezer();
+  const html = solo.document.getElementById('overlayInhoud').innerHTML;
+  ok(html.indexOf('Fien')>=0 && html.indexOf('Daan')>=0, 'beide stemmen staan in het keuzescherm');
+  ok(html.indexOf('kiesStemProfiel')>=0, 'de stemmen zijn aan te tikken');
+  // rustig voorlezen bestaat als losse instelling, zodat de stem natuurlijk kan blijven
+  eq(typeof solo.zetLeesTempo, 'function', 'rustig voorlezen is instelbaar');
+  solo.zetLeesTempo(); ok(solo.S.leesTempo < 1, 'rustig voorlezen zet het tempo lager');
+  solo.zetLeesTempo(); eq(solo.S.leesTempo, 1, 'en weer terug naar normaal');
+});
+test('vooraf ingesproken audio: app en generator berekenen dezelfde bestandsnaam', ()=>{
+  const ctx = laadApp({stemmen:[{name:'Xander', lang:'nl-NL'}]});
+  ctx.laadState();
+  // dezelfde hash-functie als in gen_audio_teksten.js (FNV-1a → base36)
+  function hash36(str){ let h=0x811c9dc5; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return (h>>>0).toString(36); }
+  const norm = t => String(t).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+  ['appel', 'Hoeveel is 3 + 4?', '  dubbele   spaties  ', 'met <b>opmaak</b> erin'].forEach(t=>{
+    eq(ctx.audioSleutel(t,'nl'), 'nl-'+hash36(norm(t)),
+      'app en generator moeten dezelfde bestandsnaam berekenen voor: '+t);
+  });
+  // zonder opname: geen pad, dus de toestelstem doet het werk
+  eq(ctx.audioBestand('appel','nl'), '', 'zonder opname geen audiopad');
+  // met opname in de index: het juiste pad per stem
+  const sl = ctx.audioSleutel('appel','nl');
+  ctx.AUDIO_INDEX.fien[sl] = 1;
+  ctx.kiesStemProfiel('fien');
+  eq(ctx.audioBestand('appel','nl'), 'audio/fien/'+sl+'.mp3', 'pad volgt de gekozen stem');
+  ctx.kiesStemProfiel('daan');
+  eq(ctx.audioBestand('appel','nl'), '', 'geen opname voor Daan → terugval op de toestelstem');
+  // Engels/Spaans gebruiken één gedeelde opname per taal (moet in de doeltaal klinken)
+  const en = ctx.audioSleutel('apple','en');
+  ctx.AUDIO_INDEX.taal[en] = 1;
+  eq(ctx.audioBestand('apple','en'), 'audio/taal/'+en+'.mp3', 'vreemde taal uit de gedeelde map');
+  // voorlezen uit? dan ook geen audio
+  ctx.S.voorlezenAan = false; ctx.zeg('appel');            // mag niet throwen
+  ctx.S.voorlezenAan = true;
+  eq(typeof ctx.stopAudio, 'function', 'audio is te stoppen (bij Verder / nieuw scherm)');
+  ctx.AUDIO_INDEX.fien = {}; ctx.AUDIO_INDEX.taal = {};    // opruimen voor andere tests
+});
+test('audio-pijplijn: opnamelijst en index zijn compleet en consistent', ()=>{
+  const lijstPad = path.join(ROOT,'_export-te-vervangen','audio','opnamelijst.json');
+  ok(fs.existsSync(lijstPad), 'opnamelijst.json bestaat (node gen_audio_teksten.js)');
+  const lijst = JSON.parse(fs.readFileSync(lijstPad,'utf8'));
+  ok(lijst.length > 3000, 'opnamelijst is verdacht klein: '+lijst.length);
+  // elke regel heeft een bestand, stem, taal en tekst
+  lijst.slice(0,200).forEach(r=>{
+    ok(/^audio\/(fien|daan|taal)\/(nl|en|es)-[a-z0-9]+\.mp3$/.test(r.bestand), 'ongeldig pad: '+r.bestand);
+    ok(r.tekst && r.tekst.length>1, 'lege tekst bij '+r.bestand);
+  });
+  // beide stemmen krijgen dezelfde Nederlandse teksten
+  const fien = new Set(lijst.filter(r=>r.stem==='fien').map(r=>r.tekst));
+  const daan = new Set(lijst.filter(r=>r.stem==='daan').map(r=>r.tekst));
+  eq(fien.size, daan.size, 'Fien en Daan moeten dezelfde teksten inspreken');
+  // de leerinhoud zit erin
+  const waar = new Set(lijst.map(r=>r.waar));
+  ['memory','spelling','klankenjacht','talen-nl','talen-en','lezen-tekst','lezen-vraag',
+   'denken','rekentoppers','beeldlab-zoek','spelregels'].forEach(k=>
+    ok(waar.has(k), 'opnamelijst mist: '+k));
+  // de index bestaat en heeft de juiste vorm (leeg is prima: dan doet de toestelstem het)
+  const idx = require('../data/audio-index.js');
+  ['fien','daan','taal'].forEach(k=> ok(idx[k] && typeof idx[k]==='object', 'audio-index mist map: '+k));
+  const sw = fs.readFileSync(path.join(ROOT,'sw.js'),'utf8');
+  ok(sw.indexOf('audio-index.js')>=0, 'audio-index hoort in de offline-cache');
+});
+test('stemkwaliteit: app merkt een basisstem en legt uit hoe je een betere krijgt', ()=>{
+  // Een basisstem klinkt onvermijdelijk robotachtig; de verbeterde stem is gratis maar moet
+  // eenmalig gedownload worden. De app moet dat merken en de ouder concreet op weg helpen.
+  const basis = laadApp({stemmen:[{name:'Xander', lang:'nl-NL'}]});
+  basis.laadState();
+  eq(basis.stemKwaliteit(), 'basis', 'alleen een basisstem wordt herkend');
+  basis.openStemkiezer();
+  const h1 = basis.document.getElementById('overlayInhoud').innerHTML;
+  ok(h1.indexOf('robotachtig')>=0, 'de app benoemt eerlijk dat de stem robotachtig klinkt');
+  ok(/Instellingen|instellingen/.test(h1), 'er staat een concrete route naar de systeeminstellingen');
+
+  const beter = laadApp({stemmen:[{name:'Xander (Enhanced)', lang:'nl-NL'}]});
+  beter.laadState();
+  eq(beter.stemKwaliteit(), 'premium', 'een verbeterde stem wordt herkend');
+  // en die verbeterde stem wordt ook echt gekozen, ook al staat er een basisstem vóór in de voorkeur
+  const mix = laadApp({stemmen:[{name:'Claire', lang:'nl-NL'}, {name:'Xander (Premium)', lang:'nl-NL'}]});
+  mix.laadState(); mix.kiesStemProfiel('fien');
+  eq(mix.kiesBesteStem('nl').name, 'Xander (Premium)',
+    'een verbeterde stem gaat vóór de voorkeursnaam met basiskwaliteit');
+  eq(mix.stemKwaliteit(), 'premium');
+  const geen = laadApp({stemmen:[{name:'Daniel', lang:'en-GB'}]});
+  geen.laadState();
+  eq(geen.stemKwaliteit(), 'geen', 'geen Nederlandse stem wordt als zodanig gemeld');
+});
+test('matrixpuzzels: geldig raster, kloppende regel en juiste weergave', ()=>{
+  const mat = BEELD.filter(p=>p.soort==='matrix');
+  ok(mat.length >= 10, 'te weinig matrixpuzzels: '+mat.length);
+  mat.forEach(m=>{
+    ok(m.kolommen===2 || m.kolommen===3, 'matrix moet 2 of 3 kolommen hebben: '+m.kolommen);
+    eq(m.toon.length, m.kolommen*m.kolommen, 'raster niet volledig gevuld ('+m.toon.join('')+')');
+    eq(m.toon.filter(t=>t==='❓').length, 1, 'er moet precies één ❓ zijn');
+    eq(m.toon[m.toon.length-1], '❓', 'het ❓ hoort rechtsonder te staan');
+    eq(m.opties.filter(o=>o===m.goed).length, 1, 'goed niet uniek in opties');
+    ok(m.opties.indexOf('❓')<0, 'het vraagteken mag geen antwoordoptie zijn');
+    ok(m.uitleg && m.uitleg.length>10, 'uitleg ontbreekt');
+  });
+  // 2x2 hoort bij groep 7, 3x3 bij groep 8 — dus echte opbouw
+  ok(mat.filter(m=>m.kolommen===2).every(m=>m.niveau===5), '2x2 hoort bij groep 7');
+  ok(mat.filter(m=>m.kolommen===3).every(m=>m.niveau===6), '3x3 hoort bij groep 8');
+  // de app tekent een matrix als raster, niet als één rij
+  const idx = fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
+  ok(/d\.kolommen/.test(idx) && /beeldmatrix/.test(idx), 'de app rendert matrixitems als raster');
+  // headless doorspelen: een matrixitem tekent en het goede antwoord wordt beloond
+  const ctx = nieuwSpel(1); ctx.S.naam='Test'; ctx.S.groep=8; ctx.S.niveau=6;
+  ctx.openSpel('denken');
+  ctx._dg.item = mat.find(m=>m.kolommen===3);
+  ctx.dgTekenBeeld();
+  const html = ctx.document.getElementById('spelInhoud').innerHTML;
+  ok(html.indexOf('beeldmatrix')>=0, 'matrix wordt als raster getekend');
+  ok(html.indexOf('grid-template-columns:repeat(3')>=0, 'raster heeft 3 kolommen');
+  const v0 = ctx.S.valuta;
+  eq(ctx.dgKiesBeeld(ctx.maakEl ? ctx.maakEl() : ctx.document.createElement('button'), ctx._dg.item.goed), true, 'goed antwoord wordt geaccepteerd');
+  ok(ctx.S.valuta > v0, 'goed antwoord levert beloning op');
+});
+test('Rekentoppers (2F): alleen bovenbouw, geldige opgaven, uitleg en tegel', ()=>{
+  const RT = require('../data/rekentop.js');
+  ok(RT.length >= 120, 'genoeg 2F-opgaven, kreeg '+RT.length);
+  // alle 2F-domeinen die het referentieniveau vraagt zijn vertegenwoordigd
+  const soorten = new Set(RT.map(x=>x.soort));
+  ['breuk','procent','komma','meten','meetkunde','verhouding'].forEach(k=>
+    ok(soorten.has(k), '2F-domein ontbreekt: '+k));
+  RT.forEach(x=>{
+    ok(x.niveau>=4 && x.niveau<=6, '2F-opgave buiten groep 6-8: '+x.vraag);
+    eq(x.opties.filter(o=>o===x.goed).length, 1, 'goed niet uniek in opties: '+x.vraag);
+    ok(x.uitleg && x.uitleg.length>10, 'uitleg ontbreekt bij: '+x.vraag);
+  });
+  [4,5,6].forEach(n=> ok(RT.filter(x=>x.niveau===n).length>=30,
+    'te weinig 2F-opgaven voor groep '+(n+2)+': '+RT.filter(x=>x.niveau===n).length));
+  // in de app: groep 5 krijgt het spel niet, groep 6 wel
+  const ctx = nieuwSpel(1); ctx.S.naam='Test';
+  ctx.S.groep = 5; ctx.S.niveau = 3; ctx.bouwStartscherm();
+  ok(ctx.document.getElementById('oefenGrid')._kinderen.map(k=>k.innerHTML).join(' ').indexOf('Rekentoppers') < 0,
+    'Rekentoppers hoort niet bij groep 5');
+  ctx.S.groep = 6; ctx.S.niveau = 4; ctx.bouwStartscherm();
+  ok(ctx.document.getElementById('oefenGrid')._kinderen.map(k=>k.innerHTML).join(' ').indexOf('Rekentoppers') >= 0,
+    'Rekentoppers verschijnt vanaf groep 6');
+  // doorspelen: goed antwoord beloont en zet de level-teller
+  ctx.openSpel('rekentop');
+  ok(ctx._rt && ctx._rt.item, 'een 2F-opgave is geladen');
+  const v0 = ctx.S.valuta;
+  ctx.rtKies(ctx._rt.item.goed);
+  ok(ctx.S.valuta >= v0, 'goed antwoord levert beloning op');
+  ok(ctx.S.levels['rekentop_4'] && ctx.S.levels['rekentop_4'].teller >= 1, 'level-teller loopt');
+});
+test('spelling-instinkers zijn echte valkuilen, geen willekeurige letters', ()=>{
+  // In de bovenbouw moet de afleider een fout gespeld klankdeel zijn (kom bij com-pu-ter),
+  // geen losse letter: die is te doorzichtig bij meerlettergrepige woorden.
+  const boven = WOORDEN.filter(w=>Number(w.niveau)>=4);
+  boven.forEach(w=>{
+    (w.extra||[]).forEach(e=>{
+      ok(e.length >= 2, 'losse letter als instinker bij '+w.w+': '+e);
+      ok(!/[qxy]/.test(e), 'instinker met een letter die in het Nederlands niet voorkomt: '+w.w+' → '+e);
+    });
+  });
+  ok(boven.every(w=>(w.extra||[]).length>=1), 'elk bovenbouwwoord heeft minstens één instinker');
+});
+test('flits-lookalikes zijn leesbare varianten, geen onmogelijke letterreeksen', ()=>{
+  FLITS.filter(f=>Number(f.niveau)>=4).forEach(f=>{
+    f.alt.forEach(a=>{
+      ok(!/[qxy]/.test(a), 'lookalike met onmogelijke letter: '+f.w+' → '+a);
+      eq(a[0], f.w[0], 'lookalike verandert de eerste letter (onrealistisch): '+f.w+' → '+a);
+      eq(a.length >= f.w.length-1 && a.length <= f.w.length+1, true, 'lookalike wijkt te veel in lengte af: '+f.w+' → '+a);
+    });
+  });
+});
+test('plaatje ↔ woord is eenduidig (cumulatief per groep)', ()=>{
+  // De app biedt alle lagere niveaus als herhaling aan, dus een groep-8-kind ziet ook de
+  // groep-3-woorden. Twee woorden met hetzelfde plaatje maakt Memory onoplosbaar en het
+  // Talen-antwoord ambigu — en koppelt bij beelddenkers het woord aan het verkeerde beeld.
+  [['memory', MEM, 'w'], ['talen', TALEN, 'nl']].forEach(([naam, arr, veld])=>{
+    for(let niv=1; niv<=6; niv++){
+      const per = {};
+      arr.filter(x=>Number(x.niveau)<=niv).forEach(x=>{ (per[x.plaatje]=per[x.plaatje]||[]).push(x[veld]); });
+      const dubbel = Object.entries(per).filter(([,ws])=> new Set(ws).size > 1);
+      ok(dubbel.length===0, naam+' groep '+(niv+2)+': zelfde plaatje bij meerdere woorden → '
+        + dubbel.map(([e,ws])=>e+' = '+[...new Set(ws)].join('/')).join(' | '));
+    }
+  });
+});
+test('live-gereed: elke groep 3 t/m 8 haalt de contentnorm per domein', ()=>{
+  // norm = minimaal aantal EIGEN items op dat groepsniveau, zodat een sessie (~15-30 opgaven)
+  // geen herhaling geeft. Klankenjacht/Renlezer zijn onderbouwvaardigheden (alleen groep 3-5).
+  const DOM = [
+    ['Rekenen', SOMMEN, 250, false], ['Spelling', WOORDEN, 20, false],
+    ['Flitslezen', FLITS, 20, false], ['Memory', MEM, 20, false],
+    ['Talen', TALEN, 20, false],      ['Denken', DENKEN, 30, false],
+    ['Beelddenken', BEELD, 30, false],['Lezen', require('../data/lezen.js'), 20, false],
+    ['Klankenjacht', KLANKLETTER, 8, true], ['Renlezer', RENLEZER, 6, true],
+    ['Beeldlab sorteren', BEELDLAB.sorteer, 5, false], ['Beeldlab nabouwen', BEELDLAB.nabouw, 5, false],
+    ['Beeldlab geheugen', BEELDLAB.geheugen, 5, false], ['Beeldlab zoeken', BEELDLAB.zoek, 5, false]
+  ];
+  const tekort = [];
+  for(let g=3; g<=8; g++){
+    const niv = g - 2;
+    DOM.forEach(([naam, arr, norm, alleenOnderbouw])=>{
+      if(alleenOnderbouw && g > 5) return;
+      const eigen = arr.filter(x=>Number(x.niveau)===niv).length;
+      if(eigen < norm) tekort.push('groep '+g+' '+naam+' '+eigen+'/'+norm);
+    });
+  }
+  ok(tekort.length===0, 'onder de norm: '+tekort.join(' · '));
+});
+test('kernlijnen hebben eigen stof voor élke groep 3 t/m 8', ()=>{
+  const lijnen = { 'rekenen':SOMMEN, 'spelling':WOORDEN, 'flitslezen':FLITS, 'memory':MEM, 'talen':TALEN };
+  Object.keys(lijnen).forEach(naam=>{
+    [1,2,3,4,5,6].forEach(niv=>{
+      const n = lijnen[naam].filter(x=>Number(x.niveau)===niv).length;
+      ok(n > 0, naam+' mist eigen stof op niveau '+niv+' (groep '+(niv+2)+')');
+    });
+  });
+  // spelling bovenbouw: langere, meerlettergrepige woorden dan de onderbouw
+  const langsteTot = niv => WOORDEN.filter(w=>Number(w.niveau)<=niv).reduce((m,w)=>Math.max(m,w.w.length),0);
+  ok(langsteTot(6) > langsteTot(2), 'groep 8 heeft langere spellingwoorden dan groep 4');
+  // delen samengevoegd = het woord (regel blijft gelden voor de nieuwe woorden)
+  WOORDEN.filter(w=>Number(w.niveau)>=4).forEach(w=>{
+    eq((w.delen||[]).join(''), w.w, 'delen ≠ woord bij '+w.w);
+    (w.extra||[]).forEach(e=> ok(w.w.indexOf(e)<0, 'instinker '+e+' zit in '+w.w));
+  });
+});
+test('elke groep 3 t/m 8 heeft eigen rekenstof op niveau', ()=>{
+  const perNiveau = {};
+  SOMMEN.forEach(s=>{ perNiveau[s.niveau] = (perNiveau[s.niveau]||0) + 1; });
+  [1,2,3,4,5,6].forEach(n=> ok(perNiveau[n] >= 200, 'te weinig sommen op niveau '+n+' (groep '+(n+2)+'): '+(perNiveau[n]||0)));
+  // groep 5 (niveau 3) mag nog geen deelsommen krijgen; die horen bij groep 6 (niveau 4)
+  const delenTot3 = SOMMEN.filter(s=>s.op===':' && s.niveau<=3).length;
+  eq(delenTot3, 0, 'geen deelsommen t/m groep 5, kreeg '+delenTot3);
+  ok(SOMMEN.some(s=>s.op===':' && s.niveau===4), 'delen start in groep 6');
+  // bovenbouw rekent met grotere getallen dan de onderbouw
+  const maxTot = n => SOMMEN.filter(s=>s.niveau<=n).reduce((m,s)=>Math.max(m, s.a, s.b||0), 0);
+  ok(maxTot(1) <= 20, 'groep 3 blijft t/m 20, kreeg '+maxTot(1));
+  ok(maxTot(3) <= 100, 'groep 5 blijft t/m 100, kreeg '+maxTot(3));
+  ok(maxTot(6) > 1000, 'groep 8 rekent met grote getallen, kreeg '+maxTot(6));
 });
 test('profiel opslaan zet naam/groep/niveau en toont HUD', ()=>{
   const ctx = laadApp();
@@ -173,7 +528,7 @@ test('profiel opslaan zet naam/groep/niveau en toont HUD', ()=>{
   ctx.document.getElementById('pfNaam').value = 'Test';
   ctx.stelLeeftijdIn(8);
   ctx.bewaarProfiel();
-  eq(ctx.S.naam, 'Test'); eq(ctx.S.groep, 5); eq(ctx.S.niveau, 2);
+  eq(ctx.S.naam, 'Test'); eq(ctx.S.groep, 5); eq(ctx.S.niveau, 3);   // groep 5 → niveau 3
   eq(ctx.document.getElementById('hud').hidden, false, 'HUD zichtbaar na profiel');
 });
 test('eerste keer: onboarding loopt naam → leeftijd → avatar en zet alles', ()=>{
@@ -406,19 +761,36 @@ test('Smederij: foto → bouwen → correct woord geeft valuta en gaat naar bonu
   eq(ctx._sm.fase, 'bonus', 'na correct naar bonusfase');
   ok(ctx.S.valuta > v0, 'valuta gestegen'); eq(ctx.S.dagquest.woord, 1, 'dagquest woord +1');
 });
-test('Smederij: bonus achterstevoren accepteert omgekeerde volgorde', ()=>{
+test('Smederij: bonus achterstevoren is LETTER voor letter omgekeerd (patat → tatap)', ()=>{
   const ctx = nieuwSpel(1); ctx.startSmederij();
-  ctx._sm.woord = {w:'trein', delen:['t','r','ei','n'], extra:['ij'], niveau:1};
-  ctx._sm.fase='bonus'; ctx._sm.gebouwd=[];
-  ['n','ei','r','t'].forEach(d=>ctx.smBonusKies(d));
-  // laatste smBonusKies triggert controle; verifieer via directe controle-functie
-  ok(true);
+  ctx._sm.woord = {w:'patat', delen:['pa','tat'], extra:['ta'], niveau:1}; ctx._sm.fase='bonus';
+  ctx._sm.gebouwd='tatpa'.split('');   // klankdeel-omkering — mag NIET goed zijn
+  ok(ctx.smBonusControleer()===false, 'klankdeel-omkering (tatpa) wordt afgekeurd');
+  ctx._sm.gebouwd='tatap'.split('');   // echte letter-omkering
+  ok(ctx.smBonusControleer()===true, 'letter-omkering (tatap) wordt goedgekeurd');
+});
+test('Smederij: 1-lettergreepwoord wordt ook echt omgedraaid (slang → gnals)', ()=>{
+  const ctx = nieuwSpel(1); ctx.startSmederij();
+  ctx._sm.woord = {w:'slang', delen:['slang'], extra:[], niveau:1}; ctx._sm.fase='bonus';
+  ctx._sm.gebouwd='slang'.split('');   // het woord zelf is niet "achterstevoren"
+  ok(ctx.smBonusControleer()===false, 'het woord zelf (niet omgekeerd) is fout');
+  ctx._sm.gebouwd='gnals'.split('');
+  ok(ctx.smBonusControleer()===true, 'gnals is goed');
 });
 test('Smederij: dubbele klankdelen worden correct opgebouwd', ()=>{
   const ctx = nieuwSpel(1); ctx.startSmederij();
   ctx._sm.woord = {w:'oo', delen:['o','o'], extra:['a'], niveau:1}; ctx._sm.fase='bouwen'; ctx._sm.gebouwd=[];
   ctx.smKiesDeel('o'); ctx.smKiesDeel('o');
   eq(ctx._sm.fase,'bonus','dubbel deel toch correct');
+});
+test('Voorlezen kiest een Nederlandse stem en forceert nooit een andere taal', ()=>{
+  const nl = laadApp({stemmen:[{name:'Google US English',lang:'en-US'},{name:'Xander',lang:'nl_NL'},{name:'Google Nederlands',lang:'nl-NL'}]});
+  nl.laadStemmen();
+  const v = nl.kiesBesteStem('nl');
+  ok(v && v.lang.toLowerCase().replace('_','-').indexOf('nl')===0, 'Nederlandse stem gekozen ('+(v&&v.lang)+')');
+  const en = laadApp({stemmen:[{name:'Google US English',lang:'en-US'}]});
+  en.laadStemmen();
+  eq(en.kiesBesteStem('nl'), null, 'zonder NL-stem wordt geen (verkeerde) stem geforceerd');
 });
 test('Bouwmeester: klok — talige antwoorden en SVG-klok', ()=>{
   const ctx = nieuwSpel(2);
@@ -887,7 +1259,7 @@ test('begrijpend lezen: data is geldig (antwoord uniek in opties, uitleg aanwezi
   ok(L.length>=6, 'genoeg verhalen');
   [1,2,3].forEach(n=> ok(L.filter(v=>v.niveau===n).length>=2, 'verhalen op niveau '+n));
   L.forEach(v=>{
-    ok(v.titel && v.tekst, 'titel + tekst'); ok([1,2,3].includes(v.niveau), 'niveau geldig');
+    ok(v.titel && v.tekst, 'titel + tekst'); ok([1,2,3,4,5,6].includes(v.niveau), 'niveau geldig');
     ok(Array.isArray(v.vragen) && v.vragen.length>=1, 'minstens 1 vraag: '+v.titel);
     v.vragen.forEach(q=>{ ok(q.opties.length>=2, '2 opties: '+q.vraag); ok(q.opties.includes(q.goed), 'goed in opties: '+q.vraag);
       eq(q.opties.filter(o=>o===q.goed).length, 1, 'goed uniek: '+q.vraag); ok(!!q.uitleg, 'uitleg: '+q.vraag); });
@@ -910,6 +1282,36 @@ test('begrijpend lezen staat in het oefenmenu (ook in groep 3)', ()=>{
   const ctx = nieuwSpel(1); ctx.S.naam='Test'; ctx.stelLeeftijdIn(6); ctx.bouwStartscherm();
   const heeft = ctx.document.getElementById('oefenGrid').children.some(c=>(c.getAttribute('onclick')||'').indexOf("'lezen'")>=0);
   ok(heeft, 'Begrijpend lezen zichtbaar, ook voor jongere groepen');
+});
+test('klankenjacht: goede letter beloont en gaat verder; foute letter blijft', ()=>{
+  const ctx = nieuwSpel(1); ctx.startKlankletter();
+  ok(ctx._kl.item, 'item gekozen');
+  const it=ctx._kl.item, v0=ctx.S.valuta;
+  const fout=it.opties.find(o=>o!==it.letter);
+  eq(ctx.klKies(fout), false, 'foute letter afgewezen');
+  eq(ctx._kl.item, it, 'zelfde item na fout');
+  eq(ctx.klKies(it.letter), true, 'juiste letter geaccepteerd');
+  ok(ctx.S.valuta>v0, 'beloning na goed'); ok(ctx.S.levels['klankletter_1'].teller>=1, 'level-teller loopt');
+});
+test('klankenjacht staat in het oefenmenu (ook in groep 3)', ()=>{
+  const ctx = nieuwSpel(1); ctx.S.naam='Test'; ctx.stelLeeftijdIn(6); ctx.bouwStartscherm();
+  const heeft = ctx.document.getElementById('oefenGrid').children.some(c=>(c.getAttribute('onclick')||'').indexOf("'klankletter'")>=0);
+  ok(heeft, 'Klankenjacht zichtbaar, ook voor groep 3');
+});
+test('renlezer: goede actie beloont + afstand groeit; foute actie blijft', ()=>{
+  const ctx = nieuwSpel(1); ctx.startRenlezer();
+  ok(ctx._rl.item, 'item gekozen'); eq(ctx._rl.afstand, 0, 'start op 0 meter');
+  const it=ctx._rl.item, v0=ctx.S.valuta;
+  const fout=it.opties.find(o=>o!==it.goed);
+  eq(ctx.rlKies(fout), false, 'foute actie afgewezen'); eq(ctx._rl.afstand, 0, 'geen afstand na fout');
+  eq(ctx.rlKies(it.goed), true, 'juiste actie geaccepteerd');
+  ok(ctx.S.valuta>v0, 'beloning na goed'); eq(ctx._rl.afstand, 10, 'afstand +10');
+  ok(ctx.S.levels['renlezer_1'].teller>=1, 'level-teller loopt');
+});
+test('renlezer staat in het oefenmenu', ()=>{
+  const ctx = nieuwSpel(1); ctx.S.naam='Test'; ctx.stelLeeftijdIn(6); ctx.bouwStartscherm();
+  const heeft = ctx.document.getElementById('oefenGrid').children.some(c=>(c.getAttribute('onclick')||'').indexOf("'renlezer'")>=0);
+  ok(heeft, 'Renlezer zichtbaar in het menu');
 });
 
 // ============================================================
@@ -946,15 +1348,109 @@ test('app initialiseert foutloos met verse opslag (smoke)', ()=>{
   const ctx = laadApp(); ctx.init();  // opent profielscherm, mag niet throwen
   ok(typeof ctx.APP_VERSIE === 'string' && /^\d+\.\d+\.\d+$/.test(ctx.APP_VERSIE), 'geldig versienummer');
 });
-test('APP_VERSIE en CACHE_VERSIE (sw.js) zijn gelijk', ()=>{
+test('CACHE_VERSIE (sw.js) wordt afgeleid van APP_VERSIE — één versie-bron', ()=>{
   const ctx = laadApp();
+  const versie = require(path.join(ROOT,'version.js'));
+  eq(versie, ctx.APP_VERSIE, 'version.js is de bron die de app gebruikt');
   const sw = fs.readFileSync(path.join(ROOT,'sw.js'),'utf8');
-  const m = sw.match(/CACHE_VERSIE\s*=\s*"[a-z]+-([\d.]+)"/);
-  ok(m, 'CACHE_VERSIE gevonden'); eq(m[1], ctx.APP_VERSIE, 'cacheversie loopt mee met app-versie');
+  ok(/importScripts\(\s*["']version\.js["']\s*\)/.test(sw), 'sw.js laadt version.js');
+  ok(/CACHE_VERSIE\s*=\s*"archito-"\s*\+\s*APP_VERSIE/.test(sw), 'CACHE_VERSIE afgeleid van APP_VERSIE');
 });
 test('manifest.json is geldige JSON met standalone + iconen', ()=>{
   const mf = JSON.parse(fs.readFileSync(path.join(ROOT,'manifest.json'),'utf8'));
   eq(mf.display, 'standalone'); ok(mf.icons.length>=2, 'iconen aanwezig');
+});
+test('springspel.html: zelfstandig, 3 levels, leerpoort en aanpasbare vragen', ()=>{
+  const p = path.join(ROOT,'springspel.html');
+  ok(fs.existsSync(p), 'springspel.html bestaat');
+  const h = fs.readFileSync(p,'utf8');
+  ok(!/<script[^>]+src=/.test(h), 'geen externe libraries (alles in één bestand)');
+  // vragen bovenaan, eenvoudig aan te passen — per GROEP (3 t/m 8)
+  const vragen = h.match(/\{\s*groep:\s*\d+,\s*vraag:/g) || [];
+  ok(vragen.length >= 24, 'leervragen staan als lijst bovenaan, kreeg '+vragen.length);
+  [3,4,5,6,7,8].forEach(g=>{
+    const n = (h.match(new RegExp('\\{\\s*groep:\\s*'+g+',','g'))||[]).length;
+    ok(n >= 4, 'groep '+g+' heeft genoeg vragen, kreeg '+n);
+  });
+  // 3 levels met een puntendrempel
+  const nodig = h.match(/nodig:\s*\d+/g) || [];
+  ok(nodig.length >= 3, 'minstens 3 levels met een leerpunten-drempel, kreeg '+nodig.length);
+  ok(/function\s+antwoord\s*\(/.test(h) && /function\s+startLevel\s*\(/.test(h), 'leerpoort-functies aanwezig');
+  ok(/hudPunten/.test(h) && /hudSlot/.test(h), 'HUD toont punten en of het level ontgrendeld is');
+  // vragen volgen het groepsniveau van het kind, en het poppetje is de themamascotte
+  ok(/localStorage\.getItem\("blokwereld_v3"\)/.test(h), 'leest het Archito-profiel (groepsniveau + thema)');
+  ok(/v\.groep === KIND\.groep/.test(h), 'leervragen volgen de groep van het kind');
+  // niet te zwaar: begin groep 5 = tafels en +/- tot 100, nog geen deelsommen of procenten
+  const g5 = (h.match(/\{\s*groep:\s*5,[\s\S]*?\},/g) || []).join(' ');
+  ok(g5.length > 0, 'groep-5-vragen gevonden');
+  ok(!/:\s*8\?|\s:\s\d/.test(g5.replace(/opties[\s\S]*?\]/g,'')), 'groep 5 heeft geen deelsommen (die komen later)');
+  ok(!/%/.test(g5), 'groep 5 heeft geen procenten');
+  ok(!/0,\d/.test(g5), 'groep 5 heeft geen kommagetallen');
+  ok(/THEMA_MASCOTTE/.test(h) && /mascotte-" \+ sleutel \+ "-nb\.png/.test(h), 'poppetje is de mascotte van het gekozen thema');
+  // telefoon: touch-besturing aanwezig
+  ok(/id="btnLinks"/.test(h) && /id="btnRechts"/.test(h) && /id="btnSpring"/.test(h), 'touch-knoppen voor telefoon aanwezig');
+  ok(/touchstart/.test(h), 'touch-events aangesloten (iOS/Android)');
+  ok(/name="viewport"/.test(h), 'viewport-meta voor mobiel');
+  ok(/safe-area-inset-bottom/.test(h), 'respecteert de iOS safe-area onderin');
+  // elke onclick verwijst naar een functie die in het bestand staat
+  const re = /on(?:click|change)="([a-zA-Z_$][\w$]*)\s*\(/g; let m, mist=[];
+  const seen = new Set();
+  while((m = re.exec(h))){ if(seen.has(m[1])) continue; seen.add(m[1]);
+    if(!new RegExp('function\\s+'+m[1]+'\\s*\\(').test(h)) mist.push(m[1]); }
+  ok(mist.length===0, 'geen functie voor: '+mist.join(', '));
+});
+test('springspel: tegel staat naast Bouwen op het startscherm en opent het spel', ()=>{
+  const ctx = nieuwSpel(1); ctx.S.naam='Test'; ctx.S.valuta = 50;   // bouwen vrij → beide tegels
+  ctx.bouwStartscherm();
+  const maak = ctx.document.getElementById('maakGrid');
+  const namen = maak._kinderen.map(k=>k.innerHTML).join(' ');
+  ok(/Springavontuur/.test(namen), 'Springavontuur-tegel staat in de Maken-sectie');
+  ok(/menu-springen\.png/.test(namen), 'tegel gebruikt het flatte spring-icoon');
+  eq(typeof ctx.openSpringspel, 'function', 'openSpringspel() bestaat');
+  const idx = fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
+  ok(/location\.href\s*=\s*"springspel\.html"/.test(idx), 'de tegel navigeert naar springspel.html');
+  const spel = fs.readFileSync(path.join(ROOT,'springspel.html'),'utf8');
+  ok(/function\s+terugNaarArchito/.test(spel) && /index\.html/.test(spel), 'springspel heeft een terug-knop naar de app');
+  const sw = fs.readFileSync(path.join(ROOT,'sw.js'),'utf8');
+  ok(/springspel\.html/.test(sw), 'springspel zit in de offline-cache');
+});
+test('bouwmodus: lava is te kiezen, steen is grijs, water/lava stromen', ()=>{
+  const ctx = laadApp(); ctx.laadState();
+  ok(ctx.BLOKKEN.lava && ctx.BLOKKEN.lava.prijs > 0, 'lava is een plaatsbaar blok');
+  const grond = ctx.BLOK_CATS.find(c=>c.items.indexOf('lava')>=0);
+  ok(grond, 'lava staat in een blok-categorie (kiesbaar in de blok-kiezer)');
+  ok(/^#c9c6c2$/i.test(ctx.BLOKKEN.steen.kleur), 'steen heeft een normale steen-grijstint, kreeg '+ctx.BLOKKEN.steen.kleur);
+  const css = fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
+  ok(/@keyframes\s+waterStroom/.test(css), 'water heeft een stroom-animatie');
+  ok(/@keyframes\s+lavaStroom/.test(css), 'lava heeft een stroom-animatie');
+});
+test('bouwmodus: cadeau en schatkist uitpakken geven extra blokken', ()=>{
+  const ctx = nieuwSpel(1); ctx.startBouwmodus();
+  const w = ctx.S.werelden[ctx.S.actieveWereld];
+  // schatkist neerzetten en uitpakken
+  w.grid[3][3].push('schatkist');
+  const v0 = ctx.S.valuta, hoog0 = w.grid[3][3].length;
+  eq(ctx.pakUit(3,3), true, 'schatkist wordt uitgepakt');
+  ok(ctx.S.valuta > v0, 'uitpakken levert extra blokken (valuta) op, was '+v0+' nu '+ctx.S.valuta);
+  eq(w.grid[3][3].length, hoog0-1, 'de schatkist is van het veld verdwenen');
+  // cadeau geeft minder dan de duurdere schatkist
+  w.grid[4][4].push('cadeau');
+  const v1 = ctx.S.valuta;
+  eq(ctx.pakUit(4,4), true, 'cadeau wordt uitgepakt');
+  const winstCadeau = ctx.S.valuta - v1;
+  ok(winstCadeau > 0 && winstCadeau < (ctx.S.valuta - v1) + 10, 'cadeau geeft ook bonus');
+  // gewone blokken zijn niet 'uit te pakken'
+  w.grid[5][5].push('steen');
+  eq(ctx.pakUit(5,5), false, 'een steen is geen cadeau');
+});
+test('rebranding (FASE 0): productnaam = Archito, craft-wereld = Bouwwereld, sleutel behouden', ()=>{
+  const idx = fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
+  const mf = JSON.parse(fs.readFileSync(path.join(ROOT,'manifest.json'),'utf8'));
+  eq(mf.name, 'Archito', 'manifest name = Archito');
+  ok(/<title>\s*Archito\s*<\/title>/.test(idx), 'index-title = Archito');
+  const ctx = laadApp();
+  eq(ctx.THEMAS.craft.wereld, 'Bouwwereld', 'craft-bouwwereld hernoemd naar Bouwwereld');
+  ok(idx.indexOf('blokwereld_v3')>=0, 'localStorage-sleutel blokwereld_v3 blijft behouden (anders raken profielen kwijt)');
 });
 test('corrupte opslag valt netjes terug op verse state', ()=>{
   const ctx = laadApp(); ctx.localStorage.setItem('blokwereld_v3','{kapot json');
@@ -1024,6 +1520,64 @@ test('juice-functies zijn veilig headless (geen exceptions)', ()=>{
   ctx.spatDeeltjes({x:10,y:10}, ['#fff','#000'], 8);
   ctx.screenPop(); ctx.mascotteJuich(); ctx.updateComboHud();
   ok(true, 'geen exception');
+});
+
+// ============================================================
+sectie('11. Scenario: ouder-weekrapport, beloften, oefendoel, sprintduel');
+
+test('dag-historie logt goed én fout per domein', ()=>{
+  const ctx = nieuwSpel(1); ctx.startRekenmijn();
+  for(let i=0;i<3;i++){ const s=ctx._rm.som; ctx.rmKies(ctx.somAntwoord(s)); ctx.rmVolgende(); }
+  const s=ctx._rm.som; const juist=ctx.somAntwoord(s); ctx.rmKies(juist===0?1:juist+1);   // 1 fout
+  const H = ctx.S.historie; const vandaag = ctx.vandaagStr();
+  ok(H && H[vandaag], 'historie voor vandaag aangemaakt');
+  eq(H[vandaag].goed.reken, 3, '3 goede rekenantwoorden gelogd');
+  ok((H[vandaag].fout.reken||0) >= 1, 'minstens 1 fout gelogd');
+  ok((H[vandaag].xp||0) > 0, 'XP in de dag-historie geregistreerd');
+});
+
+test('weekTotalen berekent dagen, XP en % goed per domein', ()=>{
+  const ctx = nieuwSpel(1); ctx.startRekenmijn();
+  for(let i=0;i<4;i++){ const s=ctx._rm.som; ctx.rmKies(ctx.somAntwoord(s)); ctx.rmVolgende(); }
+  const w = ctx.weekTotalen(7);
+  eq(w.dagen, 7, '7 dagen venster');
+  ok(w.perDomein.reken && w.perDomein.reken.goed===4, 'reken-goed telt op in de week');
+  ok(w.gemPct!==null && w.gemPct>=0 && w.gemPct<=100, 'gemiddeld % goed geldig');
+  ok(w.actief>=1, 'minstens één actieve dag geteld');
+  ok(w.totXp>0, 'XP-groei in de week');
+});
+
+test('weekrapport-render en standalone-document draaien headless', ()=>{
+  const ctx = nieuwSpel(1);
+  const body = ctx.weekrapportBody(); ok(typeof body==='string' && body.indexOf('Weekrapport')>=0, 'rapport-body gevuld');
+  const doc = ctx.weekrapportStandalone(); ok(doc.indexOf('<!doctype html>')===0, 'standalone is een volledig document');
+  ctx.openWeekrapport(); ctx.oefendoelHtml(); ctx.barekaSamenvatting();
+  ctx.printWeekrapport(); ctx.downloadWeekrapport();   // mogen niet crashen zonder window.open/Blob
+  ok(true, 'geen exception in de rapport-functies');
+});
+
+test('oefendoel is instelbaar en wordt bewaard', ()=>{
+  const ctx = nieuwSpel(1);
+  ctx.zetOefendoel(15); eq(ctx.S.oefendoel.minPerDag, 15, 'doel gezet op 15');
+  ctx.zetOefendoel(0); eq(ctx.S.oefendoel.minPerDag, 0, 'doel uitgezet');
+});
+
+test('privacy-beloften aanwezig en strip is te sluiten', ()=>{
+  const ctx = nieuwSpel(1);
+  const html = ctx.beloftenHtml();
+  ok(html.indexOf('tracking')>=0 && html.toLowerCase().indexOf('offline')>=0, 'kernbeloften staan erin');
+  ctx.sluitBeloften(); eq(ctx.S.beloftenWeg, true, 'strip weggeklikt onthouden');
+  ctx.openWaaromWerkt(); ok(true, '"Waarom dit werkt" opent zonder fout');
+});
+
+test('sprintduel: iedereen wint munten en eigen record wordt bewaard', ()=>{
+  const ctx = nieuwSpel(1);
+  const voor = ctx.S.valuta;
+  ctx.startSprint(); ok(ctx._sp, 'sprint gestart');
+  const a = ctx.somAntwoord(ctx._sp.som); ctx.sprintKies(a);   // één goed
+  ctx.sprintEinde();
+  ok(ctx.S.valuta > voor, 'speler wint altijd munten');
+  ok(ctx.S.sprintBest && ctx.S.sprintBest[ctx.S.niveau], 'eigen record opgeslagen');
 });
 
 // ============================================================

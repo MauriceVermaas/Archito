@@ -105,6 +105,9 @@ function laadApp(opties){
     confirm:()=>true, prompt:()=> (opties.pinAntwoord!==undefined?opties.pinAntwoord:null), alert:()=>{},
     console, Math, Date, JSON, Object, Array, String, Number, parseInt, parseFloat, isNaN, isFinite,
   };
+  // versie + config als globals (in de browser via <script src>, hier direct ingeladen)
+  ctx.APP_VERSIE = require(path.join(ROOT,'version.js'));
+  ctx.CONFIG = require(path.join(ROOT,'data/config.js'));
   // databestanden als globals
   ctx.SOMMEN = require(path.join(ROOT,'data/sommen.js'));
   ctx.WOORDEN = require(path.join(ROOT,'data/woorden.js'));
@@ -120,6 +123,11 @@ function laadApp(opties){
   ctx.LEZEN = require(path.join(ROOT,'data/lezen.js'));
   ctx.OUDERTIPS = require(path.join(ROOT,'data/oudertips.js'));
   ctx.BEELDLAB = require(path.join(ROOT,'data/beeldlab.js'));
+  ctx.KLANKLETTER = require(path.join(ROOT,'data/klankletter.js'));
+  ctx.RENLEZER = require(path.join(ROOT,'data/renlezer.js'));
+  ctx.REKENTOP = require(path.join(ROOT,'data/rekentop.js'));
+  ctx.AUDIO_INDEX = require(path.join(ROOT,'data/audio-index.js'));
+  ctx.Audio = function(){ return { play:()=>({catch:()=>{}}), pause:()=>{}, currentTime:0, playbackRate:1 }; };
   const cre = require(path.join(ROOT,'data/creatief.js'));
   ctx.CHALLENGE_DATA = cre.CHALLENGE_DATA; ctx.WONDER_DATA = cre.WONDER_DATA; ctx.STARTZIN_DATA = cre.STARTZIN_DATA;
 
